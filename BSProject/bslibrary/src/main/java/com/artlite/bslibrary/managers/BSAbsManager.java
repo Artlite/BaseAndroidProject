@@ -5,8 +5,6 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.artlite.bslibrary.helpers.BSValidationHelper;
-
 import java.lang.ref.WeakReference;
 
 /**

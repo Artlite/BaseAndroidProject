@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import java.util.Timer;
+
 /**
  * Class which provide the executing action in background and main threads
  * Created by dlernatovich on 2/17/2017.
@@ -53,20 +55,30 @@ public final class BSThreadManager extends BSAbsManager {
      * @param callback instance of {@link OnThreadCallback}
      */
     public static void main(@Nullable final OnThreadCallback callback) {
+        main(0, callback);
+    }
+
+    /**
+     * Method which provide the executing action on main thread
+     *
+     * @param delay    delay value
+     * @param callback instance of {@link OnThreadCallback}
+     */
+    public static void main(int delay, @Nullable final OnThreadCallback callback) {
         //Validate instance
         if (!hasInstance()) {
             return;
         }
         //Execute callback
         if (getInstance().getHandler() != null) {
-            getInstance().getHandler().post(new Runnable() {
+            getInstance().getHandler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     if (nullValidate(callback)) {
                         callback.onExecute();
                     }
                 }
-            });
+            }, delay * 1000);
         }
     }
 

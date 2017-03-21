@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 
-import com.artlite.bslibrary.helpers.BSValidationHelper;
+import com.artlite.bslibrary.managers.BSThreadManager;
 
 /**
  * Created by dlernatovich on 2/17/2017.
@@ -212,27 +212,39 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
     /**
      * Method which provide the doing action on UI thread after the delaying time
      *
-     * @param performer current action
+     * @param callback instance of {@link BSThreadManager.OnThreadCallback}
      */
-    protected void onMain(@Nullable final OnActionPerformer performer) {
-        onMain(0, performer);
+    protected void main(@Nullable final BSThreadManager.OnThreadCallback callback) {
+        main(0, callback);
     }
 
     /**
      * Method which provide the doing action on UI thread after the delaying time
      *
      * @param delayTime delaying time (in seconds)
-     * @param performer current action
+     * @param callback  instance of {@link BSThreadManager.OnThreadCallback}
      */
-    protected void onMain(double delayTime, @Nullable final OnActionPerformer performer) {
-        if (BSValidationHelper.nullValidate(performer)) {
-            MAIN_THREAD_HANDLER.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    performer.onPerform();
-                }
-            }, (int) (delayTime * 1000));
-        }
+    protected void main(int delayTime,
+                        @Nullable final BSThreadManager.OnThreadCallback callback) {
+        BSThreadManager.main(delayTime, callback);
+    }
+
+    /**
+     * Method which provide the executing action on background thread
+     *
+     * @param callback instance of {@link BSThreadManager.OnThreadCallback}
+     */
+    public static void background(@Nullable final BSThreadManager.OnThreadCallback callback) {
+        BSThreadManager.background(callback);
+    }
+
+    /**
+     * Method which provide the executing action on background thread
+     *
+     * @param callback instance of {@link BSThreadManager.OnThreadCallback}
+     */
+    public static void execute(@Nullable final BSThreadManager.OnExecutionCallback callback) {
+        BSThreadManager.execute(callback);
     }
 
     //==============================================================================================

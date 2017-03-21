@@ -1,4 +1,4 @@
-package com.artlite.bslibrary.helpers;
+package com.artlite.bslibrary.helpers.service;
 
 import android.app.ActivityManager;
 import android.content.Context;

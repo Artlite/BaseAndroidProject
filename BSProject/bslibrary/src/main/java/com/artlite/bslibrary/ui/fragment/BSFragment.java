@@ -2,10 +2,13 @@ package com.artlite.bslibrary.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.artlite.bslibrary.managers.BSThreadManager;
 
 /**
  * Created by dlernatovich on 2/17/2017.
@@ -79,5 +82,47 @@ public abstract class BSFragment extends Fragment implements View.OnClickListene
      */
     protected void startActivity(Class aClass) {
         getActivity().startActivity(new Intent(getActivity(), aClass));
+    }
+
+    //==============================================================================================
+    //                                      PERFORMING
+    //==============================================================================================
+
+    /**
+     * Method which provide the doing action on UI thread after the delaying time
+     *
+     * @param callback instance of {@link BSThreadManager.OnThreadCallback}
+     */
+    protected void main(@Nullable final BSThreadManager.OnThreadCallback callback) {
+        main(0, callback);
+    }
+
+    /**
+     * Method which provide the doing action on UI thread after the delaying time
+     *
+     * @param delayTime delaying time (in seconds)
+     * @param callback  instance of {@link BSThreadManager.OnThreadCallback}
+     */
+    protected void main(int delayTime,
+                        @Nullable final BSThreadManager.OnThreadCallback callback) {
+        BSThreadManager.main(delayTime, callback);
+    }
+
+    /**
+     * Method which provide the executing action on background thread
+     *
+     * @param callback instance of {@link BSThreadManager.OnThreadCallback}
+     */
+    public static void background(@Nullable final BSThreadManager.OnThreadCallback callback) {
+        BSThreadManager.background(callback);
+    }
+
+    /**
+     * Method which provide the executing action on background thread
+     *
+     * @param callback instance of {@link BSThreadManager.OnThreadCallback}
+     */
+    public static void execute(@Nullable final BSThreadManager.OnExecutionCallback callback) {
+        BSThreadManager.execute(callback);
     }
 }

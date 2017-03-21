@@ -1,4 +1,4 @@
-package com.artlite.bslibrary.helpers;
+package com.artlite.bslibrary.helpers.validation;
 
 import android.support.annotation.Nullable;
 
@@ -7,11 +7,10 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * Created by dlernatovich on 2/17/2017.
+ * Method which provide the validating
  */
 
-public class BSValidationHelper {
-
+public final class BSValidationHelper {
     /**
      * Method which provide the validation for null elements
      *
@@ -32,18 +31,9 @@ public class BSValidationHelper {
         if (objects == null) {
             return false;
         }
-
-        if (objects.length == 0) {
-            return true;
-        }
-
         for (Object object : objects) {
             if (object == null) {
                 return false;
-            } else if (object instanceof WeakReference) {
-                if (((WeakReference) object).get() == null) {
-                    return false;
-                }
             }
         }
         return true;

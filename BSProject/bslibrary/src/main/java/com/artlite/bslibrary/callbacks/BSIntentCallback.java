@@ -3,8 +3,10 @@ package com.artlite.bslibrary.callbacks;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
+
 /**
- * Class which provide the functional for {@link com.artlite.bslibrary.helpers.BSIntentHelper}
+ * Class which provide the functional for {@link BSIntentHelper}
  * Created by dlernatovich on 2/17/2017.
  */
 

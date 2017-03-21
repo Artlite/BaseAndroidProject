@@ -15,21 +15,44 @@ public abstract class BSView extends ViewGroup implements View.OnClickListener {
 
     protected View baseView;
 
+    /**
+     * Constructor which provide the create {@link BSView} from
+     *
+     * @param context instance of {@link Context}
+     */
     public BSView(Context context) {
         super(context);
         onInitializeView(context);
     }
 
+    /**
+     * Constructor which provide the create {@link BSView} from
+     *
+     * @param context instance of {@link Context}
+     * @param attrs   instance of {@link AttributeSet}
+     */
     public BSView(Context context, AttributeSet attrs) {
         super(context, attrs);
         onInitializeView(context);
     }
 
+    /**
+     * Constructor which provide the create {@link BSView} from
+     *
+     * @param context      instance of {@link Context}
+     * @param attrs        instance of {@link AttributeSet}
+     * @param defStyleAttr attribute style
+     */
     public BSView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         onInitializeView(context);
     }
 
+    /**
+     * Method which provide the {@link BSView} initializing
+     *
+     * @param context instance of {@link Context}
+     */
     private void onInitializeView(Context context) {
         inflateView(context, getLayoutId());
         if (baseView != null) {

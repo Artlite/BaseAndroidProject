@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.artlite.bslibrary.helpers.BSServiceHelper;
+import com.artlite.bslibrary.helpers.service.BSServiceHelper;
 
 /**
  * Class which provide the service performing
