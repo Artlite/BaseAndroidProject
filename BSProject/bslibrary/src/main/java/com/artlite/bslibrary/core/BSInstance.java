@@ -3,6 +3,7 @@ package com.artlite.bslibrary.core;
 import android.content.Context;
 import android.support.annotation.Nullable;
 
+import com.artlite.bslibrary.helpers.log.BSLogHelper;
 import com.artlite.bslibrary.managers.BSEventManager;
 import com.artlite.bslibrary.managers.BSServiceManager;
 import com.artlite.bslibrary.managers.BSThreadManager;
@@ -22,10 +23,15 @@ public final class BSInstance {
      * @param context instance of {@link Context}
      */
     public static void init(@Nullable final Context context) {
-        BSEventManager.init(context);
-        BSServiceManager.init(context);
-        BSThreadManager.init(context);
-        BSTransferManager.init(context);
-        BSTypefaceManager.init(context);
+        final String methodName = "void init(context)";
+        try {
+            BSEventManager.init(context);
+            BSServiceManager.init(context);
+            BSThreadManager.init(context);
+            BSTransferManager.init(context);
+            BSTypefaceManager.init(context);
+        } catch (Exception ex) {
+            BSLogHelper.log(null, methodName, ex, null);
+        }
     }
 }

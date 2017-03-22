@@ -56,10 +56,16 @@ public class BSTextView extends AppCompatTextView {
             return;
         }
         Typeface typeface = this.getTypeface();
+        Typeface boldFont = getBold();
+        Typeface font = getFont();
         if (typeface.isBold()) {
-            this.setTypeface(getBold());
+            if (boldFont != null) {
+                this.setTypeface(boldFont);
+            }
         } else {
-            this.setTypeface(getFont());
+            if (font != null) {
+                this.setTypeface(font);
+            }
         }
     }
 
