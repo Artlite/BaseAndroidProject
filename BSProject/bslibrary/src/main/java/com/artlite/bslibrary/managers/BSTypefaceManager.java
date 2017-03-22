@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.artlite.bslibrary.helpers.log.BSLogHelper;
+
 /**
  * Class which provide the functional for {@link Typeface}
  */
@@ -20,12 +22,12 @@ public final class BSTypefaceManager extends BSBaseManager {
     /**
      * Default {@link Typeface}
      */
-    private final Typeface DEFAULT_FONT;
+    private Typeface DEFAULT_FONT;
 
     /**
      * Bold default {@link Typeface}
      */
-    private final Typeface DEFAULT_BOLD_FONT;
+    private Typeface DEFAULT_BOLD_FONT;
 
     /**
      * Method which provide the initialization of {@link BSEventManager}
@@ -62,8 +64,13 @@ public final class BSTypefaceManager extends BSBaseManager {
      */
     public BSTypefaceManager(@NonNull Context context) {
         super(context);
-        DEFAULT_FONT = Typeface.createFromAsset(context.getAssets(), "fonts/Bariol.ttf");
-        DEFAULT_BOLD_FONT = Typeface.createFromAsset(context.getAssets(), "fonts/Bariol_Bold.ttf");
+        final String methodName = "BSTypefaceManager(context)";
+        try {
+            DEFAULT_FONT = Typeface.createFromAsset(context.getAssets(), "fonts/Bariol.ttf");
+            DEFAULT_BOLD_FONT = Typeface.createFromAsset(context.getAssets(), "fonts/Bariol_Bold.ttf");
+        } catch (Exception ex) {
+            BSLogHelper.log(null, methodName, ex, null);
+        }
     }
 
     //==============================================================================================
