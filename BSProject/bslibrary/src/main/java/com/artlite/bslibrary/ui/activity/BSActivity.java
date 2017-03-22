@@ -151,6 +151,21 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
         startActivity(new Intent(this, activtyClass));
     }
 
+    /**
+     * Method which provide starting the Activity
+     *
+     * @param activtyClass activity which should be starting
+     */
+    protected void startActivity(Class activtyClass, boolean isNeedClear) {
+        Intent intent = new Intent(this, activtyClass);
+        if (isNeedClear) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    | Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        }
+        startActivity(intent);
+    }
+
     //==============================================================================================
     //                                    ACTIVITY FOR RESULTS
     //==============================================================================================

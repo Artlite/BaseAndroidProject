@@ -2,6 +2,7 @@ package com.artlite.bslibrary.ui.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,15 @@ import android.view.ViewGroup;
 
 public abstract class BSView extends ViewGroup implements View.OnClickListener {
 
+    /**
+     * Instance of {@link View}
+     */
     protected View baseView;
+
+    /**
+     * Instance of {@link PopupCallback}
+     */
+    protected PopupCallback popupCallback;
 
     /**
      * Constructor which provide the create {@link BSView} from
@@ -104,8 +113,39 @@ public abstract class BSView extends ViewGroup implements View.OnClickListener {
         }
     }
 
+    /**
+     * Method which provide the on click functional
+     *
+     * @param view instance of {@link View}
+     */
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
 
+    }
+
+    /**
+     * Method which provide the setting of the {@link PopupCallback}
+     *
+     * @param popupCallback instance of {@link PopupCallback}
+     */
+    public void setPopupCallback(@Nullable final PopupCallback popupCallback) {
+        this.popupCallback = popupCallback;
+    }
+
+    /**
+     * Method which provide the dismissing the pop up window if popUpListener isn't null
+     */
+    protected void dismissPopup() {
+        if (popupCallback != null) {
+            popupCallback.close();
+        }
+    }
+
+    /**
+     * Listener which provide the interaction between
+     * View and Popup Window
+     */
+    public interface PopupCallback {
+        void close();
     }
 }

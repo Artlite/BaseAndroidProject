@@ -3,6 +3,7 @@ package com.artlite.bslibrary.models;
 import android.support.annotation.NonNull;
 
 import com.artlite.bslibrary.helpers.broadcast.BSLocalBroadcastHelper;
+import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 
 import java.io.Serializable;
 

@@ -5,15 +5,17 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
+
 import java.lang.ref.WeakReference;
 
 /**
  * Created by dlernatovich on 2/17/2017.
  */
 
-public abstract class BSAbsManager {
+public abstract class BSBaseManager {
     //Tag
-    protected static final String TAG = BSAbsManager.class.getName();
+    protected static final String TAG = BSBaseManager.class.getName();
     //Cache size
     protected static final int K_CACHE_SIZE = 5 * 1024 * 1024; // 5MiB
     //Context reference
@@ -24,7 +26,7 @@ public abstract class BSAbsManager {
     /**
      * Default constructor
      */
-    public BSAbsManager(@NonNull final Context context) {
+    public BSBaseManager(@NonNull final Context context) {
         this.context = new WeakReference<Context>(context);
         this.handler = new Handler();
     }

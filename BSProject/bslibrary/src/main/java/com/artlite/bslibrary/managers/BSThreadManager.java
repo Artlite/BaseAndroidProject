@@ -4,14 +4,12 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import java.util.Timer;
-
 /**
  * Class which provide the executing action in background and main threads
  * Created by dlernatovich on 2/17/2017.
  */
 
-public final class BSThreadManager extends BSAbsManager {
+public final class BSThreadManager extends BSBaseManager {
 
     private static BSThreadManager instance;
 
@@ -20,7 +18,7 @@ public final class BSThreadManager extends BSAbsManager {
      *
      * @return
      */
-    private static BSThreadManager getInstance() {
+    protected static BSThreadManager getInstance() {
         if (isEmpty(instance)) {
             Log.e(TAG, "ThreadManager should be initialized in the Application singleton");
         }

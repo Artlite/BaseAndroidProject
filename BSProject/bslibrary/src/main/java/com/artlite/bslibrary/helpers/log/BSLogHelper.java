@@ -3,6 +3,8 @@ package com.artlite.bslibrary.helpers.log;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
+
 /**
  * Class which provide the log functional
  */

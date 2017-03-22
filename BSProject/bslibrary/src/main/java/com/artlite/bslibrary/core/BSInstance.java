@@ -7,6 +7,7 @@ import com.artlite.bslibrary.managers.BSEventManager;
 import com.artlite.bslibrary.managers.BSServiceManager;
 import com.artlite.bslibrary.managers.BSThreadManager;
 import com.artlite.bslibrary.managers.BSTransferManager;
+import com.artlite.bslibrary.managers.BSTypefaceManager;
 
 /**
  * Class which provide the BSLibrary application
@@ -25,5 +26,6 @@ public final class BSInstance {
         BSServiceManager.init(context);
         BSThreadManager.init(context);
         BSTransferManager.init(context);
+        BSTypefaceManager.init(context);
     }
 }

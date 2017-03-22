@@ -14,7 +14,7 @@ import java.util.List;
  * Created by dlernatovich on 2/17/2017.
  */
 
-public final class BSEventManager extends BSAbsManager {
+public final class BSEventManager extends BSBaseManager {
 
     private static BSEventManager instance;
 

@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference;
  * Created by dlernatovich on 2/17/2017.
  */
 
-public final class BSTransferManager extends BSAbsManager {
+public final class BSTransferManager extends BSBaseManager {
 
     private static BSTransferManager instance;
     private final LruCache<Class, WeakReference<Object>> data;
@@ -22,7 +22,7 @@ public final class BSTransferManager extends BSAbsManager {
      *
      * @return instance of the {@link BSTransferManager}
      */
-    public static BSTransferManager getInstance() {
+    protected static BSTransferManager getInstance() {
         if (isNull(instance)) {
             Log.e(TAG, "TransferManager should be initialized the Application singleton");
         }
@@ -55,12 +55,12 @@ public final class BSTransferManager extends BSAbsManager {
      * @param object instance of {@link Object}
      * @return put results
      */
-    public boolean put(@Nullable final Class dest,
-                       @Nullable final Object object) {
+    public static synchronized boolean put(@Nullable final Class dest,
+                                           @Nullable final Object object) {
         final String methodName = "put(aClass, object)";
         boolean result = true;
         try {
-            data.put(dest, new WeakReference<Object>(object));
+            getInstance().data.put(dest, new WeakReference<Object>(object));
         } catch (Exception ex) {
             Log.e(TAG, methodName, ex);
         }
@@ -75,8 +75,8 @@ public final class BSTransferManager extends BSAbsManager {
      * @return instance of {@link Object}
      */
     @Nullable
-    public <T extends Object> T get(@Nullable final Object owner) {
-        if (owner != null) {
+    public static synchronized <T extends Object> T get(@Nullable final Object owner) {
+        if ((owner != null) && (hasInstance())) {
             return get(owner.getClass());
         }
         return null;
@@ -90,12 +90,12 @@ public final class BSTransferManager extends BSAbsManager {
      * @return instance of {@link Object}
      */
     @Nullable
-    public <T extends Object> T get(@Nullable final Class owner) {
+    public static synchronized <T extends Object> T get(@Nullable final Class owner) {
         final String methodName = "T get(owner)";
-        if (owner != null) {
-            if (data.get(owner) != null) {
-                final WeakReference<Object> reference = data.get(owner);
-                data.remove(owner);
+        if ((owner != null) && (hasInstance())) {
+            if (getInstance().data.get(owner) != null) {
+                final WeakReference<Object> reference = getInstance().data.get(owner);
+                getInstance().data.remove(owner);
                 if ((reference != null) && (reference.get() != null)) {
                     final Object object = reference.get();
                     try {

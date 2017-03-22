@@ -3,6 +3,7 @@ package com.artlite.bslibrary.models;
 import android.support.annotation.Nullable;
 
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
+import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 
 /**
  * Class which provide the loggable functional

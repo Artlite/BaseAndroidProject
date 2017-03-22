@@ -12,7 +12,7 @@ import com.artlite.bslibrary.helpers.service.BSServiceHelper;
  * Created by dlernatovich on 2/17/2017.
  */
 
-public final class BSServiceManager extends BSAbsManager {
+public final class BSServiceManager extends BSBaseManager {
 
     private static BSServiceManager instance;
 
@@ -21,7 +21,7 @@ public final class BSServiceManager extends BSAbsManager {
      *
      * @return instance of {@link BSServiceManager}
      */
-    private static BSServiceManager getInstance() {
+    protected static BSServiceManager getInstance() {
         if (isNull(instance)) {
             Log.e(TAG, "ServiceManager should be initialized the Application singleton");
         }

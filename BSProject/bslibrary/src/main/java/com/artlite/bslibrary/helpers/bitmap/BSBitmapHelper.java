@@ -1,5 +1,6 @@
 package com.artlite.bslibrary.helpers.bitmap;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.IntRange;
@@ -9,6 +10,9 @@ import android.support.annotation.Nullable;
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Class which provide the base functional for {@link Bitmap}
@@ -93,6 +97,63 @@ public final class BSBitmapHelper extends BSBaseHelper {
             return bitmap;
         } catch (Exception ex) {
             log(null, methodName, ex, bytes);
+            return null;
+        }
+    }
+
+    /**
+     * Method which provide the saving of the {@link Bitmap} to file system
+     *
+     * @param context instance of {@link Context}
+     * @param bitmap  instance of {@link Bitmap}
+     * @param name    name value
+     */
+    public static void cacheBitmap(final Context context,
+                                   final Bitmap bitmap,
+                                   final String name) {
+        if (isEmpty(context, name)) {
+            return;
+        }
+        final String methodName = "void cacheBitmap(context, bitmap, name)";
+        String filename = String.format("%s%s%s", context.getCacheDir(), File.separator, name);
+        log(null, methodName, null, filename);
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(filename);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
+            // PNG is a lossless format, the compression factor (100) is ignored
+        } catch (Exception e) {
+            log(null, methodName, e, null);
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                log(null, methodName, e, null);
+            }
+        }
+    }
+
+    /**
+     * Method which provide the getting of the cached {@link Bitmap}
+     *
+     * @param context instance of {@link Context}
+     * @param name    name value
+     * @return instance of {@link Bitmap}
+     */
+    public static Bitmap getCachedBitmap(@Nullable final Context context,
+                                         @Nullable final String name) {
+        if (isEmpty(context, name)) {
+            return null;
+        }
+        String filename = String.format("%s%s%s", context.getCacheDir(), File.separator, name);
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            Bitmap bitmap = BitmapFactory.decodeFile(filename, options);
+            return bitmap;
+        } catch (Exception e) {
             return null;
         }
     }
