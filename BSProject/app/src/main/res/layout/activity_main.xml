@@ -15,38 +15,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hello World!"
-        android:textSize="16sp" />
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
-    <com.artlite.bslibrary.ui.fonted.BSTextView
+    <com.artlite.bslibrary.ui.fonted.BSEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:textSize="16sp"
-        android:textStyle="italic" />
+        android:hint="Input text here"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
-    <com.artlite.bslibrary.ui.fonted.BSTextView
+    <com.artlite.bslibrary.ui.fonted.BSButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Just do it"
+        android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold" />
 
-    <com.artlite.bslibrary.ui.fonted.BSTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:textSize="16sp"
-        android:textStyle="bold|italic" />
 
-    <com.artlite.bslibrary.ui.fonted.BSTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Привет мир"
-        android:textSize="16sp" />
-
-    <com.artlite.bslibrary.ui.fonted.BSTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Привіт світ"
-        android:textSize="16sp" />
 </LinearLayout>
