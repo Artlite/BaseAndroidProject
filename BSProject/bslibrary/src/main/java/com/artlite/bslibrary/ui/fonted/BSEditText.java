@@ -56,17 +56,19 @@ public class BSEditText extends AppCompatEditText {
             return;
         }
         Typeface typeface = this.getTypeface();
-        Typeface boldFont = getBold();
         Typeface font = getFont();
-        if (typeface.isBold()) {
-            if (boldFont != null) {
-                this.setTypeface(boldFont);
-            }
-        } else {
-            if (font != null) {
-                this.setTypeface(font);
+        if (typeface != null) {
+            if (typeface.getStyle() == Typeface.NORMAL) {
+                font = getFont();
+            } else if (typeface.getStyle() == Typeface.BOLD) {
+                font = getFontBold();
+            } else if (typeface.getStyle() == Typeface.ITALIC) {
+                font = getFontItalic();
+            } else if (typeface.getStyle() == Typeface.BOLD_ITALIC) {
+                font = getFontBoldItalic();
             }
         }
+        this.setTypeface(font);
     }
 
     /**
@@ -104,7 +106,7 @@ public class BSEditText extends AppCompatEditText {
      */
     @Warning(massage = "This method should be overriden if you want to change typeface")
     protected Typeface getFont() {
-        return BSTypefaceManager.getFont();
+        return BSTypefaceManager.getBariol();
     }
 
     /**
@@ -113,7 +115,27 @@ public class BSEditText extends AppCompatEditText {
      * @return instance of {@link Typeface}
      */
     @Warning(massage = "This method should be overriden if you want to change typeface")
-    protected Typeface getBold() {
-        return BSTypefaceManager.getBold();
+    protected Typeface getFontBold() {
+        return BSTypefaceManager.getBariolBold();
+    }
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @Warning(massage = "This method should be overriden if you want to change typeface")
+    protected Typeface getFontItalic() {
+        return BSTypefaceManager.getBariolItalic();
+    }
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @Warning(massage = "This method should be overriden if you want to change typeface")
+    protected Typeface getFontBoldItalic() {
+        return BSTypefaceManager.getBariolBoldItalic();
     }
 }

@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.artlite.bsproject.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.artlite.bslibrary.ui.fonted.BSTextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+        android:text="Hello World!"
+        android:textSize="16sp" />
+
+    <com.artlite.bslibrary.ui.fonted.BSTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textSize="16sp"
+        android:textStyle="italic" />
+
+    <com.artlite.bslibrary.ui.fonted.BSTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <com.artlite.bslibrary.ui.fonted.BSTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <com.artlite.bslibrary.ui.fonted.BSTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Привет мир"
+        android:textSize="16sp" />
+
+    <com.artlite.bslibrary.ui.fonted.BSTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Привіт світ"
+        android:textSize="16sp" />
+</LinearLayout>
