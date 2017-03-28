@@ -1,10 +1,8 @@
 package com.artlite.bsproject;
 
-import android.view.View;
-
 import com.artlite.bslibrary.ui.activity.BSActivity;
 
-public class MainActivity extends BSActivity {
+public class DetailsActivity extends BSActivity {
 
     /**
      * Method which provide the getting of the layout ID for the current Activity
@@ -13,7 +11,7 @@ public class MainActivity extends BSActivity {
      */
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_main;
+        return R.layout.activity_details;
     }
 
     /**
@@ -21,7 +19,6 @@ public class MainActivity extends BSActivity {
      */
     @Override
     protected void onCreateActivity() {
-        setOnClickListeners(R.id.button1);
 
     }
 
@@ -33,21 +30,5 @@ public class MainActivity extends BSActivity {
     @Override
     protected boolean isOverrideTransitionAnimation() {
         return true;
-    }
-
-    /**
-     * Overriden method for the OnClickListener
-     *
-     * @param v current view
-     */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button1:
-                startActivity(DetailsActivity.class);
-                break;
-            default:
-                break;
-        }
     }
 }

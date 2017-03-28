@@ -1,9 +1,11 @@
 package com.artlite.bslibrary.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.support.annotation.AnimRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,7 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 
+import com.artlite.bslibrary.R;
+import com.artlite.bslibrary.helpers.log.BSLogHelper;
 import com.artlite.bslibrary.managers.BSThreadManager;
+
+import java.util.Set;
 
 /**
  * Created by dlernatovich on 2/17/2017.
@@ -31,6 +37,7 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
     //                                      FIELDS
     //==============================================================================================
     protected final Handler MAIN_THREAD_HANDLER = new Handler();
+    protected Boolean isLaunchActivity = null;
 
     //==============================================================================================
     //                                      CREATE
@@ -100,6 +107,22 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
     protected void setOnClickListeners(View... views) {
         for (View view : views) {
             view.setOnClickListener(this);
+        }
+    }
+
+    /**
+     * Method which provide the setting of the OnClickListener
+     *
+     * @param ids current list of views
+     */
+    protected void setOnClickListeners(int... ids) {
+        final String methodName = "void setOnClickListeners(int... ids)";
+        for (int id : ids) {
+            try {
+                findViewById(id).setOnClickListener(this);
+            } catch (Exception ex) {
+                BSLogHelper.log(this, methodName, ex, null);
+            }
         }
     }
 
@@ -260,6 +283,116 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
      */
     public static void execute(@Nullable final BSThreadManager.OnExecutionCallback callback) {
         BSThreadManager.execute(callback);
+    }
+
+    //==============================================================================================
+    //                                     ANIMATION
+    //==============================================================================================
+
+    /**
+     * Method which provide the finishing activity
+     */
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransitionExit();
+    }
+
+    /**
+     * Method which provide the starting activity
+     *
+     * @param intent instance of {@link Intent}
+     */
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+        overridePendingTransitionEnter();
+    }
+
+    /**
+     * Overrides the pending Activity transition by performing the "Enter" animation.
+     */
+    protected void overridePendingTransitionEnter() {
+        if (isOverrideTransitionAnimation() == true) {
+            overridePendingTransition(getStartEnterAnim(), getStartEndAnim());
+        }
+    }
+
+    /**
+     * Overrides the pending Activity transition by performing the "Exit" animation.
+     */
+    protected void overridePendingTransitionExit() {
+        if ((isOverrideTransitionAnimation() == true) && (isLaunchActivity() == false)) {
+            overridePendingTransition(getFinishStartAnim(), getFinishEndAnim());
+        }
+    }
+
+    /**
+     * Method which provide the getting of the start enter animation
+     *
+     * @return id for start enter animation
+     */
+    @AnimRes
+    protected int getStartEnterAnim() {
+        return R.anim.slide_from_right;
+    }
+
+    /**
+     * Method which provide the getting of the start end animation
+     *
+     * @return id for start end animation
+     */
+    @AnimRes
+    protected int getStartEndAnim() {
+        return R.anim.slide_to_left;
+    }
+
+    /**
+     * Method which provide the getting of the finish start animation
+     *
+     * @return id for start end animation
+     */
+    @AnimRes
+    protected int getFinishStartAnim() {
+        return R.anim.slide_from_left;
+    }
+
+    /**
+     * Method which provide the getting of the finish start animation
+     *
+     * @return id for start end animation
+     */
+    @AnimRes
+    protected int getFinishEndAnim() {
+        return R.anim.slide_to_right;
+    }
+
+    /**
+     * Method which provide the defining if need to override of the transition animation
+     *
+     * @return defining results
+     */
+    protected boolean isOverrideTransitionAnimation() {
+        return false;
+    }
+
+    /**
+     * Method which provide the checking if current {@link Activity} is launch
+     *
+     * @return checking if current {@link Activity} is launch
+     */
+    private boolean isLaunchActivity() {
+        if (isLaunchActivity == null) {
+            Intent intent = getIntent();
+            String action = intent.getAction();
+            Set<String> categories = intent.getCategories();
+            if (categories != null) {
+                isLaunchActivity = categories.contains("android.intent.category.LAUNCHER");
+            } else {
+                isLaunchActivity = false;
+            }
+        }
+        return isLaunchActivity;
     }
 
     //==============================================================================================

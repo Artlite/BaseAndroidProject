@@ -26,6 +26,7 @@
         android:textSize="18sp" />
 
     <com.artlite.bslibrary.ui.fonted.BSButton
+        android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Just do it"
