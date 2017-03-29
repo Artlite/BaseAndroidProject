@@ -3,20 +3,24 @@ package com.artlite.bslibrary.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Parcelable;
 import android.support.annotation.AnimRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.artlite.bslibrary.R;
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
+import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.managers.BSThreadManager;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -36,7 +40,6 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
     //==============================================================================================
     //                                      FIELDS
     //==============================================================================================
-    protected final Handler MAIN_THREAD_HANDLER = new Handler();
     protected Boolean isLaunchActivity = null;
 
     //==============================================================================================
@@ -52,7 +55,8 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(getLayoutId());
-        onCreateActivity();
+        onInitBackButton();
+        onCreateActivity((bundle == null) ? getIntent().getExtras() : bundle);
     }
 
     //==============================================================================================
@@ -83,6 +87,22 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
      */
     protected int getMenuId() {
         return K_NONE_MENU;
+    }
+
+    /**
+     * Method which provide the action when user check option {@link Menu}
+     *
+     * @param item instance of {@link MenuItem}
+     * @return checking results
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //==============================================================================================
@@ -169,22 +189,35 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
      * Method which provide starting the Activity
      *
      * @param activtyClass activity which should be starting
+     * @param callbacks    instances of {@link OnStartActivityCallback}
      */
-    protected void startActivity(Class activtyClass) {
-        startActivity(new Intent(this, activtyClass));
+    protected void startActivity(Class activtyClass,
+                                 @Nullable final OnStartActivityCallback... callbacks) {
+        startActivity(activtyClass, false, callbacks);
     }
 
     /**
      * Method which provide starting the Activity
      *
      * @param activtyClass activity which should be starting
+     * @param isNeedClear  is need clear {@link Activity} stack
+     * @param callbacks    instances of {@link OnStartActivityCallback}
      */
-    protected void startActivity(Class activtyClass, boolean isNeedClear) {
-        Intent intent = new Intent(this, activtyClass);
+    protected void startActivity(Class activtyClass,
+                                 boolean isNeedClear,
+                                 @Nullable final OnStartActivityCallback... callbacks) {
+        final Intent intent = new Intent(this, activtyClass);
         if (isNeedClear) {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
                     | Intent.FLAG_ACTIVITY_NEW_TASK
                     | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        }
+        if ((callbacks != null) && (callbacks.length > 0)) {
+            for (final OnStartActivityCallback callback : callbacks) {
+                if (callback != null) {
+                    callback.onPreExecute(intent);
+                }
+            }
         }
         startActivity(intent);
     }
@@ -194,12 +227,60 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
     //==============================================================================================
 
     /**
+     * Method which provide the getting of the extras from {@link Intent}
+     *
+     * @param intent instance of {@link Intent}
+     * @param key    instance of {@link String} key
+     * @param <T>    class type
+     * @return instance of {@link Serializable}
+     */
+    @Nullable
+    protected <T extends Parcelable> T getExtras(@Nullable final Intent intent,
+                                                 @Nullable final String key) {
+        if (!BSValidationHelper.isEmpty(intent, key)) {
+            return getExtras(intent.getExtras(), key);
+        }
+        return null;
+    }
+
+    /**
+     * Method which provide the getting of the extras from {@link Intent}
+     *
+     * @param bundle instance of {@link Bundle}
+     * @param key    instance of {@link String} key
+     * @param <T>    class type
+     * @return instance of {@link Serializable}
+     */
+    @Nullable
+    protected <T extends Parcelable> T getExtras(@Nullable final Bundle bundle,
+                                                 @Nullable final String key) {
+        final String methodName = "T getExtras(intent, key)";
+        try {
+            return bundle.getParcelable(key);
+        } catch (Exception ex) {
+            BSLogHelper.log(this, methodName, ex, null);
+        }
+        return null;
+    }
+
+
+    /**
      * Method which provide starting the Activity for results
      *
      * @param activtyClass activity which should be starting
+     * @param callbacks    instances of {@link OnStartActivityCallback}
      */
-    protected void startActivityForResults(Class activtyClass) {
-        startActivityForResult(new Intent(this, activtyClass), ON_BASE_ACTIVITY_RESULTS);
+    protected void startActivityForResults(Class activtyClass,
+                                           @Nullable final OnStartActivityCallback... callbacks) {
+        final Intent intent = new Intent(this, activtyClass);
+        if ((callbacks != null) && (callbacks.length > 0)) {
+            for (final OnStartActivityCallback callback : callbacks) {
+                if (callback != null) {
+                    callback.onPreExecute(intent);
+                }
+            }
+        }
+        startActivityForResult(intent, ON_BASE_ACTIVITY_RESULTS);
     }
 
     /**
@@ -396,6 +477,32 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
     }
 
     //==============================================================================================
+    //                                    BACK PRESSED
+    //==============================================================================================
+
+    /**
+     * Method which provide the checking if need back button into {@link ActionBar}
+     *
+     * @return checking if need back button into {@link ActionBar}
+     */
+    protected boolean isNeedBackButton() {
+        return false;
+    }
+
+    /**
+     * Method which provide the initializing of the back button in {@link ActionBar}
+     */
+    private void onInitBackButton() {
+        if ((isNeedBackButton() == true) && (isLaunchActivity() == false)) {
+            if (getActionBar() != null) {
+                getActionBar().setDisplayHomeAsUpEnabled(true);
+            } else if (getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
+    }
+
+    //==============================================================================================
     //                                      CLASSES
     //==============================================================================================
 
@@ -404,6 +511,18 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
      */
     protected interface OnActionPerformer {
         void onPerform();
+    }
+
+    /**
+     * Callback which provide the action with intent before start {@link android.app.Activity}
+     */
+    protected interface OnStartActivityCallback {
+        /**
+         * Method which provide the action before starting activity
+         *
+         * @param intent instance of {@link Intent}
+         */
+        void onPreExecute(@NonNull final Intent intent);
     }
 
     //==============================================================================================
@@ -420,7 +539,7 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
     /**
      * Method which provide the action when Activity is created
      */
-    protected abstract void onCreateActivity();
+    protected abstract void onCreateActivity(@Nullable final Bundle bundle);
 
     //TODO Example for the onOptionsItemSelected
     //    @Override

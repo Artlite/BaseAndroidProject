@@ -1,5 +1,6 @@
 package com.artlite.bsproject;
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.artlite.bslibrary.ui.activity.BSActivity;
@@ -20,7 +21,7 @@ public class MainActivity extends BSActivity {
      * Method which provide the action when Activity is created
      */
     @Override
-    protected void onCreateActivity() {
+    protected void onCreateActivity(Bundle bundle) {
         setOnClickListeners(R.id.button1);
 
     }

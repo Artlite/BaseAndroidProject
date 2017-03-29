@@ -1,5 +1,8 @@
 package com.artlite.bsproject;
 
+import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+
 import com.artlite.bslibrary.ui.activity.BSActivity;
 
 public class DetailsActivity extends BSActivity {
@@ -18,7 +21,7 @@ public class DetailsActivity extends BSActivity {
      * Method which provide the action when Activity is created
      */
     @Override
-    protected void onCreateActivity() {
+    protected void onCreateActivity(Bundle bundle) {
 
     }
 
@@ -29,6 +32,16 @@ public class DetailsActivity extends BSActivity {
      */
     @Override
     protected boolean isOverrideTransitionAnimation() {
+        return true;
+    }
+
+    /**
+     * Method which provide the checking if need back button into {@link ActionBar}
+     *
+     * @return checking if need back button into {@link ActionBar}
+     */
+    @Override
+    protected boolean isNeedBackButton() {
         return true;
     }
 }
