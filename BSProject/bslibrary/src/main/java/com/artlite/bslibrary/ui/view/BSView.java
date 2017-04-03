@@ -6,13 +6,13 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 /**
- * Created by dlernatovich on 2/17/2017.
+ * Class which provide the base {@link View} functional
  */
 
-public abstract class BSView extends ViewGroup implements View.OnClickListener {
+public abstract class BSView extends LinearLayout implements View.OnClickListener {
 
     /**
      * Instance of {@link View}
