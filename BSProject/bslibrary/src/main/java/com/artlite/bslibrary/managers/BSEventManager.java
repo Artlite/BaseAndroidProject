@@ -16,8 +16,14 @@ import java.util.List;
 
 public final class BSEventManager extends BSBaseManager {
 
+    /**
+     * Instance of the {@link BSEventManager}
+     */
     private static BSEventManager instance;
 
+    /**
+     * Instance of the {@link LruCache}
+     */
     private final LruCache<String, List<WeakReference<OnEventCallback>>> events;
 
     /**

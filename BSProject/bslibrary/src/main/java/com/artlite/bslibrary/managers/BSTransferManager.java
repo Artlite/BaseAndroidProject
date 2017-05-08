@@ -14,7 +14,14 @@ import java.lang.ref.WeakReference;
 
 public final class BSTransferManager extends BSBaseManager {
 
+    /**
+     * Instance of the {@link BSTransferManager}
+     */
     private static BSTransferManager instance;
+
+    /**
+     * Instance of the {@link LruCache}
+     */
     private final LruCache<Class, WeakReference<Object>> data;
 
     /**

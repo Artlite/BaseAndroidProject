@@ -14,6 +14,9 @@ import com.artlite.bslibrary.helpers.service.BSServiceHelper;
 
 public final class BSServiceManager extends BSBaseManager {
 
+    /**
+     * Instance of the {@link BSServiceManager}
+     */
     private static BSServiceManager instance;
 
     /**

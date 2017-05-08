@@ -11,6 +11,9 @@ import android.util.Log;
 
 public final class BSThreadManager extends BSBaseManager {
 
+    /**
+     * Instance of the {@link BSThreadManager}
+     */
     private static BSThreadManager instance;
 
     /**
