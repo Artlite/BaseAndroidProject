@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.artlite.bslibrary.R;
+import com.artlite.bslibrary.helpers.injector.BSInjector;
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.managers.BSThreadManager;
@@ -56,6 +57,7 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(bundle);
         setContentView(getLayoutId());
         onInitBackButton();
+        BSInjector.inject(this);
         onCreateActivity((bundle == null) ? getIntent().getExtras() : bundle);
     }
 

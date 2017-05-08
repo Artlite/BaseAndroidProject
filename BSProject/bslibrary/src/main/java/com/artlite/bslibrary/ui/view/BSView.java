@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.artlite.bslibrary.helpers.injector.BSInjector;
+
 /**
  * Class which provide the base {@link View} functional
  */
@@ -65,7 +67,8 @@ public abstract class BSView extends LinearLayout implements View.OnClickListene
     private void onInitializeView(Context context) {
         inflateView(context, getLayoutId());
         if (baseView != null) {
-
+            BSInjector.inject(baseView);
+            BSInjector.inject(this);
         }
         onCreateView();
     }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.artlite.bslibrary.helpers.injector.BSInjector;
 import com.artlite.bslibrary.managers.BSThreadManager;
 
 /**
@@ -35,6 +36,7 @@ public abstract class BSFragment extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         containerView = inflater.inflate(getLayoutId(), container, false);
+        BSInjector.inject(this, containerView);
         onCreateFragment(containerView);
         return containerView;
     }
