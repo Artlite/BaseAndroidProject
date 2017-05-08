@@ -41,7 +41,7 @@ public abstract class BSBitmappedView<T extends Object> extends BSView {
      *
      * @warning Should be overriding in the
      */
-    protected Bitmap onApply(final T... objects) {
+    public Bitmap onApply(final T... objects) {
         return create(this);
     }
 
