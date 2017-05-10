@@ -1,11 +1,21 @@
 package com.artlite.bsproject;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 
+import com.artlite.bslibrary.annotations.FindViewBy;
+import com.artlite.bslibrary.helpers.dialog.BSDialogHelper;
 import com.artlite.bslibrary.ui.activity.BSActivity;
+import com.artlite.bslibrary.ui.fonted.BSEditText;
 
 public class MainActivity extends BSActivity {
+
+    @FindViewBy(id = R.id.view_for_pop_up)
+    private View forPopup;
+
+    @FindViewBy(id = R.id.edit_popup)
+    private BSEditText editText;
 
     /**
      * Method which provide the getting of the layout ID for the current Activity
@@ -22,7 +32,7 @@ public class MainActivity extends BSActivity {
      */
     @Override
     protected void onCreateActivity(Bundle bundle) {
-        setOnClickListeners(R.id.button1);
+        setOnClickListeners(R.id.button1, R.id.button2);
 
     }
 
@@ -44,9 +54,15 @@ public class MainActivity extends BSActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button1:
+            case R.id.button1: {
                 startActivity(DetailsActivity.class);
                 break;
+            }
+            case R.id.button2: {
+                Dialog dialog = BSDialogHelper.create(this, "Resident evil", "Text", R.mipmap.ic_recycle);
+                dialog.show();
+                break;
+            }
             default:
                 break;
         }

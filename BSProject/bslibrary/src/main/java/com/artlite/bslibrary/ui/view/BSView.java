@@ -1,7 +1,9 @@
 package com.artlite.bslibrary.ui.view;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -9,6 +11,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.artlite.bslibrary.helpers.injector.BSInjector;
+import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Class which provide the base {@link View} functional
@@ -24,7 +29,12 @@ public abstract class BSView extends LinearLayout implements View.OnClickListene
     /**
      * Instance of {@link PopupCallback}
      */
-    protected PopupCallback popupCallback;
+    protected WeakReference<PopupCallback> popupCallback;
+
+    /**
+     * Instance of the {@link WeakReference}
+     */
+    protected WeakReference<Dialog> dialogReference;
 
     /**
      * Constructor which provide the create {@link BSView} from
@@ -117,6 +127,20 @@ public abstract class BSView extends LinearLayout implements View.OnClickListene
     }
 
     /**
+     * Method which provide the setting of the OnClickListener
+     *
+     * @param ids current list of {@link View} IDs
+     */
+    protected void setOnClickListeners(@IdRes Integer... ids) {
+        for (Integer id : ids) {
+            final View view = findViewById(id);
+            if (view != null) {
+                view.setOnClickListener(this);
+            }
+        }
+    }
+
+    /**
      * Method which provide the on click functional
      *
      * @param view instance of {@link View}
@@ -126,23 +150,81 @@ public abstract class BSView extends LinearLayout implements View.OnClickListene
 
     }
 
+    //==============================================================================================
+    //                                          POPUP
+    //==============================================================================================
+
     /**
      * Method which provide the setting of the {@link PopupCallback}
      *
      * @param popupCallback instance of {@link PopupCallback}
      */
     public void setPopupCallback(@Nullable final PopupCallback popupCallback) {
-        this.popupCallback = popupCallback;
+        if (!BSValidationHelper.isEmpty(popupCallback)) {
+            this.popupCallback = new WeakReference<PopupCallback>(popupCallback);
+        }
+    }
+
+    /**
+     * Method which provide the {@link PopupCallback} getting from the {@link BSView}
+     *
+     * @return instance of the {@link PopupCallback}
+     */
+    @Nullable
+    protected PopupCallback getCallback() {
+        return (popupCallback == null)
+                ? null : popupCallback.get();
     }
 
     /**
      * Method which provide the dismissing the pop up window if popUpListener isn't null
      */
     protected void dismissPopup() {
-        if (popupCallback != null) {
-            popupCallback.close();
+        final PopupCallback callback = getCallback();
+        if (callback != null) {
+            callback.close();
         }
     }
+
+    //==============================================================================================
+    //                                          DIALOG
+    //==============================================================================================
+
+    /**
+     * Method which provide the setting of the {@link Dialog} inside the {@link BSView}
+     *
+     * @param dialog instance of the {@link Dialog}
+     */
+    public void setDialog(@Nullable final Dialog dialog) {
+        if (!BSValidationHelper.isNull(dialog)) {
+            this.dialogReference = new WeakReference<Dialog>(dialog);
+        }
+    }
+
+    /**
+     * Method which provide the {@link Dialog} getting
+     *
+     * @return instance of the {@link Dialog}
+     */
+    @Nullable
+    protected Dialog getDialog() {
+        return (dialogReference == null)
+                ? null : dialogReference.get();
+    }
+
+    /**
+     * Method which provide the dismiss {@link Dialog} from the {@link BSView}
+     */
+    protected void dismissDialog() {
+        final Dialog dialog = getDialog();
+        if (!BSValidationHelper.isNull(dialog)) {
+            dialog.dismiss();
+        }
+    }
+
+    //==============================================================================================
+    //                                          CLASSES
+    //==============================================================================================
 
     /**
      * Listener which provide the interaction between
