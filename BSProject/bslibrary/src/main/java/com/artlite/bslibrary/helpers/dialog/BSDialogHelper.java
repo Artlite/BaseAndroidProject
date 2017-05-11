@@ -38,6 +38,20 @@ public final class BSDialogHelper extends BSBaseHelper {
     /**
      * Method which provide the create the of the {@link AlertDialog} from
      *
+     * @param context instance of {@link Context}
+     * @return instance of the {@link AlertDialog}
+     */
+    @Nullable
+    public static AlertDialog create(@Nullable final Context context,
+                                     @Nullable Boolean isCancelable,
+                                     @Nullable final BSView view) {
+        return create(context, isCancelable, null, null, null, view, null, null,
+                null, null, null, null);
+    }
+
+    /**
+     * Method which provide the create the of the {@link AlertDialog} from
+     *
      * @param context       instance of {@link Context}
      * @param isCancelable  {@link Boolean} value if it cancellable
      * @param positiveTitle {@link String} value of the positive title
@@ -322,7 +336,7 @@ public final class BSDialogHelper extends BSBaseHelper {
         }
 
         // If Dialog don't have any buttons than do it cancelable
-        if (!isHaveButtons) {
+        if ((!isHaveButtons) && (view == null)) {
             builder.setCancelable(true);
         }
 

@@ -68,7 +68,7 @@ public final class UserView extends BSView {
     protected void onCreateView() {
         labelHeader.setText(BSRandomManager.generateSentence(20));
         labelDescription.setText(BSRandomManager.generateSentence(20));
-        setOnClickListeners(R.id.button_close);
+        setOnClickListeners(R.id.button_close, R.id.button_cancel, R.id.button_event);
     }
 
     @Override
@@ -77,6 +77,15 @@ public final class UserView extends BSView {
             case R.id.button_close: {
                 dismissPopup();
                 dismissDialog();
+                break;
+            }
+            case R.id.button_cancel: {
+                dismissPopup();
+                cancelDialog();
+                break;
+            }
+            case R.id.button_event: {
+                sendEvent(new Event("ResidentEvil:UserView"));
                 break;
             }
             default:

@@ -27,6 +27,18 @@
         android:id="@+id/button_close"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CLose" />
+        android:text="Done" />
+
+    <com.artlite.bslibrary.ui.fonted.BSButton
+        android:id="@+id/button_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel" />
+
+    <com.artlite.bslibrary.ui.fonted.BSButton
+        android:id="@+id/button_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event" />
 
 </LinearLayout>

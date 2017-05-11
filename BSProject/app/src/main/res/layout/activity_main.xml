@@ -15,7 +15,7 @@
         android:id="@+id/view_for_pop_up"
         android:layout_width="@dimen/dimen_30"
         android:layout_height="@dimen/dimen_30"
-        android:layout_gravity="left"
+        android:layout_gravity="center_horizontal"
         android:background="@android:color/darker_gray" />
 
     <com.artlite.bslibrary.ui.fonted.BSTextView

@@ -1,13 +1,15 @@
 package com.artlite.bsproject;
 
-import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.Toast;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
-import com.artlite.bslibrary.helpers.dialog.BSDialogHelper;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
+import com.artlite.bslibrary.ui.view.BSView;
 
 public class MainActivity extends BSActivity {
 
@@ -59,8 +61,29 @@ public class MainActivity extends BSActivity {
                 break;
             }
             case R.id.button2: {
-                Dialog dialog = BSDialogHelper.create(this, "Resident evil", "Text", R.mipmap.ic_recycle);
-                dialog.show();
+                new UserView(this).showAsDialog(false, new BSView.OnDialogCallback() {
+                    @Override
+                    public void onShow(@NonNull Context context, @NonNull BSView view) {
+                        Toast.makeText(context, "onShow", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancel(@NonNull Context context, @NonNull BSView view) {
+                        Toast.makeText(context, "onCancel", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onClose(@NonNull Context context, @NonNull BSView view) {
+                        Toast.makeText(context, "onClose", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onEventReceived(@NonNull Context context,
+                                                @NonNull BSView view,
+                                                @NonNull BSView.Event event) {
+                        Toast.makeText(context, "onEventReceived", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
             }
             default:
