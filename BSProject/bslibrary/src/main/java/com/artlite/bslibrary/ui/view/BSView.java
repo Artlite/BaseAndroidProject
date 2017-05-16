@@ -564,7 +564,7 @@ public abstract class BSView extends LinearLayout
     /**
      * Class which provide the action for {@link BSView}
      */
-    public class Event {
+    public static class Event {
         /**
          * {@link Integer} value for the {@link Event}
          */
