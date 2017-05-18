@@ -17,6 +17,7 @@ import com.artlite.bslibrary.helpers.injector.BSInjector;
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
 import com.artlite.bslibrary.helpers.popup.BSPopupHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
+import com.artlite.bslibrary.managers.BSThreadManager;
 
 import java.lang.ref.WeakReference;
 
@@ -97,7 +98,12 @@ public abstract class BSView extends LinearLayout
             BSInjector.inject(baseView);
             BSInjector.inject(this);
         }
-        onCreateView();
+        BSThreadManager.main(new BSThreadManager.OnThreadCallback() {
+            @Override
+            public void onExecute() {
+                onCreateView();
+            }
+        });
     }
 
     /**

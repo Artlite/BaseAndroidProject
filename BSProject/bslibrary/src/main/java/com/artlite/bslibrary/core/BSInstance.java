@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
+import com.artlite.bslibrary.managers.BSContextManager;
 import com.artlite.bslibrary.managers.BSEventManager;
 import com.artlite.bslibrary.managers.BSRandomManager;
 import com.artlite.bslibrary.managers.BSScreenManager;
@@ -34,6 +35,7 @@ public final class BSInstance {
             BSTypefaceManager.init(context);
             BSRandomManager.init(context);
             BSScreenManager.init(context);
+            BSContextManager.init(context);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }

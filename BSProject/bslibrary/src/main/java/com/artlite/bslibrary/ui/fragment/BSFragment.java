@@ -17,6 +17,16 @@ import com.artlite.bslibrary.managers.BSThreadManager;
 
 public abstract class BSFragment extends Fragment implements View.OnClickListener {
 
+    /**
+     * Method which provide the delaying between create {@link Fragment} and call of the
+     * {@link #onCreateFragment(View)}
+     * for now it 1 second
+     */
+    private static final int K_DELAY_CREATION = 1;
+
+    /**
+     * Instance of {@link View}
+     */
     protected View containerView;
 
     /**
@@ -37,7 +47,12 @@ public abstract class BSFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         containerView = inflater.inflate(getLayoutId(), container, false);
         BSInjector.inject(this, containerView);
-        onCreateFragment(containerView);
+        BSThreadManager.main(K_DELAY_CREATION, new BSThreadManager.OnThreadCallback() {
+            @Override
+            public void onExecute() {
+                onCreateFragment(containerView);
+            }
+        });
         return containerView;
     }
 

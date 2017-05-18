@@ -53,12 +53,17 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
      * @param bundle instance of {@link Bundle}
      */
     @Override
-    protected void onCreate(Bundle bundle) {
+    protected void onCreate(final Bundle bundle) {
         super.onCreate(bundle);
         setContentView(getLayoutId());
         onInitBackButton();
         BSInjector.inject(this);
-        onCreateActivity((bundle == null) ? getIntent().getExtras() : bundle);
+        BSThreadManager.main(new BSThreadManager.OnThreadCallback() {
+            @Override
+            public void onExecute() {
+                onCreateActivity((bundle == null) ? getIntent().getExtras() : bundle);
+            }
+        });
     }
 
     //==============================================================================================
