@@ -1,9 +1,11 @@
 package com.artlite.bsproject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
@@ -18,6 +20,9 @@ public class MainActivity extends BSActivity {
 
     @FindViewBy(id = R.id.edit_popup)
     private BSEditText editText;
+
+    @FindViewBy(id = R.id.image_view)
+    private ImageView imageView;
 
     /**
      * Method which provide the getting of the layout ID for the current Activity
@@ -34,7 +39,7 @@ public class MainActivity extends BSActivity {
      */
     @Override
     protected void onCreateActivity(Bundle bundle) {
-        setOnClickListeners(R.id.button1, R.id.button2);
+        setOnClickListeners(R.id.button1, R.id.button2, R.id.button3);
 
     }
 
@@ -86,8 +91,17 @@ public class MainActivity extends BSActivity {
                 });
                 break;
             }
+            case R.id.button3: {
+                startActivityForPickImage();
+                break;
+            }
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityImageResults(@NonNull Bitmap bitmap) {
+        this.imageView.setImageBitmap(bitmap);
     }
 }

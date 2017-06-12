@@ -1,7 +1,11 @@
 package com.artlite.bslibrary.ui.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.AnimRes;
@@ -16,11 +20,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.artlite.bslibrary.R;
+import com.artlite.bslibrary.callbacks.BSPermissionCallback;
 import com.artlite.bslibrary.helpers.injector.BSInjector;
+import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
+import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.managers.BSThreadManager;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -34,8 +42,29 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
     //                                      CONSTANTS
     //==============================================================================================
 
-    protected static final int ON_BASE_ACTIVITY_RESULTS = 0x1;
+    /**
+     * {@link Integer} value of the pick image result
+     */
+    protected static final int K_ON_RESULT_PICK_IMAGE = 0b11;
+
+    /**
+     * {@link Integer} value of the request permission code
+     */
+    protected static final int K_REQUEST_PERMISSION_PHOTO = 0b10;
+
+    /**
+     * {@link Integer} value of the base activity results
+     */
+    protected static final int ON_BASE_ACTIVITY_RESULTS = 0b1;
+
+    /**
+     * {@link String} value of the results of the extra key
+     */
     protected static final String ON_RESULT_EXTRA_KEY = "ON_RESULT_EXTRA_KEY";
+
+    /**
+     * {@link Integer} value of the none menu
+     */
     protected static final int K_NONE_MENU = Integer.MIN_VALUE;
 
     //==============================================================================================
@@ -270,6 +299,18 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
         return null;
     }
 
+    /**
+     * Method which provide the starting activity for picking results
+     */
+    protected void startActivityForPickImage() {
+        BSPermissionHelper.requestPermissions(this, new BSPermissionCallback() {
+            @Override
+            public void onPermissionGranted() {
+                startActivityForResult(Intent.createChooser(BSIntentHelper.pickImage(),
+                        getString(R.string.text_select_image)), K_ON_RESULT_PICK_IMAGE);
+            }
+        }, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
 
     /**
      * Method which provide starting the Activity for results
@@ -303,7 +344,11 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
         if (resultCode == RESULT_OK) {
             // The user picked a contact.
             // The Intent's data Uri identifies which contact was selected.
-            onActivityResult(requestCode, data);
+            if ((requestCode == K_ON_RESULT_PICK_IMAGE) && (data != null)) {
+                onActivityImageResults(data);
+            } else {
+                onActivityResult(requestCode, data);
+            }
         }
 
     }
@@ -314,6 +359,35 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
      * @param data current intent
      */
     protected void onActivityResult(int requestCode, Intent data) {
+
+    }
+
+    /**
+     * Method which provide the on activity pick image results
+     *
+     * @param data instance of the {@link Intent}
+     */
+    private void onActivityImageResults(@NonNull final Intent data) {
+        final String methodName = "void onActivityImageResults(Intent)";
+        Bitmap bitmap = null;
+        try {
+            Uri selectedImage = data.getData();
+            InputStream imageStream = getContentResolver().openInputStream(selectedImage);
+            bitmap = BitmapFactory.decodeStream(imageStream);
+        } catch (Exception ex) {
+            BSLogHelper.log(this, methodName, ex, null);
+        }
+        if (bitmap != null) {
+            onActivityImageResults(bitmap);
+        }
+    }
+
+    /**
+     * Method which provide the callback when image picking finished
+     *
+     * @param bitmap instance of the {@link Bitmap}
+     */
+    protected void onActivityImageResults(@NonNull final Bitmap bitmap) {
 
     }
 
