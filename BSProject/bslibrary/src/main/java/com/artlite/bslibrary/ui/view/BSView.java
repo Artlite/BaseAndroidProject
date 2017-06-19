@@ -61,7 +61,7 @@ public abstract class BSView extends LinearLayout
      */
     public BSView(Context context) {
         super(context);
-        onInitializeView(context);
+        onInitializeView(context, null);
     }
 
     /**
@@ -72,7 +72,7 @@ public abstract class BSView extends LinearLayout
      */
     public BSView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        onInitializeView(context);
+        onInitializeView(context, attrs);
     }
 
     /**
@@ -84,7 +84,7 @@ public abstract class BSView extends LinearLayout
      */
     public BSView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        onInitializeView(context);
+        onInitializeView(context, attrs);
     }
 
     /**
@@ -92,11 +92,19 @@ public abstract class BSView extends LinearLayout
      *
      * @param context instance of {@link Context}
      */
-    private void onInitializeView(Context context) {
+    private void onInitializeView(Context context, @Nullable final AttributeSet attrs) {
+        final String methodName = "void onInitializeView(Context, AttributeSet)";
         inflateView(context, getLayoutId());
         if (baseView != null) {
             BSInjector.inject(baseView);
             BSInjector.inject(this);
+        }
+        if (attrs != null) {
+            try {
+                onInitAttributes(attrs);
+            } catch (Exception ex) {
+                BSLogHelper.log(this, methodName, ex, attrs);
+            }
         }
         BSThreadManager.main(new BSThreadManager.OnThreadCallback() {
             @Override
@@ -104,6 +112,15 @@ public abstract class BSView extends LinearLayout
                 onCreateView();
             }
         });
+    }
+
+    /**
+     * Method which provide the {@link AttributeSet} initialize
+     *
+     * @param attributes instance of the {@link AttributeSet}
+     */
+    protected void onInitAttributes(@NonNull AttributeSet attributes) {
+
     }
 
     /**
