@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <attr name="searchTextStyle" format="enum">
+        <enum name="bold" value="0" />
+        <enum name="normal" value="1" />
+        <enum name="italic" value="2" />
+    </attr>
+
     <declare-styleable name="BSSearchView">
         <attr name="searchBackground" format="reference" />
         <attr name="generalTint" format="color" />
@@ -7,5 +14,7 @@
         <attr name="textTint" format="color" />
         <attr name="closeIconTint" format="color" />
         <attr name="searchHintText" format="string" />
+        <attr name="searchTextSize" format="dimension" />
+        <attr name="searchTextStyle" />
     </declare-styleable>
 </resources>

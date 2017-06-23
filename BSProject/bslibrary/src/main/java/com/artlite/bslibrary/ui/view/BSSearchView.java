@@ -3,9 +3,11 @@ package com.artlite.bslibrary.ui.view;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -94,6 +96,16 @@ public final class BSSearchView extends BSView {
     private Drawable background;
 
     /**
+     * {@link Integer} value of the text size
+     */
+    private int textSize;
+
+    /**
+     * {@link Integer} value of the text style
+     */
+    private int textStyle;
+
+    /**
      * Constructor which provide the create {@link BSView} from
      *
      * @param context instance of {@link Context}
@@ -154,7 +166,30 @@ public final class BSSearchView extends BSView {
         this.closeIconTint = attr.getColorStateList(R.styleable.BSSearchView_closeIconTint);
         this.hint = attr.getString(R.styleable.BSSearchView_searchHintText);
         this.background = attr.getDrawable(R.styleable.BSSearchView_searchBackground);
+        this.textSize = attr.getDimensionPixelSize(R.styleable.BSSearchView_searchTextSize,
+                getResources().getDimensionPixelSize(R.dimen.text_16));
+        this.textStyle = attr.getInteger(R.styleable.BSSearchView_searchTextStyle,
+                1);
 
+        //Set typeface
+        switch (textStyle) {
+            case 0:
+                editSearch.setTypeface(null, Typeface.BOLD);
+                break;
+            case 1:
+                editSearch.setTypeface(null, Typeface.NORMAL);
+                break;
+            case 2:
+                editSearch.setTypeface(null, Typeface.ITALIC);
+                break;
+            default:
+                editSearch.setTypeface(null, Typeface.NORMAL);
+                break;
+        }
+
+        editSearch.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+
+        //Set general tints
         if (generalTint != null) {
             imageClose.setColorFilter(generalTint.getDefaultColor());
             imageSearch.setColorFilter(generalTint.getDefaultColor());
@@ -314,16 +349,17 @@ public final class BSSearchView extends BSView {
     }
 
     /**
-     * HOW TO CUSTOMIZE:
-     * <com.artlite.bslibrary.ui.view.BSSearchView
-     * android:id="@+id/search_view"
-     * android:layout_width="match_parent"
-     * android:layout_height="wrap_content"
-     * app:generalTint="@android:color/holo_red_dark"
-     * app:closeIconTint="@android:color/holo_blue_dark"
-     * app:textTint="@android:color/holo_purple"
-     * app:searchHintText="jkshksdgfdhsgfsdhkfgs"
-     * app:searchBackground="@drawable/background_round"
-     * app:searchIconTint="@android:color/holo_green_dark"/>
+     HOW TO CUSTOMIZE:
+     <com.artlite.bslibrary.ui.view.BSSearchView
+     android:id="@+id/search_view"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     app:generalTint="@android:color/holo_red_dark"
+     app:closeIconTint="@android:color/holo_blue_dark"
+     app:textTint="@android:color/holo_purple"
+     app:searchHintText="jkshksdgfdhsgfsdhkfgs"
+     app:searchBackground="@drawable/background_round"
+     app:searchTextSize="@dimen/text_20"
+     app:searchIconTint="@android:color/holo_green_dark"/>
      */
 }
