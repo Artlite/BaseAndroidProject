@@ -62,6 +62,14 @@ public final class UserView extends BSView {
     }
 
     /**
+     * Method which provide interface linking
+     */
+    @Override
+    protected void onLinkInterface() {
+
+    }
+
+    /**
      * Method which provide the creating of the {@link View}
      */
     @Override

@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">BSLibrary</string>
-    <string name="text_select_image">Select image</string>
-    <string name="text_permission_required_read_write_storage">For pick image we need to permission of the Read/Write external storage. Please allow this permission from the application settings</string>
+    <string name="bs_text_select_image">Select image</string>
+    <string name="bs_text_permission_required_read_write_storage">For pick image we need to permission of the Read/Write external storage. Please allow this permission from the application settings</string>
 </resources>

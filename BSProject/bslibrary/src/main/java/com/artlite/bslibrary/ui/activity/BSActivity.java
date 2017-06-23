@@ -307,7 +307,7 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onPermissionGranted() {
                 startActivityForResult(Intent.createChooser(BSIntentHelper.pickImage(),
-                        getString(R.string.text_select_image)), K_ON_RESULT_PICK_IMAGE);
+                        getString(R.string.bs_text_select_image)), K_ON_RESULT_PICK_IMAGE);
             }
         }, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
@@ -496,7 +496,7 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
      */
     @AnimRes
     protected int getStartEnterAnim() {
-        return R.anim.slide_from_right;
+        return R.anim.bs_slide_from_right;
     }
 
     /**
@@ -506,7 +506,7 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
      */
     @AnimRes
     protected int getStartEndAnim() {
-        return R.anim.slide_to_left;
+        return R.anim.bs_slide_to_left;
     }
 
     /**
@@ -516,7 +516,7 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
      */
     @AnimRes
     protected int getFinishStartAnim() {
-        return R.anim.slide_from_left;
+        return R.anim.bs_slide_from_left;
     }
 
     /**
@@ -526,7 +526,7 @@ public abstract class BSActivity extends AppCompatActivity implements View.OnCli
      */
     @AnimRes
     protected int getFinishEndAnim() {
-        return R.anim.slide_to_right;
+        return R.anim.bs_slide_to_right;
     }
 
     /**

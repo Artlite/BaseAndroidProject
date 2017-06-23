@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BSSearchView">
+        <attr name="searchBackground" format="reference" />
+        <attr name="generalTint" format="color" />
+        <attr name="searchIconTint" format="color" />
+        <attr name="textTint" format="color" />
+        <attr name="closeIconTint" format="color" />
+        <attr name="searchHintText" format="string" />
+    </declare-styleable>
+</resources>

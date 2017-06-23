@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.artlite.bsproject.DetailsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <com.artlite.bslibrary.ui.view.BSSearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:generalTint="@android:color/holo_red_dark"
+        app:closeIconTint="@android:color/holo_blue_dark"
+        app:textTint="@android:color/holo_purple"
+        app:searchHintText="jkshksdgfdhsgfsdhkfgs"
+        app:searchBackground="@drawable/background_round"
+        app:searchIconTint="@android:color/holo_green_dark"/>
+
+</LinearLayout>

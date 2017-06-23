@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.artlite.bslibrary.annotations.Info;
 import com.artlite.bslibrary.helpers.dialog.BSDialogHelper;
 import com.artlite.bslibrary.helpers.injector.BSInjector;
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
@@ -99,6 +100,11 @@ public abstract class BSView extends LinearLayout
             BSInjector.inject(baseView);
             BSInjector.inject(this);
         }
+        try {
+            onLinkInterface();
+        } catch (Exception ex) {
+            BSLogHelper.log(this, methodName, ex, null);
+        }
         if (attrs != null) {
             try {
                 onInitAttributes(attrs);
@@ -152,11 +158,19 @@ public abstract class BSView extends LinearLayout
      *
      * @return layout ID
      */
+    @Info(massage = "Method which provide the getting of the Integer value of the layout ID")
     protected abstract int getLayoutId();
+
+    /**
+     * Method which provide interface linking
+     */
+    @Info(massage = "Method which provide the interface linking")
+    protected abstract void onLinkInterface();
 
     /**
      * Method which provide the creating of the {@link View}
      */
+    @Info(massage = "Method which provide the actions when view created adn interface linking")
     protected abstract void onCreateView();
 
     /**
@@ -184,7 +198,7 @@ public abstract class BSView extends LinearLayout
      *
      * @param ids current list of {@link View} IDs
      */
-    protected void setOnClickListeners(@IdRes Integer... ids) {
+    protected void setOnClickListeners(@IdRes int... ids) {
         for (Integer id : ids) {
             final View view = findViewById(id);
             if (view != null) {
