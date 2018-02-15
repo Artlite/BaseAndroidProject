@@ -103,11 +103,10 @@ public abstract class BSFragment extends Fragment implements View.OnClickListene
      */
     protected void setOnClickListeners(@IdRes int... ids) {
         final String methodName = "void setOnClickListeners(int... ids)";
-        final Activity activity = getActivity();
-        if (activity != null) {
+        if (this.containerView != null) {
             for (int id : ids) {
                 try {
-                    activity.findViewById(id).setOnClickListener(this);
+                    this.containerView.findViewById(id).setOnClickListener(this);
                 } catch (Exception ex) {
                     BSLogHelper.log(this, methodName, ex, null);
                 }
