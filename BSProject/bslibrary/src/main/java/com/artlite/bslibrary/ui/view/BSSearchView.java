@@ -188,7 +188,7 @@ public final class BSSearchView extends BSView {
         this.textStyle = attr.getInteger(R.styleable.BSSearchView_searchTextStyle,
                 1);
         this.textGravity = attr.getInteger(R.styleable.BSSearchView_searchTextGravity,
-                1);
+                0);
 
         //Set typeface
         switch (textStyle) {
