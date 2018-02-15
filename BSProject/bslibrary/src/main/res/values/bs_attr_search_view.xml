@@ -7,14 +7,22 @@
         <enum name="italic" value="2" />
     </attr>
 
+    <attr name="searchTextGravity" format="enum">
+        <enum name="left" value="0" />
+        <enum name="right" value="1" />
+        <enum name="center" value="2" />
+    </attr>
+
     <declare-styleable name="BSSearchView">
         <attr name="searchBackground" format="reference" />
         <attr name="generalTint" format="color" />
         <attr name="searchIconTint" format="color" />
         <attr name="textTint" format="color" />
+        <attr name="textHintTint" format="color" />
         <attr name="closeIconTint" format="color" />
         <attr name="searchHintText" format="string" />
         <attr name="searchTextSize" format="dimension" />
         <attr name="searchTextStyle" />
+        <attr name="searchTextGravity" />
     </declare-styleable>
 </resources>

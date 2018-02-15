@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -83,6 +84,11 @@ public final class BSSearchView extends BSView {
     /**
      * Instance of {@link ColorStateList}
      */
+    private ColorStateList textHintTint;
+
+    /**
+     * Instance of {@link ColorStateList}
+     */
     private ColorStateList closeIconTint;
 
     /**
@@ -104,6 +110,11 @@ public final class BSSearchView extends BSView {
      * {@link Integer} value of the text style
      */
     private int textStyle;
+
+    /**
+     * {@link Integer} value of the text gravity
+     */
+    private int textGravity;
 
     /**
      * Constructor which provide the create {@link BSView} from
@@ -156,6 +167,11 @@ public final class BSSearchView extends BSView {
         return R.layout.bs_layout_search_view;
     }
 
+    /**
+     * Method which provide the init attributes
+     *
+     * @param attributes instance of the {@link AttributeSet}
+     */
     @Override
     protected void onInitAttributes(@NonNull AttributeSet attributes) {
         TypedArray attr = getContext().getTheme().obtainStyledAttributes(attributes,
@@ -163,12 +179,15 @@ public final class BSSearchView extends BSView {
         this.generalTint = attr.getColorStateList(R.styleable.BSSearchView_generalTint);
         this.searchIconTint = attr.getColorStateList(R.styleable.BSSearchView_searchIconTint);
         this.textTint = attr.getColorStateList(R.styleable.BSSearchView_textTint);
+        this.textHintTint = attr.getColorStateList(R.styleable.BSSearchView_textHintTint);
         this.closeIconTint = attr.getColorStateList(R.styleable.BSSearchView_closeIconTint);
         this.hint = attr.getString(R.styleable.BSSearchView_searchHintText);
         this.background = attr.getDrawable(R.styleable.BSSearchView_searchBackground);
         this.textSize = attr.getDimensionPixelSize(R.styleable.BSSearchView_searchTextSize,
                 getResources().getDimensionPixelSize(R.dimen.text_16));
         this.textStyle = attr.getInteger(R.styleable.BSSearchView_searchTextStyle,
+                1);
+        this.textGravity = attr.getInteger(R.styleable.BSSearchView_searchTextGravity,
                 1);
 
         //Set typeface
@@ -187,13 +206,34 @@ public final class BSSearchView extends BSView {
                 break;
         }
 
+        //Set gravity
+        switch (textGravity) {
+            case 0:
+                editSearch.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                break;
+            case 1:
+                editSearch.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                break;
+            case 2:
+                editSearch.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+                break;
+            default:
+                editSearch.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                break;
+        }
+
         editSearch.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+
+        if (background != null) {
+            layoutContent.setBackground(background);
+        }
 
         //Set general tints
         if (generalTint != null) {
             imageClose.setColorFilter(generalTint.getDefaultColor());
             imageSearch.setColorFilter(generalTint.getDefaultColor());
             editSearch.setTextColor(generalTint);
+            editSearch.setHintTextColor(textHintTint);
         }
 
         if (searchIconTint != null) {
@@ -212,8 +252,8 @@ public final class BSSearchView extends BSView {
             editSearch.setHint(hint);
         }
 
-        if (background != null) {
-            layoutContent.setBackground(background);
+        if (textHintTint != null) {
+            editSearch.setHintTextColor(textHintTint);
         }
 
         attr.recycle();

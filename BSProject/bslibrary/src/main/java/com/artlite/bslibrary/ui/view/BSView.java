@@ -8,7 +8,9 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -18,7 +20,9 @@ import com.artlite.bslibrary.helpers.injector.BSInjector;
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
 import com.artlite.bslibrary.helpers.popup.BSPopupHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
+import com.artlite.bslibrary.listeners.BSSwipeListener;
 import com.artlite.bslibrary.managers.BSThreadManager;
+import com.artlite.bslibrary.ui.activity.BSActivity;
 
 import java.lang.ref.WeakReference;
 
@@ -28,7 +32,8 @@ import java.lang.ref.WeakReference;
 
 public abstract class BSView extends LinearLayout
         implements View.OnClickListener, DialogInterface.OnDismissListener,
-        DialogInterface.OnCancelListener, DialogInterface.OnShowListener {
+        DialogInterface.OnCancelListener, DialogInterface.OnShowListener,
+        View.OnTouchListener {
 
     /**
      * Instance of {@link View}
@@ -54,6 +59,11 @@ public abstract class BSView extends LinearLayout
      * Instance of the {@link OnDropdownCallback}
      */
     protected WeakReference<OnDropdownCallback> dropdownCallbackReference;
+
+    /**
+     * Instance of the {@link GestureDetector}
+     */
+    private GestureDetector gestureDetector;
 
     /**
      * Constructor which provide the create {@link BSView} from
@@ -112,6 +122,7 @@ public abstract class BSView extends LinearLayout
                 BSLogHelper.log(this, methodName, ex, attrs);
             }
         }
+        onInitgestures();
         BSThreadManager.main(new BSThreadManager.OnThreadCallback() {
             @Override
             public void onExecute() {
@@ -216,6 +227,52 @@ public abstract class BSView extends LinearLayout
     public void onClick(View view) {
 
     }
+
+    //==============================================================================================
+    //                                         GESTURES
+    //==============================================================================================
+
+    /**
+     * Method which provide the init gestures detector
+     */
+    protected void onInitgestures() {
+        this.gestureDetector = new GestureDetector(getContext(), this.swipeListener);
+    }
+
+    /**
+     * Method which provide the touch functional
+     *
+     * @param view        instance of the {@link View}
+     * @param motionEvent instance of the {@link MotionEvent}
+     * @return
+     */
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if (this.gestureDetector != null) {
+            this.gestureDetector.onTouchEvent(motionEvent);
+        }
+        return false;
+    }
+
+    /**
+     * Method which provide of the swipe functional
+     *
+     * @param direction instance of the {@link BSSwipeListener.Direction}
+     */
+    protected boolean onSwipe(BSSwipeListener.Direction direction) {
+        // TODO: 15.02.2018 Implement the swipe functional (override this method)
+        return false;
+    }
+
+    /**
+     * Instance of the {@link BSSwipeListener}
+     */
+    protected final BSSwipeListener swipeListener = new BSSwipeListener() {
+        @Override
+        public boolean onSwipe(Direction direction) {
+            return BSView.this.onSwipe(direction);
+        }
+    };
 
     //==============================================================================================
     //                                          POPUP

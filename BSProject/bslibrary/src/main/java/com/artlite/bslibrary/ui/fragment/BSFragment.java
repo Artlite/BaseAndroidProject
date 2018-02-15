@@ -1,21 +1,29 @@
 package com.artlite.bslibrary.ui.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.artlite.bslibrary.helpers.injector.BSInjector;
+import com.artlite.bslibrary.helpers.log.BSLogHelper;
+import com.artlite.bslibrary.listeners.BSSwipeListener;
 import com.artlite.bslibrary.managers.BSThreadManager;
+import com.artlite.bslibrary.ui.view.BSView;
 
 /**
  * Created by dlernatovich on 2/17/2017.
  */
 
-public abstract class BSFragment extends Fragment implements View.OnClickListener {
+public abstract class BSFragment extends Fragment implements View.OnClickListener,
+        View.OnTouchListener {
 
     /**
      * Method which provide the delaying between create {@link Fragment} and call of the
@@ -28,6 +36,11 @@ public abstract class BSFragment extends Fragment implements View.OnClickListene
      * Instance of {@link View}
      */
     protected View containerView;
+
+    /**
+     * Instance of the {@link GestureDetector}
+     */
+    private GestureDetector gestureDetector;
 
     /**
      * Default constructor
@@ -47,6 +60,7 @@ public abstract class BSFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         containerView = inflater.inflate(getLayoutId(), container, false);
         BSInjector.inject(this, containerView);
+        onInitgestures();
         BSThreadManager.main(K_DELAY_CREATION, new BSThreadManager.OnThreadCallback() {
             @Override
             public void onExecute() {
@@ -79,6 +93,25 @@ public abstract class BSFragment extends Fragment implements View.OnClickListene
     protected void setOnClickListeners(View... views) {
         for (View view : views) {
             view.setOnClickListener(this);
+        }
+    }
+
+    /**
+     * Method which provide the setting of the OnClickListener
+     *
+     * @param ids current list of views
+     */
+    protected void setOnClickListeners(@IdRes int... ids) {
+        final String methodName = "void setOnClickListeners(int... ids)";
+        final Activity activity = getActivity();
+        if (activity != null) {
+            for (int id : ids) {
+                try {
+                    activity.findViewById(id).setOnClickListener(this);
+                } catch (Exception ex) {
+                    BSLogHelper.log(this, methodName, ex, null);
+                }
+            }
         }
     }
 
@@ -142,4 +175,50 @@ public abstract class BSFragment extends Fragment implements View.OnClickListene
     public static void execute(@Nullable final BSThreadManager.OnExecutionCallback callback) {
         BSThreadManager.execute(callback);
     }
+
+    //==============================================================================================
+    //                                         GESTURES
+    //==============================================================================================
+
+    /**
+     * Method which provide the init gestures detector
+     */
+    protected void onInitgestures() {
+        this.gestureDetector = new GestureDetector(getContext(), this.swipeListener);
+    }
+
+    /**
+     * Method which provide the touch functional
+     *
+     * @param view        instance of the {@link View}
+     * @param motionEvent instance of the {@link MotionEvent}
+     * @return
+     */
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if (this.gestureDetector != null) {
+            this.gestureDetector.onTouchEvent(motionEvent);
+        }
+        return false;
+    }
+
+    /**
+     * Method which provide of the swipe functional
+     *
+     * @param direction instance of the {@link BSSwipeListener.Direction}
+     */
+    protected boolean onSwipe(BSSwipeListener.Direction direction) {
+        // TODO: 15.02.2018 Implement the swipe functional (override this method)
+        return false;
+    }
+
+    /**
+     * Instance of the {@link BSSwipeListener}
+     */
+    protected final BSSwipeListener swipeListener = new BSSwipeListener() {
+        @Override
+        public boolean onSwipe(Direction direction) {
+            return BSFragment.this.onSwipe(direction);
+        }
+    };
 }
