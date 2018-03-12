@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference;
  * Created by dlernatovich on 2/17/2017.
  */
 
-public abstract class BSBaseManager {
+abstract class BSBaseManager {
     //Tag
     protected static final String TAG = BSBaseManager.class.getName();
     //Cache size
