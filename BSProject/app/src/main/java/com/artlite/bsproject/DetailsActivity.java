@@ -2,10 +2,12 @@ package com.artlite.bsproject;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.ui.activity.BSActivity;
+import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
 import com.artlite.bslibrary.ui.view.BSSearchView;
 
 public class DetailsActivity extends BSActivity {
@@ -15,6 +17,12 @@ public class DetailsActivity extends BSActivity {
      */
     @FindViewBy(id = R.id.search_view)
     private BSSearchView searchView;
+
+    @FindViewBy(id = R.id.linear_layout)
+    private BSDraggableLinearLayout bsLinearItemLayout;
+
+    @FindViewBy(id = R.id.scroll_view)
+    private ScrollView scrollView;
 
     /**
      * Method which provide the getting of the layout ID for the current Activity
@@ -31,6 +39,7 @@ public class DetailsActivity extends BSActivity {
      */
     @Override
     protected void onCreateActivity(Bundle bundle) {
+        this.bsLinearItemLayout.configure(true, this.scrollView, null);
         searchView.setSearchCallback(new BSSearchView.OnSearchCallback() {
             @Override
             public void onSearch(String text) {
@@ -42,6 +51,9 @@ public class DetailsActivity extends BSActivity {
                 Toast.makeText(getBaseContext(), "On cancel", Toast.LENGTH_LONG).show();
             }
         });
+        for (int i = 0; i < 100; i++) {
+            this.bsLinearItemLayout.add(new DetailsItemView(this));
+        }
     }
 
     /**

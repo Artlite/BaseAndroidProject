@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/dimen_10">
+
+    <ImageView
+        android:id="@+id/drag_menu"
+        android:layout_width="@dimen/dimen_40"
+        android:layout_height="@dimen/dimen_40"
+        android:src="@drawable/ic_menu_black_24dp"
+        android:tint="@android:color/darker_gray" />
+
+    <com.artlite.bslibrary.ui.fonted.BSTextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40"
+        android:gravity="center"
+        android:text="Item" />
+
+</LinearLayout>

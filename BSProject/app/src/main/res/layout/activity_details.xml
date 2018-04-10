@@ -11,12 +11,26 @@
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:generalTint="@android:color/holo_red_dark"
         app:closeIconTint="@android:color/holo_blue_dark"
-        app:textTint="@android:color/holo_purple"
-        app:searchHintText="jkshksdgfdhsgfsdhkfgs"
+        app:generalTint="@android:color/holo_red_dark"
         app:searchBackground="@drawable/background_round"
+        app:searchHintText="jkshksdgfdhsgfsdhkfgs"
+        app:searchIconTint="@android:color/holo_green_dark"
         app:searchTextSize="@dimen/text_20"
-        app:searchIconTint="@android:color/holo_green_dark"/>
+        app:textTint="@android:color/holo_purple" />
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.artlite.bslibrary.ui.view.BSDraggableLinearLayout
+            android:id="@+id/linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </com.artlite.bslibrary.ui.view.BSDraggableLinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
-import com.artlite.bslibrary.ui.view.BSLinearItemLayout;
+import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
 import com.artlite.bslibrary.ui.view.BSView;
 
 public class MainActivity extends BSActivity {
@@ -20,7 +20,7 @@ public class MainActivity extends BSActivity {
     private View forPopup;
 
     @FindViewBy(id = R.id.activity_main)
-    private BSLinearItemLayout linearItemLayout;
+    private BSDraggableLinearLayout linearItemLayout;
 
     @FindViewBy(id = R.id.edit_popup)
     private BSEditText editText;

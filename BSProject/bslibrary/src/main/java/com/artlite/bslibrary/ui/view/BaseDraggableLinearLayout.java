@@ -43,8 +43,8 @@ import com.artlite.bslibrary.R;
  * {@link #removeView(View)} calls, so avoid using these with children previously
  * declared as draggable to prevent memory leaks and/or subtle bugs. Pull requests welcome!
  */
-class BSDragLinearLayout extends LinearLayout {
-    private static final String LOG_TAG = BSDragLinearLayout.class.getSimpleName();
+abstract class BaseDraggableLinearLayout extends LinearLayout {
+    private static final String LOG_TAG = BaseDraggableLinearLayout.class.getSimpleName();
     private static final long NOMINAL_SWITCH_DURATION = 150;
     private static final long MIN_SWITCH_DURATION = NOMINAL_SWITCH_DURATION;
     private static final long MAX_SWITCH_DURATION = NOMINAL_SWITCH_DURATION * 2;
@@ -52,7 +52,7 @@ class BSDragLinearLayout extends LinearLayout {
     private final float nominalDistanceScaled;
 
     /**
-     * Use with {@link BSDragLinearLayout#setOnViewSwapListener(BSDragLinearLayout.OnViewSwapListener)}
+     * Use with {@link BaseDraggableLinearLayout#setOnViewSwapListener(BaseDraggableLinearLayout.OnViewSwapListener)}
      * to listen for draggable view swaps.
      */
     public interface OnViewSwapListener {
@@ -171,7 +171,7 @@ class BSDragLinearLayout extends LinearLayout {
     }
 
     /**
-     * The currently dragged item, if {@link BSDragLinearLayout.DragItem#detecting}.
+     * The currently dragged item, if {@link BaseDraggableLinearLayout.DragItem#detecting}.
      */
     private final DragItem draggedItem;
     private final int slop;
@@ -198,14 +198,12 @@ class BSDragLinearLayout extends LinearLayout {
     private static final int DEFAULT_SCROLL_SENSITIVE_AREA_HEIGHT_DP = 48;
     private static final int MAX_DRAG_SCROLL_SPEED = 16;
 
-    public BSDragLinearLayout(Context context) {
+    public BaseDraggableLinearLayout(Context context) {
         this(context, null);
     }
 
-    public BSDragLinearLayout(Context context, AttributeSet attrs) {
+    public BaseDraggableLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        setOrientation(LinearLayout.VERTICAL);
 
         draggableChildren = new SparseArray<>();
 
@@ -236,9 +234,9 @@ class BSDragLinearLayout extends LinearLayout {
      * @param attrs        instance of {@link AttributeSet}
      * @param defStyleAttr attribute style
      */
-    public BSDragLinearLayout(Context context,
-                              @Nullable AttributeSet attrs,
-                              int defStyleAttr) {
+    public BaseDraggableLinearLayout(Context context,
+                                     @Nullable AttributeSet attrs,
+                                     int defStyleAttr) {
         this(context, attrs);
     }
 
@@ -251,10 +249,10 @@ class BSDragLinearLayout extends LinearLayout {
      * @param defStyleRes  def style
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public BSDragLinearLayout(Context context,
-                              AttributeSet attrs,
-                              int defStyleAttr,
-                              int defStyleRes) {
+    public BaseDraggableLinearLayout(Context context,
+                                     AttributeSet attrs,
+                                     int defStyleAttr,
+                                     int defStyleRes) {
         this(context, attrs);
     }
 
@@ -262,7 +260,7 @@ class BSDragLinearLayout extends LinearLayout {
     public void setOrientation(int orientation) {
         // enforce VERTICAL orientation; remove if HORIZONTAL support is ever added
         if (LinearLayout.HORIZONTAL == orientation) {
-            throw new IllegalArgumentException("DragLinearLayout must be VERTICAL.");
+            Log.e(LOG_TAG, "Drag and drop functional isn't supported in this orientation");
         }
         super.setOrientation(orientation);
     }
@@ -368,7 +366,7 @@ class BSDragLinearLayout extends LinearLayout {
     }
 
     /**
-     * See {@link BSDragLinearLayout.OnViewSwapListener}.
+     * See {@link BaseDraggableLinearLayout.OnViewSwapListener}.
      */
     public void setOnViewSwapListener(OnViewSwapListener swapListener) {
         this.swapListener = swapListener;
@@ -384,7 +382,7 @@ class BSDragLinearLayout extends LinearLayout {
 
     /**
      * Initiates a new {@link #draggedItem} unless the current one is still
-     * {@link BSDragLinearLayout.DragItem#detecting}.
+     * {@link BaseDraggableLinearLayout.DragItem#detecting}.
      */
     private void startDetectingDrag(View child) {
         if (draggedItem.detecting)
