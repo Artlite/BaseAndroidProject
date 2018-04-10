@@ -11,12 +11,16 @@ import android.widget.Toast;
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
+import com.artlite.bslibrary.ui.view.BSLinearItemLayout;
 import com.artlite.bslibrary.ui.view.BSView;
 
 public class MainActivity extends BSActivity {
 
     @FindViewBy(id = R.id.view_for_pop_up)
     private View forPopup;
+
+    @FindViewBy(id = R.id.activity_main)
+    private BSLinearItemLayout linearItemLayout;
 
     @FindViewBy(id = R.id.edit_popup)
     private BSEditText editText;
@@ -40,6 +44,12 @@ public class MainActivity extends BSActivity {
     @Override
     protected void onCreateActivity(Bundle bundle) {
         setOnClickListeners(R.id.button1, R.id.button2, R.id.button3);
+//        linearItemLayout.configure(true, new BSLinearItemLayout.OnViewSwapListener() {
+//            @Override
+//            public void onSwap(View firstView, int firstPosition, View secondView, int secondPosition) {
+//
+//            }
+//        });
 
     }
 

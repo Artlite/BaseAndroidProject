@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="downwards_drop_shadow_height">16dp</dimen>
     <dimen name="dimen_0">0dp</dimen>
     <dimen name="text_0">0sp</dimen>
     <dimen name="dimen_1">1dp</dimen>
