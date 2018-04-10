@@ -197,6 +197,7 @@ public final class BSLinearItemLayout extends BSDragLinearLayout {
     public final void configure(boolean draggable,
                                 @Nullable BSLinearItemLayout.OnViewSwapListener callback) {
         if (draggable) {
+            this.draggable = draggable;
             this.setViewDraggable();
             this.setOnViewSwapListener(callback);
         }
