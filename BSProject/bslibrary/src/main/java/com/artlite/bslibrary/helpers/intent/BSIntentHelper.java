@@ -1,10 +1,13 @@
 package com.artlite.bslibrary.helpers.intent;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Parcelable;
@@ -14,12 +17,14 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresPermission;
 import android.text.TextUtils;
 
 import com.artlite.bslibrary.callbacks.BSIntentCallback;
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.util.List;
 
@@ -738,4 +743,43 @@ public final class BSIntentHelper extends BSBaseHelper {
     private static boolean isSupportsContactsV2() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR;
     }
+
+    //==============================================================================================
+    //                                      SHARE IMAGE
+    //==============================================================================================
+
+    /**
+     * Method which provide the {@link Intent} with intent sharing
+     *
+     * @param bitmap instance of the {@link Bitmap}
+     * @return instance of the {@link Bitmap}
+     */
+    @SuppressLint("MissingPermission")
+    @RequiresPermission(allOf = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    @Nullable
+    public static Intent shareBitmap(@Nullable String title,
+                                     @Nullable Context context,
+                                     @Nullable Bitmap bitmap) {
+        final String imageName = "share_tmp.png";
+        Intent intent = null;
+        try {
+            File file = new File(context.getExternalCacheDir(), imageName);
+            FileOutputStream outputStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+            outputStream.flush();
+            outputStream.close();
+            file.setReadable(true, false);
+            final Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+            shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+            shareIntent.setType("image/png");
+            intent = Intent.createChooser(shareIntent, title);
+        } catch (Exception ex) {
+            intent = null;
+        }
+        return intent;
+    }
+
 }
