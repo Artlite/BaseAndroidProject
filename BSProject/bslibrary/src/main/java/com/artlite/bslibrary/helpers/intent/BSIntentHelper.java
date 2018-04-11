@@ -765,7 +765,7 @@ public final class BSIntentHelper extends BSBaseHelper {
         final String imageName = "share_tmp.png";
         Intent intent = null;
         try {
-            File file = new File(context.getExternalCacheDir(), imageName);
+            File file = new File(context.getCacheDir(), imageName);
             FileOutputStream outputStream = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
             outputStream.flush();

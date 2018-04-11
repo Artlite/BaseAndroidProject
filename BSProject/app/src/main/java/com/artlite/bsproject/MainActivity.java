@@ -1,6 +1,9 @@
 package com.artlite.bsproject;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
+import com.artlite.bslibrary.callbacks.BSPermissionCallback;
+import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
+import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
+import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
@@ -44,13 +51,6 @@ public class MainActivity extends BSActivity {
     @Override
     protected void onCreateActivity(Bundle bundle) {
         setOnClickListeners(R.id.button1, R.id.button2, R.id.button3);
-//        linearItemLayout.configure(true, new BSLinearItemLayout.OnViewSwapListener() {
-//            @Override
-//            public void onSwap(View firstView, int firstPosition, View secondView, int secondPosition) {
-//
-//            }
-//        });
-
     }
 
     /**
@@ -111,7 +111,18 @@ public class MainActivity extends BSActivity {
     }
 
     @Override
-    protected void onActivityImageResults(@NonNull Bitmap bitmap) {
+    protected void onActivityImageResults(@NonNull final Bitmap bitmap) {
         this.imageView.setImageBitmap(bitmap);
+        BSPermissionHelper.requestPermissions(this, new BSPermissionCallback() {
+            @Override
+            public void onPermissionGranted() {
+                @SuppressLint("MissingPermission") final Intent intent
+                        = BSIntentHelper.shareBitmap("Share receipt",
+                        getBaseContext(), bitmap);
+                if (!BSValidationHelper.isEmpty(intent)) {
+                    startActivity(intent);
+                }
+            }
+        }, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 }
