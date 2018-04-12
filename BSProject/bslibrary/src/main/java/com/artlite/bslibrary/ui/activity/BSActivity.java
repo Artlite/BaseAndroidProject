@@ -106,7 +106,7 @@ public abstract class BSActivity extends AppCompatActivity
         BSThreadManager.main(new BSThreadManager.OnThreadCallback() {
             @Override
             public void onExecute() {
-                onCreateActivity((bundle == null) ? getIntent().getExtras() : bundle);
+                onActivityPostCreation((bundle == null) ? getIntent().getExtras() : bundle);
             }
         });
     }
