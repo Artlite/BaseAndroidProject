@@ -1,6 +1,7 @@
 package com.artlite.bsproject;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -39,6 +40,18 @@ public class DetailsActivity extends BSActivity {
      */
     @Override
     protected void onCreateActivity(Bundle bundle) {
+
+    }
+
+    /**
+     * Method which provide the action when Activity is created (post creation)
+     * Use it if you create any callback inside the activity like
+     * <b>final |CallbackType| callback = new |CallbackType|</b>
+     *
+     * @param bundle
+     */
+    @Override
+    protected void onActivityPostCreation(@Nullable Bundle bundle) {
         this.bsLinearItemLayout.configure(true, this.scrollView, null);
         searchView.setSearchCallback(new BSSearchView.OnSearchCallback() {
             @Override

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -51,6 +52,18 @@ public class MainActivity extends BSActivity {
     @Override
     protected void onCreateActivity(Bundle bundle) {
         setOnClickListeners(R.id.button1, R.id.button2, R.id.button3);
+    }
+
+    /**
+     * Method which provide the action when Activity is created (post creation)
+     * Use it if you create any callback inside the activity like
+     * <b>final |CallbackType| callback = new |CallbackType|</b>
+     *
+     * @param bundle
+     */
+    @Override
+    protected void onActivityPostCreation(@Nullable Bundle bundle) {
+
     }
 
     /**

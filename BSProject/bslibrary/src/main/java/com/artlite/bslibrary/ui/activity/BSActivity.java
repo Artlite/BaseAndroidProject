@@ -102,6 +102,7 @@ public abstract class BSActivity extends AppCompatActivity
         onInitBackButton();
         onInitgestures();
         BSInjector.inject(this);
+        onCreateActivity((bundle == null) ? getIntent().getExtras() : bundle);
         BSThreadManager.main(new BSThreadManager.OnThreadCallback() {
             @Override
             public void onExecute() {
@@ -682,6 +683,13 @@ public abstract class BSActivity extends AppCompatActivity
      * Method which provide the action when Activity is created
      */
     protected abstract void onCreateActivity(@Nullable final Bundle bundle);
+
+    /**
+     * Method which provide the action when Activity is created (post creation)
+     * Use it if you create any callback inside the activity like
+     * <b>final |CallbackType| callback = new |CallbackType|</b>
+     */
+    protected abstract void onActivityPostCreation(@Nullable final Bundle bundle);
 
     //TODO Example for the onOptionsItemSelected
     //    @Override

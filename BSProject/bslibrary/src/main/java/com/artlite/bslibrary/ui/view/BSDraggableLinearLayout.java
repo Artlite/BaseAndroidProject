@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -189,7 +188,10 @@ public final class BSDraggableLinearLayout extends BaseDraggableLinearLayout {
             if (view instanceof BSItemView) {
                 try {
                     final BSItemView itemView = (BSItemView) view;
-                    objects.add((T) itemView.getObject());
+                    T t = (T) itemView.getObject();
+                    if (t != null) {
+                        objects.add(t);
+                    }
                 } catch (Exception ex) {
                     Log.e(TAG, String.format("Can\'t convert object to required type. Error: %s.",
                             ex.toString()));
