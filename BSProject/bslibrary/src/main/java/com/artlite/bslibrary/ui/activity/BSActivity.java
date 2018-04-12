@@ -462,8 +462,8 @@ public abstract class BSActivity extends AppCompatActivity
         final Intent intent = new Intent();
         if (value != null) {
             intent.putExtra(ON_RESULT_EXTRA_KEY, value);
-            setResult(RESULT_OK, intent);
         }
+        setResult(RESULT_OK, intent);
         onBackPressed();
     }
 
