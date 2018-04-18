@@ -1,79 +1,22 @@
 package com.artlite.bslibrary.managers;
 
-import android.graphics.drawable.Drawable;
+import android.content.Context;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.util.LruCache;
-import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ImageView;
 
+import com.artlite.bslibrary.R;
 import com.artlite.bslibrary.helpers.image.BSImageHelper;
-import com.artlite.bslibrary.helpers.log.BSLogHelper;
-import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
 /**
  * Class which provide the download image functional for the {@link ImageView}
  * and it caching
  */
 
-public final class BSImageManager {
-
-    /**
-     * Class which provide the ImageBitmap cache
-     */
-    private static class Cache {
-
-        /**
-         * {@link Integer} value of the cache size
-         */
-        private static final int K_CACHE_SIZE = 4 * 1024 * 1024; // 4MiB
-
-        /**
-         * Instance of the {@link LruCache}
-         */
-        private final LruCache<String, Drawable> cache;
-
-        /**
-         * Default constructor
-         */
-        public Cache() {
-            cache = new LruCache<>(K_CACHE_SIZE);
-        }
-
-        /**
-         * Method which provide the {@link Drawable} setting
-         *
-         * @param url      {@link String} value of the URL
-         * @param drawable instance of the {@link Drawable}
-         */
-        public void setDrawable(@Nullable final String url,
-                                @Nullable final Drawable drawable) {
-            synchronized (cache) {
-                if ((TextUtils.isEmpty(url) == false) &&
-                        (drawable != null)) {
-                    cache.put(url, drawable);
-                }
-            }
-        }
-
-        /**
-         * Method which provide the getting drawable
-         *
-         * @param url {@link String} value of the URL
-         * @return instance of the {@link Drawable}
-         */
-        @Nullable
-        public final Drawable getDrawable(@Nullable final String url) {
-            synchronized (cache) {
-                if (TextUtils.isEmpty(url) == false) {
-                    return cache.get(url);
-                }
-                return null;
-            }
-        }
-    }
+public final class BSImageManager extends BSBaseManager {
 
     /**
      * Instance of the {@link BSImageHelper}
@@ -81,15 +24,25 @@ public final class BSImageManager {
     private static BSImageManager instance;
 
     /**
-     * Instance of the {@link Cache}
-     */
-    private final Cache cache;
-
-    /**
      * Default constructor
      */
-    private BSImageManager() {
-        this.cache = new Cache();
+    private BSImageManager(@Nullable Context context) {
+        super(context);
+    }
+
+    /**
+     * Method which provide the initialization of {@link BSEventManager}
+     *
+     * @param context instance of {@link Context}
+     * @return initialization result
+     * @warning should be initializing in application singleton
+     */
+    public static void init(@Nullable final Context context) {
+        if (isNull(instance)) {
+            instance = new BSImageManager(context);
+        } else {
+            Log.e(TAG, "BSImageManager is already created");
+        }
     }
 
     /**
@@ -97,10 +50,8 @@ public final class BSImageManager {
      *
      * @return instance of the {@link BSImageManager}
      */
+    @NonNull
     public static BSImageManager getInstance() {
-        if (instance == null) {
-            instance = new BSImageManager();
-        }
         return instance;
     }
 
@@ -111,44 +62,199 @@ public final class BSImageManager {
      * @param imageView instance of the {@link ImageView}
      * @param url       {@link String} value of the image URL
      */
-    public void load(@Nullable final ImageView imageView,
-                     @Nullable final String url) {
-        final String methodName = "load(imageView, url)";
-
-        //Set previous cached image
-        if (!BSValidationHelper.isEmpty(cache, imageView, url)) {
-            final Drawable drawable = cache.getDrawable(url);
-            if (drawable != null) {
-                imageView.setImageDrawable(drawable);
-            }
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final String url) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, url,
+                    R.drawable.ic_glade_placeholder);
         }
+    }
 
-        //Download the image
-        BSImageHelper.load(imageView, url, new RequestListener<String, GlideDrawable>() {
-            @Override
-            public boolean onException(Exception e,
-                                       String model,
-                                       Target<GlideDrawable> target,
-                                       boolean isFirstResource) {
-                BSLogHelper.log(null, methodName, e, null);
-                return false;
-            }
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView instance of the {@link ImageView}
+     * @param url       {@link String} value of the image URL
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final String url,
+                            @Nullable BSImageHelper.ImagePositionType imagePositionType,
+                            @Nullable BitmapTransformation transformation) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, url,
+                    -1, -1, R.drawable.ic_glade_placeholder,
+                    imagePositionType, transformation);
+        }
+    }
 
-            @Override
-            public boolean onResourceReady(GlideDrawable resource,
-                                           String model,
-                                           Target<GlideDrawable> target,
-                                           boolean isFromMemoryCache,
-                                           boolean isFirstResource) {
-                BSLogHelper.log(null, methodName, null, "Image loaded: " + resource);
-                if (imageView != null) {
-                    imageView.setImageDrawable(resource);
-                    if (cache != null) {
-                        cache.setDrawable(url, resource);
-                    }
-                }
-                return false;
-            }
-        });
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView   instance of the {@link ImageView}
+     * @param url         {@link String} value of the image URL
+     * @param placeholder {@link Integer} drawable of placeholder
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final String url,
+                            @DrawableRes int placeholder) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, url, placeholder);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView   instance of the {@link ImageView}
+     * @param url         {@link String} value of the image URL
+     * @param placeholder {@link Integer} drawable of placeholder
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final String url,
+                            @DrawableRes int placeholder,
+                            @Nullable BSImageHelper.ImagePositionType imagePositionType,
+                            @Nullable BitmapTransformation transformation) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, url,
+                    -1, -1, placeholder,
+                    imagePositionType, transformation);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView instance of the {@link ImageView}
+     * @param url       {@link String} value of the image URL
+     * @param width     {@link Integer} value of the width
+     * @param height    {@link Integer} value of the height
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final String url,
+                            int width,
+                            int height) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, url,
+                    width, height, R.drawable.ic_glade_placeholder);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView   instance of the {@link ImageView}
+     * @param url         {@link String} value of the image URL
+     * @param width       {@link Integer} value of the width
+     * @param height      {@link Integer} value of the height
+     * @param placeholder {@link Integer} drawable of placeholder
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final String url,
+                            int width,
+                            int height,
+                            @DrawableRes int placeholder) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, url,
+                    width, height, placeholder);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView         instance of the {@link ImageView}
+     * @param url               {@link String} value of the image URL
+     * @param width             {@link Integer} value of the width
+     * @param height            {@link Integer} value of the height
+     * @param imagePositionType instance of the {@link BSImageHelper.ImagePositionType}
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final String url,
+                            int width,
+                            int height,
+                            @Nullable BSImageHelper.ImagePositionType imagePositionType) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, url,
+                    width, height, R.drawable.ic_glade_placeholder, imagePositionType);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView         instance of the {@link ImageView}
+     * @param url               {@link String} value of the image URL
+     * @param width             {@link Integer} value of the width
+     * @param height            {@link Integer} value of the height
+     * @param placeholder       {@link Integer} drawable of placeholder
+     * @param imagePositionType instance of the {@link BSImageHelper.ImagePositionType}
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final String url,
+                            int width,
+                            int height,
+                            @DrawableRes int placeholder,
+                            @Nullable BSImageHelper.ImagePositionType imagePositionType) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, url,
+                    width, height, placeholder, imagePositionType);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView         instance of the {@link ImageView}
+     * @param url               {@link String} value of the image URL
+     * @param width             {@link Integer} value of the width
+     * @param height            {@link Integer} value of the height
+     * @param imagePositionType instance of the {@link BSImageHelper.ImagePositionType}
+     * @param transformation    instance of the {@link BitmapTransformation}
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final String url,
+                            int width,
+                            int height,
+                            @Nullable BSImageHelper.ImagePositionType imagePositionType,
+                            @Nullable BitmapTransformation transformation) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, url,
+                    width, height, R.drawable.ic_glade_placeholder,
+                    imagePositionType, transformation);
+        }
+    }
+
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView         instance of the {@link ImageView}
+     * @param url               {@link String} value of the image URL
+     * @param width             {@link Integer} value of the width
+     * @param height            {@link Integer} value of the height
+     * @param placeholder       {@link Integer} drawable of placeholder
+     * @param imagePositionType instance of the {@link BSImageHelper.ImagePositionType}
+     * @param transformation    instance of the {@link BitmapTransformation}
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final String url,
+                            int width,
+                            int height,
+                            @DrawableRes int placeholder,
+                            @Nullable BSImageHelper.ImagePositionType imagePositionType,
+                            @Nullable BitmapTransformation transformation) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, url,
+                    width, height, placeholder, imagePositionType, transformation);
+        }
     }
 }

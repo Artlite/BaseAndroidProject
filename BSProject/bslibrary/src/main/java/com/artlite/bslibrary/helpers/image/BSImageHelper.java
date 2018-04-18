@@ -1,14 +1,16 @@
 package com.artlite.bslibrary.helpers.image;
 
+import android.content.Context;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.IntegerRes;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
-import com.artlite.bslibrary.managers.BSContextManager;
+import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
 /**
  * Class which provide the helping functional which related to {@link ImageView}
@@ -17,59 +19,125 @@ import com.bumptech.glide.request.target.Target;
 public final class BSImageHelper extends BSBaseHelper {
 
     /**
-     * Method which provide the loading of the image by it {@link String} value of the
-     * URL for instance of the {@link ImageView}
-     *
-     * @param imageView instance of the {@link ImageView}
-     * @param url       {@link String} value of the image URL
+     * Enum which provide the image crop style
      */
-    public static void load(@Nullable final ImageView imageView,
-                            @Nullable final String url) {
-        final String methodName = "load(imageView, url)";
-        load(imageView, url, new RequestListener<String, GlideDrawable>() {
-            @Override
-            public boolean onException(Exception e,
-                                       String model,
-                                       Target<GlideDrawable> target,
-                                       boolean isFirstResource) {
-                log(null, methodName, e, null);
-                return false;
-            }
-
-            @Override
-            public boolean onResourceReady(GlideDrawable resource,
-                                           String model,
-                                           Target<GlideDrawable> target,
-                                           boolean isFromMemoryCache,
-                                           boolean isFirstResource) {
-                log(null, methodName, null, "Image loaded: " + resource);
-                if (imageView != null) {
-                    imageView.setImageDrawable(resource);
-                }
-                return false;
-            }
-        });
+    public enum ImagePositionType {
+        NONE, CENTER_CROP, FIT_CENTER
     }
 
     /**
      * Method which provide the loading of the image by it {@link String} value of the
      * URL for instance of the {@link ImageView}
      *
+     * @param context   instance of the {@link Context}
      * @param imageView instance of the {@link ImageView}
      * @param url       {@link String} value of the image URL
      */
-    public static void load(@Nullable final ImageView imageView,
+    public static void load(@Nullable Context context,
+                            @Nullable final ImageView imageView,
                             @Nullable final String url,
-                            @Nullable final RequestListener<String, GlideDrawable> callback) {
+                            @DrawableRes int placeholder) {
+        load(context, imageView, url, -1, -1,
+                placeholder, null, null);
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param context   instance of the {@link Context}
+     * @param imageView instance of the {@link ImageView}
+     * @param url       {@link String} value of the image URL
+     * @param width     {@link Integer} value of the width
+     * @param height    {@link Integer} value of the height
+     */
+    public static void load(@Nullable Context context,
+                            @Nullable final ImageView imageView,
+                            @Nullable final String url,
+                            int width,
+                            int height,
+                            @DrawableRes int placeholder) {
+        load(context, imageView, url, width, height,
+                placeholder, null, null);
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param context           instance of the {@link Context}
+     * @param imageView         instance of the {@link ImageView}
+     * @param url               {@link String} value of the image URL
+     * @param width             {@link Integer} value of the width
+     * @param height            {@link Integer} value of the height
+     * @param imagePositionType instance of the {@link ImagePositionType}
+     */
+    public static void load(@Nullable Context context,
+                            @Nullable final ImageView imageView,
+                            @Nullable final String url,
+                            int width,
+                            int height,
+                            @DrawableRes int placeholder,
+                            @Nullable ImagePositionType imagePositionType) {
+        load(context, imageView, url, width, height,
+                placeholder, imagePositionType, null);
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param context           instance of the {@link Context}
+     * @param imageView         instance of the {@link ImageView}
+     * @param url               {@link String} value of the image URL
+     * @param width             {@link Integer} value of the width
+     * @param height            {@link Integer} value of the height
+     * @param imagePositionType instance of the {@link ImagePositionType}
+     * @param transformation    instance of the {@link BitmapTransformation}
+     */
+    public static void load(@Nullable Context context,
+                            @Nullable final ImageView imageView,
+                            @Nullable final String url,
+                            int width,
+                            int height,
+                            @DrawableRes int placeholder,
+                            @Nullable ImagePositionType imagePositionType,
+                            @Nullable BitmapTransformation transformation) {
         final String methodName = "load(imageView, url, callback)";
-        if (isNull(imageView, url)) {
+        if (imagePositionType == null) {
+            imagePositionType = ImagePositionType.NONE;
+        }
+        if (isNull(imageView, url, context)) {
             return;
         }
-        Glide.with(BSContextManager.getRegisteredContext())
+        DrawableRequestBuilder builder = Glide
+                .with(context)
                 .load(url)
-                .centerCrop()
-                .fitCenter()
-                .listener(callback)
-                .into(imageView);
+                .placeholder(placeholder)
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
+        switch (imagePositionType) {
+            case NONE: {
+                break;
+            }
+            case FIT_CENTER: {
+                builder = builder.fitCenter();
+                break;
+            }
+            case CENTER_CROP: {
+                builder = builder.centerCrop();
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+        if (transformation != null) {
+            builder = builder.transform(transformation);
+        }
+        if ((width > 0) && (height > 0)) {
+            builder = builder.override(width, height);
+        }
+        builder.into(imageView);
     }
 }
