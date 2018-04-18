@@ -24,6 +24,7 @@ import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
 import com.artlite.bslibrary.ui.view.BSView;
+import com.bumptech.glide.load.Transformation;
 
 public class MainActivity extends BSActivity {
 
@@ -68,8 +69,8 @@ public class MainActivity extends BSActivity {
     protected void onActivityPostCreation(@Nullable Bundle bundle) {
         BSImageManager.load(this.imageView,
                 "https://www.sideshowtoy.com/assets/products/902749-ada-wong/lg/resident-evil-6-ada-wong-sixth-scale-hot-toys-feature-902749-11.jpg",
-                BSImageHelper.ImagePositionType.FIT_CENTER,
-                new BSGlideCornersTransformation(30, 30));
+                BSImageHelper.ImagePositionType.NONE,
+                new BSGlideCornersTransformation(30, 0));
     }
 
     /**

@@ -2,13 +2,13 @@ package com.artlite.bslibrary.helpers.image;
 
 import android.content.Context;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IntegerRes;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 

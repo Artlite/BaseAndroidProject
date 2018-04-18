@@ -232,7 +232,6 @@ public final class BSImageManager extends BSBaseManager {
         }
     }
 
-
     /**
      * Method which provide the loading of the image by it {@link String} value of the
      * URL for instance of the {@link ImageView}
