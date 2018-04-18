@@ -1,26 +1,55 @@
 package com.artlite.bslibrary.transformation;
 
+/**
+ * Copyright (C) 2018 Wasabeef
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.support.annotation.DimenRes;
+import android.support.annotation.Nullable;
 
 import com.artlite.bslibrary.managers.BSContextManager;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.request.target.Target;
 
+import java.lang.ref.WeakReference;
+import java.util.UUID;
+
 /**
- * Class which provide the circle image transformation
+ * Transformer which provide the round corners
  */
-public final class BSGlideCircleTransform extends BitmapTransformation {
+public class BSGlideSquareTransformation extends BitmapTransformation {
+
+    /**
+     * {@link Integer} value of the radius
+     */
+    private final int radius;
 
     /**
      * Constructor which provide to create the {@link BSGlideCircleTransform}
      */
-    public BSGlideCircleTransform() {
-        super(BSContextManager.getApplicationContext());
+    public BSGlideSquareTransformation(int radius) {
+        this(BSContextManager.getApplicationContext(), radius);
     }
 
     /**
@@ -28,8 +57,13 @@ public final class BSGlideCircleTransform extends BitmapTransformation {
      *
      * @param context instance of the {@link Context}
      */
-    public BSGlideCircleTransform(Context context) {
+    public BSGlideSquareTransformation(Context context, @DimenRes int radius) {
         super(context);
+        if (context != null) {
+            this.radius = context.getResources().getDimensionPixelSize(radius);
+        } else {
+            this.radius = 0;
+        }
     }
 
     /**
@@ -73,28 +107,21 @@ public final class BSGlideCircleTransform extends BitmapTransformation {
      * @param source instance of the {@link Bitmap}
      * @return instance of the {@link Bitmap}
      */
-    private static Bitmap circleCrop(BitmapPool pool, Bitmap source) {
-        if (source == null) return null;
+    private Bitmap circleCrop(BitmapPool pool, Bitmap source) {
+        final Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setShader(new BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
 
-        int size = Math.min(source.getWidth(), source.getHeight());
-        int x = (source.getWidth() - size) / 2;
-        int y = (source.getHeight() - size) / 2;
+        Bitmap output = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+        canvas.drawRoundRect(new RectF(0, 0, source.getWidth() - 0,
+                source.getHeight() - 0), radius, radius, paint);
 
-        // TODO this could be acquired from the pool too
-        Bitmap squared = Bitmap.createBitmap(source, x, y, size, size);
-
-        Bitmap result = pool.get(size, size, Bitmap.Config.ARGB_8888);
-        if (result == null) {
-            result = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+        if (source != output) {
+            source.recycle();
         }
 
-        Canvas canvas = new Canvas(result);
-        Paint paint = new Paint();
-        paint.setShader(new BitmapShader(squared, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));
-        paint.setAntiAlias(true);
-        float r = size / 2f;
-        canvas.drawCircle(r, r, r, paint);
-        return result;
+        return output;
     }
 
     /**
@@ -109,8 +136,9 @@ public final class BSGlideCircleTransform extends BitmapTransformation {
      *
      * @return A string that uniquely identifies this transformation.
      */
+    @SuppressLint("DefaultLocale")
     @Override
     public String getId() {
-        return "artlite:filter2";
+        return String.format("artlite: RoundCornersSquare(%d)", this.radius);
     }
 }
