@@ -19,6 +19,9 @@ public abstract class BSSwipeListener extends GestureDetector.SimpleOnGestureLis
      */
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        if ((e1 == null) || (e2 == null)) {
+            return false;
+        }
         float x1 = e1.getX();
         float y1 = e1.getY();
         float x2 = e2.getX();
@@ -59,7 +62,6 @@ public abstract class BSSwipeListener extends GestureDetector.SimpleOnGestureLis
      * @return the angle between two points
      */
     public double getAngle(float x1, float y1, float x2, float y2) {
-
         double rad = Math.atan2(y1 - y2, x2 - x1) + Math.PI;
         return (rad * 180 / Math.PI + 180) % 360;
     }

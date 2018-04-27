@@ -19,6 +19,7 @@ import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.managers.BSImageManager;
+import com.artlite.bslibrary.transformation.BSGlideCropSquareTransformation;
 import com.artlite.bslibrary.transformation.BSGlideSquareTransformation;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
@@ -67,9 +68,9 @@ public class MainActivity extends BSActivity {
     @Override
     protected void onActivityPostCreation(@Nullable Bundle bundle) {
         BSImageManager.load(this.imageView,
-                "https://www.sideshowtoy.com/assets/products/902749-ada-wong/lg/resident-evil-6-ada-wong-sixth-scale-hot-toys-feature-902749-11.jpg",
-                BSImageHelper.ImagePositionType.NONE,
-                new BSGlideSquareTransformation(R.dimen.dimen_10));
+                "http://mychjp.com/wp-content/uploads/2018/04/custom-sales-receipt-templates-to-personalized-with-your-small-business-tem-invoices-template-form.jpg",
+                BSImageHelper.ImagePositionType.CENTER_CROP,
+                new BSGlideCropSquareTransformation(R.dimen.dimen_10));
     }
 
     /**

@@ -25,20 +25,16 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.support.annotation.DimenRes;
-import android.support.annotation.Nullable;
 
 import com.artlite.bslibrary.managers.BSContextManager;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.request.target.Target;
 
-import java.lang.ref.WeakReference;
-import java.util.UUID;
-
 /**
  * Transformer which provide the round corners
  */
-public class BSGlideSquareTransformation extends BitmapTransformation {
+public class BSGlideCropSquareTransformation extends BitmapTransformation {
 
     /**
      * {@link Integer} value of the radius
@@ -48,7 +44,7 @@ public class BSGlideSquareTransformation extends BitmapTransformation {
     /**
      * Constructor which provide to create the {@link BSGlideCircleTransform}
      */
-    public BSGlideSquareTransformation(int radius) {
+    public BSGlideCropSquareTransformation(int radius) {
         this(BSContextManager.getApplicationContext(), radius);
     }
 
@@ -57,7 +53,7 @@ public class BSGlideSquareTransformation extends BitmapTransformation {
      *
      * @param context instance of the {@link Context}
      */
-    public BSGlideSquareTransformation(Context context, @DimenRes int radius) {
+    public BSGlideCropSquareTransformation(Context context, @DimenRes int radius) {
         super(context);
         if (context != null) {
             this.radius = context.getResources().getDimensionPixelSize(radius);
@@ -108,6 +104,23 @@ public class BSGlideSquareTransformation extends BitmapTransformation {
      * @return instance of the {@link Bitmap}
      */
     private Bitmap circleCrop(BitmapPool pool, Bitmap source) {
+        if (source.getWidth() >= source.getHeight()) {
+            source = Bitmap.createBitmap(
+                    source,
+                    source.getWidth() / 2 - source.getHeight() / 2,
+                    0,
+                    source.getHeight(),
+                    source.getHeight()
+            );
+        } else {
+            source = Bitmap.createBitmap(
+                    source,
+                    0,
+                    source.getHeight() / 2 - source.getWidth() / 2,
+                    source.getWidth(),
+                    source.getWidth()
+            );
+        }
         final Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setShader(new BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
@@ -139,6 +152,6 @@ public class BSGlideSquareTransformation extends BitmapTransformation {
     @SuppressLint("DefaultLocale")
     @Override
     public String getId() {
-        return String.format("artlite: BSGlideSquareTransformation(%d)", this.radius);
+        return String.format("artlite: BSGlideCropSquareTransformation(%d)", this.radius);
     }
 }

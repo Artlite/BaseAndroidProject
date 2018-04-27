@@ -1,6 +1,7 @@
 package com.artlite.bslibrary.managers;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -92,6 +93,24 @@ public final class BSImageManager extends BSBaseManager {
      * Method which provide the loading of the image by it {@link String} value of the
      * URL for instance of the {@link ImageView}
      *
+     * @param imageView instance of the {@link ImageView}
+     * @param uri       instance of the {@link Uri}
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final Uri uri,
+                            @Nullable BSImageHelper.ImagePositionType imagePositionType,
+                            @Nullable BitmapTransformation transformation) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, uri,
+                    -1, -1, R.drawable.ic_glade_placeholder,
+                    imagePositionType, transformation);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
      * @param imageView   instance of the {@link ImageView}
      * @param url         {@link String} value of the image URL
      * @param placeholder {@link Integer} drawable of placeholder
@@ -101,6 +120,22 @@ public final class BSImageManager extends BSBaseManager {
                             @DrawableRes int placeholder) {
         if (instance != null) {
             BSImageHelper.load(instance.getContext(), imageView, url, placeholder);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView   instance of the {@link ImageView}
+     * @param uri         instance of the {@link Uri}
+     * @param placeholder {@link Integer} drawable of placeholder
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final Uri uri,
+                            @DrawableRes int placeholder) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, uri, placeholder);
         }
     }
 
@@ -119,6 +154,26 @@ public final class BSImageManager extends BSBaseManager {
                             @Nullable BitmapTransformation transformation) {
         if (instance != null) {
             BSImageHelper.load(instance.getContext(), imageView, url,
+                    -1, -1, placeholder,
+                    imagePositionType, transformation);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView   instance of the {@link ImageView}
+     * @param uri         instance of the {@link Uri}
+     * @param placeholder {@link Integer} drawable of placeholder
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final Uri uri,
+                            @DrawableRes int placeholder,
+                            @Nullable BSImageHelper.ImagePositionType imagePositionType,
+                            @Nullable BitmapTransformation transformation) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, uri,
                     -1, -1, placeholder,
                     imagePositionType, transformation);
         }
@@ -147,6 +202,25 @@ public final class BSImageManager extends BSBaseManager {
      * Method which provide the loading of the image by it {@link String} value of the
      * URL for instance of the {@link ImageView}
      *
+     * @param imageView instance of the {@link ImageView}
+     * @param uri       instance of the {@link Uri}
+     * @param width     {@link Integer} value of the width
+     * @param height    {@link Integer} value of the height
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final Uri uri,
+                            int width,
+                            int height) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, uri,
+                    width, height, R.drawable.ic_glade_placeholder);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
      * @param imageView   instance of the {@link ImageView}
      * @param url         {@link String} value of the image URL
      * @param width       {@link Integer} value of the width
@@ -160,6 +234,27 @@ public final class BSImageManager extends BSBaseManager {
                             @DrawableRes int placeholder) {
         if (instance != null) {
             BSImageHelper.load(instance.getContext(), imageView, url,
+                    width, height, placeholder);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView   instance of the {@link ImageView}
+     * @param uri         instance of the {@link Uri}
+     * @param width       {@link Integer} value of the width
+     * @param height      {@link Integer} value of the height
+     * @param placeholder {@link Integer} drawable of placeholder
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final Uri uri,
+                            int width,
+                            int height,
+                            @DrawableRes int placeholder) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, uri,
                     width, height, placeholder);
         }
     }
@@ -190,6 +285,27 @@ public final class BSImageManager extends BSBaseManager {
      * URL for instance of the {@link ImageView}
      *
      * @param imageView         instance of the {@link ImageView}
+     * @param uri               instance of the {@link Uri}
+     * @param width             {@link Integer} value of the width
+     * @param height            {@link Integer} value of the height
+     * @param imagePositionType instance of the {@link BSImageHelper.ImagePositionType}
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final Uri uri,
+                            int width,
+                            int height,
+                            @Nullable BSImageHelper.ImagePositionType imagePositionType) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, uri,
+                    width, height, R.drawable.ic_glade_placeholder, imagePositionType);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView         instance of the {@link ImageView}
      * @param url               {@link String} value of the image URL
      * @param width             {@link Integer} value of the width
      * @param height            {@link Integer} value of the height
@@ -204,6 +320,29 @@ public final class BSImageManager extends BSBaseManager {
                             @Nullable BSImageHelper.ImagePositionType imagePositionType) {
         if (instance != null) {
             BSImageHelper.load(instance.getContext(), imageView, url,
+                    width, height, placeholder, imagePositionType);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView         instance of the {@link ImageView}
+     * @param uri               instance of the {@link Uri}
+     * @param width             {@link Integer} value of the width
+     * @param height            {@link Integer} value of the height
+     * @param placeholder       {@link Integer} drawable of placeholder
+     * @param imagePositionType instance of the {@link BSImageHelper.ImagePositionType}
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final Uri uri,
+                            int width,
+                            int height,
+                            @DrawableRes int placeholder,
+                            @Nullable BSImageHelper.ImagePositionType imagePositionType) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, uri,
                     width, height, placeholder, imagePositionType);
         }
     }
@@ -237,6 +376,30 @@ public final class BSImageManager extends BSBaseManager {
      * URL for instance of the {@link ImageView}
      *
      * @param imageView         instance of the {@link ImageView}
+     * @param uri               instance of the {@link Uri}
+     * @param width             {@link Integer} value of the width
+     * @param height            {@link Integer} value of the height
+     * @param imagePositionType instance of the {@link BSImageHelper.ImagePositionType}
+     * @param transformation    instance of the {@link BitmapTransformation}
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final Uri uri,
+                            int width,
+                            int height,
+                            @Nullable BSImageHelper.ImagePositionType imagePositionType,
+                            @Nullable BitmapTransformation transformation) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, uri,
+                    width, height, R.drawable.ic_glade_placeholder,
+                    imagePositionType, transformation);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView         instance of the {@link ImageView}
      * @param url               {@link String} value of the image URL
      * @param width             {@link Integer} value of the width
      * @param height            {@link Integer} value of the height
@@ -253,6 +416,31 @@ public final class BSImageManager extends BSBaseManager {
                             @Nullable BitmapTransformation transformation) {
         if (instance != null) {
             BSImageHelper.load(instance.getContext(), imageView, url,
+                    width, height, placeholder, imagePositionType, transformation);
+        }
+    }
+
+    /**
+     * Method which provide the loading of the image by it {@link String} value of the
+     * URL for instance of the {@link ImageView}
+     *
+     * @param imageView         instance of the {@link ImageView}
+     * @param uri               instance of the {@link Uri}
+     * @param width             {@link Integer} value of the width
+     * @param height            {@link Integer} value of the height
+     * @param placeholder       {@link Integer} drawable of placeholder
+     * @param imagePositionType instance of the {@link BSImageHelper.ImagePositionType}
+     * @param transformation    instance of the {@link BitmapTransformation}
+     */
+    public static void load(@Nullable final ImageView imageView,
+                            @Nullable final Uri uri,
+                            int width,
+                            int height,
+                            @DrawableRes int placeholder,
+                            @Nullable BSImageHelper.ImagePositionType imagePositionType,
+                            @Nullable BitmapTransformation transformation) {
+        if (instance != null) {
+            BSImageHelper.load(instance.getContext(), imageView, uri,
                     width, height, placeholder, imagePositionType, transformation);
         }
     }
