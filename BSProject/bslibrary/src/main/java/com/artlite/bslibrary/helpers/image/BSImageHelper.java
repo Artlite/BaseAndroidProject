@@ -173,6 +173,7 @@ public final class BSImageHelper extends BSBaseHelper {
                 .with(context)
                 .load(url)
                 .placeholder(placeholder)
+                .dontAnimate()
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
         switch (imagePositionType) {
             case NONE: {
@@ -230,6 +231,7 @@ public final class BSImageHelper extends BSBaseHelper {
                 .with(context)
                 .load(uri)
                 .placeholder(placeholder)
+                .dontAnimate()
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
         switch (imagePositionType) {
             case NONE: {
