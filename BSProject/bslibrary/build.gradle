@@ -3,11 +3,11 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'com.artlite'
     PUBLISH_ARTIFACT_ID = 'baseproject'
-    PUBLISH_VERSION = '2.5'
+    PUBLISH_VERSION = '2.6'
 }
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion "25.0.0"
 
     defaultConfig {
@@ -36,7 +36,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.0.0'
+    compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.github.bumptech.glide:glide:3.8.0'
     compile 'com.google.android.gms:play-services-location:11.0.0'
 }
