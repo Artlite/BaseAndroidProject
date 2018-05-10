@@ -1,6 +1,5 @@
 package com.artlite.bslibrary.ui.fragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -16,7 +15,6 @@ import com.artlite.bslibrary.helpers.injector.BSInjector;
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
 import com.artlite.bslibrary.listeners.BSSwipeListener;
 import com.artlite.bslibrary.managers.BSThreadManager;
-import com.artlite.bslibrary.ui.view.BSView;
 
 /**
  * Created by dlernatovich on 2/17/2017.
@@ -27,7 +25,7 @@ public abstract class BSFragment extends Fragment implements View.OnClickListene
 
     /**
      * Method which provide the delaying between create {@link Fragment} and call of the
-     * {@link #onCreateFragment(View)}
+     * {@link #onFragmentPostCreation(View)}
      * for now it 1 second
      */
     private static final int K_DELAY_CREATION = 1;
@@ -64,9 +62,10 @@ public abstract class BSFragment extends Fragment implements View.OnClickListene
         BSThreadManager.main(K_DELAY_CREATION, new BSThreadManager.OnThreadCallback() {
             @Override
             public void onExecute() {
-                onCreateFragment(containerView);
+                onFragmentPostCreation(containerView);
             }
         });
+        onCreateFragment(containerView);
         return containerView;
     }
 
@@ -83,6 +82,13 @@ public abstract class BSFragment extends Fragment implements View.OnClickListene
      * @param containerView current view
      */
     protected abstract void onCreateFragment(View containerView);
+
+    /**
+     * Method which provide the action when fragment is created
+     *
+     * @param containerView current view
+     */
+    protected abstract void onFragmentPostCreation(View containerView);
 
 
     /**
