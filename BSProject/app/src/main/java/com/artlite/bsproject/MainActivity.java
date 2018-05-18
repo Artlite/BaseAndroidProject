@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,8 +20,8 @@ import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.managers.BSImageManager;
+import com.artlite.bslibrary.managers.BSLocationManager;
 import com.artlite.bslibrary.transformation.BSGlideCropSquareTransformation;
-import com.artlite.bslibrary.transformation.BSGlideSquareTransformation;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
@@ -56,6 +57,7 @@ public class MainActivity extends BSActivity {
     @Override
     protected void onCreateActivity(Bundle bundle) {
         setOnClickListeners(R.id.button1, R.id.button2, R.id.button3);
+        BSLocationManager.startLocationMonitoring(this);
     }
 
     /**
@@ -93,6 +95,8 @@ public class MainActivity extends BSActivity {
         switch (v.getId()) {
             case R.id.button1: {
                 startActivity(DetailsActivity.class);
+                Location location = BSLocationManager.getLocation();
+                String name = BSLocationManager.getLocationName();
                 break;
             }
             case R.id.button2: {
