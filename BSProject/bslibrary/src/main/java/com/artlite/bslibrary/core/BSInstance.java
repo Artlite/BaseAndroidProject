@@ -12,6 +12,7 @@ import com.artlite.bslibrary.managers.BSLocationManager;
 import com.artlite.bslibrary.managers.BSRandomManager;
 import com.artlite.bslibrary.managers.BSScreenManager;
 import com.artlite.bslibrary.managers.BSServiceManager;
+import com.artlite.bslibrary.managers.BSStatusBarManager;
 import com.artlite.bslibrary.managers.BSThreadManager;
 import com.artlite.bslibrary.managers.BSTransferManager;
 import com.artlite.bslibrary.managers.BSTypefaceManager;
@@ -42,6 +43,7 @@ public final class BSInstance {
             BSThreadManager.init(context);
             BSTransferManager.init(context);
             BSTypefaceManager.init(context);
+            BSStatusBarManager.init(context);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }

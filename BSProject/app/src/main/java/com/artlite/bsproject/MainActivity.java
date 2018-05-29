@@ -18,9 +18,12 @@ import com.artlite.bslibrary.callbacks.BSPermissionCallback;
 import com.artlite.bslibrary.helpers.image.BSImageHelper;
 import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
+import com.artlite.bslibrary.helpers.statusbar.BSStatusBarHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
+import com.artlite.bslibrary.managers.BSContextManager;
 import com.artlite.bslibrary.managers.BSImageManager;
 import com.artlite.bslibrary.managers.BSLocationManager;
+import com.artlite.bslibrary.managers.BSStatusBarManager;
 import com.artlite.bslibrary.transformation.BSGlideCropSquareTransformation;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
@@ -126,7 +129,9 @@ public class MainActivity extends BSActivity {
                 break;
             }
             case R.id.button3: {
-                startActivityForPickImage();
+                BSStatusBarManager.open();
+
+//                startActivityForPickImage();
                 break;
             }
             default:
