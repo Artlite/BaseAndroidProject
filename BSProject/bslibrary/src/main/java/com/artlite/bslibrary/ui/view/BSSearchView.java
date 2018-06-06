@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,6 +32,11 @@ public final class BSSearchView extends BSView {
      * Instance of {@link LinearLayout}
      */
     private LinearLayout layoutContent;
+
+    /**
+     * Instance of the {@link FrameLayout}
+     */
+    private FrameLayout viewSearchCover;
 
     /**
      * Instance of the {@link ImageView}
@@ -155,6 +161,7 @@ public final class BSSearchView extends BSView {
         imageSearch = (ImageView) findViewById(R.id.image_search);
         editSearch = (EditText) findViewById(R.id.edit_search);
         imageClose = (ImageView) findViewById(R.id.image_close);
+        viewSearchCover = (FrameLayout) findViewById(R.id.view_search_cover);
     }
 
     /**
@@ -267,7 +274,7 @@ public final class BSSearchView extends BSView {
         imageClose.setVisibility(INVISIBLE);
         editSearch.setClickable(false);
         editSearch.setOnEditorActionListener(actionListener);
-        setOnClickListeners(R.id.image_search, R.id.image_close);
+        setOnClickListeners(R.id.image_search, R.id.image_close, R.id.view_search_cover);
     }
 
     /**
@@ -278,7 +285,7 @@ public final class BSSearchView extends BSView {
     @Override
     public void onClick(View view) {
         final int id = view.getId();
-        if (id == R.id.image_search) {
+        if ((id == R.id.image_search) || (id == R.id.view_search_cover)) {
             startSearching();
         } else if (id == R.id.image_close) {
             cancelSearch();
@@ -303,6 +310,7 @@ public final class BSSearchView extends BSView {
         }
         BSImeHelper.showKeyboard(getContext(), this);
         imageClose.setVisibility(VISIBLE);
+        viewSearchCover.setVisibility(GONE);
         editSearch.setText("");
         editSearch.setClickable(true);
         editSearch.setEnabled(true);
@@ -316,6 +324,7 @@ public final class BSSearchView extends BSView {
     private void stopSearching() {
         BSImeHelper.hideKeyboard(getContext(), this);
         imageClose.setVisibility(INVISIBLE);
+        viewSearchCover.setVisibility(VISIBLE);
         editSearch.setText("");
         editSearch.setClickable(false);
         editSearch.setEnabled(false);
