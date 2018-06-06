@@ -18,9 +18,7 @@ import com.artlite.bslibrary.callbacks.BSPermissionCallback;
 import com.artlite.bslibrary.helpers.image.BSImageHelper;
 import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
-import com.artlite.bslibrary.helpers.statusbar.BSStatusBarHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
-import com.artlite.bslibrary.managers.BSContextManager;
 import com.artlite.bslibrary.managers.BSImageManager;
 import com.artlite.bslibrary.managers.BSLocationManager;
 import com.artlite.bslibrary.managers.BSStatusBarManager;
@@ -72,10 +70,11 @@ public class MainActivity extends BSActivity {
      */
     @Override
     protected void onActivityPostCreation(@Nullable Bundle bundle) {
-        BSImageManager.load(this.imageView,
-                "http://mychjp.com/wp-content/uploads/2018/04/custom-sales-receipt-templates-to-personalized-with-your-small-business-tem-invoices-template-form.jpg",
-                BSImageHelper.ImagePositionType.CENTER_CROP,
-                new BSGlideCropSquareTransformation(R.dimen.dimen_10));
+        final String url = "https://img00.deviantart.net/2234/i/2017/085/2/c/ada_wong_by_artsbycarlos-db3bvd4.jpg";
+        BSImageManager.create(this.imageView, url)
+                .setPositionType(BSImageHelper.ImagePositionType.CENTER_CROP)
+                .setTransformation(new BSGlideCropSquareTransformation(R.dimen.dimen_10))
+                .download();
     }
 
     /**
