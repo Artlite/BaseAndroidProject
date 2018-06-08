@@ -22,7 +22,7 @@ public final class BSFormatHelper extends BSBaseHelper {
      * @return
      */
     public static String format(double number, int precisionCount) {
-        StringBuilder formatterValue = new StringBuilder("#.");
+        StringBuilder formatterValue = new StringBuilder("0.");
 
         for (int i = 0; i < precisionCount; i++) {
             formatterValue.append("0");
