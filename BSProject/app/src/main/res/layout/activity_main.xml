@@ -29,30 +29,37 @@
         android:id="@+id/edit_popup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Input text here"
-        android:textColor="@android:color/black"
         android:background="@drawable/bs_background_round_corners_card"
+        android:hint="Input text here"
         android:padding="@dimen/dimen_15"
+        android:textColor="@android:color/black"
         android:textSize="18sp" />
+
+    <com.artlite.bslibrary.ui.fonted.BSCurrencyEditText
+        android:id="@+id/edit_currency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bs_background_round_corners_card"
+        android:padding="@dimen/dimen_15" />
 
     <com.artlite.bslibrary.ui.fonted.BSButton
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bs_background_card"
         android:text="Just do it"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        android:background="@drawable/bs_background_card"
         android:textStyle="bold" />
 
     <com.artlite.bslibrary.ui.fonted.BSButton
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bs_background_card"
         android:text="Show pop up"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        android:background="@drawable/bs_background_card"
         android:textStyle="bold" />
 
     <com.artlite.bslibrary.ui.fonted.BSButton

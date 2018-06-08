@@ -24,11 +24,12 @@ import com.artlite.bslibrary.managers.BSLocationManager;
 import com.artlite.bslibrary.managers.BSStatusBarManager;
 import com.artlite.bslibrary.transformation.BSGlideCropSquareTransformation;
 import com.artlite.bslibrary.ui.activity.BSActivity;
+import com.artlite.bslibrary.ui.fonted.BSCurrencyEditText;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
 import com.artlite.bslibrary.ui.view.BSView;
 
-public class MainActivity extends BSActivity {
+public class MainActivity extends BSActivity implements BSCurrencyEditText.OnCurrencyEditCallback {
 
     @FindViewBy(id = R.id.view_for_pop_up)
     private View forPopup;
@@ -41,6 +42,9 @@ public class MainActivity extends BSActivity {
 
     @FindViewBy(id = R.id.image_view)
     private ImageView imageView;
+
+    @FindViewBy(id = R.id.edit_currency)
+    private BSCurrencyEditText currencyEditText;
 
     /**
      * Method which provide the getting of the layout ID for the current Activity
@@ -70,6 +74,7 @@ public class MainActivity extends BSActivity {
      */
     @Override
     protected void onActivityPostCreation(@Nullable Bundle bundle) {
+        this.currencyEditText.configure(this);
         final String url = "https://img00.deviantart.net/2234/i/2017/085/2/c/ada_wong_by_artsbycarlos-db3bvd4.jpg";
         BSImageManager.create(this.imageView, url)
                 .setPositionType(BSImageHelper.ImagePositionType.NONE)
@@ -154,5 +159,35 @@ public class MainActivity extends BSActivity {
                 }
             }
         }, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    /**
+     * Method which provide the action when the {@link BSCurrencyEditText} start
+     * editing
+     *
+     * @param editText instance of the {@link BSCurrencyEditText}
+     * @param editID   {@link Integer} value of the edit text ID
+     * @param value    {@link Double} value of the value
+     */
+    @Override
+    public void currencyEditStartEditing(@NonNull BSCurrencyEditText editText,
+                                         int editID,
+                                         double value) {
+        editText.setText("");
+    }
+
+    /**
+     * Method which provide the action when the {@link BSCurrencyEditText} finish
+     * editing
+     *
+     * @param editText instance of the {@link BSCurrencyEditText}
+     * @param editID   {@link Integer} value of the edit text ID
+     * @param value    {@link Double} value of the value
+     */
+    @Override
+    public void currencyEditFinishEditing(@NonNull BSCurrencyEditText editText,
+                                          int editID,
+                                          double value) {
+
     }
 }
