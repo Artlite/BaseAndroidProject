@@ -29,6 +29,8 @@ import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
 import com.artlite.bslibrary.ui.view.BSView;
 
+import java.util.Locale;
+
 public class MainActivity extends BSActivity implements BSCurrencyEditText.OnCurrencyEditCallback {
 
     @FindViewBy(id = R.id.view_for_pop_up)
@@ -74,7 +76,7 @@ public class MainActivity extends BSActivity implements BSCurrencyEditText.OnCur
      */
     @Override
     protected void onActivityPostCreation(@Nullable Bundle bundle) {
-        this.currencyEditText.configure(this);
+        this.currencyEditText.configure(Locale.GERMANY, this);
         final String url = "https://img00.deviantart.net/2234/i/2017/085/2/c/ada_wong_by_artsbycarlos-db3bvd4.jpg";
         BSImageManager.create(this.imageView, url)
                 .setPositionType(BSImageHelper.ImagePositionType.NONE)

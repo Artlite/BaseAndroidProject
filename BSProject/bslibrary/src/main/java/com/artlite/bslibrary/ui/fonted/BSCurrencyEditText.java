@@ -3,16 +3,30 @@ package com.artlite.bslibrary.ui.fonted;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.artlite.bslibrary.helpers.format.BSFormatHelper;
+import com.artlite.bslibrary.helpers.ime.BSImeHelper;
 import com.artlite.bslibrary.listeners.BSEditFinishListener;
 import com.artlite.bslibrary.listeners.BSFocusLostListener;
+import com.artlite.bslibrary.managers.BSContextManager;
 
-public class BSCurrencyEditText extends BSEditText {
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Currency;
+import java.util.Locale;
+
+public class BSCurrencyEditText extends BSEditText implements TextView.OnEditorActionListener,
+        TextWatcher {
 
     /**
      * Class which provide the action from {@link BSCurrencyEditText}
@@ -57,6 +71,21 @@ public class BSCurrencyEditText extends BSEditText {
     protected OnCurrencyEditCallback callback;
 
     /**
+     * Instance of the {@link FrameLayout}
+     */
+    protected FrameLayout coverLayout;
+
+    /**
+     * {@link String} value of the inner text
+     */
+    private String innerText;
+
+    /**
+     * Instance of the {@link Locale}
+     */
+    protected Locale locale;
+
+    /**
      * Constructor which provide the creating of the {@link BSCurrencyEditText} from
      *
      * @param context instance of {@link Context}
@@ -93,9 +122,12 @@ public class BSCurrencyEditText extends BSEditText {
      * Method which provide the on init {@link BSCurrencyEditText}
      */
     protected void onInit() {
+        this.innerText = "";
+        this.setCursorVisible(false);
         this.setImeOptions(EditorInfo.IME_ACTION_DONE);
         this.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
-        this.setOnEditorActionListener(new BSEditFinishListener());
+        this.addTextChangedListener(this);
+        this.setOnEditorActionListener(this);
         this.setOnFocusChangeListener(new BSFocusLostListener<BSCurrencyEditText>() {
             @Override
             public void onFocusLost(@NonNull BSCurrencyEditText view) {
@@ -112,18 +144,20 @@ public class BSCurrencyEditText extends BSEditText {
     /**
      * Method which provide the configuring of the {@link OnCurrencyEditCallback}
      *
+     * @param locale   instance of the {@link Locale}
      * @param callback instance of the {@link OnCurrencyEditCallback}
      */
-    public void configure(@Nullable OnCurrencyEditCallback callback) {
+    public void configure(@Nullable Locale locale,
+                          @Nullable OnCurrencyEditCallback callback) {
         this.callback = callback;
+        this.locale = locale;
+        this.setText(this.getStringValue());
     }
 
     /**
      * Method which provide the action when the edit text finished
      */
     protected void onFinishEdit() {
-        double value = getValue() / 100;
-        this.setText(BSFormatHelper.format(value, 2));
         try {
             this.callback.currencyEditFinishEditing(this, this.getId(), this.getValue());
         } catch (Exception ex) {
@@ -143,6 +177,84 @@ public class BSCurrencyEditText extends BSEditText {
     }
 
     /**
+     * Method which provide of the {@link TextView} editor action
+     *
+     * @param textView instance of the {@link TextView}
+     * @param actionId {@link Integer} value of the action id
+     * @param event    instance of the {@link KeyEvent}
+     * @return {@link Boolean} value if the action needed
+     */
+    @Override
+    public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                actionId == EditorInfo.IME_ACTION_DONE ||
+                event != null &&
+                        event.getAction() == KeyEvent.ACTION_DOWN &&
+                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+            if (event == null || !event.isShiftPressed()) {
+                textView.clearFocus();
+                BSImeHelper.hideKeyboard(BSContextManager.getApplicationContext(), textView);
+                return true; // consume.
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Method which provide the action before the {@link TextView} changed
+     *
+     * @param charSequence {@link CharSequence} of the text
+     * @param i            instance of the {@link Integer}
+     * @param i1           instance of the {@link Integer}
+     * @param i2           instance of the {@link Integer}
+     */
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        this.innerText += charSequence;
+    }
+
+    /**
+     * Method which provide the action of the {@link TextView} changed
+     *
+     * @param charSequence {@link CharSequence} of the text
+     * @param i            instance of the {@link Integer}
+     * @param i1           instance of the {@link Integer}
+     * @param i2           instance of the {@link Integer}
+     */
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        if (!charSequence.toString().equals(innerText)) {
+            this.removeTextChangedListener(this);
+
+            String cleanString = charSequence.toString()
+                    .replaceAll(getRegEx(getLocale(), true), "").trim();
+            double parsed = 0;
+            try {
+                parsed = Double.parseDouble(cleanString);
+            } catch (Exception ex) {
+                Log.e(TAG, "onTextChanged: ", ex);
+            }
+            String formatted = NumberFormat.getCurrencyInstance(this.getLocale())
+                    .format((parsed / 100));
+            this.innerText = formatted;
+            this.setText(formatted);
+            this.setSelection(formatted.length());
+            this.addTextChangedListener(this);
+        }
+    }
+
+    /**
+     * Method which provide the action after text changed
+     *
+     * @param editable instance of the {@link Editable}
+     */
+    @Override
+    public void afterTextChanged(Editable editable) {
+
+    }
+
+
+    /**
      * Method which provide the getting value
      *
      * @return value of the currency
@@ -156,4 +268,71 @@ public class BSCurrencyEditText extends BSEditText {
         }
         return value;
     }
+
+    /**
+     * Method which provide the getting text from the current component
+     *
+     * @return current String value
+     */
+    @Override
+    public String getStringValue() {
+        String text = super.getStringValue();
+        String cleanString = text
+                .replaceAll(getRegEx(getLocale(), false), "").trim()
+                .replaceAll(",", ".");
+        return cleanString;
+    }
+
+    /**
+     * Method which provide the selection changed
+     *
+     * @param selStart {@link Integer} value of the start
+     * @param selEnd   {@link Integer} value of the end
+     */
+    @Override
+    protected void onSelectionChanged(int selStart, int selEnd) {
+        setSelection(this.length());
+    }
+
+    /**
+     * Method which provide the getting {@link Locale}
+     *
+     * @return instance of the {@link Locale}
+     */
+    @NonNull
+    protected Locale getLocale() {
+        if (this.locale == null) {
+            this.locale = Locale.getDefault();
+        }
+        return this.locale;
+    }
+
+    /**
+     * Method which provide the getting of the regular expression
+     *
+     * @param locale        instance of the {@link Locale}
+     * @param needSeparator {@link Boolean} value if it need separator
+     * @return instance of the {@link String}
+     */
+    protected String getRegEx(@NonNull Locale locale, boolean needSeparator) {
+        try {
+            Currency currency = Currency.getInstance(locale);
+            String currencySymbol = currency.getSymbol().replaceAll("\\w", "");
+            String decimal = "" + ((DecimalFormat) DecimalFormat.getInstance(locale))
+                    .getDecimalFormatSymbols().getDecimalSeparator() + "";
+            String numberDivider = "" + ((DecimalFormat) DecimalFormat.getInstance(locale))
+                    .getDecimalFormatSymbols().getGroupingSeparator() + "";
+            if (numberDivider.equals(" ")) {
+                numberDivider = "";
+            }
+            String regex = (needSeparator)
+                    ? "[" + currencySymbol + "" + numberDivider + "" + decimal + "\\s]"
+                    : "[" + currencySymbol + "" + numberDivider + "\\s]";
+            return regex;
+        } catch (Exception ex) {
+            Log.e(TAG, "getRegEx: ", ex);
+            return "";
+        }
+    }
+
 }

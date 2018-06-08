@@ -25,7 +25,7 @@ public final class BSFormatHelper extends BSBaseHelper {
         StringBuilder formatterValue = new StringBuilder("#.");
 
         for (int i = 0; i < precisionCount; i++) {
-            formatterValue.append("#");
+            formatterValue.append("0");
         }
 
         DecimalFormat formatter = new DecimalFormat(formatterValue.toString());
