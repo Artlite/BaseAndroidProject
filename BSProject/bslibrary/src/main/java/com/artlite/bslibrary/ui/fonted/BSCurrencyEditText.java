@@ -94,7 +94,7 @@ public class BSCurrencyEditText extends BSEditText {
      */
     protected void onInit() {
         this.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        this.setRawInputType(InputType.TYPE_CLASS_NUMBER);
+        this.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
         this.setOnEditorActionListener(new BSEditFinishListener());
         this.setOnFocusChangeListener(new BSFocusLostListener<BSCurrencyEditText>() {
             @Override
