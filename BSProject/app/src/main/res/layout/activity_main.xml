@@ -13,10 +13,10 @@
 
     <View
         android:id="@+id/view_for_pop_up"
-        android:layout_width="@dimen/dimen_30"
-        android:layout_height="@dimen/dimen_30"
+        android:layout_width="@dimen/dimen_100"
+        android:layout_height="@dimen/dimen_100"
         android:layout_gravity="center_horizontal"
-        android:background="@android:color/darker_gray" />
+        android:background="@drawable/bs_material2_oval_corners" />
 
     <com.artlite.bslibrary.ui.fonted.BSTextView
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
         android:id="@+id/edit_popup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bs_background_round_corners_card"
+        android:background="@drawable/bs_material2_square"
         android:hint="Input text here"
         android:padding="@dimen/dimen_15"
         android:textColor="@android:color/black"
@@ -39,14 +39,14 @@
         android:id="@+id/edit_currency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bs_background_round_corners_card"
+        android:background="@drawable/bs_material2_square"
         android:padding="@dimen/dimen_15" />
 
     <com.artlite.bslibrary.ui.fonted.BSButton
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bs_background_card"
+        android:background="@drawable/bs_material2_oval_corners"
         android:text="Just do it"
         android:textColor="@android:color/black"
         android:textSize="16sp"
