@@ -80,5 +80,4 @@ public abstract class BSLockableActivity extends BSActivity {
         return false;
     }
 
-
 }
