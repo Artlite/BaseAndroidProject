@@ -24,6 +24,7 @@ import com.artlite.bslibrary.managers.BSLocationManager;
 import com.artlite.bslibrary.managers.BSStatusBarManager;
 import com.artlite.bslibrary.transformation.BSGlideCropSquareTransformation;
 import com.artlite.bslibrary.ui.activity.BSActivity;
+import com.artlite.bslibrary.ui.activity.BSLockableActivity;
 import com.artlite.bslibrary.ui.fonted.BSCurrencyEditText;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
@@ -31,7 +32,7 @@ import com.artlite.bslibrary.ui.view.BSView;
 
 import java.util.Locale;
 
-public class MainActivity extends BSActivity implements BSCurrencyEditText.OnCurrencyEditCallback {
+public class MainActivity extends BSLockableActivity implements BSCurrencyEditText.OnCurrencyEditCallback {
 
     @FindViewBy(id = R.id.view_for_pop_up)
     private View forPopup;
@@ -76,6 +77,7 @@ public class MainActivity extends BSActivity implements BSCurrencyEditText.OnCur
      */
     @Override
     protected void onActivityPostCreation(@Nullable Bundle bundle) {
+        this.lock();
         this.currencyEditText.configure(Locale.GERMANY, this);
         final String url = "https://img00.deviantart.net/2234/i/2017/085/2/c/ada_wong_by_artsbycarlos-db3bvd4.jpg";
         BSImageManager.create(this.imageView, url)
@@ -191,5 +193,15 @@ public class MainActivity extends BSActivity implements BSCurrencyEditText.OnCur
                                           int editID,
                                           double value) {
 
+    }
+
+    /**
+     * Method which provide the getting content view ID
+     *
+     * @return {@link Integer} value of the content view ID
+     */
+    @Override
+    protected Integer getContentViewID() {
+        return R.id.activity_main;
     }
 }
