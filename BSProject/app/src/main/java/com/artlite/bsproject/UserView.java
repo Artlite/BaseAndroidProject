@@ -7,13 +7,14 @@ import android.view.View;
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.managers.BSRandomManager;
 import com.artlite.bslibrary.ui.fonted.BSTextView;
+import com.artlite.bslibrary.ui.view.BSLockableView;
 import com.artlite.bslibrary.ui.view.BSView;
 
 /**
  * Created by dlernatovich on 5/10/2017.
  */
 
-public final class UserView extends BSView {
+public final class UserView extends BSLockableView {
 
     @FindViewBy(id = R.id.label_description)
     private BSTextView labelDescription;
@@ -74,9 +75,11 @@ public final class UserView extends BSView {
      */
     @Override
     protected void onCreateView() {
+        this.lockView();
         labelHeader.setText(BSRandomManager.generateSentence(20));
         labelDescription.setText(BSRandomManager.generateSentence(20));
         setOnClickListeners(R.id.button_close, R.id.button_cancel, R.id.button_event);
+        this.unlockView();
     }
 
     @Override

@@ -39,7 +39,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 /**
- * Class which provide the activity which can lock it UI
+ * Class which provide the activity which can lockActivity it UI
  */
 
 public abstract class BSLockableActivity extends BSActivity {
@@ -50,36 +50,27 @@ public abstract class BSLockableActivity extends BSActivity {
     private static final String TAG = BSLockableActivity.class.getSimpleName();
 
     /**
-     * Method which provide the getting content view ID
-     *
-     * @return {@link Integer} value of the content view ID
-     */
-    @Nullable
-    @IdRes
-    protected abstract Integer getContentViewID();
-
-    /**
      * Method which provide the lock of the user interface
      *
      * @return {@link Boolean} value if the UI was locked
      */
-    protected boolean lock() {
+    public final boolean lockActivity() {
         try {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             return true;
         } catch (Exception ex) {
-            Log.e(TAG, "lock: ", ex);
+            Log.e(TAG, "lockActivity: ", ex);
         }
         return false;
     }
 
     /**
-     * Method which provide the lock of the user interface
+     * Method which provide the lockActivity of the user interface
      *
      * @return {@link Boolean} value if the UI was locked
      */
-    protected boolean unlock() {
+    public final boolean unlockActivity() {
         try {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             return true;
