@@ -50,14 +50,18 @@ public abstract class BSLockableActivity extends BSActivity {
     private static final String TAG = BSLockableActivity.class.getSimpleName();
 
     /**
+     * {@link Boolean} value if the view is locked
+     */
+    private boolean isLocked = false;
+
+    /**
      * Method which provide the lock of the user interface
      *
      * @return {@link Boolean} value if the UI was locked
      */
     public final boolean lockActivity() {
         try {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            this.isLocked = true;
             return true;
         } catch (Exception ex) {
             Log.e(TAG, "lockActivity: ", ex);
@@ -72,12 +76,23 @@ public abstract class BSLockableActivity extends BSActivity {
      */
     public final boolean unlockActivity() {
         try {
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            this.isLocked = false;
             return true;
         } catch (Exception ex) {
             Log.e(TAG, "unlock: ", ex);
         }
         return false;
+    }
+
+    /**
+     * Method which provide the dispatching of the touch event
+     *
+     * @param motionEvent instance of the {@link MotionEvent}
+     * @return {@link Boolean} value of the click event
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent motionEvent) {
+        return (this.isLocked) ? true : super.dispatchTouchEvent(motionEvent);
     }
 
 }
