@@ -8,7 +8,7 @@ buildscript {
             name 'Google'
         }
 //        maven { url 'D:\\Development\\SDK\\Android\\Sdk\\extras\\android\\m2repository' }
-        maven { url 'C:\\Users\\dlernatovich\\Documents\\AndroidSDK\\extras\\android\\m2repository' }
+//        maven { url 'C:\\Users\\dlernatovich\\Documents\\AndroidSDK\\extras\\android\\m2repository' }
         google()
     }
     dependencies {

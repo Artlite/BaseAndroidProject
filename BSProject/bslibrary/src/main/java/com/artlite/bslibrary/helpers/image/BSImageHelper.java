@@ -9,12 +9,15 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
-import com.bumptech.glide.DrawableRequestBuilder;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.lang.ref.WeakReference;
+
+import jp.wasabeef.glide.transformations.BitmapTransformation;
 
 /**
  * Class which provide the helping functional which related to {@link ImageView}
@@ -40,9 +43,14 @@ public final class BSImageHelper extends BSBaseHelper {
         private static final String TAG = LoadingTask.class.getSimpleName();
 
         /**
-         * Instance of the {@link DrawableRequestBuilder}
+         * Instance of the {@link RequestBuilder}
          */
-        private DrawableRequestBuilder builder;
+        private RequestBuilder builder;
+
+        /**
+         * Instance of the {@link RequestOptions}
+         */
+        private RequestOptions options;
 
         /**
          * Instance of the {@link WeakReference}
@@ -69,9 +77,7 @@ public final class BSImageHelper extends BSBaseHelper {
             if (!isNull(url, context)) {
                 this.builder = Glide
                         .with(context)
-                        .load(url)
-                        .dontAnimate()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL);
+                        .load(url);
             } else {
                 this.builder = null;
             }
@@ -96,9 +102,7 @@ public final class BSImageHelper extends BSBaseHelper {
             if (!isNull(uri, context)) {
                 this.builder = Glide
                         .with(context)
-                        .load(uri)
-                        .dontAnimate()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL);
+                        .load(uri);
             } else {
                 this.builder = null;
             }
@@ -112,11 +116,7 @@ public final class BSImageHelper extends BSBaseHelper {
          */
         @NonNull
         public LoadingTask setPlaceholder(@DrawableRes int placeholder) {
-            if (this.builder != null) {
-                this.builder = this.builder.placeholder(placeholder);
-            } else {
-                Log.d(TAG, "setPlaceholder: builder is empty");
-            }
+            this.options = this.getOptions().placeholder(placeholder);
             return this;
         }
 
@@ -128,11 +128,7 @@ public final class BSImageHelper extends BSBaseHelper {
          */
         @NonNull
         public LoadingTask setError(@DrawableRes int error) {
-            if (this.builder != null) {
-                this.builder = this.builder.error(error);
-            } else {
-                Log.d(TAG, "setPlaceholder: builder is empty");
-            }
+            this.options = this.getOptions().error(error);
             return this;
         }
 
@@ -145,14 +141,10 @@ public final class BSImageHelper extends BSBaseHelper {
          */
         @NonNull
         public LoadingTask setSize(int width, int height) {
-            if (this.builder != null) {
-                if ((width > 0) && (height > 0)) {
-                    this.builder = builder.override(width, height);
-                } else {
-                    Log.d(TAG, "setSize: width or height is less or equals to zero");
-                }
+            if ((width > 0) && (height > 0)) {
+                this.options = this.getOptions().override(width, height);
             } else {
-                Log.d(TAG, "setSize: builder is empty");
+                Log.d(TAG, "setSize: width or height is less or equals to zero");
             }
             return this;
         }
@@ -178,11 +170,11 @@ public final class BSImageHelper extends BSBaseHelper {
                     break;
                 }
                 case FIT_CENTER: {
-                    this.builder = builder.fitCenter();
+                    this.options = this.getOptions().fitCenter();
                     break;
                 }
                 case CENTER_CROP: {
-                    this.builder = builder.centerCrop();
+                    this.options = this.getOptions().centerCrop();
                     break;
                 }
                 default: {
@@ -208,7 +200,27 @@ public final class BSImageHelper extends BSBaseHelper {
                 Log.d(TAG, "setTransformation: Transformation is empty");
                 return this;
             }
-            this.builder = this.builder.transform(transformation);
+            this.options = this.getOptions().transform(transformation);
+            return this;
+        }
+
+        /**
+         * Method which provide the setting position type
+         *
+         * @param transformation instance of the {@link BitmapTransformation}
+         * @return instance of the {@link LoadingTask}
+         */
+        @NonNull
+        public LoadingTask setTransformation(@Nullable MultiTransformation transformation) {
+            if (this.builder == null) {
+                Log.d(TAG, "setTransformation: builder is empty");
+                return this;
+            }
+            if (transformation == null) {
+                Log.d(TAG, "setTransformation: Transformation is empty");
+                return this;
+            }
+            this.options = this.getOptions().transform(transformation);
             return this;
         }
 
@@ -223,10 +235,25 @@ public final class BSImageHelper extends BSBaseHelper {
             final ImageView imageView = (this.imageViewReference == null)
                     ? null : this.imageViewReference.get();
             if (imageView != null) {
-                this.builder.into(imageView);
+                this.builder.apply(this.getOptions()).into(imageView);
             } else {
                 Log.d(TAG, "download: Image view is empty");
             }
+        }
+
+        /**
+         * Method which provide the getting of the {@link RequestOptions}
+         *
+         * @return instance of the {@link RequestOptions}
+         */
+        @NonNull
+        protected RequestOptions getOptions() {
+            if (this.options == null) {
+                this.options = new RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .dontAnimate();
+            }
+            return this.options;
         }
     }
 

@@ -22,16 +22,23 @@ import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.managers.BSImageManager;
 import com.artlite.bslibrary.managers.BSLocationManager;
 import com.artlite.bslibrary.managers.BSStatusBarManager;
-import com.artlite.bslibrary.transformation.BSGlideCropSquareTransformation;
 import com.artlite.bslibrary.ui.activity.BSLockableActivity;
 import com.artlite.bslibrary.ui.fonted.BSCurrencyEditText;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
 import com.artlite.bslibrary.ui.view.BSView;
+import com.bumptech.glide.load.MultiTransformation;
 
 import java.util.Locale;
 
-public class MainActivity extends BSLockableActivity implements BSCurrencyEditText.OnCurrencyEditCallback {
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import jp.wasabeef.glide.transformations.CropSquareTransformation;
+import jp.wasabeef.glide.transformations.CropTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
+public class MainActivity extends BSLockableActivity
+        implements BSCurrencyEditText.OnCurrencyEditCallback {
 
     @FindViewBy(id = R.id.view_for_pop_up)
     private View forPopup;
@@ -79,11 +86,16 @@ public class MainActivity extends BSLockableActivity implements BSCurrencyEditTe
         this.lockActivity();
         this.currencyEditText.configure(Locale.GERMANY, this);
         final String url = "https://img00.deviantart.net/2234/i/2017/085/2/c/ada_wong_by_artsbycarlos-db3bvd4.jpg";
+        int corner = getResources().getDimensionPixelSize(R.dimen.dimen_8);
+        int size = getResources().getDimensionPixelSize(R.dimen.dimen_100);
         BSImageManager.create(this.imageView, url)
                 .setPositionType(BSImageHelper.ImagePositionType.NONE)
-                .setTransformation(new BSGlideCropSquareTransformation(R.dimen.dimen_10))
+                .setTransformation(new MultiTransformation(
+                        new CropSquareTransformation(),
+                        new RoundedCornersTransformation(corner, 0)
+                ))
                 .setPlaceholder(android.R.drawable.ic_notification_clear_all)
-                .setSize(300, 300)
+                .setSize(size, size)
                 .download();
         this.unlockActivity();
     }

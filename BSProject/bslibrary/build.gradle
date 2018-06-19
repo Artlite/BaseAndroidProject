@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'com.artlite'
     PUBLISH_ARTIFACT_ID = 'baseproject'
-    PUBLISH_VERSION = '3.1.0'
+    PUBLISH_VERSION = '4.0.0'
 }
 
 android {
@@ -32,16 +32,29 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
     compile 'com.android.support:appcompat-v7:25.0.0'
+    //noinspection GradleCompatible
     compile 'com.android.support:design:25.0.0'
-    compile 'com.github.bumptech.glide:glide:3.8.0'
+    compile("com.github.bumptech.glide:glide:4.7.1") {
+        exclude group: "com.android.support"
+    }
+    //noinspection GradleCompatible
+    compile "com.android.support:support-fragment:25.0.0"
+    //noinspection GradleDependency
     compile 'com.android.support:support-annotations:25.0.0'
     // FlexBox library for the tag view
     compile 'com.google.android:flexbox:1.0.0'
+    // Transformations
+    compile('jp.wasabeef:glide-transformations:3.3.0') {
+        exclude group: "com.android.support"
+    }
+    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 //    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.12'
 }
 
