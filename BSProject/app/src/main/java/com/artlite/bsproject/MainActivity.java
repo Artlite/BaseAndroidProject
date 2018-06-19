@@ -23,7 +23,6 @@ import com.artlite.bslibrary.managers.BSImageManager;
 import com.artlite.bslibrary.managers.BSLocationManager;
 import com.artlite.bslibrary.managers.BSStatusBarManager;
 import com.artlite.bslibrary.transformation.BSGlideCropSquareTransformation;
-import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.activity.BSLockableActivity;
 import com.artlite.bslibrary.ui.fonted.BSCurrencyEditText;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
@@ -64,7 +63,7 @@ public class MainActivity extends BSLockableActivity implements BSCurrencyEditTe
      */
     @Override
     protected void onCreateActivity(Bundle bundle) {
-        setOnClickListeners(R.id.button1, R.id.button2, R.id.button3);
+        setOnClickListeners(R.id.button1, R.id.button2, R.id.button3, R.id.button4);
         BSLocationManager.startLocationMonitoring(this);
     }
 
@@ -143,6 +142,10 @@ public class MainActivity extends BSLockableActivity implements BSCurrencyEditTe
                 BSStatusBarManager.open();
 
 //                startActivityForPickImage();
+                break;
+            }
+            case R.id.button4: {
+                startActivity(TagsActivity.class);
                 break;
             }
             default:

@@ -9,10 +9,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.artlite.bslibrary.annotations.FindViewBy;
-import com.artlite.bslibrary.ui.fonted.BSTextView;
+import com.artlite.bslibrary.R;
 import com.google.android.flexbox.FlexboxLayout;
-import com.mio.modo.R;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +19,8 @@ import java.util.Set;
 /**
  * Class which provide the tags view functional
  */
-public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView {
+public final class BSTagsView<T extends BSTagsView.TagInterface, K extends BSTagsView.BaseTagView>
+        extends BSView {
 
     /**
      * {@link String} constant of the tag
@@ -31,7 +30,6 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
     /**
      * Instance of the {@link FlexboxLayout}
      */
-    @FindViewBy(id = R.id.grid_layout)
     private FlexboxLayout flexboxLayout;
 
     /**
@@ -42,7 +40,7 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
     /**
      * Instance of the {@link OnTagsViewCallback}
      */
-    private OnTagsViewCallback<T> callback;
+    private OnTagsViewCallback<T, K> callback;
 
     /**
      * Instance of the tags {@link HashSet}
@@ -86,7 +84,7 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
      */
     @Override
     protected int getLayoutId() {
-        return R.layout.view_tags;
+        return R.layout.bs_tags_view;
     }
 
     /**
@@ -94,7 +92,7 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
      */
     @Override
     protected void onLinkInterface() {
-
+        this.flexboxLayout = this.findViewById(R.id.grid_layout);
     }
 
     /**
@@ -105,7 +103,7 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
     }
 
     /**
-     * Method which provide the configuring of the {@link TagView}
+     * Method which provide the configuring of the {@link BaseTagView}
      *
      * @param callback instance of the {@link OnTagsViewCallback}
      */
@@ -114,10 +112,10 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
     }
 
     /**
-     * Method which provide the adding of the {@link TagView}
+     * Method which provide the adding of the {@link BaseTagView}
      *
      * @param object instance of the {@link TagInterface}
-     * @return instance of the {@link TagView}
+     * @return instance of the {@link BaseTagView}
      */
     @NonNull
     public <T extends TagInterface> void set(@Nullable T object) {
@@ -127,10 +125,10 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
     }
 
     /**
-     * Method which provide the adding of the {@link TagView}
+     * Method which provide the adding of the {@link BaseTagView}
      *
      * @param objects {@link List} of the instance of the {@link TagInterface}
-     * @return instance of the {@link TagView}
+     * @return instance of the {@link BaseTagView}
      */
     @NonNull
     public <T extends TagInterface> void set(@Nullable List<T> objects) {
@@ -140,10 +138,10 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
     }
 
     /**
-     * Method which provide the adding of the {@link TagView}
+     * Method which provide the adding of the {@link BaseTagView}
      *
      * @param object instance of the {@link TagInterface}
-     * @return instance of the {@link TagView}
+     * @return instance of the {@link BaseTagView}
      */
     @NonNull
     public <T extends TagInterface> void add(@Nullable T object) {
@@ -153,10 +151,10 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
     }
 
     /**
-     * Method which provide the adding of the {@link TagView}
+     * Method which provide the adding of the {@link BaseTagView}
      *
      * @param objects {@link List} of the instance of the {@link TagInterface}
-     * @return instance of the {@link TagView}
+     * @return instance of the {@link BaseTagView}
      */
     @NonNull
     public <T extends TagInterface> void add(@Nullable List<T> objects) {
@@ -184,16 +182,19 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
     }
 
     /**
-     * Method which provide the adding of the {@link TagView}
+     * Method which provide the adding of the {@link BaseTagView}
      *
      * @param layout instance of the {@link FlexboxLayout}
      * @param object instance of the {@link TagInterface}
-     * @return instance of the {@link TagView}
+     * @return instance of the {@link BaseTagView}
      */
-    @NonNull
-    protected TagView add(@NonNull FlexboxLayout layout,
-                          @Nullable TagInterface object) {
-        final TagView tagView = new TagView(getContext());
+    @Nullable
+    protected BaseTagView add(@NonNull FlexboxLayout layout,
+                              @Nullable TagInterface object) {
+        if ((this.callback == null) || (getContext() == null)) {
+            return null;
+        }
+        final BaseTagView tagView = this.callback.tagsViewCreateView(getContext());
         if (layout == null) {
             return tagView;
         }
@@ -234,9 +235,9 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
     }
 
     /**
-     * Method which provide the {@link TagView} clicked
+     * Method which provide the {@link BaseTagView} clicked
      *
-     * @param view instance of the {@link TagView}
+     * @param view instance of the {@link BaseTagView}
      */
     protected void onViewRemoved(@NonNull BaseTagView view) {
         try {
@@ -250,9 +251,9 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
     }
 
     /**
-     * Method which provide the {@link TagView} clicked
+     * Method which provide the {@link BaseTagView} clicked
      *
-     * @param view instance of the {@link TagView}
+     * @param view instance of the {@link BaseTagView}
      */
     protected void onViewClicked(@NonNull BaseTagView view) {
         try {
@@ -265,9 +266,9 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
     }
 
     /**
-     * Method which provide the {@link TagView} clicked
+     * Method which provide the {@link BaseTagView} clicked
      *
-     * @param view instance of the {@link TagView}
+     * @param view instance of the {@link BaseTagView}
      */
     protected void onViewLongClicked(@NonNull BaseTagView view) {
         try {
@@ -367,7 +368,7 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
         }
 
         /**
-         * Method which provide the configuring of the {@link TagView}
+         * Method which provide the configuring of the {@link BaseTagView}
          *
          * @param callback instance of the {@link OnTagViewCallback}
          */
@@ -464,101 +465,10 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
         }
     }
 
-    /**
-     * Class which provide the view for the {@link TagsView}
-     */
-    public static class TagView extends BaseTagView {
-
-        /**
-         * Instance of the {@link BSTextView}
-         */
-        @FindViewBy(id = R.id.tag_text)
-        private BSTextView labelTag;
-
-        /**
-         * Instance of the {@link View}
-         */
-        @FindViewBy(id = R.id.button_delete)
-        private View buttonDelete;
-
-        /**
-         * Constructor which provide the create {@link BSView} from
-         *
-         * @param context instance of {@link Context}
-         */
-        public TagView(Context context) {
-            super(context);
-        }
-
-        /**
-         * Constructor which provide the create {@link BSView} from
-         *
-         * @param context instance of {@link Context}
-         * @param attrs   instance of {@link AttributeSet}
-         */
-        public TagView(Context context, AttributeSet attrs) {
-            super(context, attrs);
-        }
-
-        /**
-         * Constructor which provide the create {@link BSView} from
-         *
-         * @param context      instance of {@link Context}
-         * @param attrs        instance of {@link AttributeSet}
-         * @param defStyleAttr attribute style
-         */
-        public TagView(Context context, AttributeSet attrs, int defStyleAttr) {
-            super(context, attrs, defStyleAttr);
-        }
-
-        /**
-         * Method which provide the getting of the layout ID
-         *
-         * @return layout ID
-         */
-        @Override
-        protected int getLayoutId() {
-            return R.layout.recycle_tag;
-        }
-
-        /**
-         * Method which provide the getting of the {@link TextView}
-         *
-         * @return instance of the {@link TextView}
-         */
-        @NonNull
-        @Override
-        protected TextView getTagLabel() {
-            return this.labelTag;
-        }
-
-        /**
-         * Method which provide the getting of the get delete {@link View}
-         *
-         * @return instance of the delete {@link View}
-         */
-        @NonNull
-        @Override
-        protected View getDeleteView() {
-            return this.buttonDelete;
-        }
-
-        /**
-         * Method which provide the getting of the content {@link View}
-         *
-         * @return instance of the {@link View}
-         */
-        @Nullable
-        @Override
-        protected View getContentView() {
-            return findViewById(R.id.tag_content);
-        }
-    }
-
     // CALLBACKS
 
     /**
-     * Interface which provide the callback for the {@link TagView}
+     * Interface which provide the callback for the {@link BaseTagView}
      */
     protected interface OnTagViewCallback {
         /**
@@ -584,35 +494,43 @@ public final class BSTagsView<T extends BSTagsView.TagInterface> extends BSView 
     }
 
     /**
-     * Interface which provide the callback for the {@link TagsView}
+     * Interface which provide the callback for the {@link BSTagsView}
      */
-    public interface OnTagsViewCallback<T extends TagInterface> {
+    public interface OnTagsViewCallback<T extends TagInterface, K extends BaseTagView> {
 
         /**
-         * Method which provide the {@link TagsView} item clicked
+         * Method which provide the {@link BSTagsView} item clicked
          *
          * @param view   instance of the {@link BaseTagView}
          * @param object instance of the {@link Object}
          */
-        void tagsViewOnClickItem(@NonNull BaseTagView view,
-                                 @NonNull T object);
+        void tagsViewOnClickItem(@NonNull final BaseTagView view,
+                                 @NonNull final T object);
 
         /**
-         * Method which provide the {@link TagsView} item clicked
+         * Method which provide the {@link BSTagsView} item clicked
          *
          * @param view   instance of the {@link BaseTagView}
          * @param object instance of the {@link Object}
          */
-        void tagsViewOnLongClickItem(@NonNull BaseTagView view,
-                                     @NonNull T object);
+        void tagsViewOnLongClickItem(@NonNull final BaseTagView view,
+                                     @NonNull final T object);
 
         /**
-         * Method which provide the {@link TagsView} item deleting
+         * Method which provide the {@link BSTagsView} item deleting
          *
          * @param object instance of the {@link Object}
          */
-        void tagsViewOnDeleteItem(@NonNull T object);
+        void tagsViewOnDeleteItem(@NonNull final T object);
 
+        /**
+         * Method which provide the create the tags view externally
+         *
+         * @param context instance of {@link Context}
+         * @return instance of the {@link BaseTagView}
+         */
+        @NonNull
+        K tagsViewCreateView(@NonNull final Context context);
     }
 
     // INTERFACES

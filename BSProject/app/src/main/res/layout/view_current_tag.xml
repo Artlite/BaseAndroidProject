@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/view_content"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bs_material2_round_corners"
+    android:orientation="horizontal"
+    android:padding="@dimen/dimen_20">
+
+    <com.artlite.bslibrary.ui.fonted.BSTextView
+        android:id="@+id/label_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Some text" />
+
+    <com.artlite.bslibrary.ui.fonted.BSButton
+        android:id="@+id/view_delete"
+        android:layout_width="@dimen/dimen_30"
+        android:layout_height="@dimen/dimen_30"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dimen_8"
+        android:background="@drawable/bs_material2_round_corners"
+        android:text="x"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/text_10"
+        android:textStyle="bold" />
+
+</LinearLayout>
