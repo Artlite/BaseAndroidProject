@@ -29,6 +29,7 @@ import com.artlite.bslibrary.ui.activity.BSLockableActivity;
 import com.artlite.bslibrary.ui.fonted.BSCurrencyEditText;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
+import com.artlite.bslibrary.ui.view.BSImageView;
 import com.artlite.bslibrary.ui.view.BSView;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -48,7 +49,7 @@ public class MainActivity extends BSLockableActivity
     private BSEditText editText;
 
     @FindViewBy(id = R.id.image_view)
-    private ImageView imageView;
+    private BSImageView imageView;
 
     @FindViewBy(id = R.id.edit_currency)
     private BSCurrencyEditText currencyEditText;
@@ -85,30 +86,6 @@ public class MainActivity extends BSLockableActivity
     protected void onActivityPostCreation(@Nullable Bundle bundle) {
         this.lockActivity();
         this.currencyEditText.configure(Locale.GERMANY, this);
-        final String url = "http://directoryhaze.com/upload/w/white-theme-white-brick-chrome-web-store.jpeg";
-        int corner = getResources().getDimensionPixelSize(R.dimen.dimen_8);
-        int size = 400;
-        BSImageManager.create(this.imageView, url)
-                .setPositionType(BSImageHelper.ImagePositionType.NONE)
-                .setPlaceholder(android.R.drawable.ic_notification_clear_all)
-                .setSize(size, size)
-                .download(new SimpleTarget<Bitmap>() {
-                    /**
-                     * The method that will be called when the resource load has finished.
-                     *
-                     * @param resource   the loaded resource.
-                     * @param transition
-                     */
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource,
-                                                @Nullable Transition<? super Bitmap> transition) {
-                        rect = new Rect(10, 10, 500, 500);
-                        BSCanvasHelper.drawRect(imageView, resource,
-                                getResources().getColor(android.R.color.holo_red_dark),
-                                80,
-                                10, 10, 500, 390);
-                    }
-                });
         this.unlockActivity();
     }
 
@@ -131,7 +108,7 @@ public class MainActivity extends BSLockableActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button1: {
-                startActivity(DetailsActivity.class);
+                startActivity(RectangleImageActivity.class);
                 Location location = BSLocationManager.getLocation();
                 String name = BSLocationManager.getLocationName();
                 break;

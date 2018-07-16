@@ -82,7 +82,7 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
-    <ImageView
+    <com.artlite.bslibrary.ui.view.BSImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
