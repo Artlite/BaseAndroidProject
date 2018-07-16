@@ -1,6 +1,7 @@
 package com.artlite.bslibrary.helpers.image;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -9,11 +10,12 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
-import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.lang.ref.WeakReference;
 
@@ -57,6 +59,21 @@ public final class BSImageHelper extends BSBaseHelper {
          */
         private final WeakReference<ImageView> imageViewReference;
 
+        /**
+         * Instance of the {@link WeakReference}
+         */
+        private final WeakReference<Context> contextReference;
+
+        /**
+         * {@link String} constants of the url
+         */
+        private final String url;
+
+        /**
+         * Instance of the {@link Uri}
+         */
+        private final Uri uri;
+
 
         /**
          * Constructor which provide the create {@link LoadingTask} with parameters
@@ -74,6 +91,12 @@ public final class BSImageHelper extends BSBaseHelper {
                 this.imageViewReference = null;
                 Log.d(TAG, "LoadingTask: Image view is empty");
             }
+            if (context != null) {
+                this.contextReference = new WeakReference<>(context);
+            } else {
+                this.contextReference = null;
+                Log.d(TAG, "LoadingTask: Context is empty");
+            }
             if (!isNull(url, context)) {
                 this.builder = Glide
                         .with(context)
@@ -81,6 +104,8 @@ public final class BSImageHelper extends BSBaseHelper {
             } else {
                 this.builder = null;
             }
+            this.uri = null;
+            this.url = url;
         }
 
         /**
@@ -99,6 +124,12 @@ public final class BSImageHelper extends BSBaseHelper {
                 this.imageViewReference = null;
                 Log.d(TAG, "LoadingTask: Image view is empty");
             }
+            if (context != null) {
+                this.contextReference = new WeakReference<>(context);
+            } else {
+                this.contextReference = null;
+                Log.d(TAG, "LoadingTask: Context is empty");
+            }
             if (!isNull(uri, context)) {
                 this.builder = Glide
                         .with(context)
@@ -106,6 +137,8 @@ public final class BSImageHelper extends BSBaseHelper {
             } else {
                 this.builder = null;
             }
+            this.uri = uri;
+            this.url = null;
         }
 
         /**
@@ -228,14 +261,31 @@ public final class BSImageHelper extends BSBaseHelper {
          * Method which provide the download of the url to the {@link ImageView}
          */
         public void download() {
+            this.download(null);
+        }
+
+        /**
+         * Method which provide the download of the url to the {@link ImageView}
+         *
+         * @param target instance of the {@link SimpleTarget}
+         */
+        public void download(@Nullable final SimpleTarget<Bitmap> target) {
             if (this.builder == null) {
                 Log.d(TAG, "download: builder is empty");
                 return;
             }
-            final ImageView imageView = (this.imageViewReference == null)
-                    ? null : this.imageViewReference.get();
+            final ImageView imageView = this.getImageView();
+            final Context context = this.getContext();
             if (imageView != null) {
-                this.builder.apply(this.getOptions()).into(imageView);
+                if (target == null) {
+                    this.builder.apply(this.getOptions()).into(imageView);
+                } else if ((context != null) && ((this.url != null) || (this.uri != null))) {
+                    this.builder = Glide
+                            .with(context)
+                            .asBitmap()
+                            .load((this.uri == null) ? this.url : this.uri);
+                    this.builder.apply(this.getOptions()).into(target);
+                }
             } else {
                 Log.d(TAG, "download: Image view is empty");
             }
@@ -254,6 +304,28 @@ public final class BSImageHelper extends BSBaseHelper {
                         .dontAnimate();
             }
             return this.options;
+        }
+
+        /**
+         * Method which provide the getting {@link Context}
+         *
+         * @return instance of the {@link Context}
+         */
+        @Nullable
+        protected Context getContext() {
+            return (this.contextReference == null)
+                    ? null : this.contextReference.get();
+        }
+
+        /**
+         * Method which provide the getting {@link ImageView}
+         *
+         * @return instance of the {@link ImageView}
+         */
+        @Nullable
+        protected ImageView getImageView() {
+            return (this.imageViewReference == null)
+                    ? null : this.imageViewReference.get();
         }
     }
 

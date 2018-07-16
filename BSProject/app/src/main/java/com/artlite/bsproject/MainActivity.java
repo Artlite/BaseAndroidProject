@@ -5,16 +5,19 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.callbacks.BSPermissionCallback;
+import com.artlite.bslibrary.helpers.canvas.BSCanvasHelper;
 import com.artlite.bslibrary.helpers.image.BSImageHelper;
 import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
@@ -27,15 +30,10 @@ import com.artlite.bslibrary.ui.fonted.BSCurrencyEditText;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
 import com.artlite.bslibrary.ui.view.BSView;
-import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.util.Locale;
-
-import jp.wasabeef.glide.transformations.BlurTransformation;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
-import jp.wasabeef.glide.transformations.CropSquareTransformation;
-import jp.wasabeef.glide.transformations.CropTransformation;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MainActivity extends BSLockableActivity
         implements BSCurrencyEditText.OnCurrencyEditCallback {
@@ -54,6 +52,8 @@ public class MainActivity extends BSLockableActivity
 
     @FindViewBy(id = R.id.edit_currency)
     private BSCurrencyEditText currencyEditText;
+
+    private Rect rect;
 
     /**
      * Method which provide the getting of the layout ID for the current Activity
@@ -85,18 +85,30 @@ public class MainActivity extends BSLockableActivity
     protected void onActivityPostCreation(@Nullable Bundle bundle) {
         this.lockActivity();
         this.currencyEditText.configure(Locale.GERMANY, this);
-        final String url = "https://img00.deviantart.net/2234/i/2017/085/2/c/ada_wong_by_artsbycarlos-db3bvd4.jpg";
+        final String url = "http://directoryhaze.com/upload/w/white-theme-white-brick-chrome-web-store.jpeg";
         int corner = getResources().getDimensionPixelSize(R.dimen.dimen_8);
-        int size = getResources().getDimensionPixelSize(R.dimen.dimen_100);
+        int size = 400;
         BSImageManager.create(this.imageView, url)
                 .setPositionType(BSImageHelper.ImagePositionType.NONE)
-                .setTransformation(new MultiTransformation(
-                        new CropSquareTransformation(),
-                        new RoundedCornersTransformation(corner, 0)
-                ))
                 .setPlaceholder(android.R.drawable.ic_notification_clear_all)
                 .setSize(size, size)
-                .download();
+                .download(new SimpleTarget<Bitmap>() {
+                    /**
+                     * The method that will be called when the resource load has finished.
+                     *
+                     * @param resource   the loaded resource.
+                     * @param transition
+                     */
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource,
+                                                @Nullable Transition<? super Bitmap> transition) {
+                        rect = new Rect(10, 10, 500, 500);
+                        BSCanvasHelper.drawRect(imageView, resource,
+                                getResources().getColor(android.R.color.holo_red_dark),
+                                80,
+                                10, 10, 500, 390);
+                    }
+                });
         this.unlockActivity();
     }
 

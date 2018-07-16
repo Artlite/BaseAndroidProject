@@ -97,6 +97,16 @@ public final class BSRandomManager extends BSBaseManager {
     }
 
     /**
+     * Method which provide the generating of the random String value with length
+     *
+     * @param length current random string length
+     * @return generated String value
+     */
+    public static String generateString(int length, boolean onlyLetters) {
+        return BSRandomHelper.generateString(length, onlyLetters);
+    }
+
+    /**
      * Method which provide to generate of the random sentence
      *
      * @return generated sentence

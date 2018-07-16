@@ -18,6 +18,8 @@ public class BSRandomHelper extends BSBaseHelper {
     private static final int MAX_VALUE = 900000;
     private static final String ALPHABET = "QWERTYUIOP{}ASDFGHJKL:|ZXCVBNM<>?qwertyuiop[]" +
             "asdfghjkl;'zxcvbnm,./1234567890-=+_";
+    private static final String ALPHABET_ONLY_LETTERS = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiop" +
+            "asdfghjklzxcvbnm1234567890";
 
     /**
      * Method which provide the generating of the random integer value
@@ -58,7 +60,19 @@ public class BSRandomHelper extends BSBaseHelper {
      * @return generated String value
      */
     public static String generateString(int length) {
-        char[] chars = ALPHABET.toCharArray();
+        return generateString(length, false);
+    }
+
+    /**
+     * Method which provide the generating of the random String value with length
+     *
+     * @param length current random string length
+     * @return generated String value
+     */
+    public static String generateString(int length, boolean onlyLetters) {
+        char[] chars = (!onlyLetters)
+                ? ALPHABET.toCharArray()
+                : ALPHABET_ONLY_LETTERS.toCharArray();
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < length; i++) {
