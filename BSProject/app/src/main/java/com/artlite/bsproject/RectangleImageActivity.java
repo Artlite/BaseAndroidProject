@@ -5,11 +5,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
@@ -19,6 +15,7 @@ import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.view.BSImageView;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.otaliastudios.zoom.ZoomApi;
 import com.otaliastudios.zoom.ZoomLayout;
 
 public class RectangleImageActivity extends BSActivity implements BSImageView.OnImageViewCallback {
@@ -64,7 +61,9 @@ public class RectangleImageActivity extends BSActivity implements BSImageView.On
     protected void onActivityPostCreation(@Nullable Bundle bundle) {
         this.imageView.setCallback(this);
 //        final String url = "https://orig00.deviantart.net/2333/f/2015/150/d/c/ada_wong_by_gladiusgaming-d8vbviz.jpg";
-        final String url = "https://mztressofalleviltales.files.wordpress.com/2018/05/3f55fd11-babb-417c-82c0-903aa23f9629.jpeg?w=446&h=764";
+        final String url = "https://image.ibb.co/eSF3zJ/Nijiya_market.jpg";
+        this.zoomLayout.getEngine().setTransformation(ZoomApi.TRANSFORMATION_CENTER_CROP,
+                Gravity.TOP);
         BSImageManager.create(this.imageView, url)
                 .setPositionType(BSImageHelper.ImagePositionType.NONE)
                 .setPlaceholder(android.R.drawable.ic_notification_clear_all)
@@ -79,14 +78,14 @@ public class RectangleImageActivity extends BSActivity implements BSImageView.On
                     public void onResourceReady(@NonNull Bitmap resource,
                                                 @Nullable Transition<? super Bitmap> transition) {
                         imageView.setImageBitmap(resource);
-                        imageView.drawRect(android.R.color.holo_red_dark,
-                                80,
+                        imageView.drawRectRound(android.R.color.holo_red_dark,
+                                180,
                                 10,
                                 10,
                                 200,
                                 200);
-                        imageView.drawRect(android.R.color.holo_green_dark,
-                                80,
+                        imageView.drawRectRound(android.R.color.holo_green_dark,
+                                180,
                                 210,
                                 10,
                                 400,

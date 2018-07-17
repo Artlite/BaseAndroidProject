@@ -5,19 +5,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.ImageView;
 
 import com.artlite.bslibrary.helpers.canvas.BSCanvasHelper;
 import com.artlite.bslibrary.managers.BSRandomManager;
@@ -148,7 +145,7 @@ public final class BSImageView extends AppCompatImageView {
      */
     @Nullable
     public Rect drawRect(@ColorRes int color,
-                         @IntRange(from = 0, to = 100) int alpha,
+                         @IntRange(from = 0, to = 255) int alpha,
                          int left,
                          int top,
                          int right,
@@ -168,7 +165,7 @@ public final class BSImageView extends AppCompatImageView {
      */
     @Nullable
     public Rect drawRect(@ColorRes int color,
-                         @IntRange(from = 0, to = 100) int alpha,
+                         @IntRange(from = 0, to = 255) int alpha,
                          int left,
                          int top,
                          int right,
@@ -177,6 +174,64 @@ public final class BSImageView extends AppCompatImageView {
         final Rect rect = BSCanvasHelper.drawRect(this,
                 this.getBitmap(), getResources().getColor(color), alpha,
                 left, top, right, bottom);
+        if (rect != null) {
+            this.rects.add(new InnerRect(id, rect));
+            if (this.callback != null) {
+                this.callback.baseImageViewRectAdded(this,
+                        id, rect);
+            }
+        }
+        return rect;
+    }
+
+    /**
+     * Method which provide the rectangle drawing
+     *
+     * @param color  {@link Integer} value of the color
+     * @param left   {@link Integer} value of the x top
+     * @param top    {@link Integer} value of the y top
+     * @param right  {@link Integer} value of the x bottom
+     * @param bottom {@link Integer} value of the y bottom
+     * @return instance of the {@link Rect}
+     */
+    @Nullable
+    public Rect drawRectRound(@ColorRes int color,
+                              @IntRange(from = 0, to = 255) int alpha,
+                              int left,
+                              int top,
+                              int right,
+                              int bottom) {
+        return this.drawRectRound(color, alpha, left, top, right, bottom, null);
+    }
+
+    /**
+     * Method which provide the rectangle drawing
+     *
+     * @param color  {@link Integer} value of the color
+     * @param left   {@link Integer} value of the x top
+     * @param top    {@link Integer} value of the y top
+     * @param right  {@link Integer} value of the x bottom
+     * @param bottom {@link Integer} value of the y bottom
+     * @return instance of the {@link Rect}
+     */
+    @Nullable
+    public Rect drawRectRound(@ColorRes int color,
+                              @IntRange(from = 0, to = 255) int alpha,
+                              int left,
+                              int top,
+                              int right,
+                              int bottom,
+                              @Nullable String id) {
+        Rect rect = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            rect = BSCanvasHelper.drawRectRound(this,
+                    this.getBitmap(), getResources().getColor(color), alpha,
+                    left, top, right, bottom);
+        } else {
+            rect = BSCanvasHelper.drawRect(this,
+                    this.getBitmap(), getResources().getColor(color), alpha,
+                    left, top, right, bottom);
+        }
         if (rect != null) {
             this.rects.add(new InnerRect(id, rect));
             if (this.callback != null) {
