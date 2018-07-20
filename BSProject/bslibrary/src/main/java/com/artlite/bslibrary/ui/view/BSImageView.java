@@ -295,7 +295,6 @@ public final class BSImageView extends AppCompatImageView {
     /**
      * Method which provide the rectangle drawing
      *
-     * @param color  {@link Integer} value of the color
      * @param left   {@link Integer} value of the x top
      * @param top    {@link Integer} value of the y top
      * @param right  {@link Integer} value of the x bottom
@@ -303,19 +302,17 @@ public final class BSImageView extends AppCompatImageView {
      * @return instance of the {@link Rect}
      */
     @Nullable
-    public Rect drawRectRound(@ColorRes int color,
-                              int left,
+    public Rect drawRectRound(int left,
                               int top,
                               int right,
                               int bottom,
                               @Nullable BSCanvasHelper.OnCanvasCallback callback) {
-        return this.drawRectRound(color, left, top, right, bottom, null, callback);
+        return this.drawRectRound(left, top, right, bottom, null, callback);
     }
 
     /**
      * Method which provide the rectangle drawing
      *
-     * @param color  {@link Integer} value of the color
      * @param left   {@link Integer} value of the x top
      * @param top    {@link Integer} value of the y top
      * @param right  {@link Integer} value of the x bottom
@@ -323,8 +320,7 @@ public final class BSImageView extends AppCompatImageView {
      * @return instance of the {@link Rect}
      */
     @Nullable
-    public Rect drawRectRound(@ColorRes int color,
-                              int left,
+    public Rect drawRectRound(int left,
                               int top,
                               int right,
                               int bottom,
