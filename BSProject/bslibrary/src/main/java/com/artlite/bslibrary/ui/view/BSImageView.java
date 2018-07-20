@@ -195,6 +195,56 @@ public final class BSImageView extends AppCompatImageView {
      * @return instance of the {@link Rect}
      */
     @Nullable
+    public Rect drawRect(@ColorRes int color,
+                         int left,
+                         int top,
+                         int right,
+                         int bottom,
+                         @Nullable BSCanvasHelper.OnCanvasCallback callback) {
+        return this.drawRect(color, left, top, right, bottom, null, callback);
+    }
+
+    /**
+     * Method which provide the rectangle drawing
+     *
+     * @param color  {@link Integer} value of the color
+     * @param left   {@link Integer} value of the x top
+     * @param top    {@link Integer} value of the y top
+     * @param right  {@link Integer} value of the x bottom
+     * @param bottom {@link Integer} value of the y bottom
+     * @return instance of the {@link Rect}
+     */
+    @Nullable
+    public Rect drawRect(@ColorRes int color,
+                         int left,
+                         int top,
+                         int right,
+                         int bottom,
+                         @Nullable String id,
+                         @Nullable BSCanvasHelper.OnCanvasCallback callback) {
+        final Rect rect = BSCanvasHelper.drawRect(this,
+                this.getBitmap(), left, top, right, bottom, callback);
+        if (rect != null) {
+            this.rects.add(new InnerRect(id, rect));
+            if (this.callback != null) {
+                this.callback.baseImageViewRectAdded(this,
+                        id, rect);
+            }
+        }
+        return rect;
+    }
+
+    /**
+     * Method which provide the rectangle drawing
+     *
+     * @param color  {@link Integer} value of the color
+     * @param left   {@link Integer} value of the x top
+     * @param top    {@link Integer} value of the y top
+     * @param right  {@link Integer} value of the x bottom
+     * @param bottom {@link Integer} value of the y bottom
+     * @return instance of the {@link Rect}
+     */
+    @Nullable
     public Rect drawRectRound(@ColorRes int color,
                               @IntRange(from = 0, to = 255) int alpha,
                               int left,
@@ -231,6 +281,62 @@ public final class BSImageView extends AppCompatImageView {
             rect = BSCanvasHelper.drawRect(this,
                     this.getBitmap(), getResources().getColor(color), alpha,
                     left, top, right, bottom);
+        }
+        if (rect != null) {
+            this.rects.add(new InnerRect(id, rect));
+            if (this.callback != null) {
+                this.callback.baseImageViewRectAdded(this,
+                        id, rect);
+            }
+        }
+        return rect;
+    }
+
+    /**
+     * Method which provide the rectangle drawing
+     *
+     * @param color  {@link Integer} value of the color
+     * @param left   {@link Integer} value of the x top
+     * @param top    {@link Integer} value of the y top
+     * @param right  {@link Integer} value of the x bottom
+     * @param bottom {@link Integer} value of the y bottom
+     * @return instance of the {@link Rect}
+     */
+    @Nullable
+    public Rect drawRectRound(@ColorRes int color,
+                              int left,
+                              int top,
+                              int right,
+                              int bottom,
+                              @Nullable BSCanvasHelper.OnCanvasCallback callback) {
+        return this.drawRectRound(color, left, top, right, bottom, null, callback);
+    }
+
+    /**
+     * Method which provide the rectangle drawing
+     *
+     * @param color  {@link Integer} value of the color
+     * @param left   {@link Integer} value of the x top
+     * @param top    {@link Integer} value of the y top
+     * @param right  {@link Integer} value of the x bottom
+     * @param bottom {@link Integer} value of the y bottom
+     * @return instance of the {@link Rect}
+     */
+    @Nullable
+    public Rect drawRectRound(@ColorRes int color,
+                              int left,
+                              int top,
+                              int right,
+                              int bottom,
+                              @Nullable String id,
+                              @Nullable BSCanvasHelper.OnCanvasCallback callback) {
+        Rect rect = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            rect = BSCanvasHelper.drawRectRound(this,
+                    this.getBitmap(), left, top, right, bottom, callback);
+        } else {
+            rect = BSCanvasHelper.drawRect(this,
+                    this.getBitmap(), left, top, right, bottom, callback);
         }
         if (rect != null) {
             this.rects.add(new InnerRect(id, rect));
