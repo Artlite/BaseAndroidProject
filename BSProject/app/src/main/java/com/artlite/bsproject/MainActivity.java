@@ -39,9 +39,6 @@ import java.util.Locale;
 public class MainActivity extends BSLockableActivity
         implements BSCurrencyEditText.OnCurrencyEditCallback {
 
-    @FindViewBy(id = R.id.view_for_pop_up)
-    private View forPopup;
-
     @FindViewBy(id = R.id.activity_main)
     private BSDraggableLinearLayout linearItemLayout;
 
@@ -71,7 +68,7 @@ public class MainActivity extends BSLockableActivity
      */
     @Override
     protected void onCreateActivity(Bundle bundle) {
-        setOnClickListeners(R.id.button1, R.id.button2, R.id.button3, R.id.button4);
+        setOnClickListeners(R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5);
         BSLocationManager.startLocationMonitoring(this);
     }
 
@@ -147,6 +144,10 @@ public class MainActivity extends BSLockableActivity
             }
             case R.id.button4: {
                 startActivity(TagsActivity.class);
+                break;
+            }
+            case R.id.button5: {
+                startActivity(PDFActivity.class);
                 break;
             }
             default:

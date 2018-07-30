@@ -24,7 +24,8 @@
         <activity
             android:name=".RectangleImageActivity"
             android:label="@string/title_activity_rectangle_image"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PDFActivity"></activity>
     </application>
 
 </manifest>
