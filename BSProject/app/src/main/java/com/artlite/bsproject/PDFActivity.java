@@ -14,8 +14,9 @@ import android.os.Bundle;
 
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.view.BSPDFView;
+import com.github.barteksc.pdfviewer.PDFView;
 
-public class PDFActivity extends BSActivity {
+public class PDFActivity extends BSActivity implements BSPDFView.OnConfigurationCallback {
 
     /**
      * Instance of the {@link BSPDFView}
@@ -52,6 +53,7 @@ public class PDFActivity extends BSActivity {
      */
     @Override
     protected void onActivityPostCreation(@Nullable Bundle bundle) {
+        this.view.configure(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED ||
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -62,14 +64,26 @@ public class PDFActivity extends BSActivity {
             return;
         }
         view.download("http://www.pdf995.com/samples/pdf.pdf",
-                null,
-                new BSPDFView.OnPdfCallback() {
-                    @Override
-                    public void pdfViewDownloadComplete(@NonNull BSPDFView view,
-                                                        @Nullable String url,
-                                                        @Nullable Uri pdfUri) {
+                null, true);
+    }
 
-                    }
-                });
+    /**
+     * Method which provide the configuring the {@link BSPDFView}
+     *
+     * @param configurator instance of the {@link PDFView.Configurator}
+     */
+    @Override
+    public void pdfViewConfigure(@NonNull PDFView.Configurator configurator) {
+        configurator.enableAntialiasing(true);
+    }
+
+    /**
+     * Method which provide the complete of the {@link BSPDFView} loading
+     *
+     * @param view instance of the {@link BSPDFView}
+     */
+    @Override
+    public void pdfViewLoadComplete(@NonNull BSPDFView view) {
+
     }
 }

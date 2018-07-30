@@ -1,30 +1,22 @@
 package com.artlite.bslibrary.ui.view;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.artlite.bslibrary.R;
-import com.artlite.bslibrary.managers.BSRandomManager;
+import com.artlite.bslibrary.tasks.BSDownloadTask;
 import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.util.FitPolicy;
+import com.github.barteksc.pdfviewer.source.DocumentSource;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.lang.ref.WeakReference;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import jp.wasabeef.glide.transformations.internal.Utils;
 
 /**
  * View which provide the show the pdf from sources
@@ -34,18 +26,22 @@ public class BSPDFView extends BSView {
     /**
      * Callback which provide the callback with the pdf downloading
      */
-    public interface OnPdfCallback {
+    public interface OnConfigurationCallback {
 
         /**
-         * Method which provide the action when the pdf download was completed
+         * Method which provide the configuring the {@link BSPDFView}
          *
-         * @param view   instance of the {@link BSPDFView}
-         * @param url    {@link String} value of the url
-         * @param pdfUri instance of the {@link Uri}
+         * @param configurator instance of the {@link PDFView.Configurator}
          */
-        void pdfViewDownloadComplete(@NonNull BSPDFView view,
-                                     @Nullable String url,
-                                     @Nullable Uri pdfUri);
+        void pdfViewConfigure(@NonNull final PDFView.Configurator configurator);
+
+        /**
+         * Method which provide the complete of the {@link BSPDFView} loading
+         *
+         * @param view instance of the {@link BSPDFView}
+         */
+        void pdfViewLoadComplete(@NonNull final BSPDFView view);
+
     }
 
     /**
@@ -62,6 +58,11 @@ public class BSPDFView extends BSView {
      * Instance of the {@link Uri}
      */
     private Uri uri;
+
+    /**
+     * Instance of the {@link OnConfigurationCallback}
+     */
+    private OnConfigurationCallback callback;
 
     /**
      * Constructor which provide the create {@link BSView} from
@@ -120,13 +121,12 @@ public class BSPDFView extends BSView {
     }
 
     /**
-     * Method which provide the getting instance of the {@link PDFView}
+     * Method which provide the configuring of the {@link BSPDFView}
      *
-     * @return instance of the {@link PDFView}
+     * @param callback instance of the {@link OnConfigurationCallback}
      */
-    @NonNull
-    public final PDFView getPdfView() {
-        return this.viewPDF;
+    public final void configure(@Nullable OnConfigurationCallback callback) {
+        this.callback = callback;
     }
 
     /**
@@ -144,136 +144,131 @@ public class BSPDFView extends BSView {
      *
      * @param url {@link String} value of the url
      */
+    @SuppressLint("MissingPermission")
     @RequiresPermission(allOf = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public void download(@Nullable final String url,
-                         @Nullable String fileName,
-                         @Nullable OnPdfCallback callback) {
-        new PDFDownloadTask(this, fileName, url, callback).execute();
+                         @Nullable final String fileName,
+                         boolean forceReload) {
+        new BSDownloadTask(getContext(), url, "pdf", fileName,
+                "pdf", forceReload, new BSDownloadTask.OnDownloadCallback() {
+            @Override
+            public void downloadTaskPreExecute(@NonNull Context context,
+                                               @NonNull BSDownloadTask task,
+                                               @Nullable String folderName,
+                                               @NonNull String fileName,
+                                               @NonNull String fileExtension) {
+
+            }
+
+            @Override
+            public void downloadTaskFinished(@NonNull Context context,
+                                             @NonNull BSDownloadTask task,
+                                             @Nullable String folderName,
+                                             @NonNull String fileName,
+                                             @NonNull String fileExtension,
+                                             @Nullable Uri uri) {
+                download(uri);
+            }
+        }).execute();
     }
 
     /**
-     * Task which provide the downloading of the PDF
+     * Method which provide to download and show pdf from {@link Uri}
+     *
+     * @param uri instance of the {@link Uri}
      */
-    protected static class PDFDownloadTask extends AsyncTask<Void, Void, Uri> {
-
-        /**
-         * {@link String} value of the url
-         */
-        private final String url;
-
-        /**
-         * Instance of the {@link OnPdfCallback}
-         */
-        private final OnPdfCallback callback;
-
-        /**
-         * Instance of the {@link WeakReference}
-         */
-        private final WeakReference<BSPDFView> viewReference;
-
-        /**
-         * Instance of the {@link File}
-         */
-        private File pdfStorage = null;
-
-        /**
-         * Instance of the {@link File}
-         */
-        private File pdfFile = null;
-
-        /**
-         * {@link String} value of the file name
-         */
-        private final String fileName;
-
-        /**
-         * Constructor which provide the create of the {@link PDFDownloadTask}
-         *
-         * @param view     instance of the {@link BSPDFView}
-         * @param url      {@link String} value of the url
-         * @param callback instance of the {@link OnPdfCallback}
-         */
-        public PDFDownloadTask(@Nullable BSPDFView view,
-                               @Nullable String fileName,
-                               @Nullable String url,
-                               @Nullable OnPdfCallback callback) {
-            this.url = url;
-            this.callback = callback;
-            this.viewReference = new WeakReference<>(view);
-            this.fileName = (fileName == null)
-                    ? BSRandomManager.generateString(30, true) : fileName;
+    public void download(@Nullable final Uri uri) {
+        this.uri = uri;
+        final PDFView.Configurator configurator = this.viewPDF.fromUri(uri);
+        if (this.callback != null) {
+            this.callback.pdfViewConfigure(configurator);
         }
-
-
-        /**
-         * Method which provide the doing on background functional
-         *
-         * @param voids instance of the {@link Void}
-         * @return instance of the {@link Uri}
-         */
-        @Override
-        protected Uri doInBackground(Void... voids) {
-            try {
-                final URL urlObject = new URL(url);
-                HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
-                connection.setRequestMethod("GET");
-                connection.connect();
-                //If Connection response is not OK then show Logs
-                if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                    Log.e(TAG, "Server returned HTTP " + connection.getResponseCode()
-                            + " " + connection.getResponseMessage());
-                }
-                pdfStorage = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_DOWNLOADS).toString() + "/pdf");
-                if (!pdfStorage.exists()) {
-                    pdfStorage.mkdir();
-                    Log.d(TAG, "doInBackground: Pdf storage was created");
-                } else {
-                    Log.d(TAG, "doInBackground: Pdf storage was created previously");
-                }
-                pdfFile = new File(pdfStorage, String.format("%s.pdf", fileName));
-                if (!pdfFile.exists()) {
-                    pdfFile.createNewFile();
-                    Log.d(TAG, "doInBackground: File was created");
-                } else {
-                    Log.d(TAG, "doInBackground: File was created was previously");
-                }
-                FileOutputStream outputStream = new FileOutputStream(pdfFile);
-                InputStream inputStream = connection.getInputStream();
-                byte[] buffer = new byte[1024];
-                int len1 = 0;
-                while ((len1 = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, len1);
-                }
-                outputStream.close();
-                inputStream.close();
-            } catch (Exception ex) {
-                pdfFile = null;
-                Log.e(TAG, "download: ", ex);
-                return null;
-            }
-            return Uri.fromFile(pdfFile);
-        }
-
-        /**
-         * Method which provide the on post execute functional
-         *
-         * @param uri instance of the {@link Uri}
-         */
-        @Override
-        protected void onPostExecute(Uri uri) {
-            final BSPDFView view = (this.viewReference == null) ? null : this.viewReference.get();
-            if ((view != null) && (this.callback != null)) {
-                view.uri = uri;
-                view.viewPDF.fromUri(uri)
-                        .enableAntialiasing(true)
-                        .pageFitPolicy(FitPolicy.WIDTH)
-                        .load();
-                this.callback.pdfViewDownloadComplete(view, url, uri);
-            }
-            super.onPostExecute(uri);
+        configurator.load();
+        if (this.callback != null) {
+            this.callback.pdfViewLoadComplete(this);
         }
     }
+
+    /**
+     * Method which provide to download and show pdf from {@link String} asset
+     *
+     * @param asset instance of the {@link String}
+     */
+    public void download(@Nullable final String asset) {
+        final PDFView.Configurator configurator = this.viewPDF.fromAsset(asset);
+        if (this.callback != null) {
+            this.callback.pdfViewConfigure(configurator);
+        }
+        configurator.load();
+        if (this.callback != null) {
+            this.callback.pdfViewLoadComplete(this);
+        }
+    }
+
+    /**
+     * Method which provide to download and show pdf from array of {@link Byte}
+     *
+     * @param bytes instance of the {@link Object}
+     */
+    public void download(@Nullable final byte[] bytes) {
+        final PDFView.Configurator configurator = this.viewPDF.fromBytes(bytes);
+        if (this.callback != null) {
+            this.callback.pdfViewConfigure(configurator);
+        }
+        configurator.load();
+        if (this.callback != null) {
+            this.callback.pdfViewLoadComplete(this);
+        }
+    }
+
+    /**
+     * Method which provide to download and show pdf from {@link File}
+     *
+     * @param file instance of the {@link Object}
+     */
+    public void download(@Nullable final File file) {
+        final PDFView.Configurator configurator = this.viewPDF.fromFile(file);
+        if (this.callback != null) {
+            this.callback.pdfViewConfigure(configurator);
+        }
+        configurator.load();
+        if (this.callback != null) {
+            this.callback.pdfViewLoadComplete(this);
+        }
+    }
+
+    /**
+     * Method which provide to download and show pdf from {@link InputStream}
+     *
+     * @param stream instance of the {@link Object}
+     */
+    public void download(@Nullable final InputStream stream) {
+        final PDFView.Configurator configurator = this.viewPDF.fromStream(stream);
+        if (this.callback != null) {
+            this.callback.pdfViewConfigure(configurator);
+        }
+        configurator.load();
+        if (this.callback != null) {
+            this.callback.pdfViewLoadComplete(this);
+        }
+    }
+
+    /**
+     * Method which provide to download and show pdf from {@link DocumentSource}
+     *
+     * @param source instance of the {@link Object}
+     */
+    public void download(@Nullable final DocumentSource source) {
+        final PDFView.Configurator configurator = this.viewPDF.fromSource(source);
+        if (this.callback != null) {
+            this.callback.pdfViewConfigure(configurator);
+        }
+        configurator.load();
+        if (this.callback != null) {
+            this.callback.pdfViewLoadComplete(this);
+        }
+    }
+
 }

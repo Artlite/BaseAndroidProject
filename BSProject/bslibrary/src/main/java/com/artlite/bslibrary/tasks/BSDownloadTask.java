@@ -1,5 +1,6 @@
 package com.artlite.bslibrary.tasks;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
@@ -7,7 +8,10 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresPermission;
 import android.util.Log;
+
+import com.artlite.bslibrary.managers.BSRandomManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -105,6 +109,11 @@ public class BSDownloadTask extends AsyncTask<Void, Void, Uri> {
     private File file;
 
     /**
+     * {@link Boolean} value of the force reload
+     */
+    private final boolean forceReload;
+
+    /**
      * Constructor which provide the creating of the {@link BSDownloadTask}
      *
      * @param context       instance of the {@link Context}
@@ -112,18 +121,25 @@ public class BSDownloadTask extends AsyncTask<Void, Void, Uri> {
      * @param fileName      {@link String} value of the file name
      * @param fileExtension {@link String} value of the file extension
      */
+    @SuppressLint("DefaultLocale")
+    @RequiresPermission(allOf = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public BSDownloadTask(@NonNull Context context,
                           @NonNull String url,
                           @Nullable String folderName,
-                          @NonNull String fileName,
+                          @Nullable String fileName,
                           @NonNull String fileExtension,
+                          boolean forceReload,
                           @Nullable OnDownloadCallback callback) {
         this.context = context;
         this.url = url;
         this.folderName = (folderName == null) ? "" : String.format("/%s", folderName);
-        this.fileName = fileName;
+        this.fileName = (fileName != null)
+                ? fileName : String.format("file_%d", Math.abs(url.hashCode()));
         this.fileExtension = fileExtension;
         this.callback = callback;
+        this.forceReload = forceReload;
     }
 
     /**
@@ -165,11 +181,12 @@ public class BSDownloadTask extends AsyncTask<Void, Void, Uri> {
                 Log.d(TAG, "doInBackground: The file storage was created previously");
             }
             file = new File(storage, String.format("%s.%s", this.fileName, this.fileExtension));
-            if (!file.exists()) {
+            if ((file.exists()) && (!forceReload)) {
+                Log.d(TAG, "doInBackground: File was created was previously and loaded");
+                return Uri.fromFile(file);
+            } else {
                 file.createNewFile();
                 Log.d(TAG, "doInBackground: File was created");
-            } else {
-                Log.d(TAG, "doInBackground: File was created was previously");
             }
             FileOutputStream outputStream = new FileOutputStream(file);
             InputStream inputStream = connection.getInputStream();
