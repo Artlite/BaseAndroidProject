@@ -140,6 +140,16 @@ public class BSPDFView extends BSView {
     }
 
     /**
+     * Method which provide the getting of the instance of the {@link PDFView}
+     *
+     * @return instance of the {@link PDFView}
+     */
+    @NonNull
+    public PDFView getPdfView() {
+        return viewPDF;
+    }
+
+    /**
      * Method which provide the download the PDF from {@link String} value of the url
      *
      * @param url {@link String} value of the url
