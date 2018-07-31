@@ -1,6 +1,7 @@
 package com.artlite.bsproject;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -63,7 +64,30 @@ public class PDFActivity extends BSActivity implements BSPDFView.OnConfiguration
                     0b1010);
             return;
         }
-        view.download("http://www.pdf995.com/samples/pdf.pdf",
+        this.download();
+    }
+
+    /**
+     * Method which provide the action when the activity permission request result
+     *
+     * @param requestCode  {@link Integer} value of the request code
+     * @param permissions  {@link String} array of the permission
+     * @param grantResults {@link Integer} array of the granted results
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        this.download();
+    }
+
+    /**
+     * Method which provide the download pdf by {@link String} value of the url
+     */
+    @SuppressLint("MissingPermission")
+    protected void download() {
+        view.download("https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf",
                 null, true);
     }
 
