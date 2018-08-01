@@ -60,6 +60,11 @@ public class BSPDFView extends BSView {
     private Uri uri;
 
     /**
+     * Instance of the file
+     */
+    private File file;
+
+    /**
      * Instance of the {@link OnConfigurationCallback}
      */
     private OnConfigurationCallback callback;
@@ -140,6 +145,15 @@ public class BSPDFView extends BSView {
     }
 
     /**
+     * Method which provide the getting of the instance of the file
+     *
+     * @return instance of the {@link File}
+     */
+    public File getFile() {
+        return file;
+    }
+
+    /**
      * Method which provide the getting of the instance of the {@link PDFView}
      *
      * @return instance of the {@link PDFView}
@@ -178,7 +192,8 @@ public class BSPDFView extends BSView {
                                              @Nullable String folderName,
                                              @NonNull String fileName,
                                              @NonNull String fileExtension,
-                                             @Nullable Uri uri) {
+                                             @Nullable Uri uri,
+                                             @Nullable File file) {
                 download(uri);
             }
         }).execute();

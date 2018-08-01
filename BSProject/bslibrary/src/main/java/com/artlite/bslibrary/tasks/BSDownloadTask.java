@@ -58,13 +58,15 @@ public class BSDownloadTask extends AsyncTask<Void, Void, Uri> {
          * @param fileName      {@link String} value of the file name
          * @param fileExtension {@link String} value of the file extension
          * @param uri           instance of the {@link Uri}
+         * @param file          instance of the {@link File}
          */
         void downloadTaskFinished(@NonNull Context context,
                                   @NonNull BSDownloadTask task,
                                   @Nullable String folderName,
                                   @NonNull String fileName,
                                   @NonNull String fileExtension,
-                                  @Nullable Uri uri);
+                                  @Nullable Uri uri,
+                                  @Nullable File file);
     }
 
     /**
@@ -215,7 +217,7 @@ public class BSDownloadTask extends AsyncTask<Void, Void, Uri> {
         super.onPostExecute(uri);
         if (this.callback != null) {
             this.callback.downloadTaskFinished(context, this,
-                    folderName, fileName, fileExtension, uri);
+                    folderName, fileName, fileExtension, uri, this.file);
         }
     }
 }
