@@ -194,6 +194,7 @@ public class BSPDFView extends BSView {
                                              @NonNull String fileExtension,
                                              @Nullable Uri uri,
                                              @Nullable File file) {
+                BSPDFView.this.file = file;
                 download(uri);
             }
         }).execute();
