@@ -151,7 +151,11 @@ public class BSCurrencyEditText extends BSEditText implements TextView.OnEditorA
                           @Nullable OnCurrencyEditCallback callback) {
         this.callback = callback;
         this.locale = locale;
-        this.setText(this.getStringValue());
+        try {
+            this.setText(this.getStringValue());
+        } catch (Exception ex) {
+            Log.e(TAG, "configure: ", ex);
+        }
     }
 
     /**
@@ -225,20 +229,23 @@ public class BSCurrencyEditText extends BSEditText implements TextView.OnEditorA
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         if (!charSequence.toString().equals(innerText)) {
             this.removeTextChangedListener(this);
-
-            String cleanString = charSequence.toString()
-                    .replaceAll(getRegEx(getLocale(), true), "").trim();
-            double parsed = 0;
             try {
-                parsed = Double.parseDouble(cleanString);
+                String cleanString = charSequence.toString()
+                        .replaceAll(getRegEx(getLocale(), true), "").trim();
+                double parsed = 0;
+                try {
+                    parsed = Double.parseDouble(cleanString);
+                } catch (Exception ex) {
+                    Log.e(TAG, "onTextChanged: ", ex);
+                }
+                String formatted = NumberFormat.getCurrencyInstance(this.getLocale())
+                        .format((parsed / 100));
+                this.innerText = formatted;
+                this.setText(formatted);
+                this.setSelection(formatted.length());
             } catch (Exception ex) {
                 Log.e(TAG, "onTextChanged: ", ex);
             }
-            String formatted = NumberFormat.getCurrencyInstance(this.getLocale())
-                    .format((parsed / 100));
-            this.innerText = formatted;
-            this.setText(formatted);
-            this.setSelection(formatted.length());
             this.addTextChangedListener(this);
         }
     }
