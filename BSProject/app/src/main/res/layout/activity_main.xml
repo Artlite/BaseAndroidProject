@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.artlite.bslibrary.ui.view.BSDraggableLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:text="Hello World!"
         android:textColor="@android:color/black"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <com.artlite.bslibrary.ui.fonted.BSEditText
         android:id="@+id/edit_popup"
@@ -27,15 +27,15 @@
         android:hint="Input text here"
         android:padding="@dimen/dimen_15"
         android:textColor="@android:color/black"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <com.artlite.bslibrary.ui.fonted.BSCurrencyEditText
         android:id="@+id/edit_currency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:currencyTextSize="@dimen/text_14"
         android:background="@drawable/bs_material2_square"
-        android:padding="@dimen/dimen_15" />
+        android:padding="@dimen/dimen_15"
+        app:currencyTextSize="16sp" />
 
     <com.artlite.bslibrary.ui.fonted.BSButton
         android:id="@+id/button1"
@@ -44,7 +44,7 @@
         android:background="@drawable/bs_background_card"
         android:text="Just do it"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <com.artlite.bslibrary.ui.fonted.BSButton
@@ -54,7 +54,7 @@
         android:background="@drawable/bs_background_card"
         android:text="Show pop up"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <com.artlite.bslibrary.ui.fonted.BSButton
@@ -64,7 +64,7 @@
         android:background="@drawable/bs_background_card"
         android:text="Pick image"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <com.artlite.bslibrary.ui.fonted.BSButton
@@ -74,7 +74,7 @@
         android:background="@drawable/bs_background_card"
         android:text="Show tags"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <com.artlite.bslibrary.ui.fonted.BSButton
@@ -84,7 +84,7 @@
         android:background="@drawable/bs_background_card"
         android:text="Show PDF"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <com.artlite.bslibrary.ui.view.BSImageView

@@ -31,82 +31,182 @@ public final class BSTypefaceManager extends BSBaseManager {
     /**
      * Aller
      */
-    private static final String K_FONT_ALLER = getFontPath("Aller.ttf");
-    private static final String K_FONT_ALLER_BOLD = getFontPath("Aller_Bold.ttf");
-    private static final String K_FONT_ALLER_ITALIC = getFontPath("Aller_Italic.ttf");
-    private static final String K_FONT_ALLER_BOLD_ITALIC = getFontPath("Aller_Bold_Italic.ttf");
+    private static final String K_FONT_ALLER
+            = getFontPath("Aller.ttf");
+    private static final String K_FONT_ALLER_BOLD
+            = getFontPath("Aller_Bold.ttf");
+    private static final String K_FONT_ALLER_ITALIC
+            = getFontPath("Aller_Italic.ttf");
+    private static final String K_FONT_ALLER_BOLD_ITALIC
+            = getFontPath("Aller_Bold_Italic.ttf");
 
     /**
      * Roboto
      */
-    private static final String K_FONT_ROBOTO = getFontPath("Roboto.ttf");
-    private static final String K_FONT_ROBOTO_BOLD = getFontPath("Roboto_Bold.ttf");
-    private static final String K_FONT_ROBOTO_ITALIC = getFontPath("Roboto_Italic.ttf");
-    private static final String K_FONT_ROBOTO_BOLD_ITALIC = getFontPath("Roboto_Bold_Italic.ttf");
+    private static final String K_FONT_ROBOTO
+            = getFontPath("Roboto.ttf");
+    private static final String K_FONT_ROBOTO_BOLD
+            = getFontPath("Roboto_Bold.ttf");
+    private static final String K_FONT_ROBOTO_ITALIC
+            = getFontPath("Roboto_Italic.ttf");
+    private static final String K_FONT_ROBOTO_BOLD_ITALIC
+            = getFontPath("Roboto_Bold_Italic.ttf");
 
     /**
      * OpenSans
      */
-    private static final String K_FONT_OS = getFontPath("OpenSans.ttf");
-    private static final String K_FONT_OS_BOLD = getFontPath("OpenSans_Bold.ttf");
-    private static final String K_FONT_OS_ITALIC = getFontPath("OpenSans_Italic.ttf");
-    private static final String K_FONT_OS_BOLD_ITALIC = getFontPath("OpenSans_Bold_Italic.ttf");
+    private static final String K_FONT_OS
+            = getFontPath("OpenSans.ttf");
+    private static final String K_FONT_OS_BOLD
+            = getFontPath("OpenSans_Bold.ttf");
+    private static final String K_FONT_OS_ITALIC
+            = getFontPath("OpenSans_Italic.ttf");
+    private static final String K_FONT_OS_BOLD_ITALIC
+            = getFontPath("OpenSans_Bold_Italic.ttf");
 
     /**
      * San Francisco
      */
-    private static final String K_FONT_SF = getFontPath("SF.otf");
-    private static final String K_FONT_SF_BOLD = getFontPath("SF_Bold.otf");
-    private static final String K_FONT_SF_ITALIC = getFontPath("SF_Italic.otf");
-    private static final String K_FONT_SF_BOLD_ITALIC = getFontPath("SF_Bold_Italic.otf");
+    private static final String K_FONT_SF
+            = getFontPath("SF.otf");
+    private static final String K_FONT_SF_BOLD
+            = getFontPath("SF_Bold.otf");
+    private static final String K_FONT_SF_ITALIC
+            = getFontPath("SF_Italic.otf");
+    private static final String K_FONT_SF_BOLD_ITALIC
+            = getFontPath("SF_Bold_Italic.otf");
 
     /**
      * Ubuntu
      */
-    private static final String K_FONT_U = getFontPath("Ubuntu.ttf");
-    private static final String K_FONT_U_BOLD = getFontPath("Ubuntu_Bold.ttf");
-    private static final String K_FONT_U_ITALIC = getFontPath("Ubuntu_Italic.ttf");
-    private static final String K_FONT_U_BOLD_ITALIC = getFontPath("Ubuntu_Bold_Italic.ttf");
+    private static final String K_FONT_U
+            = getFontPath("Ubuntu.ttf");
+    private static final String K_FONT_U_BOLD
+            = getFontPath("Ubuntu_Bold.ttf");
+    private static final String K_FONT_U_ITALIC
+            = getFontPath("Ubuntu_Italic.ttf");
+    private static final String K_FONT_U_BOLD_ITALIC
+            = getFontPath("Ubuntu_Bold_Italic.ttf");
 
     /**
      * Ubuntu Mono
      */
-    private static final String K_FONT_UM = getFontPath("UbuntuMono.ttf");
-    private static final String K_FONT_UM_BOLD = getFontPath("UbuntuMono_Bold.ttf");
-    private static final String K_FONT_UM_ITALIC = getFontPath("UbuntuMono_Italic.ttf");
-    private static final String K_FONT_UM_BOLD_ITALIC = getFontPath("UbuntuMono_Bold_Italic.ttf");
+    private static final String K_FONT_UM
+            = getFontPath("UbuntuMono.ttf");
+    private static final String K_FONT_UM_BOLD
+            = getFontPath("UbuntuMono_Bold.ttf");
+    private static final String K_FONT_UM_ITALIC
+            = getFontPath("UbuntuMono_Italic.ttf");
+    private static final String K_FONT_UM_BOLD_ITALIC
+            = getFontPath("UbuntuMono_Bold_Italic.ttf");
 
     /**
      * Bariol
      */
-    private static final String K_FONT_BARIOL = getFontPath("Bariol.otf");
-    private static final String K_FONT_BARIOL_BOLD = getFontPath("Bariol_Bold.otf");
-    private static final String K_FONT_BARIOL_ITALIC = getFontPath("Bariol_Italic.otf");
-    private static final String K_FONT_BARIOL_BOLD_ITALIC = getFontPath("Bariol_Bold_Italic.otf");
+    private static final String K_FONT_BARIOL
+            = getFontPath("Bariol.otf");
+    private static final String K_FONT_BARIOL_BOLD
+            = getFontPath("Bariol_Bold.otf");
+    private static final String K_FONT_BARIOL_ITALIC
+            = getFontPath("Bariol_Italic.otf");
+    private static final String K_FONT_BARIOL_BOLD_ITALIC
+            = getFontPath("Bariol_Bold_Italic.otf");
 
     /**
      * Comfortaa
      */
-    private static final String K_FONT_COMFORTAA = getFontPath("Comfortaa.ttf");
-    private static final String K_FONT_COMFORTAA_BOLD = getFontPath("Comfortaa_Bold.ttf");
-    private static final String K_FONT_COMFORTAA_ITALIC = getFontPath("Comfortaa.ttf");
-    private static final String K_FONT_COMFORTAA_BOLD_ITALIC = getFontPath("Comfortaa_Bold.ttf");
+    private static final String K_FONT_COMFORTAA
+            = getFontPath("Comfortaa.ttf");
+    private static final String K_FONT_COMFORTAA_BOLD
+            = getFontPath("Comfortaa_Bold.ttf");
+    private static final String K_FONT_COMFORTAA_ITALIC
+            = getFontPath("Comfortaa.ttf");
+    private static final String K_FONT_COMFORTAA_BOLD_ITALIC
+            = getFontPath("Comfortaa_Bold.ttf");
 
     /**
      * Varela Round
      */
-    private static final String K_FONT_VR = getFontPath("VarelaRound.ttf");
-    private static final String K_FONT_VR_BOLD = getFontPath("VarelaRound.ttf");
-    private static final String K_FONT_VR_ITALIC = getFontPath("VarelaRound.ttf");
-    private static final String K_FONT_VR_BOLD_ITALIC = getFontPath("VarelaRound.ttf");
+    private static final String K_FONT_VR
+            = getFontPath("VarelaRound.ttf");
+    private static final String K_FONT_VR_BOLD
+            = getFontPath("VarelaRound.ttf");
+    private static final String K_FONT_VR_ITALIC
+            = getFontPath("VarelaRound.ttf");
+    private static final String K_FONT_VR_BOLD_ITALIC
+            = getFontPath("VarelaRound.ttf");
 
     /**
      * Montserat
      */
-    private static final String K_FONT_MONTSERAT = getFontPath("Montserrat.otf");
-    private static final String K_FONT_MONTSERAT_BOLD = getFontPath("Montserrat_SemiBold.otf");
-    private static final String K_FONT_MONTSERAT_ITALIC = getFontPath("Montserrat_Italic.otf");
-    private static final String K_FONT_MONTSERAT_BOLD_ITALIC = getFontPath("Montserrat_SemiBoldItalic.otf");
+    private static final String K_FONT_MONTSERAT
+            = getFontPath("Montserrat.otf");
+    private static final String K_FONT_MONTSERAT_BOLD
+            = getFontPath("Montserrat_SemiBold.otf");
+    private static final String K_FONT_MONTSERAT_ITALIC
+            = getFontPath("Montserrat_Italic.otf");
+    private static final String K_FONT_MONTSERAT_BOLD_ITALIC
+            = getFontPath("Montserrat_SemiBoldItalic.otf");
+
+    /**
+     * Blogger Sans
+     */
+    private static final String K_FONT_BLOG_SANS
+            = getFontPath("Blogger_Sans.otf");
+    private static final String K_FONT_BLOG_SANS_BOLD
+            = getFontPath("Blogger_Sans_Bold.otf");
+    private static final String K_FONT_BLOG_SANS_ITALIC
+            = getFontPath("Blogger_Sans_Italic.otf");
+    private static final String K_FONT_BLOG_SANS_BOLD_ITALIC
+            = getFontPath("Blogger_Sans_Bold_Italic.otf");
+
+    /**
+     * Clear Sans
+     */
+    private static final String K_FONT_CLEAR_SANS
+            = getFontPath("ClearSans.ttf");
+    private static final String K_FONT_CLEAR_SANS_BOLD
+            = getFontPath("ClearSans_Bold.ttf");
+    private static final String K_FONT_CLEAR_SANS_ITALIC
+            = getFontPath("ClearSans_Italic.ttf");
+    private static final String K_FONT_CLEAR_SANS_BOLD_ITALIC
+            = getFontPath("ClearSans_BoldItalic.ttf");
+
+    /**
+     * Roboto Condensed
+     */
+    private static final String K_FONT_ROBOTO_CONSENDET
+            = getFontPath("RobotoCondensed.ttf");
+    private static final String K_FONT_ROBOTO_CONSENDET_BOLD
+            = getFontPath("RobotoCondensed_Bold.ttf");
+    private static final String K_FONT_ROBOTO_CONSENDET_ITALIC
+            = getFontPath("RobotoCondensed_Italic.ttf");
+    private static final String K_FONT_ROBOTO_CONSENDET_BOLD_ITALIC
+            = getFontPath("RobotoCondensed_BoldItalic.ttf");
+
+    /**
+     * DejaVu Sans
+     */
+    private static final String K_FONT_DJV
+            = getFontPath("DejaVuSans.ttf");
+    private static final String K_FONT_DJV_BOLD
+            = getFontPath("DejaVuSans_Bold.ttf");
+    private static final String K_FONT_DJV_ITALIC
+            = getFontPath("DejaVuSans_Oblique.ttf");
+    private static final String K_FONT_DJV_BOLD_ITALIC
+            = getFontPath("DejaVuSans_BoldOblique.ttf");
+
+    /**
+     * Sans Compact
+     */
+    private static final String K_FONT_SFC
+            = getFontPath("SF-Pro-Display-Regular.otf");
+    private static final String K_FONT_SFC_BOLD
+            = getFontPath("SF-Pro-Display-Semibold.otf");
+    private static final String K_FONT_SFC_ITALIC
+            = getFontPath("SF-Pro-Display-RegularItalic.otf");
+    private static final String K_FONT_SFC_BOLD_ITALIC
+            = getFontPath("SF-Pro-Display-SemiboldItalic.otf");
 
     //==============================================================================================
     //                                      INSTANCE
@@ -200,6 +300,46 @@ public final class BSTypefaceManager extends BSBaseManager {
     private Typeface MONTSERAT_BOLD;
     private Typeface MONTSERAT_ITALIC;
     private Typeface MONTSERAT_BOLD_ITALIC;
+
+    /**
+     * Blog Sans
+     */
+    private Typeface BLOG_SANS;
+    private Typeface BLOG_SANS_BOLD;
+    private Typeface BLOG_SANS_ITALIC;
+    private Typeface BLOG_SANS_BOLD_ITALIC;
+
+    /**
+     * Clear Sans
+     */
+    private Typeface CLEAR_SANS;
+    private Typeface CLEAR_SANS_BOLD;
+    private Typeface CLEAR_SANS_ITALIC;
+    private Typeface CLEAR_SANS_BOLD_ITALIC;
+
+    /**
+     * Roboto Condensed
+     */
+    private Typeface ROBOTO_CONSENDET;
+    private Typeface ROBOTO_CONSENDET_BOLD;
+    private Typeface ROBOTO_CONSENDET_ITALIC;
+    private Typeface ROBOTO_CONSENDET_BOLD_ITALIC;
+
+    /**
+     * Roboto Condensed
+     */
+    private Typeface DJV;
+    private Typeface DJV_BOLD;
+    private Typeface DJV_ITALIC;
+    private Typeface DJV_BOLD_ITALIC;
+
+    /**
+     * Sans Compact
+     */
+    private Typeface SFC;
+    private Typeface SFC_BOLD;
+    private Typeface SFC_ITALIC;
+    private Typeface SFC_BOLD_ITALIC;
 
     //==============================================================================================
     //                                   STATIC METHODS
@@ -325,6 +465,31 @@ public final class BSTypefaceManager extends BSBaseManager {
             MONTSERAT_BOLD = getTypeface(context, K_FONT_MONTSERAT_BOLD);
             MONTSERAT_ITALIC = getTypeface(context, K_FONT_MONTSERAT_ITALIC);
             MONTSERAT_BOLD_ITALIC = getTypeface(context, K_FONT_MONTSERAT_BOLD_ITALIC);
+            //Blogger Sans
+            BLOG_SANS = getTypeface(context, K_FONT_BLOG_SANS);
+            BLOG_SANS_BOLD = getTypeface(context, K_FONT_BLOG_SANS_BOLD);
+            BLOG_SANS_ITALIC = getTypeface(context, K_FONT_BLOG_SANS_ITALIC);
+            BLOG_SANS_BOLD_ITALIC = getTypeface(context, K_FONT_BLOG_SANS_BOLD_ITALIC);
+            //Blogger Sans
+            CLEAR_SANS = getTypeface(context, K_FONT_CLEAR_SANS);
+            CLEAR_SANS_BOLD = getTypeface(context, K_FONT_CLEAR_SANS_BOLD);
+            CLEAR_SANS_ITALIC = getTypeface(context, K_FONT_CLEAR_SANS_ITALIC);
+            CLEAR_SANS_BOLD_ITALIC = getTypeface(context, K_FONT_CLEAR_SANS_BOLD_ITALIC);
+            //Blogger Sans
+            ROBOTO_CONSENDET = getTypeface(context, K_FONT_ROBOTO_CONSENDET);
+            ROBOTO_CONSENDET_BOLD = getTypeface(context, K_FONT_ROBOTO_CONSENDET_BOLD);
+            ROBOTO_CONSENDET_ITALIC = getTypeface(context, K_FONT_ROBOTO_CONSENDET_ITALIC);
+            ROBOTO_CONSENDET_BOLD_ITALIC = getTypeface(context, K_FONT_ROBOTO_CONSENDET_BOLD_ITALIC);
+            //Blogger Sans
+            DJV = getTypeface(context, K_FONT_DJV);
+            DJV_BOLD = getTypeface(context, K_FONT_DJV_BOLD);
+            DJV_ITALIC = getTypeface(context, K_FONT_DJV_ITALIC);
+            DJV_BOLD_ITALIC = getTypeface(context, K_FONT_DJV_BOLD_ITALIC);
+            //Blogger Sans
+            SFC = getTypeface(context, K_FONT_SFC);
+            SFC_BOLD = getTypeface(context, K_FONT_SFC_BOLD);
+            SFC_ITALIC = getTypeface(context, K_FONT_SFC_ITALIC);
+            SFC_BOLD_ITALIC = getTypeface(context, K_FONT_SFC_BOLD_ITALIC);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }
@@ -782,6 +947,231 @@ public final class BSTypefaceManager extends BSBaseManager {
     @NonNull
     public static Typeface getMontseratBoldItalic() {
         return getInstance().MONTSERAT_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       BLOG_SANS
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getBlogSans() {
+        return getInstance().BLOG_SANS;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getBlogSansBold() {
+        return getInstance().BLOG_SANS_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getBlogSansItalic() {
+        return getInstance().BLOG_SANS_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getBlogSansBoldItalic() {
+        return getInstance().BLOG_SANS_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       CLEAR_SANS
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getClearSans() {
+        return getInstance().CLEAR_SANS;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getClearSansBold() {
+        return getInstance().CLEAR_SANS_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getClearSansItalic() {
+        return getInstance().CLEAR_SANS_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getClearSansBoldItalic() {
+        return getInstance().CLEAR_SANS_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       ROBOTO_CONSENDET
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getRobotoCondensed() {
+        return getInstance().ROBOTO_CONSENDET;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getRobotoCondensedBold() {
+        return getInstance().ROBOTO_CONSENDET_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getRobotoCondensedItalic() {
+        return getInstance().ROBOTO_CONSENDET_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getRobotoCondensedBoldItalic() {
+        return getInstance().ROBOTO_CONSENDET_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       DJV
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getDjv() {
+        return getInstance().DJV;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getDjvBold() {
+        return getInstance().DJV_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getDjvItalic() {
+        return getInstance().DJV_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getDjvBoldItalic() {
+        return getInstance().DJV_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       SFC
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getSfc() {
+        return getInstance().SFC;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getSfcBold() {
+        return getInstance().SFC_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getSfcItalic() {
+        return getInstance().SFC_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getSfcBoldItalic() {
+        return getInstance().SFC_BOLD_ITALIC;
     }
 
 }

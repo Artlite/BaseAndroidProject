@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.artlite.bslibrary.R;
 import com.artlite.bslibrary.helpers.ime.BSImeHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
+import com.artlite.bslibrary.ui.fonted.BSEditText;
 
 /**
  * Created by dlernatovich on 22.06.2017.
@@ -46,7 +47,7 @@ public final class BSSearchView extends BSView {
     /**
      * Instance of the {@link EditText}
      */
-    private EditText editSearch;
+    private BSEditText editSearch;
 
     /**
      * Instance of the {@link ImageView}
@@ -157,11 +158,11 @@ public final class BSSearchView extends BSView {
      */
     @Override
     protected void onLinkInterface() {
-        layoutContent = (LinearLayout) findViewById(R.id.content);
-        imageSearch = (ImageView) findViewById(R.id.image_search);
-        editSearch = (EditText) findViewById(R.id.edit_search);
-        imageClose = (ImageView) findViewById(R.id.image_close);
-        viewSearchCover = (FrameLayout) findViewById(R.id.view_search_cover);
+        layoutContent = findViewById(R.id.content);
+        imageSearch = findViewById(R.id.image_search);
+        editSearch = findViewById(R.id.edit_search);
+        imageClose = findViewById(R.id.image_close);
+        viewSearchCover = findViewById(R.id.view_search_cover);
     }
 
     /**
