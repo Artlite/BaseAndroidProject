@@ -107,7 +107,7 @@ public class BSButton extends AppCompatButton {
      */
     @Warning(massage = "This method should be overriden if you want to change typeface")
     protected Typeface getFont() {
-        return BSTypefaceManager.getSfc();
+        return BSTypefaceManager.getGs();
     }
 
     /**
@@ -117,7 +117,7 @@ public class BSButton extends AppCompatButton {
      */
     @Warning(massage = "This method should be overriden if you want to change typeface")
     protected Typeface getFontBold() {
-        return BSTypefaceManager.getSfcBold();
+        return BSTypefaceManager.getGsBold();
     }
 
     /**
@@ -127,7 +127,7 @@ public class BSButton extends AppCompatButton {
      */
     @Warning(massage = "This method should be overriden if you want to change typeface")
     protected Typeface getFontItalic() {
-        return BSTypefaceManager.getSfcItalic();
+        return BSTypefaceManager.getGsItalic();
     }
 
     /**
@@ -137,7 +137,7 @@ public class BSButton extends AppCompatButton {
      */
     @Warning(massage = "This method should be overriden if you want to change typeface")
     protected Typeface getFontBoldItalic() {
-        return BSTypefaceManager.getSfcBoldItalic();
+        return BSTypefaceManager.getGsBoldItalic();
     }
 
 }

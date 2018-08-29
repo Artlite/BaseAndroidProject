@@ -197,16 +197,28 @@ public final class BSTypefaceManager extends BSBaseManager {
             = getFontPath("DejaVuSans_BoldOblique.ttf");
 
     /**
-     * Sans Compact
+     * SFC
      */
     private static final String K_FONT_SFC
-            = getFontPath("SF-Pro-Display-Regular.otf");
+            = getFontPath("SFP.otf");
     private static final String K_FONT_SFC_BOLD
-            = getFontPath("SF-Pro-Display-Semibold.otf");
+            = getFontPath("SFPB.otf");
     private static final String K_FONT_SFC_ITALIC
-            = getFontPath("SF-Pro-Display-RegularItalic.otf");
+            = getFontPath("SFPI.otf");
     private static final String K_FONT_SFC_BOLD_ITALIC
-            = getFontPath("SF-Pro-Display-SemiboldItalic.otf");
+            = getFontPath("SFPBI.otf");
+
+    /**
+     * GS
+     */
+    private static final String K_FONT_GS
+            = getFontPath("GS.ttf");
+    private static final String K_FONT_GS_BOLD
+            = getFontPath("GS_Bold.ttf");
+    private static final String K_FONT_GS_ITALIC
+            = getFontPath("GS_Italic.ttf");
+    private static final String K_FONT_GS_BOLD_ITALIC
+            = getFontPath("GS_BoldItalic.ttf");
 
     //==============================================================================================
     //                                      INSTANCE
@@ -334,12 +346,20 @@ public final class BSTypefaceManager extends BSBaseManager {
     private Typeface DJV_BOLD_ITALIC;
 
     /**
-     * Sans Compact
+     * SFC
      */
     private Typeface SFC;
     private Typeface SFC_BOLD;
     private Typeface SFC_ITALIC;
     private Typeface SFC_BOLD_ITALIC;
+
+    /**
+     * GS
+     */
+    private Typeface GS;
+    private Typeface GS_BOLD;
+    private Typeface GS_ITALIC;
+    private Typeface GS_BOLD_ITALIC;
 
     //==============================================================================================
     //                                   STATIC METHODS
@@ -485,11 +505,16 @@ public final class BSTypefaceManager extends BSBaseManager {
             DJV_BOLD = getTypeface(context, K_FONT_DJV_BOLD);
             DJV_ITALIC = getTypeface(context, K_FONT_DJV_ITALIC);
             DJV_BOLD_ITALIC = getTypeface(context, K_FONT_DJV_BOLD_ITALIC);
-            //Blogger Sans
+            //SFC
             SFC = getTypeface(context, K_FONT_SFC);
             SFC_BOLD = getTypeface(context, K_FONT_SFC_BOLD);
             SFC_ITALIC = getTypeface(context, K_FONT_SFC_ITALIC);
             SFC_BOLD_ITALIC = getTypeface(context, K_FONT_SFC_BOLD_ITALIC);
+            //SFC
+            GS = getTypeface(context, K_FONT_GS);
+            GS_BOLD = getTypeface(context, K_FONT_GS_BOLD);
+            GS_ITALIC = getTypeface(context, K_FONT_GS_ITALIC);
+            GS_BOLD_ITALIC = getTypeface(context, K_FONT_GS_BOLD_ITALIC);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }
@@ -1172,6 +1197,51 @@ public final class BSTypefaceManager extends BSBaseManager {
     @NonNull
     public static Typeface getSfcBoldItalic() {
         return getInstance().SFC_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       GS
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getGs() {
+        return getInstance().GS;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getGsBold() {
+        return getInstance().GS_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getGsItalic() {
+        return getInstance().GS_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getGsBoldItalic() {
+        return getInstance().GS_BOLD_ITALIC;
     }
 
 }
