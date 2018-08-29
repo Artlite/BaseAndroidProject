@@ -106,7 +106,7 @@ public class BSEditText extends AppCompatEditText {
      */
     @Warning(massage = "This method should be overriden if you want to change typeface")
     protected Typeface getFont() {
-        return BSTypefaceManager.getBariol();
+        return BSTypefaceManager.getMontserat();
     }
 
     /**
@@ -116,7 +116,7 @@ public class BSEditText extends AppCompatEditText {
      */
     @Warning(massage = "This method should be overriden if you want to change typeface")
     protected Typeface getFontBold() {
-        return BSTypefaceManager.getBariolBold();
+        return BSTypefaceManager.getMontseratBold();
     }
 
     /**
@@ -126,7 +126,7 @@ public class BSEditText extends AppCompatEditText {
      */
     @Warning(massage = "This method should be overriden if you want to change typeface")
     protected Typeface getFontItalic() {
-        return BSTypefaceManager.getBariolItalic();
+        return BSTypefaceManager.getMontseratItalic();
     }
 
     /**
@@ -136,6 +136,6 @@ public class BSEditText extends AppCompatEditText {
      */
     @Warning(massage = "This method should be overriden if you want to change typeface")
     protected Typeface getFontBoldItalic() {
-        return BSTypefaceManager.getBariolBoldItalic();
+        return BSTypefaceManager.getMontseratBoldItalic();
     }
 }

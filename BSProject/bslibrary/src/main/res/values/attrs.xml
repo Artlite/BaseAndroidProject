@@ -4,4 +4,7 @@
         <attr name="scrollSensitiveHeight" format="dimension" />
         <attr name="placeholderView" format="reference" />
     </declare-styleable>
+    <declare-styleable name="BSCurrencyEditText">
+        <attr name="currencyTextSize" format="dimension" />
+    </declare-styleable>
 </resources>

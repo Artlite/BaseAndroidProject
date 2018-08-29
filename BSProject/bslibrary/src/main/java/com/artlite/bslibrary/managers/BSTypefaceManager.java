@@ -84,6 +84,30 @@ public final class BSTypefaceManager extends BSBaseManager {
     private static final String K_FONT_BARIOL_ITALIC = getFontPath("Bariol_Italic.otf");
     private static final String K_FONT_BARIOL_BOLD_ITALIC = getFontPath("Bariol_Bold_Italic.otf");
 
+    /**
+     * Comfortaa
+     */
+    private static final String K_FONT_COMFORTAA = getFontPath("Comfortaa.ttf");
+    private static final String K_FONT_COMFORTAA_BOLD = getFontPath("Comfortaa_Bold.ttf");
+    private static final String K_FONT_COMFORTAA_ITALIC = getFontPath("Comfortaa.ttf");
+    private static final String K_FONT_COMFORTAA_BOLD_ITALIC = getFontPath("Comfortaa_Bold.ttf");
+
+    /**
+     * Varela Round
+     */
+    private static final String K_FONT_VR = getFontPath("VarelaRound.ttf");
+    private static final String K_FONT_VR_BOLD = getFontPath("VarelaRound.ttf");
+    private static final String K_FONT_VR_ITALIC = getFontPath("VarelaRound.ttf");
+    private static final String K_FONT_VR_BOLD_ITALIC = getFontPath("VarelaRound.ttf");
+
+    /**
+     * Montserat
+     */
+    private static final String K_FONT_MONTSERAT = getFontPath("Montserrat.otf");
+    private static final String K_FONT_MONTSERAT_BOLD = getFontPath("Montserrat_SemiBold.otf");
+    private static final String K_FONT_MONTSERAT_ITALIC = getFontPath("Montserrat_Italic.otf");
+    private static final String K_FONT_MONTSERAT_BOLD_ITALIC = getFontPath("Montserrat_SemiBoldItalic.otf");
+
     //==============================================================================================
     //                                      INSTANCE
     //==============================================================================================
@@ -152,6 +176,30 @@ public final class BSTypefaceManager extends BSBaseManager {
     private Typeface BARIOL_BOLD;
     private Typeface BARIOL_ITALIC;
     private Typeface BARIOL_BOLD_ITALIC;
+
+    /**
+     * Comfortaa
+     */
+    private Typeface COMFORTAA;
+    private Typeface COMFORTAA_BOLD;
+    private Typeface COMFORTAA_ITALIC;
+    private Typeface COMFORTAA_BOLD_ITALIC;
+
+    /**
+     * Varela Round
+     */
+    private Typeface VR;
+    private Typeface VR_BOLD;
+    private Typeface VR_ITALIC;
+    private Typeface VR_BOLD_ITALIC;
+
+    /**
+     * Montserat
+     */
+    private Typeface MONTSERAT;
+    private Typeface MONTSERAT_BOLD;
+    private Typeface MONTSERAT_ITALIC;
+    private Typeface MONTSERAT_BOLD_ITALIC;
 
     //==============================================================================================
     //                                   STATIC METHODS
@@ -262,6 +310,21 @@ public final class BSTypefaceManager extends BSBaseManager {
             BARIOL_BOLD = getTypeface(context, K_FONT_BARIOL_BOLD);
             BARIOL_ITALIC = getTypeface(context, K_FONT_BARIOL_ITALIC);
             BARIOL_BOLD_ITALIC = getTypeface(context, K_FONT_BARIOL_BOLD_ITALIC);
+            //Comfortaa
+            COMFORTAA = getTypeface(context, K_FONT_COMFORTAA);
+            COMFORTAA_BOLD = getTypeface(context, K_FONT_COMFORTAA_BOLD);
+            COMFORTAA_ITALIC = getTypeface(context, K_FONT_COMFORTAA_ITALIC);
+            COMFORTAA_BOLD_ITALIC = getTypeface(context, K_FONT_COMFORTAA_BOLD_ITALIC);
+            //Varela Round
+            VR = getTypeface(context, K_FONT_VR);
+            VR_BOLD = getTypeface(context, K_FONT_VR_BOLD);
+            VR_ITALIC = getTypeface(context, K_FONT_VR_ITALIC);
+            VR_BOLD_ITALIC = getTypeface(context, K_FONT_VR_BOLD_ITALIC);
+            //Varela Round
+            MONTSERAT = getTypeface(context, K_FONT_MONTSERAT);
+            MONTSERAT_BOLD = getTypeface(context, K_FONT_MONTSERAT_BOLD);
+            MONTSERAT_ITALIC = getTypeface(context, K_FONT_MONTSERAT_ITALIC);
+            MONTSERAT_BOLD_ITALIC = getTypeface(context, K_FONT_MONTSERAT_BOLD_ITALIC);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }
@@ -584,6 +647,141 @@ public final class BSTypefaceManager extends BSBaseManager {
     @NonNull
     public static Typeface getBariolBoldItalic() {
         return getInstance().BARIOL_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       COMFORTAA
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getComfortaa() {
+        return getInstance().COMFORTAA;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getComfortaaBold() {
+        return getInstance().COMFORTAA_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getComfortaaItalic() {
+        return getInstance().COMFORTAA_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getComfortaaBoldItalic() {
+        return getInstance().COMFORTAA_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       COMFORTAA
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getVR() {
+        return getInstance().VR;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getVRBold() {
+        return getInstance().VR_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getVRItalic() {
+        return getInstance().VR_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getVRBoldItalic() {
+        return getInstance().VR_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       MONTSERAT
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getMontserat() {
+        return getInstance().MONTSERAT;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getMontseratBold() {
+        return getInstance().MONTSERAT_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getMontseratItalic() {
+        return getInstance().MONTSERAT_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getMontseratBoldItalic() {
+        return getInstance().MONTSERAT_BOLD_ITALIC;
     }
 
 }

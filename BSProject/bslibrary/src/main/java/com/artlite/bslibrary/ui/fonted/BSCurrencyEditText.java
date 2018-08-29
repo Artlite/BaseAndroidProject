@@ -1,6 +1,7 @@
 package com.artlite.bslibrary.ui.fonted;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -8,15 +9,14 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.artlite.bslibrary.helpers.format.BSFormatHelper;
+import com.artlite.bslibrary.R;
 import com.artlite.bslibrary.helpers.ime.BSImeHelper;
-import com.artlite.bslibrary.listeners.BSEditFinishListener;
 import com.artlite.bslibrary.listeners.BSFocusLostListener;
 import com.artlite.bslibrary.managers.BSContextManager;
 
@@ -103,6 +103,7 @@ public class BSCurrencyEditText extends BSEditText implements TextView.OnEditorA
      */
     public BSCurrencyEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.onInitAttributes(attrs);
         this.onInit();
     }
 
@@ -115,7 +116,22 @@ public class BSCurrencyEditText extends BSEditText implements TextView.OnEditorA
      */
     public BSCurrencyEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.onInitAttributes(attrs);
         this.onInit();
+    }
+
+    /**
+     * Method which provide the init attributes
+     *
+     * @param attributes instance of the {@link AttributeSet}
+     */
+    protected void onInitAttributes(@NonNull AttributeSet attributes) {
+        TypedArray attr = getContext().getTheme().obtainStyledAttributes(attributes,
+                R.styleable.BSCurrencyEditText, 0, 0);
+        int textSize = attr.getDimensionPixelSize(R.styleable.BSCurrencyEditText_currencyTextSize,
+                getResources().getDimensionPixelSize(R.dimen.text_14));
+        this.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        attr.recycle();
     }
 
     /**
