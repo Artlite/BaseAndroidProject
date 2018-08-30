@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.artlite.bslibrary.constants.BSTypeface;
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
 
 /**
@@ -220,6 +221,18 @@ public final class BSTypefaceManager extends BSBaseManager {
     private static final String K_FONT_GS_BOLD_ITALIC
             = getFontPath("GS_BoldItalic.ttf");
 
+    /**
+     * Fira
+     */
+    private static final String K_FONT_FIRA
+            = getFontPath("FiraSans-Regular.ttf");
+    private static final String K_FONT_FIRA_BOLD
+            = getFontPath("FiraSans-SemiBold.ttf");
+    private static final String K_FONT_FIRA_ITALIC
+            = getFontPath("FiraSans-Italic.ttf");
+    private static final String K_FONT_FIRA_BOLD_ITALIC
+            = getFontPath("FiraSans-SemiBoldItalic.ttf");
+
     //==============================================================================================
     //                                      INSTANCE
     //==============================================================================================
@@ -361,6 +374,19 @@ public final class BSTypefaceManager extends BSBaseManager {
     private Typeface GS_ITALIC;
     private Typeface GS_BOLD_ITALIC;
 
+    /**
+     * FIRA
+     */
+    private Typeface FIRA;
+    private Typeface FIRA_BOLD;
+    private Typeface FIRA_ITALIC;
+    private Typeface FIRA_BOLD_ITALIC;
+
+    /**
+     * Instance of the {@link BSTypeface}
+     */
+    private BSTypeface typeface = BSTypeface.OPEN_SANS;
+
     //==============================================================================================
     //                                   STATIC METHODS
     //==============================================================================================
@@ -372,9 +398,11 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return initialization result
      * @warning should be initializing in application singleton
      */
-    public static void init(@Nullable final Context context) {
+    public static void init(@Nullable final Context context,
+                            BSTypeface typeface) {
         if (isNull(instance)) {
             instance = new BSTypefaceManager(context);
+            instance.typeface = typeface;
         } else {
             Log.e(TAG, "TypeFace manager is already created");
         }
@@ -510,11 +538,16 @@ public final class BSTypefaceManager extends BSBaseManager {
             SFC_BOLD = getTypeface(context, K_FONT_SFC_BOLD);
             SFC_ITALIC = getTypeface(context, K_FONT_SFC_ITALIC);
             SFC_BOLD_ITALIC = getTypeface(context, K_FONT_SFC_BOLD_ITALIC);
-            //SFC
+            //GS
             GS = getTypeface(context, K_FONT_GS);
             GS_BOLD = getTypeface(context, K_FONT_GS_BOLD);
             GS_ITALIC = getTypeface(context, K_FONT_GS_ITALIC);
             GS_BOLD_ITALIC = getTypeface(context, K_FONT_GS_BOLD_ITALIC);
+            //FIRA
+            FIRA = getTypeface(context, K_FONT_FIRA);
+            FIRA_BOLD = getTypeface(context, K_FONT_FIRA_BOLD);
+            FIRA_ITALIC = getTypeface(context, K_FONT_FIRA_ITALIC);
+            FIRA_BOLD_ITALIC = getTypeface(context, K_FONT_FIRA_BOLD_ITALIC);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }
@@ -523,6 +556,236 @@ public final class BSTypefaceManager extends BSBaseManager {
     //==============================================================================================
     //                                       GETTERS
     //==============================================================================================
+
+    //==============================================================================================
+    //                                       DEFAULT
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getDefault() {
+        return getInstance().getDefaultInner();
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getDefaultBold() {
+        return getInstance().getDefaultBoldInner();
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getDefaultItalic() {
+        return getInstance().getDefaultItalicInner();
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getDefaultBoldItalic() {
+        return getInstance().getDefaultBoldItalicInner();
+    }
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    protected Typeface getDefaultInner() {
+        switch (typeface) {
+            case GS:
+                return getGs();
+            case SF:
+                return getSf();
+            case DJV:
+                getDjv();
+            case SFC:
+                getSfc();
+            case ALLER:
+                getAller();
+            case BARIOL:
+                getBariol();
+            case ROBOTO:
+                getRoboto();
+            case UBUNTU:
+                getUbuntu();
+            case BLOG_SANS:
+                getBlogSans();
+            case COMFORTAA:
+                getComfortaa();
+            case MONTSERAT:
+                getMontserat();
+            case OPEN_SANS:
+                return getOs();
+            case CLEAR_SANS:
+                return getClearSans();
+            case UBUNTU_MONO:
+                return getUbuntuMono();
+            case VARELA_ROUND:
+                return getVR();
+            case ROBOTO_CONSENDET:
+                return getRobotoCondensed();
+            case FIRA_SANS:
+                return getFira();
+        }
+        return getOs();
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    protected Typeface getDefaultBoldInner() {
+        switch (typeface) {
+            case GS:
+                return getGsBold();
+            case SF:
+                return getSfBold();
+            case DJV:
+                getDjvBold();
+            case SFC:
+                getSfcBold();
+            case ALLER:
+                getAllerBold();
+            case BARIOL:
+                getBariolBold();
+            case ROBOTO:
+                getRobotoBold();
+            case UBUNTU:
+                getUbuntuBold();
+            case BLOG_SANS:
+                getBlogSansBold();
+            case COMFORTAA:
+                getComfortaaBold();
+            case MONTSERAT:
+                getMontseratBold();
+            case OPEN_SANS:
+                return getOsBold();
+            case CLEAR_SANS:
+                return getClearSansBold();
+            case UBUNTU_MONO:
+                return getUbuntuMonoBold();
+            case VARELA_ROUND:
+                return getVRBold();
+            case ROBOTO_CONSENDET:
+                return getRobotoCondensedBold();
+            case FIRA_SANS:
+                return getFiraBold();
+        }
+        return getOsBold();
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    protected Typeface getDefaultItalicInner() {
+        switch (typeface) {
+            case GS:
+                return getGsItalic();
+            case SF:
+                return getSfItalic();
+            case DJV:
+                getDjvItalic();
+            case SFC:
+                getSfcItalic();
+            case ALLER:
+                getAllerItalic();
+            case BARIOL:
+                getBariolItalic();
+            case ROBOTO:
+                getRobotoItalic();
+            case UBUNTU:
+                getUbuntuItalic();
+            case BLOG_SANS:
+                getBlogSansItalic();
+            case COMFORTAA:
+                getComfortaaItalic();
+            case MONTSERAT:
+                getMontseratItalic();
+            case OPEN_SANS:
+                return getOsItalic();
+            case CLEAR_SANS:
+                return getClearSansItalic();
+            case UBUNTU_MONO:
+                return getUbuntuMonoItalic();
+            case VARELA_ROUND:
+                return getVRItalic();
+            case ROBOTO_CONSENDET:
+                return getRobotoCondensedItalic();
+            case FIRA_SANS:
+                return getFiraItalic();
+        }
+        return getOsItalic();
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    protected Typeface getDefaultBoldItalicInner() {
+        switch (typeface) {
+            case GS:
+                return getGsBoldItalic();
+            case SF:
+                return getSfBoldItalic();
+            case DJV:
+                getDjvBoldItalic();
+            case SFC:
+                getSfcBoldItalic();
+            case ALLER:
+                getAllerBoldItalic();
+            case BARIOL:
+                getBariolBoldItalic();
+            case ROBOTO:
+                getRobotoBoldItalic();
+            case UBUNTU:
+                getUbuntuBoldItalic();
+            case BLOG_SANS:
+                getBlogSansBoldItalic();
+            case COMFORTAA:
+                getComfortaaBoldItalic();
+            case MONTSERAT:
+                getMontseratBoldItalic();
+            case OPEN_SANS:
+                return getOsBoldItalic();
+            case CLEAR_SANS:
+                return getClearSansBoldItalic();
+            case UBUNTU_MONO:
+                return getUbuntuMonoBoldItalic();
+            case VARELA_ROUND:
+                return getVRBoldItalic();
+            case ROBOTO_CONSENDET:
+                return getRobotoCondensedBoldItalic();
+            case FIRA_SANS:
+                return getFiraBoldItalic();
+        }
+        return getOsBoldItalic();
+    }
 
     //==============================================================================================
     //                                       ALLER
@@ -1242,6 +1505,51 @@ public final class BSTypefaceManager extends BSBaseManager {
     @NonNull
     public static Typeface getGsBoldItalic() {
         return getInstance().GS_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       FIRA
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getFira() {
+        return getInstance().FIRA;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getFiraBold() {
+        return getInstance().FIRA_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getFiraItalic() {
+        return getInstance().FIRA_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getFiraBoldItalic() {
+        return getInstance().FIRA_BOLD_ITALIC;
     }
 
 }

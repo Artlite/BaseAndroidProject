@@ -1,8 +1,10 @@
 package com.artlite.bslibrary.core;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.artlite.bslibrary.constants.BSTypeface;
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
 import com.artlite.bslibrary.managers.BSContextManager;
 import com.artlite.bslibrary.managers.BSEventManager;
@@ -32,6 +34,16 @@ public final class BSInstance {
      * @param context instance of {@link Context}
      */
     public static void init(@Nullable final Context context) {
+        init(context, BSTypeface.OPEN_SANS);
+    }
+
+    /**
+     * Method which provide the initialization of the Base project library
+     *
+     * @param context instance of {@link Context}
+     */
+    public static void init(@Nullable final Context context,
+                            @NonNull BSTypeface typeface) {
         final String methodName = "void init(context)";
         try {
             BSContextManager.init(context);
@@ -44,7 +56,7 @@ public final class BSInstance {
             BSServiceManager.init(context);
             BSThreadManager.init(context);
             BSTransferManager.init(context);
-            BSTypefaceManager.init(context);
+            BSTypefaceManager.init(context, typeface);
             BSStatusBarManager.init(context);
             BSSharedPreferenceManager.init(context);
             BSViewManager.init(context);
