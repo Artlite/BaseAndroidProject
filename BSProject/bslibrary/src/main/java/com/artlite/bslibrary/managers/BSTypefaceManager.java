@@ -143,11 +143,11 @@ public final class BSTypefaceManager extends BSBaseManager {
     private static final String K_FONT_MONTSERAT
             = getFontPath("Montserrat.otf");
     private static final String K_FONT_MONTSERAT_BOLD
-            = getFontPath("Montserrat_SemiBold.otf");
+            = getFontPath("Montserrat-Bold.otf");
     private static final String K_FONT_MONTSERAT_ITALIC
             = getFontPath("Montserrat_Italic.otf");
     private static final String K_FONT_MONTSERAT_BOLD_ITALIC
-            = getFontPath("Montserrat_SemiBoldItalic.otf");
+            = getFontPath("Montserrat-BoldItalic.otf");
 
     /**
      * Blogger Sans
@@ -225,13 +225,61 @@ public final class BSTypefaceManager extends BSBaseManager {
      * Fira
      */
     private static final String K_FONT_FIRA
-            = getFontPath("FiraSans-Regular.ttf");
+            = getFontPath("FiraSans-Regular.otf");
     private static final String K_FONT_FIRA_BOLD
-            = getFontPath("FiraSans-SemiBold.ttf");
+            = getFontPath("FiraSans-Bold.otf");
     private static final String K_FONT_FIRA_ITALIC
-            = getFontPath("FiraSans-Italic.ttf");
+            = getFontPath("FiraSans-Italic.otf");
     private static final String K_FONT_FIRA_BOLD_ITALIC
-            = getFontPath("FiraSans-SemiBoldItalic.ttf");
+            = getFontPath("FiraSans-BoldItalic.otf");
+
+    /**
+     * NUNITO
+     */
+    private static final String K_FONT_NUNITO
+            = getFontPath("Nunito-Regular.ttf");
+    private static final String K_FONT_NUNITO_BOLD
+            = getFontPath("Nunito-Bold.ttf");
+    private static final String K_FONT_NUNITO_ITALIC
+            = getFontPath("Nunito-Regular.ttf");
+    private static final String K_FONT_NUNITO_BOLD_ITALIC
+            = getFontPath("Nunito-Bold.ttf");
+
+    /**
+     * FANTASQUE
+     */
+    private static final String K_FONT_FANTASQUE
+            = getFontPath("fantasquesansmono-regular.otf");
+    private static final String K_FONT_FANTASQUE_BOLD
+            = getFontPath("fantasquesansmono-bold.otf");
+    private static final String K_FONT_FANTASQUE_ITALIC
+            = getFontPath("fantasquesansmono-italic.otf");
+    private static final String K_FONT_FANTASQUE_BOLD_ITALIC
+            = getFontPath("fantasquesansmono-bolditalic.otf");
+
+    /**
+     * LATO
+     */
+    private static final String K_FONT_LATO
+            = getFontPath("Lato-Regular.ttf");
+    private static final String K_FONT_LATO_BOLD
+            = getFontPath("Lato-Bold.ttf");
+    private static final String K_FONT_LATO_ITALIC
+            = getFontPath("Lato-Italic.ttf");
+    private static final String K_FONT_LATO_BOLD_ITALIC
+            = getFontPath("Lato-BoldItalic.ttf");
+
+    /**
+     * PT_SANS
+     */
+    private static final String K_FONT_PT_SANS
+            = getFontPath("PTS55F.ttf");
+    private static final String K_FONT_PT_SANS_BOLD
+            = getFontPath("PTS75F.ttf");
+    private static final String K_FONT_PT_SANS_ITALIC
+            = getFontPath("PTS56F.ttf");
+    private static final String K_FONT_PT_SANS_BOLD_ITALIC
+            = getFontPath("PTS76F.ttf");
 
     //==============================================================================================
     //                                      INSTANCE
@@ -381,6 +429,38 @@ public final class BSTypefaceManager extends BSBaseManager {
     private Typeface FIRA_BOLD;
     private Typeface FIRA_ITALIC;
     private Typeface FIRA_BOLD_ITALIC;
+
+    /**
+     * FIRA
+     */
+    private Typeface NUNITO;
+    private Typeface NUNITO_BOLD;
+    private Typeface NUNITO_ITALIC;
+    private Typeface NUNITO_BOLD_ITALIC;
+
+    /**
+     * FANTASQUE
+     */
+    private Typeface FANTASQUE;
+    private Typeface FANTASQUE_BOLD;
+    private Typeface FANTASQUE_ITALIC;
+    private Typeface FANTASQUE_BOLD_ITALIC;
+
+    /**
+     * LATO
+     */
+    private Typeface LATO;
+    private Typeface LATO_BOLD;
+    private Typeface LATO_ITALIC;
+    private Typeface LATO_BOLD_ITALIC;
+
+    /**
+     * PT_SANS
+     */
+    private Typeface PT_SANS;
+    private Typeface PT_SANS_BOLD;
+    private Typeface PT_SANS_ITALIC;
+    private Typeface PT_SANS_BOLD_ITALIC;
 
     /**
      * Instance of the {@link BSTypeface}
@@ -548,6 +628,26 @@ public final class BSTypefaceManager extends BSBaseManager {
             FIRA_BOLD = getTypeface(context, K_FONT_FIRA_BOLD);
             FIRA_ITALIC = getTypeface(context, K_FONT_FIRA_ITALIC);
             FIRA_BOLD_ITALIC = getTypeface(context, K_FONT_FIRA_BOLD_ITALIC);
+            //NUNITO
+            NUNITO = getTypeface(context, K_FONT_NUNITO);
+            NUNITO_BOLD = getTypeface(context, K_FONT_NUNITO_BOLD);
+            NUNITO_ITALIC = getTypeface(context, K_FONT_NUNITO_ITALIC);
+            NUNITO_BOLD_ITALIC = getTypeface(context, K_FONT_NUNITO_BOLD_ITALIC);
+            //FANTASQUE
+            FANTASQUE = getTypeface(context, K_FONT_FANTASQUE);
+            FANTASQUE_BOLD = getTypeface(context, K_FONT_FANTASQUE_BOLD);
+            FANTASQUE_ITALIC = getTypeface(context, K_FONT_FANTASQUE_ITALIC);
+            FANTASQUE_BOLD_ITALIC = getTypeface(context, K_FONT_FANTASQUE_BOLD_ITALIC);
+            //LATO
+            LATO = getTypeface(context, K_FONT_LATO);
+            LATO_BOLD = getTypeface(context, K_FONT_LATO_BOLD);
+            LATO_ITALIC = getTypeface(context, K_FONT_LATO_ITALIC);
+            LATO_BOLD_ITALIC = getTypeface(context, K_FONT_LATO_BOLD_ITALIC);
+            //PT_SANS
+            PT_SANS = getTypeface(context, K_FONT_PT_SANS);
+            PT_SANS_BOLD = getTypeface(context, K_FONT_PT_SANS_BOLD);
+            PT_SANS_ITALIC = getTypeface(context, K_FONT_PT_SANS_ITALIC);
+            PT_SANS_BOLD_ITALIC = getTypeface(context, K_FONT_PT_SANS_BOLD_ITALIC);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }
@@ -644,6 +744,14 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getRobotoCondensed();
             case FIRA_SANS:
                 return getFira();
+            case NUNITO:
+                return getNunito();
+            case FANTASQUE:
+                return getFantasque();
+            case LATO:
+                return getLato();
+            case PT_SANS:
+                return getPtSans();
         }
         return getOs();
     }
@@ -691,6 +799,14 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getRobotoCondensedBold();
             case FIRA_SANS:
                 return getFiraBold();
+            case NUNITO:
+                return getNunitoBold();
+            case FANTASQUE:
+                return getFantasqueBold();
+            case LATO:
+                return getLatoBold();
+            case PT_SANS:
+                return getPtSansBold();
         }
         return getOsBold();
     }
@@ -737,6 +853,14 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getRobotoCondensedItalic();
             case FIRA_SANS:
                 return getFiraItalic();
+            case NUNITO:
+                return getNunitoItalic();
+            case FANTASQUE:
+                return getFantasqueItalic();
+            case LATO:
+                return getLatoItalic();
+            case PT_SANS:
+                return getPtSansItalic();
         }
         return getOsItalic();
     }
@@ -783,6 +907,14 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getRobotoCondensedBoldItalic();
             case FIRA_SANS:
                 return getFiraBoldItalic();
+            case NUNITO:
+                return getNunitoBoldItalic();
+            case FANTASQUE:
+                return getFantasqueBoldItalic();
+            case LATO:
+                return getLatoBoldItalic();
+            case PT_SANS:
+                return getPtSansBoldItalic();
         }
         return getOsBoldItalic();
     }
@@ -1550,6 +1682,186 @@ public final class BSTypefaceManager extends BSBaseManager {
     @NonNull
     public static Typeface getFiraBoldItalic() {
         return getInstance().FIRA_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       NUNITO
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getNunito() {
+        return getInstance().NUNITO;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getNunitoBold() {
+        return getInstance().NUNITO_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getNunitoItalic() {
+        return getInstance().NUNITO_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getNunitoBoldItalic() {
+        return getInstance().NUNITO_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       FANTASQUE
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getFantasque() {
+        return getInstance().FANTASQUE;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getFantasqueBold() {
+        return getInstance().FANTASQUE_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getFantasqueItalic() {
+        return getInstance().FANTASQUE_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getFantasqueBoldItalic() {
+        return getInstance().FANTASQUE_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       LATO
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getLato() {
+        return getInstance().LATO;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getLatoBold() {
+        return getInstance().LATO_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getLatoItalic() {
+        return getInstance().LATO_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getLatoBoldItalic() {
+        return getInstance().LATO_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       PT_SANS
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getPtSans() {
+        return getInstance().PT_SANS;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getPtSansBold() {
+        return getInstance().PT_SANS_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getPtSansItalic() {
+        return getInstance().PT_SANS_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getPtSansBoldItalic() {
+        return getInstance().PT_SANS_BOLD_ITALIC;
     }
 
 }

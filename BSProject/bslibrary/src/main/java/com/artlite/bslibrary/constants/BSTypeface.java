@@ -20,5 +20,9 @@ public enum BSTypeface {
     DJV,
     SFC,
     GS,
-    FIRA_SANS
+    FIRA_SANS,
+    NUNITO,
+    FANTASQUE,
+    LATO,
+    PT_SANS
 }
