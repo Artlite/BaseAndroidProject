@@ -13,6 +13,6 @@ public class CurrentApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        BSInstance.init(this, BSTypeface.MONTSERRAT_ALTERNATES);
+        BSInstance.init(this, BSTypeface.PODKOVA);
     }
 }

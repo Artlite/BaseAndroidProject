@@ -293,6 +293,42 @@ public final class BSTypefaceManager extends BSBaseManager {
     private static final String K_FONT_MONTSERRAT_ALTERNATES_BOLD_ITALIC
             = getFontPath("MontserratAlternates-BlackItalic.otf");
 
+    /**
+     * OS_CONDENSED
+     */
+    private static final String K_FONT_OS_CONDENSED
+            = getFontPath("OpenSans-CondLight.ttf");
+    private static final String K_FONT_OS_CONDENSED_BOLD
+            = getFontPath("OpenSans-CondBold.ttf");
+    private static final String K_FONT_OS_CONDENSED_ITALIC
+            = getFontPath("OpenSans-CondLightItalic.ttf");
+    private static final String K_FONT_OS_CONDENSED_BOLD_ITALIC
+            = getFontPath("OpenSans-CondLightItalic.ttf");
+
+    /**
+     * RUBIK
+     */
+    private static final String K_FONT_RUBIK
+            = getFontPath("Rubik-Regular.ttf");
+    private static final String K_FONT_RUBIK_BOLD
+            = getFontPath("Rubik-Bold.ttf");
+    private static final String K_FONT_RUBIK_ITALIC
+            = getFontPath("Rubik-Italic.ttf");
+    private static final String K_FONT_RUBIK_BOLD_ITALIC
+            = getFontPath("Rubik-BoldItalic.ttf");
+
+    /**
+     * PODKOVA
+     */
+    private static final String K_FONT_PODKOVA
+            = getFontPath("Podkova-Regular.ttf");
+    private static final String K_FONT_PODKOVA_BOLD
+            = getFontPath("Podkova-Bold.ttf");
+    private static final String K_FONT_PODKOVA_ITALIC
+            = getFontPath("Podkova-Regular.ttf");
+    private static final String K_FONT_PODKOVA_BOLD_ITALIC
+            = getFontPath("Podkova-Bold.ttf");
+
     //==============================================================================================
     //                                      INSTANCE
     //==============================================================================================
@@ -481,6 +517,30 @@ public final class BSTypefaceManager extends BSBaseManager {
     private Typeface MONTSERRAT_ALTERNATES_BOLD;
     private Typeface MONTSERRAT_ALTERNATES_ITALIC;
     private Typeface MONTSERRAT_ALTERNATES_BOLD_ITALIC;
+
+    /**
+     * OS_CONDENSED
+     */
+    private Typeface OS_CONDENSED;
+    private Typeface OS_CONDENSED_BOLD;
+    private Typeface OS_CONDENSED_ITALIC;
+    private Typeface OS_CONDENSED_BOLD_ITALIC;
+
+    /**
+     * OS_CONDENSED
+     */
+    private Typeface RUBIK;
+    private Typeface RUBIK_BOLD;
+    private Typeface RUBIK_ITALIC;
+    private Typeface RUBIK_BOLD_ITALIC;
+
+    /**
+     * PODKOVA
+     */
+    private Typeface PODKOVA;
+    private Typeface PODKOVA_BOLD;
+    private Typeface PODKOVA_ITALIC;
+    private Typeface PODKOVA_BOLD_ITALIC;
 
     /**
      * Instance of the {@link BSTypeface}
@@ -673,6 +733,21 @@ public final class BSTypefaceManager extends BSBaseManager {
             MONTSERRAT_ALTERNATES_BOLD = getTypeface(context, K_FONT_MONTSERRAT_ALTERNATES_BOLD);
             MONTSERRAT_ALTERNATES_ITALIC = getTypeface(context, K_FONT_MONTSERRAT_ALTERNATES_ITALIC);
             MONTSERRAT_ALTERNATES_BOLD_ITALIC = getTypeface(context, K_FONT_MONTSERRAT_ALTERNATES_BOLD_ITALIC);
+            //OS_CONDENSED
+            OS_CONDENSED = getTypeface(context, K_FONT_OS_CONDENSED);
+            OS_CONDENSED_BOLD = getTypeface(context, K_FONT_OS_CONDENSED_BOLD);
+            OS_CONDENSED_ITALIC = getTypeface(context, K_FONT_OS_CONDENSED_ITALIC);
+            OS_CONDENSED_BOLD_ITALIC = getTypeface(context, K_FONT_OS_CONDENSED_BOLD_ITALIC);
+            //RUBIK
+            RUBIK = getTypeface(context, K_FONT_RUBIK);
+            RUBIK_BOLD = getTypeface(context, K_FONT_RUBIK_BOLD);
+            RUBIK_ITALIC = getTypeface(context, K_FONT_RUBIK_ITALIC);
+            RUBIK_BOLD_ITALIC = getTypeface(context, K_FONT_RUBIK_BOLD_ITALIC);
+            //PODKOVA
+            PODKOVA = getTypeface(context, K_FONT_PODKOVA);
+            PODKOVA_BOLD = getTypeface(context, K_FONT_PODKOVA_BOLD);
+            PODKOVA_ITALIC = getTypeface(context, K_FONT_PODKOVA_ITALIC);
+            PODKOVA_BOLD_ITALIC = getTypeface(context, K_FONT_PODKOVA_BOLD_ITALIC);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }
@@ -779,6 +854,12 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getPtSans();
             case MONTSERRAT_ALTERNATES:
                 return getMontserratAlternates();
+            case OS_CONDENSED:
+                return getOsCondensed();
+            case RUBIK:
+                return getRubik();
+            case PODKOVA:
+                return getPodkova();
         }
         return getOs();
     }
@@ -836,6 +917,12 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getPtSansBold();
             case MONTSERRAT_ALTERNATES:
                 return getMontserratAlternatesBold();
+            case OS_CONDENSED:
+                return getOsCondensedBold();
+            case RUBIK:
+                return getRubikBold();
+            case PODKOVA:
+                return getPodkovaBold();
         }
         return getOsBold();
     }
@@ -892,6 +979,12 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getPtSansItalic();
             case MONTSERRAT_ALTERNATES:
                 return getMontserratAlternatesItalic();
+            case OS_CONDENSED:
+                return getOsCondensedItalic();
+            case RUBIK:
+                return getRubikItalic();
+            case PODKOVA:
+                return getPodkovaItalic();
         }
         return getOsItalic();
     }
@@ -948,6 +1041,12 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getPtSansBoldItalic();
             case MONTSERRAT_ALTERNATES:
                 return getMontserratAlternatesBoldItalic();
+            case OS_CONDENSED:
+                return getOsCondensedBoldItalic();
+            case RUBIK:
+                return getRubikBoldItalic();
+            case PODKOVA:
+                return getPodkovaBoldItalic();
         }
         return getOsBoldItalic();
     }
@@ -1940,6 +2039,141 @@ public final class BSTypefaceManager extends BSBaseManager {
     @NonNull
     public static Typeface getMontserratAlternatesBoldItalic() {
         return getInstance().MONTSERRAT_ALTERNATES_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       OS_CONDENSED
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getOsCondensed() {
+        return getInstance().OS_CONDENSED;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getOsCondensedBold() {
+        return getInstance().OS_CONDENSED_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getOsCondensedItalic() {
+        return getInstance().OS_CONDENSED_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getOsCondensedBoldItalic() {
+        return getInstance().OS_CONDENSED_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       RUBIK
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getRubik() {
+        return getInstance().RUBIK;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getRubikBold() {
+        return getInstance().RUBIK_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getRubikItalic() {
+        return getInstance().RUBIK_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getRubikBoldItalic() {
+        return getInstance().RUBIK_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       PODKOVA
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getPodkova() {
+        return getInstance().PODKOVA;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getPodkovaBold() {
+        return getInstance().PODKOVA_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getPodkovaItalic() {
+        return getInstance().PODKOVA_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getPodkovaBoldItalic() {
+        return getInstance().PODKOVA_BOLD_ITALIC;
     }
 
 }

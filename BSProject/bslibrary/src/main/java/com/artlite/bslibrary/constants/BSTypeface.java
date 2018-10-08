@@ -25,5 +25,8 @@ public enum BSTypeface {
     FANTASQUE,
     LATO,
     PT_SANS,
-    MONTSERRAT_ALTERNATES
+    MONTSERRAT_ALTERNATES,
+    OS_CONDENSED,
+    RUBIK,
+    PODKOVA
 }
