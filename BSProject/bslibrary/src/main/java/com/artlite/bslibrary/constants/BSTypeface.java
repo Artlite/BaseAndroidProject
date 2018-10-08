@@ -24,5 +24,6 @@ public enum BSTypeface {
     NUNITO,
     FANTASQUE,
     LATO,
-    PT_SANS
+    PT_SANS,
+    MONTSERRAT_ALTERNATES
 }

@@ -281,6 +281,18 @@ public final class BSTypefaceManager extends BSBaseManager {
     private static final String K_FONT_PT_SANS_BOLD_ITALIC
             = getFontPath("PTS76F.ttf");
 
+    /**
+     * MONTSERRAT_ALTERNATES
+     */
+    private static final String K_FONT_MONTSERRAT_ALTERNATES
+            = getFontPath("MontserratAlternates-Regular.otf");
+    private static final String K_FONT_MONTSERRAT_ALTERNATES_BOLD
+            = getFontPath("MontserratAlternates-Bold.otf");
+    private static final String K_FONT_MONTSERRAT_ALTERNATES_ITALIC
+            = getFontPath("MontserratAlternates-Italic.otf");
+    private static final String K_FONT_MONTSERRAT_ALTERNATES_BOLD_ITALIC
+            = getFontPath("MontserratAlternates-BlackItalic.otf");
+
     //==============================================================================================
     //                                      INSTANCE
     //==============================================================================================
@@ -461,6 +473,14 @@ public final class BSTypefaceManager extends BSBaseManager {
     private Typeface PT_SANS_BOLD;
     private Typeface PT_SANS_ITALIC;
     private Typeface PT_SANS_BOLD_ITALIC;
+
+    /**
+     * MONTSERRAT_ALTERNATES
+     */
+    private Typeface MONTSERRAT_ALTERNATES;
+    private Typeface MONTSERRAT_ALTERNATES_BOLD;
+    private Typeface MONTSERRAT_ALTERNATES_ITALIC;
+    private Typeface MONTSERRAT_ALTERNATES_BOLD_ITALIC;
 
     /**
      * Instance of the {@link BSTypeface}
@@ -648,6 +668,11 @@ public final class BSTypefaceManager extends BSBaseManager {
             PT_SANS_BOLD = getTypeface(context, K_FONT_PT_SANS_BOLD);
             PT_SANS_ITALIC = getTypeface(context, K_FONT_PT_SANS_ITALIC);
             PT_SANS_BOLD_ITALIC = getTypeface(context, K_FONT_PT_SANS_BOLD_ITALIC);
+            //MONTSERRAT_ALTERNATES
+            MONTSERRAT_ALTERNATES = getTypeface(context, K_FONT_MONTSERRAT_ALTERNATES);
+            MONTSERRAT_ALTERNATES_BOLD = getTypeface(context, K_FONT_MONTSERRAT_ALTERNATES_BOLD);
+            MONTSERRAT_ALTERNATES_ITALIC = getTypeface(context, K_FONT_MONTSERRAT_ALTERNATES_ITALIC);
+            MONTSERRAT_ALTERNATES_BOLD_ITALIC = getTypeface(context, K_FONT_MONTSERRAT_ALTERNATES_BOLD_ITALIC);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }
@@ -752,6 +777,8 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getLato();
             case PT_SANS:
                 return getPtSans();
+            case MONTSERRAT_ALTERNATES:
+                return getMontserratAlternates();
         }
         return getOs();
     }
@@ -807,6 +834,8 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getLatoBold();
             case PT_SANS:
                 return getPtSansBold();
+            case MONTSERRAT_ALTERNATES:
+                return getMontserratAlternatesBold();
         }
         return getOsBold();
     }
@@ -861,6 +890,8 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getLatoItalic();
             case PT_SANS:
                 return getPtSansItalic();
+            case MONTSERRAT_ALTERNATES:
+                return getMontserratAlternatesItalic();
         }
         return getOsItalic();
     }
@@ -915,6 +946,8 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getLatoBoldItalic();
             case PT_SANS:
                 return getPtSansBoldItalic();
+            case MONTSERRAT_ALTERNATES:
+                return getMontserratAlternatesBoldItalic();
         }
         return getOsBoldItalic();
     }
@@ -1862,6 +1895,51 @@ public final class BSTypefaceManager extends BSBaseManager {
     @NonNull
     public static Typeface getPtSansBoldItalic() {
         return getInstance().PT_SANS_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       MONTSERRAT_ALTERNATES
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getMontserratAlternates() {
+        return getInstance().MONTSERRAT_ALTERNATES;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getMontserratAlternatesBold() {
+        return getInstance().MONTSERRAT_ALTERNATES_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getMontserratAlternatesItalic() {
+        return getInstance().MONTSERRAT_ALTERNATES_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getMontserratAlternatesBoldItalic() {
+        return getInstance().MONTSERRAT_ALTERNATES_BOLD_ITALIC;
     }
 
 }
