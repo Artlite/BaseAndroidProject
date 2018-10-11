@@ -291,7 +291,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     private static final String K_FONT_MONTSERRAT_ALTERNATES_ITALIC
             = getFontPath("MontserratAlternates-Italic.otf");
     private static final String K_FONT_MONTSERRAT_ALTERNATES_BOLD_ITALIC
-            = getFontPath("MontserratAlternates-BlackItalic.otf");
+            = getFontPath("MontserratAlternates-BoldItalic.otf");
 
     /**
      * OS_CONDENSED
@@ -328,6 +328,66 @@ public final class BSTypefaceManager extends BSBaseManager {
             = getFontPath("Podkova-Regular.ttf");
     private static final String K_FONT_PODKOVA_BOLD_ITALIC
             = getFontPath("Podkova-Bold.ttf");
+
+    /**
+     * SOURCE_SANS_PRO
+     */
+    private static final String K_FONT_SOURCE_SANS_PRO
+            = getFontPath("SourceSansPro-Regular.otf");
+    private static final String K_FONT_SOURCE_SANS_PRO_BOLD
+            = getFontPath("SourceSansPro-Bold.otf");
+    private static final String K_FONT_SOURCE_SANS_PRO_ITALIC
+            = getFontPath("SourceSansPro-It.otf");
+    private static final String K_FONT_SOURCE_SANS_PRO_BOLD_ITALIC
+            = getFontPath("SourceSansPro-BoldIt.otf");
+
+    /**
+     * ROBOTO_SLAB
+     */
+    private static final String K_FONT_ROBOTO_SLAB
+            = getFontPath("RobotoSlab-Regular.ttf");
+    private static final String K_FONT_ROBOTO_SLAB_BOLD
+            = getFontPath("RobotoSlab-Bold.ttf");
+    private static final String K_FONT_ROBOTO_SLAB_ITALIC
+            = getFontPath("RobotoSlab-Regular.ttf");
+    private static final String K_FONT_ROBOTO_SLAB_BOLD_ITALIC
+            = getFontPath("RobotoSlab-Bold.ttf");
+
+    /**
+     * EXO_2
+     */
+    private static final String K_FONT_EXO_2
+            = getFontPath("Exo2.0-Regular.otf");
+    private static final String K_FONT_EXO_2_BOLD
+            = getFontPath("Exo2.0-Bold.otf");
+    private static final String K_FONT_EXO_2_ITALIC
+            = getFontPath("Exo2.0-Italic.otf");
+    private static final String K_FONT_EXO_2_BOLD_ITALIC
+            = getFontPath("Exo2.0-BoldItalic.otf");
+
+    /**
+     * M_PLUS
+     */
+    private static final String K_FONT_M_PLUS
+            = getFontPath("MPLUSRounded1c-Regular.ttf");
+    private static final String K_FONT_M_PLUS_BOLD
+            = getFontPath("MPLUSRounded1c-Bold.ttf");
+    private static final String K_FONT_M_PLUS_ITALIC
+            = getFontPath("MPLUSRounded1c-Regular.ttf");
+    private static final String K_FONT_M_PLUS_BOLD_ITALIC
+            = getFontPath("MPLUSRounded1c-Bold.ttf");
+
+    /**
+     * YANONE
+     */
+    private static final String K_FONT_YANONE
+            = getFontPath("YanoneKaffeesatz-Regular.otf");
+    private static final String K_FONT_YANONE_BOLD
+            = getFontPath("YanoneKaffeesatz-Bold.otf");
+    private static final String K_FONT_YANONE_ITALIC
+            = getFontPath("YanoneKaffeesatz-Regular.otf");
+    private static final String K_FONT_YANONE_BOLD_ITALIC
+            = getFontPath("YanoneKaffeesatz-Bold.otf");
 
     //==============================================================================================
     //                                      INSTANCE
@@ -543,6 +603,46 @@ public final class BSTypefaceManager extends BSBaseManager {
     private Typeface PODKOVA_BOLD_ITALIC;
 
     /**
+     * SOURCE_SANS_PRO
+     */
+    private Typeface SOURCE_SANS_PRO;
+    private Typeface SOURCE_SANS_PRO_BOLD;
+    private Typeface SOURCE_SANS_PRO_ITALIC;
+    private Typeface SOURCE_SANS_PRO_BOLD_ITALIC;
+
+    /**
+     * ROBOTO_SLAB
+     */
+    private Typeface ROBOTO_SLAB;
+    private Typeface ROBOTO_SLAB_BOLD;
+    private Typeface ROBOTO_SLAB_ITALIC;
+    private Typeface ROBOTO_SLAB_BOLD_ITALIC;
+
+    /**
+     * EXO_2
+     */
+    private Typeface EXO_2;
+    private Typeface EXO_2_BOLD;
+    private Typeface EXO_2_ITALIC;
+    private Typeface EXO_2_BOLD_ITALIC;
+
+    /**
+     * M_PLUS
+     */
+    private Typeface M_PLUS;
+    private Typeface M_PLUS_BOLD;
+    private Typeface M_PLUS_ITALIC;
+    private Typeface M_PLUS_BOLD_ITALIC;
+
+    /**
+     * YANONE
+     */
+    private Typeface YANONE;
+    private Typeface YANONE_BOLD;
+    private Typeface YANONE_ITALIC;
+    private Typeface YANONE_BOLD_ITALIC;
+
+    /**
      * Instance of the {@link BSTypeface}
      */
     private BSTypeface typeface = BSTypeface.OPEN_SANS;
@@ -748,6 +848,31 @@ public final class BSTypefaceManager extends BSBaseManager {
             PODKOVA_BOLD = getTypeface(context, K_FONT_PODKOVA_BOLD);
             PODKOVA_ITALIC = getTypeface(context, K_FONT_PODKOVA_ITALIC);
             PODKOVA_BOLD_ITALIC = getTypeface(context, K_FONT_PODKOVA_BOLD_ITALIC);
+            //SOURCE_SANS_PRO
+            SOURCE_SANS_PRO = getTypeface(context, K_FONT_SOURCE_SANS_PRO);
+            SOURCE_SANS_PRO_BOLD = getTypeface(context, K_FONT_SOURCE_SANS_PRO_BOLD);
+            SOURCE_SANS_PRO_ITALIC = getTypeface(context, K_FONT_SOURCE_SANS_PRO_ITALIC);
+            SOURCE_SANS_PRO_BOLD_ITALIC = getTypeface(context, K_FONT_SOURCE_SANS_PRO_BOLD_ITALIC);
+            //ROBOTO_SLAB
+            ROBOTO_SLAB = getTypeface(context, K_FONT_ROBOTO_SLAB);
+            ROBOTO_SLAB_BOLD = getTypeface(context, K_FONT_ROBOTO_SLAB_BOLD);
+            ROBOTO_SLAB_ITALIC = getTypeface(context, K_FONT_ROBOTO_SLAB_ITALIC);
+            ROBOTO_SLAB_BOLD_ITALIC = getTypeface(context, K_FONT_ROBOTO_SLAB_BOLD_ITALIC);
+            //EXO_2
+            EXO_2 = getTypeface(context, K_FONT_EXO_2);
+            EXO_2_BOLD = getTypeface(context, K_FONT_EXO_2_BOLD);
+            EXO_2_ITALIC = getTypeface(context, K_FONT_EXO_2_ITALIC);
+            EXO_2_BOLD_ITALIC = getTypeface(context, K_FONT_EXO_2_BOLD_ITALIC);
+            //M_PLUS
+            M_PLUS = getTypeface(context, K_FONT_M_PLUS);
+            M_PLUS_BOLD = getTypeface(context, K_FONT_M_PLUS_BOLD);
+            M_PLUS_ITALIC = getTypeface(context, K_FONT_M_PLUS_ITALIC);
+            M_PLUS_BOLD_ITALIC = getTypeface(context, K_FONT_M_PLUS_BOLD_ITALIC);
+            //YANONE
+            YANONE = getTypeface(context, K_FONT_YANONE);
+            YANONE_BOLD = getTypeface(context, K_FONT_YANONE_BOLD);
+            YANONE_ITALIC = getTypeface(context, K_FONT_YANONE_ITALIC);
+            YANONE_BOLD_ITALIC = getTypeface(context, K_FONT_YANONE_BOLD_ITALIC);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }
@@ -860,6 +985,16 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getRubik();
             case PODKOVA:
                 return getPodkova();
+            case SOURCE_SANS_PRO:
+                return getSourceSansPro();
+            case ROBOTO_SLAB:
+                return getRobotoSlab();
+            case EXO_2:
+                return getExoSecond();
+            case M_PLUS:
+                return getMPlus();
+            case YANONE:
+                return getYanone();
         }
         return getOs();
     }
@@ -923,6 +1058,16 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getRubikBold();
             case PODKOVA:
                 return getPodkovaBold();
+            case SOURCE_SANS_PRO:
+                return getSourceSansProBold();
+            case ROBOTO_SLAB:
+                return getRobotoSlabBold();
+            case EXO_2:
+                return getExoSecondBold();
+            case M_PLUS:
+                return getMPlusBold();
+            case YANONE:
+                return getYanoneBold();
         }
         return getOsBold();
     }
@@ -985,6 +1130,16 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getRubikItalic();
             case PODKOVA:
                 return getPodkovaItalic();
+            case SOURCE_SANS_PRO:
+                return getSourceSansProItalic();
+            case ROBOTO_SLAB:
+                return getRobotoSlabItalic();
+            case EXO_2:
+                return getExoSecondItalic();
+            case M_PLUS:
+                return getMPlusItalic();
+            case YANONE:
+                return getYanoneItalic();
         }
         return getOsItalic();
     }
@@ -1047,12 +1202,22 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getRubikBoldItalic();
             case PODKOVA:
                 return getPodkovaBoldItalic();
+            case SOURCE_SANS_PRO:
+                return getSourceSansProBoldItalic();
+            case ROBOTO_SLAB:
+                return getRobotoSlabBoldItalic();
+            case EXO_2:
+                return getExoSecondBoldItalic();
+            case M_PLUS:
+                return getMPlusBoldItalic();
+            case YANONE:
+                return getYanoneBoldItalic();
         }
         return getOsBoldItalic();
     }
 
     //==============================================================================================
-    //                                       ALLER
+    //                                       ALLER(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1097,7 +1262,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       ROBOTO
+    //                                       ROBOTO(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1142,7 +1307,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       OPEN SANS
+    //                                       OPEN SANS(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1187,7 +1352,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       SAN FRANCISCO
+    //                                       SAN FRANCISCO(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1232,7 +1397,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       UBUNTU
+    //                                       UBUNTU(SPECIFIC)
     //==============================================================================================
 
     /**
@@ -1277,7 +1442,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       UBUNTU MONO
+    //                                       UBUNTU MONO(SPECIFIC)
     //==============================================================================================
 
     /**
@@ -1322,7 +1487,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       BARIOL
+    //                                       BARIOL(CYRILIC ISN'T SUPPORTED)
     //==============================================================================================
 
     /**
@@ -1367,7 +1532,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       COMFORTAA
+    //                                       COMFORTAA(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1412,7 +1577,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       COMFORTAA
+    //                                       VR(SUPPORT ONLY REGULAR)
     //==============================================================================================
 
     /**
@@ -1457,7 +1622,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       MONTSERAT
+    //                                       MONTSERAT(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1502,7 +1667,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       BLOG_SANS
+    //                                       BLOG_SANS(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1547,7 +1712,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       CLEAR_SANS
+    //                                       CLEAR_SANS(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1592,7 +1757,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       ROBOTO_CONSENDET
+    //                                       ROBOTO_CONSENDET(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1637,7 +1802,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       DJV
+    //                                       DJV(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1682,7 +1847,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       SFC
+    //                                       SFC(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1727,7 +1892,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       GS
+    //                                       GS(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1772,7 +1937,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       FIRA
+    //                                       FIRA(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1817,7 +1982,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       NUNITO
+    //                                       NUNITO(HAVE ONLY BOLD AND REGULAR)
     //==============================================================================================
 
     /**
@@ -1862,7 +2027,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       FANTASQUE
+    //                                       FANTASQUE(SPECIFIC)
     //==============================================================================================
 
     /**
@@ -1907,7 +2072,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       LATO
+    //                                       LATO(LOOKS NICE)
     //==============================================================================================
 
     /**
@@ -1952,7 +2117,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       PT_SANS
+    //                                       PT_SANS(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -1997,7 +2162,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       MONTSERRAT_ALTERNATES
+    //                                       MONTSERRAT_ALTERNATES(LOOKS GOOD)
     //==============================================================================================
 
     /**
@@ -2042,7 +2207,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       OS_CONDENSED
+    //                                       OS_CONDENSED(LOOKS SPECIFIC)
     //==============================================================================================
 
     /**
@@ -2087,7 +2252,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       RUBIK
+    //                                       RUBIK(LOOKS NICE)
     //==============================================================================================
 
     /**
@@ -2132,7 +2297,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     }
 
     //==============================================================================================
-    //                                       PODKOVA
+    //                                       PODKOVA(HAS ONLY BOLD AND REGULAR)
     //==============================================================================================
 
     /**
@@ -2174,6 +2339,231 @@ public final class BSTypefaceManager extends BSBaseManager {
     @NonNull
     public static Typeface getPodkovaBoldItalic() {
         return getInstance().PODKOVA_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       SOURCE_SANS_PRO(LOOKS GOOD)
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getSourceSansPro() {
+        return getInstance().SOURCE_SANS_PRO;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getSourceSansProBold() {
+        return getInstance().SOURCE_SANS_PRO_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getSourceSansProItalic() {
+        return getInstance().SOURCE_SANS_PRO_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getSourceSansProBoldItalic() {
+        return getInstance().SOURCE_SANS_PRO_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       ROBOTO_SLAB (HAVE ONLY REGULAR AND BOLD)
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getRobotoSlab() {
+        return getInstance().ROBOTO_SLAB;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getRobotoSlabBold() {
+        return getInstance().ROBOTO_SLAB_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getRobotoSlabItalic() {
+        return getInstance().ROBOTO_SLAB_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getRobotoSlabBoldItalic() {
+        return getInstance().ROBOTO_SLAB_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       EXO_2 (LOOKS GOOD)
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getExoSecond() {
+        return getInstance().EXO_2;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getExoSecondBold() {
+        return getInstance().EXO_2_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getExoSecondItalic() {
+        return getInstance().EXO_2_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getExoSecondBoldItalic() {
+        return getInstance().EXO_2_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       M_PLUS
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getMPlus() {
+        return getInstance().M_PLUS;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getMPlusBold() {
+        return getInstance().M_PLUS_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getMPlusItalic() {
+        return getInstance().M_PLUS_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getMPlusBoldItalic() {
+        return getInstance().M_PLUS_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       YANONE(SPECIFIC)
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getYanone() {
+        return getInstance().YANONE;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getYanoneBold() {
+        return getInstance().YANONE_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getYanoneItalic() {
+        return getInstance().YANONE_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    public static Typeface getYanoneBoldItalic() {
+        return getInstance().YANONE_BOLD_ITALIC;
     }
 
 }

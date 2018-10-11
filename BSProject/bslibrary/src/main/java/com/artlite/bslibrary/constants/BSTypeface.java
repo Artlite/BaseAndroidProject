@@ -28,5 +28,10 @@ public enum BSTypeface {
     MONTSERRAT_ALTERNATES,
     OS_CONDENSED,
     RUBIK,
-    PODKOVA
+    PODKOVA,
+    SOURCE_SANS_PRO,
+    ROBOTO_SLAB,
+    EXO_2,
+    M_PLUS,
+    YANONE
 }
