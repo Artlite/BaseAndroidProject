@@ -87,6 +87,17 @@ public class MainActivity extends BSLockableActivity
     }
 
     /**
+     * Method which provide the getting class for the closing functional
+     *
+     * @return instance of the {@link Class}
+     */
+    @Nullable
+    @Override
+    protected Class getCloseClass() {
+        return this.getClass();
+    }
+
+    /**
      * Method which provide the defining if need to override of the transition animation
      *
      * @return defining results

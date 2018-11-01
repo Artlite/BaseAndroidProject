@@ -389,6 +389,18 @@ public final class BSTypefaceManager extends BSBaseManager {
     private static final String K_FONT_YANONE_BOLD_ITALIC
             = getFontPath("YanoneKaffeesatz-Bold.otf");
 
+    /**
+     * PRODUCT_SANS
+     */
+    private static final String K_FONT_PRODUCT_SANS
+            = getFontPath("Product_Sans_Regular.ttf");
+    private static final String K_FONT_PRODUCT_SANS_BOLD
+            = getFontPath("Product_Sans_Bold.ttf");
+    private static final String K_FONT_PRODUCT_SANS_ITALIC
+            = getFontPath("Product_Sans_Italic.ttf");
+    private static final String K_FONT_PRODUCT_SANS_BOLD_ITALIC
+            = getFontPath("Product_Sans_Bold_Italic.ttf");
+
     //==============================================================================================
     //                                      INSTANCE
     //==============================================================================================
@@ -643,9 +655,17 @@ public final class BSTypefaceManager extends BSBaseManager {
     private Typeface YANONE_BOLD_ITALIC;
 
     /**
+     * PRODUCT_SANS
+     */
+    private Typeface PRODUCT_SANS;
+    private Typeface PRODUCT_SANS_BOLD;
+    private Typeface PRODUCT_SANS_ITALIC;
+    private Typeface PRODUCT_SANS_BOLD_ITALIC;
+
+    /**
      * Instance of the {@link BSTypeface}
      */
-    private BSTypeface typeface = BSTypeface.OPEN_SANS;
+    private final BSTypeface typeface;
 
     //==============================================================================================
     //                                   STATIC METHODS
@@ -661,8 +681,7 @@ public final class BSTypefaceManager extends BSBaseManager {
     public static void init(@Nullable final Context context,
                             BSTypeface typeface) {
         if (isNull(instance)) {
-            instance = new BSTypefaceManager(context);
-            instance.typeface = typeface;
+            instance = new BSTypefaceManager(context, typeface);
         } else {
             Log.e(TAG, "TypeFace manager is already created");
         }
@@ -717,11 +736,14 @@ public final class BSTypefaceManager extends BSBaseManager {
     /**
      * Default constructor
      *
-     * @param context
+     * @param context  instance of {@link Context}
+     * @param typeface instance of the {@link BSTypeface}
      */
-    public BSTypefaceManager(@NonNull Context context) {
+    public BSTypefaceManager(@NonNull Context context,
+                             @NonNull BSTypeface typeface) {
         super(context);
         final String methodName = "BSTypefaceManager(context)";
+        this.typeface = typeface;
         try {
             //Aller
             ALLER = getTypeface(context, K_FONT_ALLER);
@@ -873,6 +895,11 @@ public final class BSTypefaceManager extends BSBaseManager {
             YANONE_BOLD = getTypeface(context, K_FONT_YANONE_BOLD);
             YANONE_ITALIC = getTypeface(context, K_FONT_YANONE_ITALIC);
             YANONE_BOLD_ITALIC = getTypeface(context, K_FONT_YANONE_BOLD_ITALIC);
+            //PRODUCT_SANS
+            PRODUCT_SANS = getTypeface(context, K_FONT_PRODUCT_SANS);
+            PRODUCT_SANS_BOLD = getTypeface(context, K_FONT_PRODUCT_SANS_BOLD);
+            PRODUCT_SANS_ITALIC = getTypeface(context, K_FONT_PRODUCT_SANS_ITALIC);
+            PRODUCT_SANS_BOLD_ITALIC = getTypeface(context, K_FONT_PRODUCT_SANS_BOLD_ITALIC);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }
@@ -995,6 +1022,8 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getMPlus();
             case YANONE:
                 return getYanone();
+            case PRODUCT_SANS:
+                return getProductSans();
         }
         return getOs();
     }
@@ -1068,6 +1097,8 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getMPlusBold();
             case YANONE:
                 return getYanoneBold();
+            case PRODUCT_SANS:
+                return getProductSansBold();
         }
         return getOsBold();
     }
@@ -1140,6 +1171,8 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getMPlusItalic();
             case YANONE:
                 return getYanoneItalic();
+            case PRODUCT_SANS:
+                return getProductSansItalic();
         }
         return getOsItalic();
     }
@@ -1212,6 +1245,8 @@ public final class BSTypefaceManager extends BSBaseManager {
                 return getMPlusBoldItalic();
             case YANONE:
                 return getYanoneBoldItalic();
+            case PRODUCT_SANS:
+                return getProductSansBoldItalic();
         }
         return getOsBoldItalic();
     }
@@ -1226,7 +1261,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getAller() {
+    protected static Typeface getAller() {
         return getInstance().ALLER;
     }
 
@@ -1237,7 +1272,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getAllerBold() {
+    protected static Typeface getAllerBold() {
         return getInstance().ALLER_BOLD;
     }
 
@@ -1247,7 +1282,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getAllerItalic() {
+    protected static Typeface getAllerItalic() {
         return getInstance().ALLER_ITALIC;
     }
 
@@ -1257,7 +1292,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getAllerBoldItalic() {
+    protected static Typeface getAllerBoldItalic() {
         return getInstance().ALLER_BOLD_ITALIC;
     }
 
@@ -1271,7 +1306,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRoboto() {
+    protected static Typeface getRoboto() {
         return getInstance().ROBOTO;
     }
 
@@ -1282,7 +1317,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRobotoBold() {
+    protected static Typeface getRobotoBold() {
         return getInstance().ROBOTO_BOLD;
     }
 
@@ -1292,7 +1327,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRobotoItalic() {
+    protected static Typeface getRobotoItalic() {
         return getInstance().ROBOTO_ITALIC;
     }
 
@@ -1302,7 +1337,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRobotoBoldItalic() {
+    protected static Typeface getRobotoBoldItalic() {
         return getInstance().ROBOTO_BOLD_ITALIC;
     }
 
@@ -1316,7 +1351,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getOs() {
+    protected static Typeface getOs() {
         return getInstance().OS;
     }
 
@@ -1327,7 +1362,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getOsBold() {
+    protected static Typeface getOsBold() {
         return getInstance().OS_BOLD;
     }
 
@@ -1337,7 +1372,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getOsItalic() {
+    protected static Typeface getOsItalic() {
         return getInstance().OS_ITALIC;
     }
 
@@ -1347,7 +1382,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getOsBoldItalic() {
+    protected static Typeface getOsBoldItalic() {
         return getInstance().OS_BOLD_ITALIC;
     }
 
@@ -1361,7 +1396,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getSf() {
+    protected static Typeface getSf() {
         return getInstance().SF;
     }
 
@@ -1372,7 +1407,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getSfBold() {
+    protected static Typeface getSfBold() {
         return getInstance().SF_BOLD;
     }
 
@@ -1382,7 +1417,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getSfItalic() {
+    protected static Typeface getSfItalic() {
         return getInstance().SF_ITALIC;
     }
 
@@ -1392,7 +1427,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getSfBoldItalic() {
+    protected static Typeface getSfBoldItalic() {
         return getInstance().SF_BOLD_ITALIC;
     }
 
@@ -1406,7 +1441,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getUbuntu() {
+    protected static Typeface getUbuntu() {
         return getInstance().U;
     }
 
@@ -1417,7 +1452,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getUbuntuBold() {
+    protected static Typeface getUbuntuBold() {
         return getInstance().U_BOLD;
     }
 
@@ -1427,7 +1462,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getUbuntuItalic() {
+    protected static Typeface getUbuntuItalic() {
         return getInstance().U_ITALIC;
     }
 
@@ -1437,7 +1472,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getUbuntuBoldItalic() {
+    protected static Typeface getUbuntuBoldItalic() {
         return getInstance().U_BOLD_ITALIC;
     }
 
@@ -1451,7 +1486,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getUbuntuMono() {
+    protected static Typeface getUbuntuMono() {
         return getInstance().UM;
     }
 
@@ -1462,7 +1497,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getUbuntuMonoBold() {
+    protected static Typeface getUbuntuMonoBold() {
         return getInstance().UM_BOLD;
     }
 
@@ -1472,7 +1507,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getUbuntuMonoItalic() {
+    protected static Typeface getUbuntuMonoItalic() {
         return getInstance().UM_ITALIC;
     }
 
@@ -1482,7 +1517,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getUbuntuMonoBoldItalic() {
+    protected static Typeface getUbuntuMonoBoldItalic() {
         return getInstance().UM_BOLD_ITALIC;
     }
 
@@ -1496,7 +1531,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getBariol() {
+    protected static Typeface getBariol() {
         return getInstance().BARIOL;
     }
 
@@ -1507,7 +1542,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getBariolBold() {
+    protected static Typeface getBariolBold() {
         return getInstance().BARIOL_BOLD;
     }
 
@@ -1517,7 +1552,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getBariolItalic() {
+    protected static Typeface getBariolItalic() {
         return getInstance().BARIOL_ITALIC;
     }
 
@@ -1527,7 +1562,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getBariolBoldItalic() {
+    protected static Typeface getBariolBoldItalic() {
         return getInstance().BARIOL_BOLD_ITALIC;
     }
 
@@ -1541,7 +1576,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getComfortaa() {
+    protected static Typeface getComfortaa() {
         return getInstance().COMFORTAA;
     }
 
@@ -1552,7 +1587,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getComfortaaBold() {
+    protected static Typeface getComfortaaBold() {
         return getInstance().COMFORTAA_BOLD;
     }
 
@@ -1562,7 +1597,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getComfortaaItalic() {
+    protected static Typeface getComfortaaItalic() {
         return getInstance().COMFORTAA_ITALIC;
     }
 
@@ -1572,7 +1607,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getComfortaaBoldItalic() {
+    protected static Typeface getComfortaaBoldItalic() {
         return getInstance().COMFORTAA_BOLD_ITALIC;
     }
 
@@ -1586,7 +1621,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getVR() {
+    protected static Typeface getVR() {
         return getInstance().VR;
     }
 
@@ -1597,7 +1632,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getVRBold() {
+    protected static Typeface getVRBold() {
         return getInstance().VR_BOLD;
     }
 
@@ -1607,7 +1642,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getVRItalic() {
+    protected static Typeface getVRItalic() {
         return getInstance().VR_ITALIC;
     }
 
@@ -1617,7 +1652,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getVRBoldItalic() {
+    protected static Typeface getVRBoldItalic() {
         return getInstance().VR_BOLD_ITALIC;
     }
 
@@ -1631,7 +1666,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getMontserat() {
+    protected static Typeface getMontserat() {
         return getInstance().MONTSERAT;
     }
 
@@ -1642,7 +1677,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getMontseratBold() {
+    protected static Typeface getMontseratBold() {
         return getInstance().MONTSERAT_BOLD;
     }
 
@@ -1652,7 +1687,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getMontseratItalic() {
+    protected static Typeface getMontseratItalic() {
         return getInstance().MONTSERAT_ITALIC;
     }
 
@@ -1662,7 +1697,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getMontseratBoldItalic() {
+    protected static Typeface getMontseratBoldItalic() {
         return getInstance().MONTSERAT_BOLD_ITALIC;
     }
 
@@ -1676,7 +1711,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getBlogSans() {
+    protected static Typeface getBlogSans() {
         return getInstance().BLOG_SANS;
     }
 
@@ -1687,7 +1722,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getBlogSansBold() {
+    protected static Typeface getBlogSansBold() {
         return getInstance().BLOG_SANS_BOLD;
     }
 
@@ -1697,7 +1732,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getBlogSansItalic() {
+    protected static Typeface getBlogSansItalic() {
         return getInstance().BLOG_SANS_ITALIC;
     }
 
@@ -1707,7 +1742,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getBlogSansBoldItalic() {
+    protected static Typeface getBlogSansBoldItalic() {
         return getInstance().BLOG_SANS_BOLD_ITALIC;
     }
 
@@ -1721,7 +1756,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getClearSans() {
+    protected static Typeface getClearSans() {
         return getInstance().CLEAR_SANS;
     }
 
@@ -1732,7 +1767,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getClearSansBold() {
+    protected static Typeface getClearSansBold() {
         return getInstance().CLEAR_SANS_BOLD;
     }
 
@@ -1742,7 +1777,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getClearSansItalic() {
+    protected static Typeface getClearSansItalic() {
         return getInstance().CLEAR_SANS_ITALIC;
     }
 
@@ -1752,7 +1787,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getClearSansBoldItalic() {
+    protected static Typeface getClearSansBoldItalic() {
         return getInstance().CLEAR_SANS_BOLD_ITALIC;
     }
 
@@ -1766,7 +1801,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRobotoCondensed() {
+    protected static Typeface getRobotoCondensed() {
         return getInstance().ROBOTO_CONSENDET;
     }
 
@@ -1777,7 +1812,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRobotoCondensedBold() {
+    protected static Typeface getRobotoCondensedBold() {
         return getInstance().ROBOTO_CONSENDET_BOLD;
     }
 
@@ -1787,7 +1822,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRobotoCondensedItalic() {
+    protected static Typeface getRobotoCondensedItalic() {
         return getInstance().ROBOTO_CONSENDET_ITALIC;
     }
 
@@ -1797,7 +1832,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRobotoCondensedBoldItalic() {
+    protected static Typeface getRobotoCondensedBoldItalic() {
         return getInstance().ROBOTO_CONSENDET_BOLD_ITALIC;
     }
 
@@ -1811,7 +1846,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getDjv() {
+    protected static Typeface getDjv() {
         return getInstance().DJV;
     }
 
@@ -1822,7 +1857,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getDjvBold() {
+    protected static Typeface getDjvBold() {
         return getInstance().DJV_BOLD;
     }
 
@@ -1832,7 +1867,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getDjvItalic() {
+    protected static Typeface getDjvItalic() {
         return getInstance().DJV_ITALIC;
     }
 
@@ -1842,7 +1877,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getDjvBoldItalic() {
+    protected static Typeface getDjvBoldItalic() {
         return getInstance().DJV_BOLD_ITALIC;
     }
 
@@ -1856,7 +1891,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getSfc() {
+    protected static Typeface getSfc() {
         return getInstance().SFC;
     }
 
@@ -1867,7 +1902,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getSfcBold() {
+    protected static Typeface getSfcBold() {
         return getInstance().SFC_BOLD;
     }
 
@@ -1877,7 +1912,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getSfcItalic() {
+    protected static Typeface getSfcItalic() {
         return getInstance().SFC_ITALIC;
     }
 
@@ -1887,7 +1922,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getSfcBoldItalic() {
+    protected static Typeface getSfcBoldItalic() {
         return getInstance().SFC_BOLD_ITALIC;
     }
 
@@ -1901,7 +1936,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getGs() {
+    protected static Typeface getGs() {
         return getInstance().GS;
     }
 
@@ -1912,7 +1947,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getGsBold() {
+    protected static Typeface getGsBold() {
         return getInstance().GS_BOLD;
     }
 
@@ -1922,7 +1957,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getGsItalic() {
+    protected static Typeface getGsItalic() {
         return getInstance().GS_ITALIC;
     }
 
@@ -1932,7 +1967,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getGsBoldItalic() {
+    protected static Typeface getGsBoldItalic() {
         return getInstance().GS_BOLD_ITALIC;
     }
 
@@ -1946,7 +1981,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getFira() {
+    protected static Typeface getFira() {
         return getInstance().FIRA;
     }
 
@@ -1957,7 +1992,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getFiraBold() {
+    protected static Typeface getFiraBold() {
         return getInstance().FIRA_BOLD;
     }
 
@@ -1967,7 +2002,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getFiraItalic() {
+    protected static Typeface getFiraItalic() {
         return getInstance().FIRA_ITALIC;
     }
 
@@ -1977,7 +2012,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getFiraBoldItalic() {
+    protected static Typeface getFiraBoldItalic() {
         return getInstance().FIRA_BOLD_ITALIC;
     }
 
@@ -1991,7 +2026,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getNunito() {
+    protected static Typeface getNunito() {
         return getInstance().NUNITO;
     }
 
@@ -2002,7 +2037,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getNunitoBold() {
+    protected static Typeface getNunitoBold() {
         return getInstance().NUNITO_BOLD;
     }
 
@@ -2012,7 +2047,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getNunitoItalic() {
+    protected static Typeface getNunitoItalic() {
         return getInstance().NUNITO_ITALIC;
     }
 
@@ -2022,7 +2057,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getNunitoBoldItalic() {
+    protected static Typeface getNunitoBoldItalic() {
         return getInstance().NUNITO_BOLD_ITALIC;
     }
 
@@ -2036,7 +2071,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getFantasque() {
+    protected static Typeface getFantasque() {
         return getInstance().FANTASQUE;
     }
 
@@ -2047,7 +2082,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getFantasqueBold() {
+    protected static Typeface getFantasqueBold() {
         return getInstance().FANTASQUE_BOLD;
     }
 
@@ -2057,7 +2092,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getFantasqueItalic() {
+    protected static Typeface getFantasqueItalic() {
         return getInstance().FANTASQUE_ITALIC;
     }
 
@@ -2067,7 +2102,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getFantasqueBoldItalic() {
+    protected static Typeface getFantasqueBoldItalic() {
         return getInstance().FANTASQUE_BOLD_ITALIC;
     }
 
@@ -2081,7 +2116,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getLato() {
+    protected static Typeface getLato() {
         return getInstance().LATO;
     }
 
@@ -2092,7 +2127,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getLatoBold() {
+    protected static Typeface getLatoBold() {
         return getInstance().LATO_BOLD;
     }
 
@@ -2102,7 +2137,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getLatoItalic() {
+    protected static Typeface getLatoItalic() {
         return getInstance().LATO_ITALIC;
     }
 
@@ -2112,7 +2147,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getLatoBoldItalic() {
+    protected static Typeface getLatoBoldItalic() {
         return getInstance().LATO_BOLD_ITALIC;
     }
 
@@ -2126,7 +2161,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getPtSans() {
+    protected static Typeface getPtSans() {
         return getInstance().PT_SANS;
     }
 
@@ -2137,7 +2172,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getPtSansBold() {
+    protected static Typeface getPtSansBold() {
         return getInstance().PT_SANS_BOLD;
     }
 
@@ -2147,7 +2182,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getPtSansItalic() {
+    protected static Typeface getPtSansItalic() {
         return getInstance().PT_SANS_ITALIC;
     }
 
@@ -2157,7 +2192,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getPtSansBoldItalic() {
+    protected static Typeface getPtSansBoldItalic() {
         return getInstance().PT_SANS_BOLD_ITALIC;
     }
 
@@ -2171,7 +2206,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getMontserratAlternates() {
+    protected static Typeface getMontserratAlternates() {
         return getInstance().MONTSERRAT_ALTERNATES;
     }
 
@@ -2182,7 +2217,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getMontserratAlternatesBold() {
+    protected static Typeface getMontserratAlternatesBold() {
         return getInstance().MONTSERRAT_ALTERNATES_BOLD;
     }
 
@@ -2192,7 +2227,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getMontserratAlternatesItalic() {
+    protected static Typeface getMontserratAlternatesItalic() {
         return getInstance().MONTSERRAT_ALTERNATES_ITALIC;
     }
 
@@ -2202,7 +2237,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getMontserratAlternatesBoldItalic() {
+    protected static Typeface getMontserratAlternatesBoldItalic() {
         return getInstance().MONTSERRAT_ALTERNATES_BOLD_ITALIC;
     }
 
@@ -2216,7 +2251,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getOsCondensed() {
+    protected static Typeface getOsCondensed() {
         return getInstance().OS_CONDENSED;
     }
 
@@ -2227,7 +2262,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getOsCondensedBold() {
+    protected static Typeface getOsCondensedBold() {
         return getInstance().OS_CONDENSED_BOLD;
     }
 
@@ -2237,7 +2272,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getOsCondensedItalic() {
+    protected static Typeface getOsCondensedItalic() {
         return getInstance().OS_CONDENSED_ITALIC;
     }
 
@@ -2247,7 +2282,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getOsCondensedBoldItalic() {
+    protected static Typeface getOsCondensedBoldItalic() {
         return getInstance().OS_CONDENSED_BOLD_ITALIC;
     }
 
@@ -2261,7 +2296,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRubik() {
+    protected static Typeface getRubik() {
         return getInstance().RUBIK;
     }
 
@@ -2272,7 +2307,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRubikBold() {
+    protected static Typeface getRubikBold() {
         return getInstance().RUBIK_BOLD;
     }
 
@@ -2282,7 +2317,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRubikItalic() {
+    protected static Typeface getRubikItalic() {
         return getInstance().RUBIK_ITALIC;
     }
 
@@ -2292,7 +2327,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRubikBoldItalic() {
+    protected static Typeface getRubikBoldItalic() {
         return getInstance().RUBIK_BOLD_ITALIC;
     }
 
@@ -2306,7 +2341,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getPodkova() {
+    protected static Typeface getPodkova() {
         return getInstance().PODKOVA;
     }
 
@@ -2317,7 +2352,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getPodkovaBold() {
+    protected static Typeface getPodkovaBold() {
         return getInstance().PODKOVA_BOLD;
     }
 
@@ -2327,7 +2362,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getPodkovaItalic() {
+    protected static Typeface getPodkovaItalic() {
         return getInstance().PODKOVA_ITALIC;
     }
 
@@ -2337,7 +2372,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getPodkovaBoldItalic() {
+    protected static Typeface getPodkovaBoldItalic() {
         return getInstance().PODKOVA_BOLD_ITALIC;
     }
 
@@ -2351,7 +2386,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getSourceSansPro() {
+    protected static Typeface getSourceSansPro() {
         return getInstance().SOURCE_SANS_PRO;
     }
 
@@ -2362,7 +2397,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getSourceSansProBold() {
+    protected static Typeface getSourceSansProBold() {
         return getInstance().SOURCE_SANS_PRO_BOLD;
     }
 
@@ -2372,7 +2407,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getSourceSansProItalic() {
+    protected static Typeface getSourceSansProItalic() {
         return getInstance().SOURCE_SANS_PRO_ITALIC;
     }
 
@@ -2382,7 +2417,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getSourceSansProBoldItalic() {
+    protected static Typeface getSourceSansProBoldItalic() {
         return getInstance().SOURCE_SANS_PRO_BOLD_ITALIC;
     }
 
@@ -2396,7 +2431,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRobotoSlab() {
+    protected static Typeface getRobotoSlab() {
         return getInstance().ROBOTO_SLAB;
     }
 
@@ -2407,7 +2442,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRobotoSlabBold() {
+    protected static Typeface getRobotoSlabBold() {
         return getInstance().ROBOTO_SLAB_BOLD;
     }
 
@@ -2417,7 +2452,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRobotoSlabItalic() {
+    protected static Typeface getRobotoSlabItalic() {
         return getInstance().ROBOTO_SLAB_ITALIC;
     }
 
@@ -2427,7 +2462,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getRobotoSlabBoldItalic() {
+    protected static Typeface getRobotoSlabBoldItalic() {
         return getInstance().ROBOTO_SLAB_BOLD_ITALIC;
     }
 
@@ -2441,7 +2476,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getExoSecond() {
+    protected static Typeface getExoSecond() {
         return getInstance().EXO_2;
     }
 
@@ -2452,7 +2487,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getExoSecondBold() {
+    protected static Typeface getExoSecondBold() {
         return getInstance().EXO_2_BOLD;
     }
 
@@ -2462,7 +2497,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getExoSecondItalic() {
+    protected static Typeface getExoSecondItalic() {
         return getInstance().EXO_2_ITALIC;
     }
 
@@ -2472,7 +2507,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getExoSecondBoldItalic() {
+    protected static Typeface getExoSecondBoldItalic() {
         return getInstance().EXO_2_BOLD_ITALIC;
     }
 
@@ -2486,7 +2521,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getMPlus() {
+    protected static Typeface getMPlus() {
         return getInstance().M_PLUS;
     }
 
@@ -2497,7 +2532,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getMPlusBold() {
+    protected static Typeface getMPlusBold() {
         return getInstance().M_PLUS_BOLD;
     }
 
@@ -2507,7 +2542,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getMPlusItalic() {
+    protected static Typeface getMPlusItalic() {
         return getInstance().M_PLUS_ITALIC;
     }
 
@@ -2517,7 +2552,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getMPlusBoldItalic() {
+    protected static Typeface getMPlusBoldItalic() {
         return getInstance().M_PLUS_BOLD_ITALIC;
     }
 
@@ -2531,7 +2566,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getYanone() {
+    protected static Typeface getYanone() {
         return getInstance().YANONE;
     }
 
@@ -2542,7 +2577,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getYanoneBold() {
+    protected static Typeface getYanoneBold() {
         return getInstance().YANONE_BOLD;
     }
 
@@ -2552,7 +2587,7 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getYanoneItalic() {
+    protected static Typeface getYanoneItalic() {
         return getInstance().YANONE_ITALIC;
     }
 
@@ -2562,8 +2597,53 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    public static Typeface getYanoneBoldItalic() {
+    protected static Typeface getYanoneBoldItalic() {
         return getInstance().YANONE_BOLD_ITALIC;
+    }
+
+    //==============================================================================================
+    //                                       PRODUCT_SANS(SPECIFIC)
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting of the default {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    protected static Typeface getProductSans() {
+        return getInstance().PRODUCT_SANS;
+    }
+
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    protected static Typeface getProductSansBold() {
+        return getInstance().PRODUCT_SANS_BOLD;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    protected static Typeface getProductSansItalic() {
+        return getInstance().PRODUCT_SANS_ITALIC;
+    }
+
+    /**
+     * Method which provide the getting of the bold {@link Typeface}
+     *
+     * @return instance of {@link Typeface}
+     */
+    @NonNull
+    protected static Typeface getProductSansBoldItalic() {
+        return getInstance().PRODUCT_SANS_BOLD_ITALIC;
     }
 
 }

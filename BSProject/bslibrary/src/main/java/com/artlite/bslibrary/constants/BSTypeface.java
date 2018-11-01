@@ -33,5 +33,6 @@ public enum BSTypeface {
     ROBOTO_SLAB,
     EXO_2,
     M_PLUS,
-    YANONE
+    YANONE,
+    PRODUCT_SANS
 }

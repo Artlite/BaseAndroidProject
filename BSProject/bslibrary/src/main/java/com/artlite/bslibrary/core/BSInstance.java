@@ -34,7 +34,7 @@ public final class BSInstance {
      * @param context instance of {@link Context}
      */
     public static void init(@Nullable final Context context) {
-        init(context, BSTypeface.OPEN_SANS);
+        init(context, BSTypeface.PRODUCT_SANS);
     }
 
     /**

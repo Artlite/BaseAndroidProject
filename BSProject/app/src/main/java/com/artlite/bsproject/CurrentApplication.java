@@ -13,6 +13,6 @@ public class CurrentApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        BSInstance.init(this, BSTypeface.SOURCE_SANS_PRO);
+        BSInstance.init(this, BSTypeface.ROBOTO_SLAB);
     }
 }

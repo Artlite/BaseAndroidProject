@@ -2,6 +2,8 @@ package com.artlite.bslibrary.ui.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +18,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +26,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.artlite.bslibrary.R;
+import com.artlite.bslibrary.annotations.Warning;
 import com.artlite.bslibrary.callbacks.BSPermissionCallback;
 import com.artlite.bslibrary.helpers.injector.BSInjector;
 import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
@@ -30,6 +34,7 @@ import com.artlite.bslibrary.helpers.log.BSLogHelper;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.listeners.BSSwipeListener;
+import com.artlite.bslibrary.managers.BSLocalNotificationManager;
 import com.artlite.bslibrary.managers.BSThreadManager;
 
 import java.io.InputStream;
@@ -46,6 +51,11 @@ public abstract class BSActivity extends AppCompatActivity
     //==============================================================================================
     //                                      CONSTANTS
     //==============================================================================================
+
+    /**
+     * {@link String} constants of the tag
+     */
+    protected static final String TAG = BSActivity.class.getSimpleName();
 
     /**
      * {@link Integer} value of the pick image result
@@ -86,6 +96,11 @@ public abstract class BSActivity extends AppCompatActivity
      */
     private GestureDetector gestureDetector;
 
+    /**
+     * Instance of the {@link BroadcastReceiver}
+     */
+    private BroadcastReceiver closeReciever;
+
     //==============================================================================================
     //                                      CREATE
     //==============================================================================================
@@ -99,6 +114,9 @@ public abstract class BSActivity extends AppCompatActivity
     protected void onCreate(final Bundle bundle) {
         super.onCreate(bundle);
         setContentView(getLayoutId());
+        // Registering of the close receiver
+        BSLocalNotificationManager.register(this.getCloseReciever(),
+                this.getCloseKey());
         onInitBackButton();
         onInitgestures();
         BSInjector.inject(this);
@@ -109,6 +127,16 @@ public abstract class BSActivity extends AppCompatActivity
                 onActivityPostCreation((bundle == null) ? getIntent().getExtras() : bundle);
             }
         });
+    }
+
+    /**
+     * Method which provide the action with destroying functional
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Unregistering of the close receiver
+        BSLocalNotificationManager.unregister(this.getCloseReciever());
     }
 
     //==============================================================================================
@@ -667,6 +695,76 @@ public abstract class BSActivity extends AppCompatActivity
          */
         void onPreExecute(@NonNull final Intent intent);
     }
+
+    //==============================================================================================
+    //                                   CLOSE ACTIVITY FUNCTIONAL
+    //==============================================================================================
+
+    /**
+     * Method which provide the getting class for the closing functional
+     *
+     * @return instance of the {@link Class}
+     */
+    @Warning(massage = "THis method provide the class for the closing of the activity")
+    @Nullable
+    protected Class getCloseClass() {
+        return null;
+    }
+
+    /**
+     * Method which provide the getting of the closing key
+     *
+     * @return instance of the {@link String}
+     */
+    @Nullable
+    protected String getCloseKey() {
+        return getCloseKey(getCloseClass());
+    }
+
+    /**
+     * Method which provide the getting of the closing key
+     *
+     * @param aClass instance of the {@link Class}
+     * @return instance of the {@link String}
+     */
+    @Nullable
+    protected static String getCloseKey(@Nullable Class aClass) {
+        try {
+            return String.format("CloseReceiver:%s", aClass.getName());
+        } catch (Exception ex) {
+            Log.e(TAG, "getCloseKey: ", ex);
+        }
+        return null;
+    }
+
+    /**
+     * Method which provide the close receiver functional
+     *
+     * @return instance of the {@link BroadcastReceiver}
+     */
+    @NonNull
+    protected BroadcastReceiver getCloseReciever() {
+        if (this.closeReciever == null) {
+            this.closeReciever = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    finish();
+                }
+            };
+        }
+        return this.closeReciever;
+    }
+
+    /**
+     * Method which provide the closing of the all class activity
+     *
+     * @param aClass instance of the {@link Class}
+     */
+    public static void closeActivityByClass(@Nullable Class aClass) {
+        final String key = getCloseKey(aClass);
+        BSLocalNotificationManager.send(key);
+    }
+
 
     //==============================================================================================
     //                                   ABSTRACT METHODS

@@ -48,6 +48,7 @@ public class TagsActivity extends BSActivity implements BSTagsView.OnTagsViewCal
         for (int i = 0; i < 100; i++) {
             this.tagsView.add(new CurrentTagView.Object(i));
         }
+        closeActivityByClass(MainActivity.class);
     }
 
     /**
