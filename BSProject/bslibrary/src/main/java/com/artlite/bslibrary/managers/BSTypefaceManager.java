@@ -742,172 +742,8 @@ public final class BSTypefaceManager extends BSBaseManager {
     public BSTypefaceManager(@NonNull Context context,
                              @NonNull BSTypeface typeface) {
         super(context);
-        final String methodName = "BSTypefaceManager(context)";
         this.typeface = typeface;
-        try {
-            //Aller
-            ALLER = getTypeface(context, K_FONT_ALLER);
-            ALLER_BOLD = getTypeface(context, K_FONT_ALLER_BOLD);
-            ALLER_ITALIC = getTypeface(context, K_FONT_ALLER_ITALIC);
-            ALLER_BOLD_ITALIC = getTypeface(context, K_FONT_ALLER_BOLD_ITALIC);
-            //Roboto
-            ROBOTO = getTypeface(context, K_FONT_ROBOTO);
-            ROBOTO_BOLD = getTypeface(context, K_FONT_ROBOTO_BOLD);
-            ROBOTO_ITALIC = getTypeface(context, K_FONT_ROBOTO_ITALIC);
-            ROBOTO_BOLD_ITALIC = getTypeface(context, K_FONT_ROBOTO_BOLD_ITALIC);
-            //Open Sans
-            OS = getTypeface(context, K_FONT_OS);
-            OS_BOLD = getTypeface(context, K_FONT_OS_BOLD);
-            OS_ITALIC = getTypeface(context, K_FONT_OS_ITALIC);
-            OS_BOLD_ITALIC = getTypeface(context, K_FONT_OS_BOLD_ITALIC);
-            //San Francisco
-            SF = getTypeface(context, K_FONT_SF);
-            SF_BOLD = getTypeface(context, K_FONT_SF_BOLD);
-            SF_ITALIC = getTypeface(context, K_FONT_SF_ITALIC);
-            SF_BOLD_ITALIC = getTypeface(context, K_FONT_SF_BOLD_ITALIC);
-            //Ubuntu
-            U = getTypeface(context, K_FONT_U);
-            U_BOLD = getTypeface(context, K_FONT_U_BOLD);
-            U_ITALIC = getTypeface(context, K_FONT_U_ITALIC);
-            U_BOLD_ITALIC = getTypeface(context, K_FONT_U_BOLD_ITALIC);
-            //Ubuntu Mono
-            UM = getTypeface(context, K_FONT_UM);
-            UM_BOLD = getTypeface(context, K_FONT_UM_BOLD);
-            UM_ITALIC = getTypeface(context, K_FONT_UM_ITALIC);
-            UM_BOLD_ITALIC = getTypeface(context, K_FONT_UM_BOLD_ITALIC);
-            //Bariol
-            BARIOL = getTypeface(context, K_FONT_BARIOL);
-            BARIOL_BOLD = getTypeface(context, K_FONT_BARIOL_BOLD);
-            BARIOL_ITALIC = getTypeface(context, K_FONT_BARIOL_ITALIC);
-            BARIOL_BOLD_ITALIC = getTypeface(context, K_FONT_BARIOL_BOLD_ITALIC);
-            //Comfortaa
-            COMFORTAA = getTypeface(context, K_FONT_COMFORTAA);
-            COMFORTAA_BOLD = getTypeface(context, K_FONT_COMFORTAA_BOLD);
-            COMFORTAA_ITALIC = getTypeface(context, K_FONT_COMFORTAA_ITALIC);
-            COMFORTAA_BOLD_ITALIC = getTypeface(context, K_FONT_COMFORTAA_BOLD_ITALIC);
-            //Varela Round
-            VR = getTypeface(context, K_FONT_VR);
-            VR_BOLD = getTypeface(context, K_FONT_VR_BOLD);
-            VR_ITALIC = getTypeface(context, K_FONT_VR_ITALIC);
-            VR_BOLD_ITALIC = getTypeface(context, K_FONT_VR_BOLD_ITALIC);
-            //Varela Round
-            MONTSERAT = getTypeface(context, K_FONT_MONTSERAT);
-            MONTSERAT_BOLD = getTypeface(context, K_FONT_MONTSERAT_BOLD);
-            MONTSERAT_ITALIC = getTypeface(context, K_FONT_MONTSERAT_ITALIC);
-            MONTSERAT_BOLD_ITALIC = getTypeface(context, K_FONT_MONTSERAT_BOLD_ITALIC);
-            //Blogger Sans
-            BLOG_SANS = getTypeface(context, K_FONT_BLOG_SANS);
-            BLOG_SANS_BOLD = getTypeface(context, K_FONT_BLOG_SANS_BOLD);
-            BLOG_SANS_ITALIC = getTypeface(context, K_FONT_BLOG_SANS_ITALIC);
-            BLOG_SANS_BOLD_ITALIC = getTypeface(context, K_FONT_BLOG_SANS_BOLD_ITALIC);
-            //Blogger Sans
-            CLEAR_SANS = getTypeface(context, K_FONT_CLEAR_SANS);
-            CLEAR_SANS_BOLD = getTypeface(context, K_FONT_CLEAR_SANS_BOLD);
-            CLEAR_SANS_ITALIC = getTypeface(context, K_FONT_CLEAR_SANS_ITALIC);
-            CLEAR_SANS_BOLD_ITALIC = getTypeface(context, K_FONT_CLEAR_SANS_BOLD_ITALIC);
-            //Blogger Sans
-            ROBOTO_CONSENDET = getTypeface(context, K_FONT_ROBOTO_CONSENDET);
-            ROBOTO_CONSENDET_BOLD = getTypeface(context, K_FONT_ROBOTO_CONSENDET_BOLD);
-            ROBOTO_CONSENDET_ITALIC = getTypeface(context, K_FONT_ROBOTO_CONSENDET_ITALIC);
-            ROBOTO_CONSENDET_BOLD_ITALIC = getTypeface(context, K_FONT_ROBOTO_CONSENDET_BOLD_ITALIC);
-            //Blogger Sans
-            DJV = getTypeface(context, K_FONT_DJV);
-            DJV_BOLD = getTypeface(context, K_FONT_DJV_BOLD);
-            DJV_ITALIC = getTypeface(context, K_FONT_DJV_ITALIC);
-            DJV_BOLD_ITALIC = getTypeface(context, K_FONT_DJV_BOLD_ITALIC);
-            //SFC
-            SFC = getTypeface(context, K_FONT_SFC);
-            SFC_BOLD = getTypeface(context, K_FONT_SFC_BOLD);
-            SFC_ITALIC = getTypeface(context, K_FONT_SFC_ITALIC);
-            SFC_BOLD_ITALIC = getTypeface(context, K_FONT_SFC_BOLD_ITALIC);
-            //GS
-            GS = getTypeface(context, K_FONT_GS);
-            GS_BOLD = getTypeface(context, K_FONT_GS_BOLD);
-            GS_ITALIC = getTypeface(context, K_FONT_GS_ITALIC);
-            GS_BOLD_ITALIC = getTypeface(context, K_FONT_GS_BOLD_ITALIC);
-            //FIRA
-            FIRA = getTypeface(context, K_FONT_FIRA);
-            FIRA_BOLD = getTypeface(context, K_FONT_FIRA_BOLD);
-            FIRA_ITALIC = getTypeface(context, K_FONT_FIRA_ITALIC);
-            FIRA_BOLD_ITALIC = getTypeface(context, K_FONT_FIRA_BOLD_ITALIC);
-            //NUNITO
-            NUNITO = getTypeface(context, K_FONT_NUNITO);
-            NUNITO_BOLD = getTypeface(context, K_FONT_NUNITO_BOLD);
-            NUNITO_ITALIC = getTypeface(context, K_FONT_NUNITO_ITALIC);
-            NUNITO_BOLD_ITALIC = getTypeface(context, K_FONT_NUNITO_BOLD_ITALIC);
-            //FANTASQUE
-            FANTASQUE = getTypeface(context, K_FONT_FANTASQUE);
-            FANTASQUE_BOLD = getTypeface(context, K_FONT_FANTASQUE_BOLD);
-            FANTASQUE_ITALIC = getTypeface(context, K_FONT_FANTASQUE_ITALIC);
-            FANTASQUE_BOLD_ITALIC = getTypeface(context, K_FONT_FANTASQUE_BOLD_ITALIC);
-            //LATO
-            LATO = getTypeface(context, K_FONT_LATO);
-            LATO_BOLD = getTypeface(context, K_FONT_LATO_BOLD);
-            LATO_ITALIC = getTypeface(context, K_FONT_LATO_ITALIC);
-            LATO_BOLD_ITALIC = getTypeface(context, K_FONT_LATO_BOLD_ITALIC);
-            //PT_SANS
-            PT_SANS = getTypeface(context, K_FONT_PT_SANS);
-            PT_SANS_BOLD = getTypeface(context, K_FONT_PT_SANS_BOLD);
-            PT_SANS_ITALIC = getTypeface(context, K_FONT_PT_SANS_ITALIC);
-            PT_SANS_BOLD_ITALIC = getTypeface(context, K_FONT_PT_SANS_BOLD_ITALIC);
-            //MONTSERRAT_ALTERNATES
-            MONTSERRAT_ALTERNATES = getTypeface(context, K_FONT_MONTSERRAT_ALTERNATES);
-            MONTSERRAT_ALTERNATES_BOLD = getTypeface(context, K_FONT_MONTSERRAT_ALTERNATES_BOLD);
-            MONTSERRAT_ALTERNATES_ITALIC = getTypeface(context, K_FONT_MONTSERRAT_ALTERNATES_ITALIC);
-            MONTSERRAT_ALTERNATES_BOLD_ITALIC = getTypeface(context, K_FONT_MONTSERRAT_ALTERNATES_BOLD_ITALIC);
-            //OS_CONDENSED
-            OS_CONDENSED = getTypeface(context, K_FONT_OS_CONDENSED);
-            OS_CONDENSED_BOLD = getTypeface(context, K_FONT_OS_CONDENSED_BOLD);
-            OS_CONDENSED_ITALIC = getTypeface(context, K_FONT_OS_CONDENSED_ITALIC);
-            OS_CONDENSED_BOLD_ITALIC = getTypeface(context, K_FONT_OS_CONDENSED_BOLD_ITALIC);
-            //RUBIK
-            RUBIK = getTypeface(context, K_FONT_RUBIK);
-            RUBIK_BOLD = getTypeface(context, K_FONT_RUBIK_BOLD);
-            RUBIK_ITALIC = getTypeface(context, K_FONT_RUBIK_ITALIC);
-            RUBIK_BOLD_ITALIC = getTypeface(context, K_FONT_RUBIK_BOLD_ITALIC);
-            //PODKOVA
-            PODKOVA = getTypeface(context, K_FONT_PODKOVA);
-            PODKOVA_BOLD = getTypeface(context, K_FONT_PODKOVA_BOLD);
-            PODKOVA_ITALIC = getTypeface(context, K_FONT_PODKOVA_ITALIC);
-            PODKOVA_BOLD_ITALIC = getTypeface(context, K_FONT_PODKOVA_BOLD_ITALIC);
-            //SOURCE_SANS_PRO
-            SOURCE_SANS_PRO = getTypeface(context, K_FONT_SOURCE_SANS_PRO);
-            SOURCE_SANS_PRO_BOLD = getTypeface(context, K_FONT_SOURCE_SANS_PRO_BOLD);
-            SOURCE_SANS_PRO_ITALIC = getTypeface(context, K_FONT_SOURCE_SANS_PRO_ITALIC);
-            SOURCE_SANS_PRO_BOLD_ITALIC = getTypeface(context, K_FONT_SOURCE_SANS_PRO_BOLD_ITALIC);
-            //ROBOTO_SLAB
-            ROBOTO_SLAB = getTypeface(context, K_FONT_ROBOTO_SLAB);
-            ROBOTO_SLAB_BOLD = getTypeface(context, K_FONT_ROBOTO_SLAB_BOLD);
-            ROBOTO_SLAB_ITALIC = getTypeface(context, K_FONT_ROBOTO_SLAB_ITALIC);
-            ROBOTO_SLAB_BOLD_ITALIC = getTypeface(context, K_FONT_ROBOTO_SLAB_BOLD_ITALIC);
-            //EXO_2
-            EXO_2 = getTypeface(context, K_FONT_EXO_2);
-            EXO_2_BOLD = getTypeface(context, K_FONT_EXO_2_BOLD);
-            EXO_2_ITALIC = getTypeface(context, K_FONT_EXO_2_ITALIC);
-            EXO_2_BOLD_ITALIC = getTypeface(context, K_FONT_EXO_2_BOLD_ITALIC);
-            //M_PLUS
-            M_PLUS = getTypeface(context, K_FONT_M_PLUS);
-            M_PLUS_BOLD = getTypeface(context, K_FONT_M_PLUS_BOLD);
-            M_PLUS_ITALIC = getTypeface(context, K_FONT_M_PLUS_ITALIC);
-            M_PLUS_BOLD_ITALIC = getTypeface(context, K_FONT_M_PLUS_BOLD_ITALIC);
-            //YANONE
-            YANONE = getTypeface(context, K_FONT_YANONE);
-            YANONE_BOLD = getTypeface(context, K_FONT_YANONE_BOLD);
-            YANONE_ITALIC = getTypeface(context, K_FONT_YANONE_ITALIC);
-            YANONE_BOLD_ITALIC = getTypeface(context, K_FONT_YANONE_BOLD_ITALIC);
-            //PRODUCT_SANS
-            PRODUCT_SANS = getTypeface(context, K_FONT_PRODUCT_SANS);
-            PRODUCT_SANS_BOLD = getTypeface(context, K_FONT_PRODUCT_SANS_BOLD);
-            PRODUCT_SANS_ITALIC = getTypeface(context, K_FONT_PRODUCT_SANS_ITALIC);
-            PRODUCT_SANS_BOLD_ITALIC = getTypeface(context, K_FONT_PRODUCT_SANS_BOLD_ITALIC);
-        } catch (Exception ex) {
-            BSLogHelper.log(null, methodName, ex, null);
-        }
     }
-
-    //==============================================================================================
-    //                                       GETTERS
-    //==============================================================================================
 
     //==============================================================================================
     //                                       DEFAULT
@@ -1261,7 +1097,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getAller() {
+    public static Typeface getAller() {
+        if (getInstance().ALLER == null) {
+            try {
+                getInstance().ALLER = getTypeface(getInstance().getContext(),
+                        K_FONT_ALLER);
+            } catch (Exception ex) {
+                Log.e(TAG, "getAller: ", ex);
+            }
+        }
         return getInstance().ALLER;
     }
 
@@ -1272,7 +1116,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getAllerBold() {
+    public static Typeface getAllerBold() {
+        if (getInstance().ALLER_BOLD == null) {
+            try {
+                getInstance().ALLER_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_ALLER_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getAllerBold: ", ex);
+            }
+        }
         return getInstance().ALLER_BOLD;
     }
 
@@ -1282,7 +1134,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getAllerItalic() {
+    public static Typeface getAllerItalic() {
+        if (getInstance().ALLER_ITALIC == null) {
+            try {
+                getInstance().ALLER_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_ALLER_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getAllerItalic: ", ex);
+            }
+        }
         return getInstance().ALLER_ITALIC;
     }
 
@@ -1292,7 +1152,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getAllerBoldItalic() {
+    public static Typeface getAllerBoldItalic() {
+        if (getInstance().ALLER_BOLD_ITALIC == null) {
+            try {
+                getInstance().ALLER_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_ALLER_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getAllerBoldItalic: ", ex);
+            }
+        }
         return getInstance().ALLER_BOLD_ITALIC;
     }
 
@@ -1306,7 +1174,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRoboto() {
+    public static Typeface getRoboto() {
+        if (getInstance().ROBOTO == null) {
+            try {
+                getInstance().ROBOTO = getTypeface(getInstance().getContext(),
+                        K_FONT_ROBOTO);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRoboto: ", ex);
+            }
+        }
         return getInstance().ROBOTO;
     }
 
@@ -1317,7 +1193,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRobotoBold() {
+    public static Typeface getRobotoBold() {
+        if (getInstance().ROBOTO_BOLD == null) {
+            try {
+                getInstance().ROBOTO_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_ROBOTO_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRobotoBold: ", ex);
+            }
+        }
         return getInstance().ROBOTO_BOLD;
     }
 
@@ -1327,7 +1211,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRobotoItalic() {
+    public static Typeface getRobotoItalic() {
+        if (getInstance().ROBOTO_ITALIC == null) {
+            try {
+                getInstance().ROBOTO_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_ROBOTO_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRobotoItalic: ", ex);
+            }
+        }
         return getInstance().ROBOTO_ITALIC;
     }
 
@@ -1337,7 +1229,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRobotoBoldItalic() {
+    public static Typeface getRobotoBoldItalic() {
+        if (getInstance().ROBOTO_BOLD_ITALIC == null) {
+            try {
+                getInstance().ROBOTO_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_ROBOTO_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRobotoBoldItalic: ", ex);
+            }
+        }
         return getInstance().ROBOTO_BOLD_ITALIC;
     }
 
@@ -1351,7 +1251,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getOs() {
+    public static Typeface getOs() {
+        if (getInstance().OS == null) {
+            try {
+                getInstance().OS = getTypeface(getInstance().getContext(),
+                        K_FONT_OS);
+            } catch (Exception ex) {
+                Log.e(TAG, "getOs: ", ex);
+            }
+        }
         return getInstance().OS;
     }
 
@@ -1362,7 +1270,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getOsBold() {
+    public static Typeface getOsBold() {
+        if (getInstance().OS_BOLD == null) {
+            try {
+                getInstance().OS_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_OS_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getOsBold: ", ex);
+            }
+        }
         return getInstance().OS_BOLD;
     }
 
@@ -1372,7 +1288,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getOsItalic() {
+    public static Typeface getOsItalic() {
+        if (getInstance().OS_ITALIC == null) {
+            try {
+                getInstance().OS_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_OS_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getOsItalic: ", ex);
+            }
+        }
         return getInstance().OS_ITALIC;
     }
 
@@ -1382,7 +1306,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getOsBoldItalic() {
+    public static Typeface getOsBoldItalic() {
+        if (getInstance().OS_BOLD_ITALIC == null) {
+            try {
+                getInstance().OS_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_OS_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getOsBoldItalic: ", ex);
+            }
+        }
         return getInstance().OS_BOLD_ITALIC;
     }
 
@@ -1396,7 +1328,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getSf() {
+    public static Typeface getSf() {
+        if (getInstance().SF == null) {
+            try {
+                getInstance().SF = getTypeface(getInstance().getContext(),
+                        K_FONT_SF);
+            } catch (Exception ex) {
+                Log.e(TAG, "getSf: ", ex);
+            }
+        }
         return getInstance().SF;
     }
 
@@ -1407,7 +1347,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getSfBold() {
+    public static Typeface getSfBold() {
+        if (getInstance().SF_BOLD == null) {
+            try {
+                getInstance().SF_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_SF_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getSfBold: ", ex);
+            }
+        }
         return getInstance().SF_BOLD;
     }
 
@@ -1417,7 +1365,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getSfItalic() {
+    public static Typeface getSfItalic() {
+        if (getInstance().SF_ITALIC == null) {
+            try {
+                getInstance().SF_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_SF_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getSfItalic: ", ex);
+            }
+        }
         return getInstance().SF_ITALIC;
     }
 
@@ -1427,7 +1383,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getSfBoldItalic() {
+    public static Typeface getSfBoldItalic() {
+        if (getInstance().SF_BOLD_ITALIC == null) {
+            try {
+                getInstance().SF_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_SF_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getSfBoldItalic: ", ex);
+            }
+        }
         return getInstance().SF_BOLD_ITALIC;
     }
 
@@ -1441,7 +1405,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getUbuntu() {
+    public static Typeface getUbuntu() {
+        if (getInstance().U == null) {
+            try {
+                getInstance().U = getTypeface(getInstance().getContext(),
+                        K_FONT_U);
+            } catch (Exception ex) {
+                Log.e(TAG, "getUbuntu: ", ex);
+            }
+        }
         return getInstance().U;
     }
 
@@ -1452,7 +1424,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getUbuntuBold() {
+    public static Typeface getUbuntuBold() {
+        if (getInstance().U_BOLD == null) {
+            try {
+                getInstance().U_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_U_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getUbuntuBold: ", ex);
+            }
+        }
         return getInstance().U_BOLD;
     }
 
@@ -1462,7 +1442,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getUbuntuItalic() {
+    public static Typeface getUbuntuItalic() {
+        if (getInstance().U_ITALIC == null) {
+            try {
+                getInstance().U_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_U_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getUbuntuItalic: ", ex);
+            }
+        }
         return getInstance().U_ITALIC;
     }
 
@@ -1472,7 +1460,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getUbuntuBoldItalic() {
+    public static Typeface getUbuntuBoldItalic() {
+        if (getInstance().U_BOLD_ITALIC == null) {
+            try {
+                getInstance().U_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_U_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getUbuntuBoldItalic: ", ex);
+            }
+        }
         return getInstance().U_BOLD_ITALIC;
     }
 
@@ -1486,7 +1482,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getUbuntuMono() {
+    public static Typeface getUbuntuMono() {
+        if (getInstance().UM == null) {
+            try {
+                getInstance().UM = getTypeface(getInstance().getContext(),
+                        K_FONT_UM);
+            } catch (Exception ex) {
+                Log.e(TAG, "getUbuntuMono: ", ex);
+            }
+        }
         return getInstance().UM;
     }
 
@@ -1497,7 +1501,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getUbuntuMonoBold() {
+    public static Typeface getUbuntuMonoBold() {
+        if (getInstance().UM_BOLD == null) {
+            try {
+                getInstance().UM_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_UM_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getUbuntuMonoBold: ", ex);
+            }
+        }
         return getInstance().UM_BOLD;
     }
 
@@ -1507,7 +1519,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getUbuntuMonoItalic() {
+    public static Typeface getUbuntuMonoItalic() {
+        if (getInstance().UM_ITALIC == null) {
+            try {
+                getInstance().UM_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_UM_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getUbuntuMonoItalic: ", ex);
+            }
+        }
         return getInstance().UM_ITALIC;
     }
 
@@ -1517,7 +1537,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getUbuntuMonoBoldItalic() {
+    public static Typeface getUbuntuMonoBoldItalic() {
+        if (getInstance().UM_BOLD_ITALIC == null) {
+            try {
+                getInstance().UM_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_UM_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getUbuntuMonoBoldItalic: ", ex);
+            }
+        }
         return getInstance().UM_BOLD_ITALIC;
     }
 
@@ -1531,7 +1559,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getBariol() {
+    public static Typeface getBariol() {
+        if (getInstance().BARIOL == null) {
+            try {
+                getInstance().BARIOL = getTypeface(getInstance().getContext(),
+                        K_FONT_BARIOL);
+            } catch (Exception ex) {
+                Log.e(TAG, "getBariol: ", ex);
+            }
+        }
         return getInstance().BARIOL;
     }
 
@@ -1542,7 +1578,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getBariolBold() {
+    public static Typeface getBariolBold() {
+        if (getInstance().BARIOL_BOLD == null) {
+            try {
+                getInstance().BARIOL_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_BARIOL_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getBariolBold: ", ex);
+            }
+        }
         return getInstance().BARIOL_BOLD;
     }
 
@@ -1552,7 +1596,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getBariolItalic() {
+    public static Typeface getBariolItalic() {
+        if (getInstance().BARIOL_ITALIC == null) {
+            try {
+                getInstance().BARIOL_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_BARIOL_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getBariolItalic: ", ex);
+            }
+        }
         return getInstance().BARIOL_ITALIC;
     }
 
@@ -1562,7 +1614,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getBariolBoldItalic() {
+    public static Typeface getBariolBoldItalic() {
+        if (getInstance().BARIOL_BOLD_ITALIC == null) {
+            try {
+                getInstance().BARIOL_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_BARIOL_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getBariolBoldItalic: ", ex);
+            }
+        }
         return getInstance().BARIOL_BOLD_ITALIC;
     }
 
@@ -1576,7 +1636,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getComfortaa() {
+    public static Typeface getComfortaa() {
+        if (getInstance().COMFORTAA == null) {
+            try {
+                getInstance().COMFORTAA = getTypeface(getInstance().getContext(),
+                        K_FONT_COMFORTAA);
+            } catch (Exception ex) {
+                Log.e(TAG, "getComfortaa: ", ex);
+            }
+        }
         return getInstance().COMFORTAA;
     }
 
@@ -1587,7 +1655,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getComfortaaBold() {
+    public static Typeface getComfortaaBold() {
+        if (getInstance().COMFORTAA_BOLD == null) {
+            try {
+                getInstance().COMFORTAA_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_COMFORTAA_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getComfortaaBold: ", ex);
+            }
+        }
         return getInstance().COMFORTAA_BOLD;
     }
 
@@ -1597,7 +1673,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getComfortaaItalic() {
+    public static Typeface getComfortaaItalic() {
+        if (getInstance().COMFORTAA_ITALIC == null) {
+            try {
+                getInstance().COMFORTAA_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_COMFORTAA_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getComfortaaItalic: ", ex);
+            }
+        }
         return getInstance().COMFORTAA_ITALIC;
     }
 
@@ -1607,7 +1691,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getComfortaaBoldItalic() {
+    public static Typeface getComfortaaBoldItalic() {
+        if (getInstance().COMFORTAA_BOLD_ITALIC == null) {
+            try {
+                getInstance().COMFORTAA_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_COMFORTAA_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getComfortaaBoldItalic: ", ex);
+            }
+        }
         return getInstance().COMFORTAA_BOLD_ITALIC;
     }
 
@@ -1621,7 +1713,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getVR() {
+    public static Typeface getVR() {
+        if (getInstance().VR == null) {
+            try {
+                getInstance().VR = getTypeface(getInstance().getContext(),
+                        K_FONT_VR);
+            } catch (Exception ex) {
+                Log.e(TAG, "getVR: ", ex);
+            }
+        }
         return getInstance().VR;
     }
 
@@ -1632,7 +1732,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getVRBold() {
+    public static Typeface getVRBold() {
+        if (getInstance().VR_BOLD == null) {
+            try {
+                getInstance().VR_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_VR_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getVRBold: ", ex);
+            }
+        }
         return getInstance().VR_BOLD;
     }
 
@@ -1642,7 +1750,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getVRItalic() {
+    public static Typeface getVRItalic() {
+        if (getInstance().VR_ITALIC == null) {
+            try {
+                getInstance().VR_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_VR_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getVRItalic: ", ex);
+            }
+        }
         return getInstance().VR_ITALIC;
     }
 
@@ -1652,7 +1768,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getVRBoldItalic() {
+    public static Typeface getVRBoldItalic() {
+        if (getInstance().VR_BOLD_ITALIC == null) {
+            try {
+                getInstance().VR_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_VR_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getVRBoldItalic: ", ex);
+            }
+        }
         return getInstance().VR_BOLD_ITALIC;
     }
 
@@ -1666,7 +1790,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getMontserat() {
+    public static Typeface getMontserat() {
+        if (getInstance().MONTSERAT == null) {
+            try {
+                getInstance().MONTSERAT = getTypeface(getInstance().getContext(),
+                        K_FONT_MONTSERAT);
+            } catch (Exception ex) {
+                Log.e(TAG, "getMontserat: ", ex);
+            }
+        }
         return getInstance().MONTSERAT;
     }
 
@@ -1677,7 +1809,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getMontseratBold() {
+    public static Typeface getMontseratBold() {
+        if (getInstance().MONTSERAT_BOLD == null) {
+            try {
+                getInstance().MONTSERAT_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_MONTSERAT_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getMontseratBold: ", ex);
+            }
+        }
         return getInstance().MONTSERAT_BOLD;
     }
 
@@ -1687,7 +1827,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getMontseratItalic() {
+    public static Typeface getMontseratItalic() {
+        if (getInstance().MONTSERAT_ITALIC == null) {
+            try {
+                getInstance().MONTSERAT_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_MONTSERAT_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getMontseratItalic: ", ex);
+            }
+        }
         return getInstance().MONTSERAT_ITALIC;
     }
 
@@ -1697,7 +1845,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getMontseratBoldItalic() {
+    public static Typeface getMontseratBoldItalic() {
+        if (getInstance().MONTSERAT_BOLD_ITALIC == null) {
+            try {
+                getInstance().MONTSERAT_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_MONTSERAT_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getMontseratBoldItalic: ", ex);
+            }
+        }
         return getInstance().MONTSERAT_BOLD_ITALIC;
     }
 
@@ -1711,7 +1867,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getBlogSans() {
+    public static Typeface getBlogSans() {
+        if (getInstance().BLOG_SANS == null) {
+            try {
+                getInstance().BLOG_SANS = getTypeface(getInstance().getContext(),
+                        K_FONT_BLOG_SANS);
+            } catch (Exception ex) {
+                Log.e(TAG, "getBlogSans: ", ex);
+            }
+        }
         return getInstance().BLOG_SANS;
     }
 
@@ -1722,7 +1886,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getBlogSansBold() {
+    public static Typeface getBlogSansBold() {
+        if (getInstance().BLOG_SANS_BOLD == null) {
+            try {
+                getInstance().BLOG_SANS_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_BLOG_SANS_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getBlogSansBold: ", ex);
+            }
+        }
         return getInstance().BLOG_SANS_BOLD;
     }
 
@@ -1732,7 +1904,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getBlogSansItalic() {
+    public static Typeface getBlogSansItalic() {
+        if (getInstance().BLOG_SANS_ITALIC == null) {
+            try {
+                getInstance().BLOG_SANS_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_BLOG_SANS_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getBlogSansItalic: ", ex);
+            }
+        }
         return getInstance().BLOG_SANS_ITALIC;
     }
 
@@ -1742,7 +1922,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getBlogSansBoldItalic() {
+    public static Typeface getBlogSansBoldItalic() {
+        if (getInstance().BLOG_SANS_BOLD_ITALIC == null) {
+            try {
+                getInstance().BLOG_SANS_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_BLOG_SANS_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getBlogSansBoldItalic: ", ex);
+            }
+        }
         return getInstance().BLOG_SANS_BOLD_ITALIC;
     }
 
@@ -1756,7 +1944,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getClearSans() {
+    public static Typeface getClearSans() {
+        if (getInstance().CLEAR_SANS == null) {
+            try {
+                getInstance().CLEAR_SANS = getTypeface(getInstance().getContext(),
+                        K_FONT_CLEAR_SANS);
+            } catch (Exception ex) {
+                Log.e(TAG, "getClearSans: ", ex);
+            }
+        }
         return getInstance().CLEAR_SANS;
     }
 
@@ -1767,7 +1963,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getClearSansBold() {
+    public static Typeface getClearSansBold() {
+        if (getInstance().CLEAR_SANS_BOLD == null) {
+            try {
+                getInstance().CLEAR_SANS_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_CLEAR_SANS_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getClearSansBold: ", ex);
+            }
+        }
         return getInstance().CLEAR_SANS_BOLD;
     }
 
@@ -1777,7 +1981,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getClearSansItalic() {
+    public static Typeface getClearSansItalic() {
+        if (getInstance().CLEAR_SANS_ITALIC == null) {
+            try {
+                getInstance().CLEAR_SANS_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_CLEAR_SANS_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getClearSansItalic: ", ex);
+            }
+        }
         return getInstance().CLEAR_SANS_ITALIC;
     }
 
@@ -1787,7 +1999,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getClearSansBoldItalic() {
+    public static Typeface getClearSansBoldItalic() {
+        if (getInstance().CLEAR_SANS_BOLD_ITALIC == null) {
+            try {
+                getInstance().CLEAR_SANS_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_CLEAR_SANS_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getClearSansBoldItalic: ", ex);
+            }
+        }
         return getInstance().CLEAR_SANS_BOLD_ITALIC;
     }
 
@@ -1801,7 +2021,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRobotoCondensed() {
+    public static Typeface getRobotoCondensed() {
+        if (getInstance().ROBOTO_CONSENDET == null) {
+            try {
+                getInstance().ROBOTO_CONSENDET = getTypeface(getInstance().getContext(),
+                        K_FONT_ROBOTO_CONSENDET);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRobotoCondensed: ", ex);
+            }
+        }
         return getInstance().ROBOTO_CONSENDET;
     }
 
@@ -1812,7 +2040,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRobotoCondensedBold() {
+    public static Typeface getRobotoCondensedBold() {
+        if (getInstance().ROBOTO_CONSENDET_BOLD == null) {
+            try {
+                getInstance().ROBOTO_CONSENDET_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_ROBOTO_CONSENDET_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRobotoCondensedBold: ", ex);
+            }
+        }
         return getInstance().ROBOTO_CONSENDET_BOLD;
     }
 
@@ -1822,7 +2058,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRobotoCondensedItalic() {
+    public static Typeface getRobotoCondensedItalic() {
+        if (getInstance().ROBOTO_CONSENDET_ITALIC == null) {
+            try {
+                getInstance().ROBOTO_CONSENDET_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_ROBOTO_CONSENDET_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRobotoCondensedItalic: ", ex);
+            }
+        }
         return getInstance().ROBOTO_CONSENDET_ITALIC;
     }
 
@@ -1832,7 +2076,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRobotoCondensedBoldItalic() {
+    public static Typeface getRobotoCondensedBoldItalic() {
+        if (getInstance().ROBOTO_CONSENDET_BOLD_ITALIC == null) {
+            try {
+                getInstance().ROBOTO_CONSENDET_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_ROBOTO_CONSENDET_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRobotoCondensedBoldItalic: ", ex);
+            }
+        }
         return getInstance().ROBOTO_CONSENDET_BOLD_ITALIC;
     }
 
@@ -1846,7 +2098,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getDjv() {
+    public static Typeface getDjv() {
+        if (getInstance().DJV == null) {
+            try {
+                getInstance().DJV = getTypeface(getInstance().getContext(),
+                        K_FONT_DJV);
+            } catch (Exception ex) {
+                Log.e(TAG, "getDjv: ", ex);
+            }
+        }
         return getInstance().DJV;
     }
 
@@ -1857,7 +2117,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getDjvBold() {
+    public static Typeface getDjvBold() {
+        if (getInstance().DJV_BOLD == null) {
+            try {
+                getInstance().DJV_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_DJV_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getDjvBold: ", ex);
+            }
+        }
         return getInstance().DJV_BOLD;
     }
 
@@ -1867,7 +2135,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getDjvItalic() {
+    public static Typeface getDjvItalic() {
+        if (getInstance().DJV_ITALIC == null) {
+            try {
+                getInstance().DJV_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_DJV_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getDjvItalic: ", ex);
+            }
+        }
         return getInstance().DJV_ITALIC;
     }
 
@@ -1877,7 +2153,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getDjvBoldItalic() {
+    public static Typeface getDjvBoldItalic() {
+        if (getInstance().DJV_BOLD_ITALIC == null) {
+            try {
+                getInstance().DJV_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_DJV_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getDjvBoldItalic: ", ex);
+            }
+        }
         return getInstance().DJV_BOLD_ITALIC;
     }
 
@@ -1891,7 +2175,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getSfc() {
+    public static Typeface getSfc() {
+        if (getInstance().SFC == null) {
+            try {
+                getInstance().SFC = getTypeface(getInstance().getContext(),
+                        K_FONT_SFC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getSfc: ", ex);
+            }
+        }
         return getInstance().SFC;
     }
 
@@ -1902,7 +2194,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getSfcBold() {
+    public static Typeface getSfcBold() {
+        if (getInstance().SFC_BOLD == null) {
+            try {
+                getInstance().SFC_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_SFC_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getSfcBold: ", ex);
+            }
+        }
         return getInstance().SFC_BOLD;
     }
 
@@ -1912,7 +2212,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getSfcItalic() {
+    public static Typeface getSfcItalic() {
+        if (getInstance().SFC_ITALIC == null) {
+            try {
+                getInstance().SFC_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_SFC_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getSfcItalic: ", ex);
+            }
+        }
         return getInstance().SFC_ITALIC;
     }
 
@@ -1922,7 +2230,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getSfcBoldItalic() {
+    public static Typeface getSfcBoldItalic() {
+        if (getInstance().SFC_BOLD_ITALIC == null) {
+            try {
+                getInstance().SFC_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_SFC_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getSfcBoldItalic: ", ex);
+            }
+        }
         return getInstance().SFC_BOLD_ITALIC;
     }
 
@@ -1936,7 +2252,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getGs() {
+    public static Typeface getGs() {
+        if (getInstance().GS == null) {
+            try {
+                getInstance().GS = getTypeface(getInstance().getContext(),
+                        K_FONT_GS);
+            } catch (Exception ex) {
+                Log.e(TAG, "getGs: ", ex);
+            }
+        }
         return getInstance().GS;
     }
 
@@ -1947,7 +2271,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getGsBold() {
+    public static Typeface getGsBold() {
+        if (getInstance().GS_BOLD == null) {
+            try {
+                getInstance().GS_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_GS_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getGsBold: ", ex);
+            }
+        }
         return getInstance().GS_BOLD;
     }
 
@@ -1957,7 +2289,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getGsItalic() {
+    public static Typeface getGsItalic() {
+        if (getInstance().GS_ITALIC == null) {
+            try {
+                getInstance().GS_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_GS_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getGsItalic: ", ex);
+            }
+        }
         return getInstance().GS_ITALIC;
     }
 
@@ -1967,7 +2307,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getGsBoldItalic() {
+    public static Typeface getGsBoldItalic() {
+        if (getInstance().GS_BOLD_ITALIC == null) {
+            try {
+                getInstance().GS_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_GS_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getGsBoldItalic: ", ex);
+            }
+        }
         return getInstance().GS_BOLD_ITALIC;
     }
 
@@ -1981,7 +2329,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getFira() {
+    public static Typeface getFira() {
+        if (getInstance().FIRA == null) {
+            try {
+                getInstance().FIRA = getTypeface(getInstance().getContext(),
+                        K_FONT_FIRA);
+            } catch (Exception ex) {
+                Log.e(TAG, "getFira: ", ex);
+            }
+        }
         return getInstance().FIRA;
     }
 
@@ -1992,7 +2348,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getFiraBold() {
+    public static Typeface getFiraBold() {
+        if (getInstance().FIRA_BOLD == null) {
+            try {
+                getInstance().FIRA_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_FIRA_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getFiraBold: ", ex);
+            }
+        }
         return getInstance().FIRA_BOLD;
     }
 
@@ -2002,7 +2366,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getFiraItalic() {
+    public static Typeface getFiraItalic() {
+        if (getInstance().FIRA_ITALIC == null) {
+            try {
+                getInstance().FIRA_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_FIRA_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getFiraItalic: ", ex);
+            }
+        }
         return getInstance().FIRA_ITALIC;
     }
 
@@ -2012,7 +2384,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getFiraBoldItalic() {
+    public static Typeface getFiraBoldItalic() {
+        if (getInstance().FIRA_BOLD_ITALIC == null) {
+            try {
+                getInstance().FIRA_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_FIRA_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getFiraBoldItalic: ", ex);
+            }
+        }
         return getInstance().FIRA_BOLD_ITALIC;
     }
 
@@ -2026,7 +2406,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getNunito() {
+    public static Typeface getNunito() {
+        if (getInstance().NUNITO == null) {
+            try {
+                getInstance().NUNITO = getTypeface(getInstance().getContext(),
+                        K_FONT_NUNITO);
+            } catch (Exception ex) {
+                Log.e(TAG, "getNunito: ", ex);
+            }
+        }
         return getInstance().NUNITO;
     }
 
@@ -2037,7 +2425,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getNunitoBold() {
+    public static Typeface getNunitoBold() {
+        if (getInstance().NUNITO_BOLD == null) {
+            try {
+                getInstance().NUNITO_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_NUNITO_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getNunitoBold: ", ex);
+            }
+        }
         return getInstance().NUNITO_BOLD;
     }
 
@@ -2047,7 +2443,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getNunitoItalic() {
+    public static Typeface getNunitoItalic() {
+        if (getInstance().NUNITO_ITALIC == null) {
+            try {
+                getInstance().NUNITO_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_NUNITO_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getNunitoItalic: ", ex);
+            }
+        }
         return getInstance().NUNITO_ITALIC;
     }
 
@@ -2057,7 +2461,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getNunitoBoldItalic() {
+    public static Typeface getNunitoBoldItalic() {
+        if (getInstance().NUNITO_BOLD_ITALIC == null) {
+            try {
+                getInstance().NUNITO_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_NUNITO_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getNunitoBoldItalic: ", ex);
+            }
+        }
         return getInstance().NUNITO_BOLD_ITALIC;
     }
 
@@ -2071,7 +2483,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getFantasque() {
+    public static Typeface getFantasque() {
+        if (getInstance().FANTASQUE == null) {
+            try {
+                getInstance().FANTASQUE = getTypeface(getInstance().getContext(),
+                        K_FONT_FANTASQUE);
+            } catch (Exception ex) {
+                Log.e(TAG, "getFantasque: ", ex);
+            }
+        }
         return getInstance().FANTASQUE;
     }
 
@@ -2082,7 +2502,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getFantasqueBold() {
+    public static Typeface getFantasqueBold() {
+        if (getInstance().FANTASQUE_BOLD == null) {
+            try {
+                getInstance().FANTASQUE_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_FANTASQUE_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getFantasqueBold: ", ex);
+            }
+        }
         return getInstance().FANTASQUE_BOLD;
     }
 
@@ -2092,7 +2520,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getFantasqueItalic() {
+    public static Typeface getFantasqueItalic() {
+        if (getInstance().FANTASQUE_ITALIC == null) {
+            try {
+                getInstance().FANTASQUE_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_FANTASQUE_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getFantasqueItalic: ", ex);
+            }
+        }
         return getInstance().FANTASQUE_ITALIC;
     }
 
@@ -2102,7 +2538,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getFantasqueBoldItalic() {
+    public static Typeface getFantasqueBoldItalic() {
+        if (getInstance().FANTASQUE_BOLD_ITALIC == null) {
+            try {
+                getInstance().FANTASQUE_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_FANTASQUE_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getFantasqueBoldItalic: ", ex);
+            }
+        }
         return getInstance().FANTASQUE_BOLD_ITALIC;
     }
 
@@ -2116,7 +2560,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getLato() {
+    public static Typeface getLato() {
+        if (getInstance().LATO == null) {
+            try {
+                getInstance().LATO = getTypeface(getInstance().getContext(),
+                        K_FONT_LATO);
+            } catch (Exception ex) {
+                Log.e(TAG, "getLato: ", ex);
+            }
+        }
         return getInstance().LATO;
     }
 
@@ -2127,7 +2579,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getLatoBold() {
+    public static Typeface getLatoBold() {
+        if (getInstance().LATO_BOLD == null) {
+            try {
+                getInstance().LATO_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_LATO_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getLatoBold: ", ex);
+            }
+        }
         return getInstance().LATO_BOLD;
     }
 
@@ -2137,7 +2597,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getLatoItalic() {
+    public static Typeface getLatoItalic() {
+        if (getInstance().LATO_ITALIC == null) {
+            try {
+                getInstance().LATO_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_LATO_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getLatoItalic: ", ex);
+            }
+        }
         return getInstance().LATO_ITALIC;
     }
 
@@ -2147,7 +2615,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getLatoBoldItalic() {
+    public static Typeface getLatoBoldItalic() {
+        if (getInstance().LATO_BOLD_ITALIC == null) {
+            try {
+                getInstance().LATO_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_LATO_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getLatoBoldItalic: ", ex);
+            }
+        }
         return getInstance().LATO_BOLD_ITALIC;
     }
 
@@ -2161,7 +2637,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getPtSans() {
+    public static Typeface getPtSans() {
+        if (getInstance().PT_SANS == null) {
+            try {
+                getInstance().PT_SANS = getTypeface(getInstance().getContext(),
+                        K_FONT_PT_SANS);
+            } catch (Exception ex) {
+                Log.e(TAG, "getPtSans: ", ex);
+            }
+        }
         return getInstance().PT_SANS;
     }
 
@@ -2172,7 +2656,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getPtSansBold() {
+    public static Typeface getPtSansBold() {
+        if (getInstance().PT_SANS_BOLD == null) {
+            try {
+                getInstance().PT_SANS_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_PT_SANS_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getPtSansBold: ", ex);
+            }
+        }
         return getInstance().PT_SANS_BOLD;
     }
 
@@ -2182,7 +2674,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getPtSansItalic() {
+    public static Typeface getPtSansItalic() {
+        if (getInstance().PT_SANS_ITALIC == null) {
+            try {
+                getInstance().PT_SANS_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_PT_SANS_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getPtSansItalic: ", ex);
+            }
+        }
         return getInstance().PT_SANS_ITALIC;
     }
 
@@ -2192,7 +2692,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getPtSansBoldItalic() {
+    public static Typeface getPtSansBoldItalic() {
+        if (getInstance().PT_SANS_BOLD_ITALIC == null) {
+            try {
+                getInstance().PT_SANS_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_PT_SANS_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getPtSansBoldItalic: ", ex);
+            }
+        }
         return getInstance().PT_SANS_BOLD_ITALIC;
     }
 
@@ -2206,7 +2714,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getMontserratAlternates() {
+    public static Typeface getMontserratAlternates() {
+        if (getInstance().MONTSERRAT_ALTERNATES == null) {
+            try {
+                getInstance().MONTSERRAT_ALTERNATES = getTypeface(getInstance().getContext(),
+                        K_FONT_MONTSERRAT_ALTERNATES);
+            } catch (Exception ex) {
+                Log.e(TAG, "getMontserratAlternates: ", ex);
+            }
+        }
         return getInstance().MONTSERRAT_ALTERNATES;
     }
 
@@ -2217,7 +2733,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getMontserratAlternatesBold() {
+    public static Typeface getMontserratAlternatesBold() {
+        if (getInstance().MONTSERRAT_ALTERNATES_BOLD == null) {
+            try {
+                getInstance().MONTSERRAT_ALTERNATES_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_MONTSERRAT_ALTERNATES_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getMontserratAlternatesBold: ", ex);
+            }
+        }
         return getInstance().MONTSERRAT_ALTERNATES_BOLD;
     }
 
@@ -2227,7 +2751,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getMontserratAlternatesItalic() {
+    public static Typeface getMontserratAlternatesItalic() {
+        if (getInstance().MONTSERRAT_ALTERNATES_ITALIC == null) {
+            try {
+                getInstance().MONTSERRAT_ALTERNATES_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_MONTSERRAT_ALTERNATES_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getMontserratAlternatesItalic: ", ex);
+            }
+        }
         return getInstance().MONTSERRAT_ALTERNATES_ITALIC;
     }
 
@@ -2237,7 +2769,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getMontserratAlternatesBoldItalic() {
+    public static Typeface getMontserratAlternatesBoldItalic() {
+        if (getInstance().MONTSERRAT_ALTERNATES_BOLD_ITALIC == null) {
+            try {
+                getInstance().MONTSERRAT_ALTERNATES_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_MONTSERRAT_ALTERNATES_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getMontserratAlternatesBoldItalic: ", ex);
+            }
+        }
         return getInstance().MONTSERRAT_ALTERNATES_BOLD_ITALIC;
     }
 
@@ -2251,7 +2791,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getOsCondensed() {
+    public static Typeface getOsCondensed() {
+        if (getInstance().OS_CONDENSED == null) {
+            try {
+                getInstance().OS_CONDENSED = getTypeface(getInstance().getContext(),
+                        K_FONT_OS_CONDENSED);
+            } catch (Exception ex) {
+                Log.e(TAG, "getOsCondensed: ", ex);
+            }
+        }
         return getInstance().OS_CONDENSED;
     }
 
@@ -2262,7 +2810,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getOsCondensedBold() {
+    public static Typeface getOsCondensedBold() {
+        if (getInstance().OS_CONDENSED_BOLD == null) {
+            try {
+                getInstance().OS_CONDENSED_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_OS_CONDENSED_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getOsCondensedBold: ", ex);
+            }
+        }
         return getInstance().OS_CONDENSED_BOLD;
     }
 
@@ -2272,7 +2828,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getOsCondensedItalic() {
+    public static Typeface getOsCondensedItalic() {
+        if (getInstance().OS_CONDENSED_ITALIC == null) {
+            try {
+                getInstance().OS_CONDENSED_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_OS_CONDENSED_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getOsCondensedItalic: ", ex);
+            }
+        }
         return getInstance().OS_CONDENSED_ITALIC;
     }
 
@@ -2282,7 +2846,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getOsCondensedBoldItalic() {
+    public static Typeface getOsCondensedBoldItalic() {
+        if (getInstance().OS_CONDENSED_BOLD_ITALIC == null) {
+            try {
+                getInstance().OS_CONDENSED_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_OS_CONDENSED_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getOsCondensedBoldItalic: ", ex);
+            }
+        }
         return getInstance().OS_CONDENSED_BOLD_ITALIC;
     }
 
@@ -2296,7 +2868,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRubik() {
+    public static Typeface getRubik() {
+        if (getInstance().RUBIK == null) {
+            try {
+                getInstance().RUBIK = getTypeface(getInstance().getContext(),
+                        K_FONT_RUBIK);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRubik: ", ex);
+            }
+        }
         return getInstance().RUBIK;
     }
 
@@ -2307,7 +2887,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRubikBold() {
+    public static Typeface getRubikBold() {
+        if (getInstance().RUBIK_BOLD == null) {
+            try {
+                getInstance().RUBIK_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_RUBIK_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRubikBold: ", ex);
+            }
+        }
         return getInstance().RUBIK_BOLD;
     }
 
@@ -2317,7 +2905,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRubikItalic() {
+    public static Typeface getRubikItalic() {
+        if (getInstance().RUBIK_ITALIC == null) {
+            try {
+                getInstance().RUBIK_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_RUBIK_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRubikItalic: ", ex);
+            }
+        }
         return getInstance().RUBIK_ITALIC;
     }
 
@@ -2327,7 +2923,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRubikBoldItalic() {
+    public static Typeface getRubikBoldItalic() {
+        if (getInstance().RUBIK_BOLD_ITALIC == null) {
+            try {
+                getInstance().RUBIK_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_RUBIK_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRubikBoldItalic: ", ex);
+            }
+        }
         return getInstance().RUBIK_BOLD_ITALIC;
     }
 
@@ -2341,7 +2945,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getPodkova() {
+    public static Typeface getPodkova() {
+        if (getInstance().PODKOVA == null) {
+            try {
+                getInstance().PODKOVA = getTypeface(getInstance().getContext(),
+                        K_FONT_PODKOVA);
+            } catch (Exception ex) {
+                Log.e(TAG, "getPodkova: ", ex);
+            }
+        }
         return getInstance().PODKOVA;
     }
 
@@ -2352,7 +2964,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getPodkovaBold() {
+    public static Typeface getPodkovaBold() {
+        if (getInstance().PODKOVA_BOLD == null) {
+            try {
+                getInstance().PODKOVA_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_PODKOVA_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getPodkovaBold: ", ex);
+            }
+        }
         return getInstance().PODKOVA_BOLD;
     }
 
@@ -2362,7 +2982,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getPodkovaItalic() {
+    public static Typeface getPodkovaItalic() {
+        if (getInstance().PODKOVA_ITALIC == null) {
+            try {
+                getInstance().PODKOVA_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_PODKOVA_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getPodkovaItalic: ", ex);
+            }
+        }
         return getInstance().PODKOVA_ITALIC;
     }
 
@@ -2372,7 +3000,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getPodkovaBoldItalic() {
+    public static Typeface getPodkovaBoldItalic() {
+        if (getInstance().PODKOVA_BOLD_ITALIC == null) {
+            try {
+                getInstance().PODKOVA_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_PODKOVA_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getPodkovaBoldItalic: ", ex);
+            }
+        }
         return getInstance().PODKOVA_BOLD_ITALIC;
     }
 
@@ -2386,7 +3022,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getSourceSansPro() {
+    public static Typeface getSourceSansPro() {
+        if (getInstance().SOURCE_SANS_PRO == null) {
+            try {
+                getInstance().SOURCE_SANS_PRO = getTypeface(getInstance().getContext(),
+                        K_FONT_SOURCE_SANS_PRO);
+            } catch (Exception ex) {
+                Log.e(TAG, "getSourceSansPro: ", ex);
+            }
+        }
         return getInstance().SOURCE_SANS_PRO;
     }
 
@@ -2397,7 +3041,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getSourceSansProBold() {
+    public static Typeface getSourceSansProBold() {
+        if (getInstance().SOURCE_SANS_PRO_BOLD == null) {
+            try {
+                getInstance().SOURCE_SANS_PRO_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_SOURCE_SANS_PRO_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getSourceSansProBold: ", ex);
+            }
+        }
         return getInstance().SOURCE_SANS_PRO_BOLD;
     }
 
@@ -2407,7 +3059,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getSourceSansProItalic() {
+    public static Typeface getSourceSansProItalic() {
+        if (getInstance().SOURCE_SANS_PRO_ITALIC == null) {
+            try {
+                getInstance().SOURCE_SANS_PRO_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_SOURCE_SANS_PRO_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getSourceSansProItalic: ", ex);
+            }
+        }
         return getInstance().SOURCE_SANS_PRO_ITALIC;
     }
 
@@ -2417,7 +3077,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getSourceSansProBoldItalic() {
+    public static Typeface getSourceSansProBoldItalic() {
+        if (getInstance().SOURCE_SANS_PRO_BOLD_ITALIC == null) {
+            try {
+                getInstance().SOURCE_SANS_PRO_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_SOURCE_SANS_PRO_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getSourceSansProBoldItalic: ", ex);
+            }
+        }
         return getInstance().SOURCE_SANS_PRO_BOLD_ITALIC;
     }
 
@@ -2431,7 +3099,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRobotoSlab() {
+    public static Typeface getRobotoSlab() {
+        if (getInstance().ROBOTO_SLAB == null) {
+            try {
+                getInstance().ROBOTO_SLAB = getTypeface(getInstance().getContext(),
+                        K_FONT_ROBOTO_SLAB);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRobotoSlab: ", ex);
+            }
+        }
         return getInstance().ROBOTO_SLAB;
     }
 
@@ -2442,7 +3118,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRobotoSlabBold() {
+    public static Typeface getRobotoSlabBold() {
+        if (getInstance().ROBOTO_SLAB_BOLD == null) {
+            try {
+                getInstance().ROBOTO_SLAB_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_ROBOTO_SLAB_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRobotoSlabBold: ", ex);
+            }
+        }
         return getInstance().ROBOTO_SLAB_BOLD;
     }
 
@@ -2452,7 +3136,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRobotoSlabItalic() {
+    public static Typeface getRobotoSlabItalic() {
+        if (getInstance().ROBOTO_SLAB_ITALIC == null) {
+            try {
+                getInstance().ROBOTO_SLAB_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_ROBOTO_SLAB_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRobotoSlabItalic: ", ex);
+            }
+        }
         return getInstance().ROBOTO_SLAB_ITALIC;
     }
 
@@ -2462,7 +3154,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getRobotoSlabBoldItalic() {
+    public static Typeface getRobotoSlabBoldItalic() {
+        if (getInstance().ROBOTO_SLAB_BOLD_ITALIC == null) {
+            try {
+                getInstance().ROBOTO_SLAB_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_ROBOTO_SLAB_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getRobotoSlabBoldItalic: ", ex);
+            }
+        }
         return getInstance().ROBOTO_SLAB_BOLD_ITALIC;
     }
 
@@ -2476,7 +3176,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getExoSecond() {
+    public static Typeface getExoSecond() {
+        if (getInstance().EXO_2 == null) {
+            try {
+                getInstance().EXO_2 = getTypeface(getInstance().getContext(),
+                        K_FONT_EXO_2);
+            } catch (Exception ex) {
+                Log.e(TAG, "getExoSecond: ", ex);
+            }
+        }
         return getInstance().EXO_2;
     }
 
@@ -2487,7 +3195,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getExoSecondBold() {
+    public static Typeface getExoSecondBold() {
+        if (getInstance().EXO_2_BOLD == null) {
+            try {
+                getInstance().EXO_2_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_EXO_2_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getExoSecondBold: ", ex);
+            }
+        }
         return getInstance().EXO_2_BOLD;
     }
 
@@ -2497,7 +3213,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getExoSecondItalic() {
+    public static Typeface getExoSecondItalic() {
+        if (getInstance().EXO_2_ITALIC == null) {
+            try {
+                getInstance().EXO_2_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_EXO_2_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getExoSecondItalic: ", ex);
+            }
+        }
         return getInstance().EXO_2_ITALIC;
     }
 
@@ -2507,7 +3231,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getExoSecondBoldItalic() {
+    public static Typeface getExoSecondBoldItalic() {
+        if (getInstance().EXO_2_BOLD_ITALIC == null) {
+            try {
+                getInstance().EXO_2_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_EXO_2_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getExoSecondBoldItalic: ", ex);
+            }
+        }
         return getInstance().EXO_2_BOLD_ITALIC;
     }
 
@@ -2521,7 +3253,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getMPlus() {
+    public static Typeface getMPlus() {
+        if (getInstance().M_PLUS == null) {
+            try {
+                getInstance().M_PLUS = getTypeface(getInstance().getContext(),
+                        K_FONT_M_PLUS);
+            } catch (Exception ex) {
+                Log.e(TAG, "getMPlus: ", ex);
+            }
+        }
         return getInstance().M_PLUS;
     }
 
@@ -2532,7 +3272,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getMPlusBold() {
+    public static Typeface getMPlusBold() {
+        if (getInstance().M_PLUS_BOLD == null) {
+            try {
+                getInstance().M_PLUS_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_M_PLUS_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getMPlusBold: ", ex);
+            }
+        }
         return getInstance().M_PLUS_BOLD;
     }
 
@@ -2542,7 +3290,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getMPlusItalic() {
+    public static Typeface getMPlusItalic() {
+        if (getInstance().M_PLUS_ITALIC == null) {
+            try {
+                getInstance().M_PLUS_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_M_PLUS_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getMPlusItalic: ", ex);
+            }
+        }
         return getInstance().M_PLUS_ITALIC;
     }
 
@@ -2552,7 +3308,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getMPlusBoldItalic() {
+    public static Typeface getMPlusBoldItalic() {
+        if (getInstance().M_PLUS_BOLD_ITALIC == null) {
+            try {
+                getInstance().M_PLUS_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_M_PLUS_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getMPlusBoldItalic: ", ex);
+            }
+        }
         return getInstance().M_PLUS_BOLD_ITALIC;
     }
 
@@ -2566,7 +3330,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getYanone() {
+    public static Typeface getYanone() {
+        if (getInstance().YANONE == null) {
+            try {
+                getInstance().YANONE = getTypeface(getInstance().getContext(),
+                        K_FONT_YANONE);
+            } catch (Exception ex) {
+                Log.e(TAG, "getYanone: ", ex);
+            }
+        }
         return getInstance().YANONE;
     }
 
@@ -2577,7 +3349,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getYanoneBold() {
+    public static Typeface getYanoneBold() {
+        if (getInstance().YANONE_BOLD == null) {
+            try {
+                getInstance().YANONE_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_YANONE_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getYanoneBold: ", ex);
+            }
+        }
         return getInstance().YANONE_BOLD;
     }
 
@@ -2587,7 +3367,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getYanoneItalic() {
+    public static Typeface getYanoneItalic() {
+        if (getInstance().YANONE_ITALIC == null) {
+            try {
+                getInstance().YANONE_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_YANONE_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getYanoneItalic: ", ex);
+            }
+        }
         return getInstance().YANONE_ITALIC;
     }
 
@@ -2597,12 +3385,20 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getYanoneBoldItalic() {
+    public static Typeface getYanoneBoldItalic() {
+        if (getInstance().YANONE_BOLD_ITALIC == null) {
+            try {
+                getInstance().YANONE_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_YANONE_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getYanoneBoldItalic: ", ex);
+            }
+        }
         return getInstance().YANONE_BOLD_ITALIC;
     }
 
     //==============================================================================================
-    //                                       PRODUCT_SANS(SPECIFIC)
+    //                                       PRODUCT_SANS(BEST FONT)
     //==============================================================================================
 
     /**
@@ -2611,7 +3407,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getProductSans() {
+    public static Typeface getProductSans() {
+        if (getInstance().PRODUCT_SANS == null) {
+            try {
+                getInstance().PRODUCT_SANS = getTypeface(getInstance().getContext(),
+                        K_FONT_PRODUCT_SANS);
+            } catch (Exception ex) {
+                Log.e(TAG, "getProductSans: ", ex);
+            }
+        }
         return getInstance().PRODUCT_SANS;
     }
 
@@ -2622,7 +3426,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getProductSansBold() {
+    public static Typeface getProductSansBold() {
+        if (getInstance().PRODUCT_SANS_BOLD == null) {
+            try {
+                getInstance().PRODUCT_SANS_BOLD = getTypeface(getInstance().getContext(),
+                        K_FONT_PRODUCT_SANS_BOLD);
+            } catch (Exception ex) {
+                Log.e(TAG, "getProductSansBold: ", ex);
+            }
+        }
         return getInstance().PRODUCT_SANS_BOLD;
     }
 
@@ -2632,7 +3444,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getProductSansItalic() {
+    public static Typeface getProductSansItalic() {
+        if (getInstance().PRODUCT_SANS_ITALIC == null) {
+            try {
+                getInstance().PRODUCT_SANS_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_PRODUCT_SANS_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getProductSansItalic: ", ex);
+            }
+        }
         return getInstance().PRODUCT_SANS_ITALIC;
     }
 
@@ -2642,7 +3462,15 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @return instance of {@link Typeface}
      */
     @NonNull
-    protected static Typeface getProductSansBoldItalic() {
+    public static Typeface getProductSansBoldItalic() {
+        if (getInstance().PRODUCT_SANS_BOLD_ITALIC == null) {
+            try {
+                getInstance().PRODUCT_SANS_BOLD_ITALIC = getTypeface(getInstance().getContext(),
+                        K_FONT_PRODUCT_SANS_BOLD_ITALIC);
+            } catch (Exception ex) {
+                Log.e(TAG, "getProductSansBoldItalic: ", ex);
+            }
+        }
         return getInstance().PRODUCT_SANS_BOLD_ITALIC;
     }
 
