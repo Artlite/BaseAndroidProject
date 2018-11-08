@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.AnimRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -547,7 +546,7 @@ public abstract class BSActivity extends AppCompatActivity
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransitionExit();
+        overridePendingTransition(R.anim.bs_anim_none, R.anim.bs_anim_exit);
     }
 
     /**
@@ -558,74 +557,7 @@ public abstract class BSActivity extends AppCompatActivity
     @Override
     public void startActivity(Intent intent) {
         super.startActivity(intent);
-        overridePendingTransitionEnter();
-    }
-
-    /**
-     * Overrides the pending Activity transition by performing the "Enter" animation.
-     */
-    protected void overridePendingTransitionEnter() {
-        if (isOverrideTransitionAnimation() == true) {
-            overridePendingTransition(getStartEnterAnim(), getStartEndAnim());
-        }
-    }
-
-    /**
-     * Overrides the pending Activity transition by performing the "Exit" animation.
-     */
-    protected void overridePendingTransitionExit() {
-        if ((isOverrideTransitionAnimation() == true) && (isLaunchActivity() == false)) {
-            overridePendingTransition(getFinishStartAnim(), getFinishEndAnim());
-        }
-    }
-
-    /**
-     * Method which provide the getting of the start enter animation
-     *
-     * @return id for start enter animation
-     */
-    @AnimRes
-    protected int getStartEnterAnim() {
-        return R.anim.bs_slide_from_right;
-    }
-
-    /**
-     * Method which provide the getting of the start end animation
-     *
-     * @return id for start end animation
-     */
-    @AnimRes
-    protected int getStartEndAnim() {
-        return R.anim.bs_slide_to_left;
-    }
-
-    /**
-     * Method which provide the getting of the finish start animation
-     *
-     * @return id for start end animation
-     */
-    @AnimRes
-    protected int getFinishStartAnim() {
-        return R.anim.bs_slide_from_left;
-    }
-
-    /**
-     * Method which provide the getting of the finish start animation
-     *
-     * @return id for start end animation
-     */
-    @AnimRes
-    protected int getFinishEndAnim() {
-        return R.anim.bs_slide_to_right;
-    }
-
-    /**
-     * Method which provide the defining if need to override of the transition animation
-     *
-     * @return defining results
-     */
-    protected boolean isOverrideTransitionAnimation() {
-        return false;
+        overridePendingTransition(R.anim.bs_anim_enter, R.anim.bs_anim_none);
     }
 
     /**

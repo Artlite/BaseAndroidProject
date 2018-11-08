@@ -98,16 +98,6 @@ public class MainActivity extends BSLockableActivity
     }
 
     /**
-     * Method which provide the defining if need to override of the transition animation
-     *
-     * @return defining results
-     */
-    @Override
-    protected boolean isOverrideTransitionAnimation() {
-        return true;
-    }
-
-    /**
      * Overriden method for the OnClickListener
      *
      * @param v current view

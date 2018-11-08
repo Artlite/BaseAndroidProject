@@ -48,17 +48,6 @@ public class TagsActivity extends BSActivity implements BSTagsView.OnTagsViewCal
         for (int i = 0; i < 100; i++) {
             this.tagsView.add(new CurrentTagView.Object(i));
         }
-        closeActivityByClass(MainActivity.class);
-    }
-
-    /**
-     * Method which provide the defining if need to override of the transition animation
-     *
-     * @return defining results
-     */
-    @Override
-    protected boolean isOverrideTransitionAnimation() {
-        return true;
     }
 
     /**
