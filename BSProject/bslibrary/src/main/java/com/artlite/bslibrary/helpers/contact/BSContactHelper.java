@@ -1,6 +1,7 @@
 package com.artlite.bslibrary.helpers.contact;
 
 import android.content.Intent;
+import android.os.Build;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,6 +26,9 @@ public final class BSContactHelper extends BSBaseHelper {
         public ContactIntentBuilder() {
             this.intent = new Intent(ContactsContract.Intents.Insert.ACTION);
             this.intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+            if (Integer.valueOf(Build.VERSION.SDK) > 14) {
+                intent.putExtra("finishActivityOnSaveCompleted", true);
+            }
         }
 
         /**
