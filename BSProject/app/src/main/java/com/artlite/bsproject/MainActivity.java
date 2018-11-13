@@ -10,29 +10,22 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.callbacks.BSPermissionCallback;
-import com.artlite.bslibrary.helpers.canvas.BSCanvasHelper;
-import com.artlite.bslibrary.helpers.image.BSImageHelper;
+import com.artlite.bslibrary.helpers.contact.BSContactHelper;
 import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
-import com.artlite.bslibrary.managers.BSImageManager;
 import com.artlite.bslibrary.managers.BSLocationManager;
-import com.artlite.bslibrary.managers.BSStatusBarManager;
 import com.artlite.bslibrary.ui.activity.BSLockableActivity;
 import com.artlite.bslibrary.ui.fonted.BSCurrencyEditText;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
 import com.artlite.bslibrary.ui.view.BSImageView;
 import com.artlite.bslibrary.ui.view.BSView;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 
 import java.util.Locale;
 
@@ -138,9 +131,15 @@ public class MainActivity extends BSLockableActivity
                 break;
             }
             case R.id.button3: {
-                BSStatusBarManager.open();
-
-//                startActivityForPickImage();
+                final Intent intent = BSContactHelper.create()
+                        .setEmail("dasdh@gmail.com")
+                        .setCompany("Company 1")
+                        .setName("Vasya Pupkin")
+                        .setPhone("+380693656963")
+                        .setJobTitle("Programmer")
+                        .setNotes("dhajksdh kasdh kajsdhkjashdkja sdhka sjdhkja sdha skjdhasjd")
+                        .build();
+                startActivityForResult(intent, 0x1770);
                 break;
             }
             case R.id.button4: {
