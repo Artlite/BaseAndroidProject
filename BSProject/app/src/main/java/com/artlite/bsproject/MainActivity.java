@@ -131,15 +131,6 @@ public class MainActivity extends BSLockableActivity
                 break;
             }
             case R.id.button3: {
-                final Intent intent = BSContactHelper.create()
-                        .setEmail("dasdh@gmail.com")
-                        .setCompany("Company 1")
-                        .setName("Vasya Pupkin")
-                        .setPhone("+380693656963")
-                        .setJobTitle("Programmer")
-                        .setNotes("dhajksdh kasdh kajsdhkjashdkja sdhka sjdhkja sdha skjdhasjd")
-                        .build();
-                startActivityForResult(intent, 0x1770);
                 break;
             }
             case R.id.button4: {

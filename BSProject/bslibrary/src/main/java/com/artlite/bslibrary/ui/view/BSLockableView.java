@@ -1,30 +1,12 @@
 package com.artlite.bslibrary.ui.view;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
 
-import com.artlite.bslibrary.annotations.Info;
-import com.artlite.bslibrary.helpers.dialog.BSDialogHelper;
-import com.artlite.bslibrary.helpers.injector.BSInjector;
-import com.artlite.bslibrary.helpers.log.BSLogHelper;
-import com.artlite.bslibrary.helpers.popup.BSPopupHelper;
-import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
-import com.artlite.bslibrary.listeners.BSSwipeListener;
-import com.artlite.bslibrary.managers.BSThreadManager;
-
-import java.lang.ref.WeakReference;
+import com.artlite.bslibrary.annotations.Warning;
 
 /**
  * Class which provide the base {@link View} functional
@@ -80,11 +62,21 @@ public abstract class BSLockableView extends BSView {
     public final boolean lockView() {
         try {
             this.isLocked = true;
+            this.onViewLocked();
             return true;
         } catch (Exception ex) {
             Log.e(TAG, "lockView: ", ex);
         }
+        this.onViewLocked();
         return false;
+    }
+
+    /**
+     * Method which provide the view locked
+     */
+    @Warning(massage = "Just for overriding")
+    protected void onViewLocked() {
+
     }
 
     /**
@@ -95,11 +87,21 @@ public abstract class BSLockableView extends BSView {
     public final boolean unlockView() {
         try {
             this.isLocked = false;
+            this.onViewUnlocked();
             return true;
         } catch (Exception ex) {
-            Log.e(TAG, "lockView: ", ex);
+            Log.e(TAG, "unlockView: ", ex);
         }
+        this.onViewUnlocked();
         return false;
+    }
+
+    /**
+     * Method which provide the view locked
+     */
+    @Warning(massage = "Just for overriding")
+    protected void onViewUnlocked() {
+
     }
 
     /**
