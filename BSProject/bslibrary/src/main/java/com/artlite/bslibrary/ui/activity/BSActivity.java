@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.artlite.bslibrary.R;
 import com.artlite.bslibrary.annotations.Warning;
@@ -44,8 +45,10 @@ import java.util.Set;
  * Created by dlernatovich on 2/17/2017.
  */
 
-public abstract class BSActivity extends AppCompatActivity
-        implements View.OnClickListener, View.OnTouchListener {
+public abstract class BSActivity
+        extends AppCompatActivity
+        implements View.OnClickListener,
+        View.OnTouchListener {
 
     //==============================================================================================
     //                                      CONSTANTS
@@ -80,6 +83,11 @@ public abstract class BSActivity extends AppCompatActivity
      * {@link Integer} value of the none menu
      */
     protected static final int K_NONE_MENU = Integer.MIN_VALUE;
+
+    /**
+     * {@link String} constants of the {@link java.net.URI} key
+     */
+    protected static final String K_FULLSCREEN_KEY = "BSActivity:Fullscreen";
 
     //==============================================================================================
     //                                      FIELDS
@@ -699,6 +707,44 @@ public abstract class BSActivity extends AppCompatActivity
 
 
     //==============================================================================================
+    //                                   FULLSCREEN
+    //==============================================================================================
+
+    /**
+     * Method which provide to apply full screen if needed
+     *
+     * @param bundle instance of the {@link Bundle}
+     */
+    protected void applyFullscreenIfNeeded(@Nullable Bundle bundle) {
+        if (bundle == null) return;
+        final boolean fulscreened = bundle.getBoolean(K_FULLSCREEN_KEY);
+        if (fulscreened) {
+            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+    }
+
+    /**
+     * Method which provide the add fullscreen flag if needed
+     *
+     * @param activity instance of the {@link Activity}
+     * @param intent   instance of the {@link Intent}
+     * @return {@link Boolean} value if it added
+     */
+    protected static boolean addFullscreenFlagIfNeeded(@Nullable Activity activity,
+                                                       @Nullable Intent intent) {
+        try {
+            final boolean fullscreened = (activity.getWindow().getAttributes().flags
+                    & WindowManager.LayoutParams.FLAG_FULLSCREEN) != 0;
+            intent.putExtra(K_FULLSCREEN_KEY, fullscreened);
+            return true;
+        } catch (Exception ex) {
+            Log.e(TAG, "addFullscreenFlagIfNeeded: ", ex);
+        }
+        return false;
+    }
+
+    // =============================================================================================
     //                                   ABSTRACT METHODS
     //==============================================================================================
 

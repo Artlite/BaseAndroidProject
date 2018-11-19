@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container_ar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#99000000"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/dimen_16"
+        android:background="@drawable/bs_background_card"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_16">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_20"
+                android:layout_height="@dimen/dimen_20"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/dimen_5"
+                android:src="@drawable/bs_ic_microphone"
+                android:visibility="gone" />
+
+            <com.artlite.bslibrary.ui.fonted.BSTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/bstext_record_audio"
+                android:textColor="#8c9ec2"
+                android:textSize="@dimen/text_20"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <com.artlite.bslibrary.ui.fonted.BSTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_8"
+            android:text="@string/bstext_please_press_the_record_button_for_the_recording_of_the_new_audio"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/text_18" />
+
+        <com.artlite.bslibrary.ui.fonted.BSTextView
+            android:id="@+id/bs_label_counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_8"
+            android:layout_marginBottom="@dimen/dimen_16"
+            android:gravity="center"
+            android:text="00:00:00"
+            android:textColor="#8c9ec2"
+            android:textSize="@dimen/text_16"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/bs_button_record"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="@dimen/dimen_30"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/bs_ic_microphone_red" />
+
+            <ImageView
+                android:id="@+id/bs_button_play"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="@dimen/dimen_30"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/bs_ic_play" />
+
+            <ImageView
+                android:id="@+id/bs_button_save"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="@dimen/dimen_30"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/bs_ic_save" />
+
+            <ImageView
+                android:id="@+id/bs_button_delete"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="@dimen/dimen_30"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/bs_ic_delete"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>

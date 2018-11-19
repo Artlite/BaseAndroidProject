@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,11 +14,11 @@ import android.widget.Toast;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.callbacks.BSPermissionCallback;
-import com.artlite.bslibrary.helpers.contact.BSContactHelper;
 import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.managers.BSLocationManager;
+import com.artlite.bslibrary.ui.activity.BSAudioRecordActivity;
 import com.artlite.bslibrary.ui.activity.BSLockableActivity;
 import com.artlite.bslibrary.ui.fonted.BSCurrencyEditText;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
@@ -100,8 +99,6 @@ public class MainActivity extends BSLockableActivity
         switch (v.getId()) {
             case R.id.button1: {
                 startActivity(RectangleImageActivity.class);
-                Location location = BSLocationManager.getLocation();
-                String name = BSLocationManager.getLocationName();
                 break;
             }
             case R.id.button2: {
@@ -131,6 +128,7 @@ public class MainActivity extends BSLockableActivity
                 break;
             }
             case R.id.button3: {
+                BSAudioRecordActivity.start(this);
                 break;
             }
             case R.id.button4: {

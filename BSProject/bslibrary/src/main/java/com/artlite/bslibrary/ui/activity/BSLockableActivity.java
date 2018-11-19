@@ -9,7 +9,8 @@ import com.artlite.bslibrary.annotations.Warning;
  * Class which provide the activity which can lockActivity it UI
  */
 
-public abstract class BSLockableActivity extends BSActivity {
+public abstract class BSLockableActivity
+        extends BSActivity {
 
     /**
      * {@link String} constants of the tag
