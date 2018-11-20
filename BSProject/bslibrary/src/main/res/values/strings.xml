@@ -6,4 +6,8 @@
     <string name="bstext_please_press_the_record_button_for_the_recording_of_the_new_audio">Please press the record button for the recording of the new audio file</string>
     <string name="bstext_voice_recorder">Voice Recorder</string>
     <string name="bstext_tap_the_record_button_to_start_a_voice_memo">Tap the Record button to start a Voice Memo</string>
+    <string name="bs_text_limit">limit</string>
+    <string name="bs_text_second">second</string>
+    <string name="bs_text_seconds">seconds</string>
+    <string name="bs_text_sec">sec</string>
 </resources>

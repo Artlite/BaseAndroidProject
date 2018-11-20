@@ -108,6 +108,11 @@ public abstract class BSActivity
      */
     private BroadcastReceiver closeReciever;
 
+    /**
+     * {@link Boolean} value if the Activity is full screen
+     */
+    private boolean fulscreened;
+
     //==============================================================================================
     //                                      CREATE
     //==============================================================================================
@@ -144,6 +149,17 @@ public abstract class BSActivity
         super.onDestroy();
         // Unregistering of the close receiver
         BSLocalNotificationManager.unregister(this.getCloseReciever());
+    }
+
+    /**
+     * Method which provide the saving of the {@link Bundle} state
+     *
+     * @param bundle instance of the {@link Bundle}
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        bundle.putBoolean(K_FULLSCREEN_KEY, this.fulscreened);
     }
 
     //==============================================================================================
@@ -717,8 +733,8 @@ public abstract class BSActivity
      */
     protected void applyFullscreenIfNeeded(@Nullable Bundle bundle) {
         if (bundle == null) return;
-        final boolean fulscreened = bundle.getBoolean(K_FULLSCREEN_KEY);
-        if (fulscreened) {
+        this.fulscreened = bundle.getBoolean(K_FULLSCREEN_KEY);
+        if (this.fulscreened) {
             this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }

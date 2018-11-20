@@ -41,6 +41,7 @@
         </LinearLayout>
 
         <com.artlite.bslibrary.ui.fonted.BSTextView
+            android:id="@+id/bs_label_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dimen_8"
@@ -48,17 +49,37 @@
             android:textColor="@android:color/darker_gray"
             android:textSize="@dimen/text_18" />
 
-        <com.artlite.bslibrary.ui.fonted.BSTextView
-            android:id="@+id/bs_label_counter"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/dimen_8"
             android:layout_marginBottom="@dimen/dimen_16"
             android:gravity="center"
-            android:text="00:00:00"
-            android:textColor="#8c9ec2"
-            android:textSize="@dimen/text_16"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
+
+            <com.artlite.bslibrary.ui.fonted.BSTextView
+                android:id="@+id/bs_label_counter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="00:00:00"
+                android:textColor="#8c9ec2"
+                android:textSize="@dimen/text_16"
+                android:textStyle="bold" />
+
+            <com.artlite.bslibrary.ui.fonted.BSTextView
+                android:id="@+id/bs_label_limit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:gravity="center"
+                android:text="(limit 200 seconds)"
+                android:textColor="#D17775"
+                android:textSize="@dimen/text_16"
+                android:textStyle="bold"
+                android:visibility="gone" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

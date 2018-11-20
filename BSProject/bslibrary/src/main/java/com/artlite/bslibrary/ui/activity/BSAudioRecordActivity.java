@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.artlite.bslibrary.R;
+import com.artlite.bslibrary.annotations.Warning;
 import com.artlite.bslibrary.callbacks.BSPermissionCallback;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.ui.fonted.BSTextView;
@@ -38,7 +40,32 @@ public class BSAudioRecordActivity
     private enum ActivityState {
         NONE,
         RECORDING,
-        PLAYING
+        PLAYING;
+
+        /**
+         * Array of the {@link ActivityState}
+         */
+        public static ActivityState[] allValues = new ActivityState[]{NONE, RECORDING, PLAYING};
+
+        /**
+         * Method which provide the getting of the index for the {@link ActivityState}
+         *
+         * @param state instance of the {@link ActivityState}
+         * @return instance of the {@link Integer}
+         */
+        public static int getIndex(@NonNull ActivityState state) {
+            switch (state) {
+                case NONE:
+                    return 0;
+                case RECORDING:
+                    return 1;
+                case PLAYING:
+                    return 2;
+
+            }
+            return 0;
+        }
+
     }
 
     /**
@@ -46,7 +73,28 @@ public class BSAudioRecordActivity
      */
     private enum RecordingState {
         NONE,
-        RECORDED
+        RECORDED;
+
+        /**
+         * Array of the {@link ActivityState}
+         */
+        public static RecordingState[] allValues = new RecordingState[]{NONE, RECORDED};
+
+        /**
+         * Method which provide the getting of the index for the {@link ActivityState}
+         *
+         * @param state instance of the {@link ActivityState}
+         * @return instance of the {@link Integer}
+         */
+        public static int getIndex(@NonNull RecordingState state) {
+            switch (state) {
+                case NONE:
+                    return 0;
+                case RECORDED:
+                    return 1;
+            }
+            return 0;
+        }
     }
 
 
@@ -64,6 +112,26 @@ public class BSAudioRecordActivity
      * {@link String} constants of the {@link java.net.URI} key
      */
     private static final String K_URI_KEY = "BSAudioRecordActivity:AudioUri";
+
+    /**
+     * {@link String} constants of the limit key
+     */
+    private static final String K_LIMIT_KEY = "BSAudioRecordActivity:Limit";
+
+    /**
+     * {@link String} constants of the file name key
+     */
+    private static final String K_FILE_NAME_KEY = "BSAudioRecordActivity:FileName";
+
+    /**
+     * {@link String} constants of the activity state key
+     */
+    private static final String K_ACTIVITY_STATE_KEY = "BSAudioRecordActivity:ActivityState";
+
+    /**
+     * {@link String} constants of the activity state key
+     */
+    private static final String K_RECORDING_STATE_KEY = "BSAudioRecordActivity:RecordingState";
 
     /**
      * {@link String} array of the permissions
@@ -118,6 +186,11 @@ public class BSAudioRecordActivity
     private BSTextView labelCounter;
 
     /**
+     * Instance of the {@link BSTextView}
+     */
+    private BSTextView labelLimit;
+
+    /**
      * Instance of the {@link ActivityState}
      */
     private ActivityState state = ActivityState.NONE;
@@ -135,7 +208,7 @@ public class BSAudioRecordActivity
     /**
      * {@link Integer} values of the time
      */
-    private int hour, minute, second;// variables holding the hour and minute
+    private int hour, minute, second, limit, secondCounter;// variables holding the hour and minute
 
     /**
      * Instance of the {@link Runnable}
@@ -157,6 +230,15 @@ public class BSAudioRecordActivity
             }
             if (hour >= 24) {
                 hour = 0;
+            }
+            if (state == ActivityState.RECORDING) {
+                if (limit > 0) {
+                    if (limit <= secondCounter) {
+                        onRecordPressed();
+                        return;
+                    }
+                    secondCounter++;
+                }
             }
             // or call your method
             updateTime();
@@ -182,6 +264,7 @@ public class BSAudioRecordActivity
     @Override
     protected void onCreateActivity(@Nullable Bundle bundle) {
         this.applyFullscreenIfNeeded(bundle);
+        this.getBundleInformation(bundle);
         this.lockActivity();
         this.setOnClickListeners(R.id.container_ar);
         this.buttonRecord = ((Activity) this).findViewById(R.id.bs_button_record);
@@ -189,6 +272,11 @@ public class BSAudioRecordActivity
         this.buttonSave = ((Activity) this).findViewById(R.id.bs_button_save);
         this.buttonDelete = ((Activity) this).findViewById(R.id.bs_button_delete);
         this.labelCounter = ((Activity) this).findViewById(R.id.bs_label_counter);
+        this.labelLimit = ((Activity) this).findViewById(R.id.bs_label_limit);
+        if (limit > 0) {
+            this.setLimitText(this.labelLimit, this.limit);
+        }
+        this.labelLimit.setVisibility((this.limit > 0) ? View.VISIBLE : View.GONE);
         this.buttons = new ImageView[]{this.buttonRecord,
                 this.buttonPlay,
                 this.buttonSave,
@@ -197,6 +285,44 @@ public class BSAudioRecordActivity
                 this.buttonPlay,
                 this.buttonSave,
                 this.buttonDelete);
+    }
+
+    /**
+     * Method which provide the saving of the {@link Bundle} state
+     *
+     * @param bundle instance of the {@link Bundle}
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        this.stopRecording();
+        this.stopPlaying();
+        bundle.putInt(K_LIMIT_KEY, this.limit);
+        bundle.putString(K_FILE_NAME_KEY, this.fileName);
+        bundle.putInt(K_ACTIVITY_STATE_KEY, ActivityState.getIndex(this.state));
+        bundle.putInt(K_RECORDING_STATE_KEY, RecordingState.getIndex(this.recordingState));
+    }
+
+    /**
+     * Method which provide the getting of the record limit
+     *
+     * @param bundle instance of the {@link Bundle}
+     */
+    protected void getBundleInformation(@Nullable Bundle bundle) {
+        if (bundle == null) {
+            this.limit = -1;
+            this.fileName = null;
+            this.state = ActivityState.NONE;
+            this.recordingState = RecordingState.NONE;
+            return;
+        } else {
+            this.limit = bundle.getInt(K_LIMIT_KEY, -1);
+            this.fileName = bundle.getString(K_FILE_NAME_KEY, null);
+            this.state = ActivityState
+                    .allValues[bundle.getInt(K_ACTIVITY_STATE_KEY, 0)];
+            this.recordingState = RecordingState
+                    .allValues[bundle.getInt(K_RECORDING_STATE_KEY, 0)];
+        }
     }
 
     /**
@@ -276,6 +402,7 @@ public class BSAudioRecordActivity
      * Method which provide the on record pressed
      */
     protected void onRecordPressed() {
+        if (this.state == ActivityState.PLAYING) return;
         if (this.state == ActivityState.NONE) {
             this.state = ActivityState.RECORDING;
             this.startCounting();
@@ -294,6 +421,7 @@ public class BSAudioRecordActivity
      */
     protected void startRecording() {
         this.stopRecording();
+        this.onDeletePressed(false);
         if (this.recorder == null) {
             this.generateFileName();
             this.recorder = new MediaRecorder();
@@ -444,10 +572,10 @@ public class BSAudioRecordActivity
             imageView.setAlpha(1.0f);
             switch (i) {
                 case 0:
-                    imageView.setImageResource(R.drawable.bs_ic_microphone_red);
+                    imageView.setImageResource(this.getMicrophoneIcon());
                     break;
                 case 1:
-                    imageView.setImageResource(R.drawable.bs_ic_play);
+                    imageView.setImageResource(this.getPlayIcon());
                     if (recordingState == RecordingState.NONE) {
                         imageView.setAlpha(0.4f);
                     } else {
@@ -455,7 +583,7 @@ public class BSAudioRecordActivity
                     }
                     break;
                 case 2:
-                    imageView.setImageResource(R.drawable.bs_ic_save);
+                    imageView.setImageResource(this.getSaveIcon());
                     if (recordingState == RecordingState.NONE) {
                         imageView.setAlpha(0.4f);
                     } else {
@@ -463,7 +591,7 @@ public class BSAudioRecordActivity
                     }
                     break;
                 case 3:
-                    imageView.setImageResource(R.drawable.bs_ic_delete);
+                    imageView.setImageResource(this.getDeleteIcon());
                     if (recordingState == RecordingState.NONE) {
                         imageView.setAlpha(0.4f);
                     } else {
@@ -496,23 +624,23 @@ public class BSAudioRecordActivity
             switch (i) {
                 case 0:
                     if (this.state == ActivityState.RECORDING) {
-                        imageView.setImageResource(R.drawable.bs_ic_stop);
+                        imageView.setImageResource(this.getStopIcon());
                     } else {
-                        imageView.setImageResource(R.drawable.bs_ic_microphone_red);
+                        imageView.setImageResource(this.getMicrophoneIcon());
                     }
                     break;
                 case 1:
                     if (this.state == ActivityState.PLAYING) {
-                        imageView.setImageResource(R.drawable.bs_ic_stop);
+                        imageView.setImageResource(this.getStopIcon());
                     } else {
-                        imageView.setImageResource(R.drawable.bs_ic_play);
+                        imageView.setImageResource(this.getPlayIcon());
                     }
                     break;
                 case 2:
-                    imageView.setImageResource(R.drawable.bs_ic_save);
+                    imageView.setImageResource(this.getSaveIcon());
                     break;
                 case 3:
-                    imageView.setImageResource(R.drawable.bs_ic_delete);
+                    imageView.setImageResource(this.getDeleteIcon());
                     break;
             }
         }
@@ -543,6 +671,7 @@ public class BSAudioRecordActivity
         this.hour = 0;
         this.minute = 0;
         this.second = 0;
+        this.secondCounter = 0;
     }
 
     /**
@@ -599,13 +728,95 @@ public class BSAudioRecordActivity
     }
 
     /**
+     * Method which provide the getting of the icon
+     *
+     * @return instance of the {@link Integer}
+     */
+    @Warning(massage = "Method could be overriding")
+    @DrawableRes
+    protected int getMicrophoneIcon() {
+        return R.drawable.bs_ic_microphone_red;
+    }
+
+    /**
+     * Method which provide the getting of the icon
+     *
+     * @return instance of the {@link Integer}
+     */
+    @Warning(massage = "Method could be overriding")
+    @DrawableRes
+    protected int getPlayIcon() {
+        return R.drawable.bs_ic_play;
+    }
+
+    /**
+     * Method which provide the getting of the icon
+     *
+     * @return instance of the {@link Integer}
+     */
+    @Warning(massage = "Method could be overriding")
+    @DrawableRes
+    protected int getSaveIcon() {
+        return R.drawable.bs_ic_save;
+    }
+
+    /**
+     * Method which provide the getting of the icon
+     *
+     * @return instance of the {@link Integer}
+     */
+    @Warning(massage = "Method could be overriding")
+    @DrawableRes
+    protected int getDeleteIcon() {
+        return R.drawable.bs_ic_delete;
+    }
+
+    /**
+     * Method which provide the getting of the icon
+     *
+     * @return instance of the {@link Integer}
+     */
+    @Warning(massage = "Method could be overriding")
+    @DrawableRes
+    protected int getStopIcon() {
+        return R.drawable.bs_ic_stop;
+    }
+
+    /**
+     * Method which provide the setting of the limit text
+     *
+     * @param labelLimit instance of the {@link BSTextView}
+     * @param limit      {@link Integer} value of the limit
+     */
+    @Warning(massage = "Method could be overriding")
+    @SuppressLint("DefaultLocale")
+    protected void setLimitText(@NonNull BSTextView labelLimit, int limit) {
+        labelLimit.setTextFromHtml(String.format("&#x21CA; %d %s",
+                limit,
+                this.getString(R.string.bs_text_sec)));
+    }
+
+    /**
      * Method which provide the start of the {@link BSAudioRecordActivity}
      *
      * @param activity instance of the parent {@link Activity}
      */
     public static void start(@Nullable Activity activity) {
+        start(activity, 0);
+    }
+
+    /**
+     * Method which provide the start of the {@link BSAudioRecordActivity}
+     *
+     * @param activity     instance of the parent {@link Activity}
+     * @param limitSeconds {@link Integer} value of the limit in seconds
+     *                     (if the value <=0 then unlimit)
+     */
+    public static void start(@Nullable Activity activity,
+                             int limitSeconds) {
         if (activity == null) return;
         final Intent intent = new Intent(activity, BSAudioRecordActivity.class);
+        intent.putExtra(K_LIMIT_KEY, limitSeconds);
         addFullscreenFlagIfNeeded(activity, intent);
         activity.startActivityForResult(intent, K_ON_RECORD_RESULT);
         activity.overridePendingTransition(android.R.anim.fade_in, 0);

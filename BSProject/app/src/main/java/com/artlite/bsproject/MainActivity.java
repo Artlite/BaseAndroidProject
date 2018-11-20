@@ -130,7 +130,7 @@ public class MainActivity extends BSLockableActivity
                 break;
             }
             case R.id.button3: {
-                BSAudioRecordActivity.start(this);
+                BSAudioRecordActivity.start(this, 120);
                 break;
             }
             case R.id.button4: {
