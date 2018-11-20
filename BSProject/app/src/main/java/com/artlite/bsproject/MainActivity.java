@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -158,6 +160,19 @@ public class MainActivity extends BSLockableActivity
                 }
             }
         }, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    /**
+     * Method which provide the action when activity return result
+     *
+     * @param data current intent
+     */
+    @Override
+    protected void onActivityResult(int requestCode, Intent data) {
+        if (BSAudioRecordActivity.checkEvent(requestCode)) {
+            final Uri uri = BSAudioRecordActivity.getExtras(data);
+            Log.d("sdasdsda", "onActivityResult: " + uri);
+        }
     }
 
     /**

@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/bstext_record_audio"
+                android:text="@string/bstext_voice_recorder"
                 android:textColor="#8c9ec2"
                 android:textSize="@dimen/text_20"
                 android:textStyle="bold" />
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dimen_8"
-            android:text="@string/bstext_please_press_the_record_button_for_the_recording_of_the_new_audio"
+            android:text="@string/bstext_tap_the_record_button_to_start_a_voice_memo"
             android:textColor="@android:color/darker_gray"
             android:textSize="@dimen/text_18" />
 
@@ -100,7 +100,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@drawable/bs_ic_delete"
-                android:visibility="gone" />
+                android:visibility="visible" />
         </LinearLayout>
 
 

@@ -5,8 +5,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -20,10 +22,15 @@ import com.artlite.bslibrary.callbacks.BSPermissionCallback;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.ui.fonted.BSTextView;
 
+import java.io.File;
+import java.util.Date;
+
 /**
  * Activity which provide the recording of the audio
  */
-public class BSAudioRecordActivity extends BSDialogActivity {
+public class BSAudioRecordActivity
+        extends BSDialogActivity
+        implements MediaPlayer.OnCompletionListener {
 
     /**
      * States for the {@link BSAudioRecordActivity}
@@ -69,6 +76,11 @@ public class BSAudioRecordActivity extends BSDialogActivity {
      * Instance of the {@link MediaPlayer}
      */
     private MediaPlayer player = null;
+
+    /**
+     * Instance of the {@link MediaPlayer}
+     */
+    private MediaRecorder recorder = null;
 
     /**
      * {@link String} value of the file name
@@ -239,6 +251,7 @@ public class BSAudioRecordActivity extends BSDialogActivity {
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.container_ar) {
+            this.onDeletePressed(false);
             this.sendActivityResult(null);
         } else if (id == R.id.bs_button_record) {
             if ((this.state == ActivityState.NONE) || (this.state == ActivityState.RECORDING)) {
@@ -254,7 +267,7 @@ public class BSAudioRecordActivity extends BSDialogActivity {
             }
         } else if (id == R.id.bs_button_delete) {
             if (this.state == ActivityState.NONE) {
-                this.onDeletePressed();
+                this.onDeletePressed(true);
             }
         }
     }
@@ -266,12 +279,53 @@ public class BSAudioRecordActivity extends BSDialogActivity {
         if (this.state == ActivityState.NONE) {
             this.state = ActivityState.RECORDING;
             this.startCounting();
+            this.startRecording();
         } else {
             this.state = ActivityState.NONE;
             this.recordingState = RecordingState.RECORDED;
             this.stopCounting();
+            this.stopRecording();
         }
         this.updateInterface();
+    }
+
+    /**
+     * Method which provide the start recording
+     */
+    protected void startRecording() {
+        this.stopRecording();
+        if (this.recorder == null) {
+            this.generateFileName();
+            this.recorder = new MediaRecorder();
+            this.recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            this.recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            this.recorder.setOutputFile(this.fileName);
+            this.recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            try {
+                this.recorder.prepare();
+                this.recorder.start();
+            } catch (Exception ex) {
+                this.stopRecording();
+                this.recordingState = RecordingState.NONE;
+                Log.e(TAG, "startRecording: ", ex);
+            }
+        }
+    }
+
+    /**
+     * Method which provide the stop recording
+     */
+    protected void stopRecording() {
+        if (this.recorder != null) {
+            try {
+                this.recorder.stop();
+                this.recorder.release();
+                this.recorder = null;
+            } catch (Exception ex) {
+                this.recordingState = RecordingState.NONE;
+                Log.e(TAG, "stopRecording: ", ex);
+            }
+        }
     }
 
     /**
@@ -281,26 +335,93 @@ public class BSAudioRecordActivity extends BSDialogActivity {
         if (recordingState == RecordingState.NONE) return;
         if (this.state == ActivityState.NONE) {
             this.state = ActivityState.PLAYING;
+            this.startPlaying();
             this.startCounting();
         } else {
             this.state = ActivityState.NONE;
+            this.stopPlaying();
             this.stopCounting();
         }
         this.updateInterface();
     }
 
     /**
-     * Method which provide the on record pressed
+     * Method which provide the start recording
      */
-    protected void onSavePressed() {
+    protected void startPlaying() {
+        this.stopPlaying();
+        if (this.player == null) {
+            this.player = new MediaPlayer();
+            try {
+                this.player.setOnCompletionListener(this);
+                this.player.setDataSource(this.fileName);
+                this.player.prepare();
+                this.player.start();
+            } catch (Exception ex) {
+                this.stopPlaying();
+                Log.e(TAG, "startPlaying: ", ex);
+            }
+        }
+    }
 
+    /**
+     * Method which provide the stop recording
+     */
+    protected void stopPlaying() {
+        if (this.player != null) {
+            try {
+                this.player.release();
+                this.player = null;
+            } catch (Exception ex) {
+                Log.e(TAG, "stopPlaying: ", ex);
+            }
+        }
+    }
+
+    /**
+     * Called when the end of a media source is reached during playback.
+     *
+     * @param mp the MediaPlayer that reached the end of the file
+     */
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+        this.onPlayPressed();
     }
 
     /**
      * Method which provide the on record pressed
      */
-    protected void onDeletePressed() {
+    protected void onSavePressed() {
+        if (recordingState == RecordingState.NONE) return;
+        try {
+            this.stopRecording();
+            this.stopPlaying();
+            final File file = new File(this.fileName);
+            final Uri uri = Uri.fromFile(file);
+            this.sendActivityResult(uri);
+        } catch (Exception ex) {
+            Log.e(TAG, "onSavePressed: ", ex);
+        }
+    }
 
+    /**
+     * Method which provide the on record pressed
+     *
+     * @param updateInterface {@link Boolean} value if the activity need the update the interface
+     */
+    protected void onDeletePressed(boolean updateInterface) {
+        if (this.recordingState == RecordingState.NONE) return;
+        try {
+            this.stopRecording();
+            this.stopPlaying();
+            final File file = new File(this.fileName);
+            if (file.exists()) file.delete();
+            this.fileName = null;
+            this.recordingState = RecordingState.NONE;
+            if (updateInterface) this.updateInterface();
+        } catch (Exception ex) {
+            Log.e(TAG, "onSavePressed: ", ex);
+        }
     }
 
     /**
@@ -335,9 +456,19 @@ public class BSAudioRecordActivity extends BSDialogActivity {
                     break;
                 case 2:
                     imageView.setImageResource(R.drawable.bs_ic_save);
+                    if (recordingState == RecordingState.NONE) {
+                        imageView.setAlpha(0.4f);
+                    } else {
+                        imageView.setAlpha(1.0f);
+                    }
                     break;
                 case 3:
                     imageView.setImageResource(R.drawable.bs_ic_delete);
+                    if (recordingState == RecordingState.NONE) {
+                        imageView.setAlpha(0.4f);
+                    } else {
+                        imageView.setAlpha(1.0f);
+                    }
                     break;
             }
         }
@@ -425,6 +556,25 @@ public class BSAudioRecordActivity extends BSDialogActivity {
     }
 
     /**
+     * Method which provide the generating of the file name
+     */
+    protected void generateFileName() {
+        String root = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS).toString();
+        File myDir = new File(root);
+        if (!myDir.exists()) {
+            myDir.mkdirs();
+        }
+        @SuppressLint("DefaultLocale") String fileName = String.format("record_%d.3gp",
+                new Date().getTime());
+        File file = new File(myDir, fileName);
+        if (file.exists()) file.delete();
+        this.fileName = file.getAbsolutePath();
+        Log.d(TAG, "generateFileName: \n\t\tFile name:" + fileName);
+
+    }
+
+    /**
      * Method which provide the sending of the Activity results
      *
      * @param value current extra value
@@ -435,7 +585,17 @@ public class BSAudioRecordActivity extends BSDialogActivity {
             intent.putExtra(K_URI_KEY, value);
         }
         setResult(RESULT_OK, intent);
-        onBackPressed();
+        this.finish();
+    }
+
+    /**
+     * Take care of popping the fragment back stack or finishing the activity
+     * as appropriate.
+     */
+    @Override
+    public void onBackPressed() {
+        this.onDeletePressed(false);
+        this.sendActivityResult(null);
     }
 
     /**
@@ -449,6 +609,16 @@ public class BSAudioRecordActivity extends BSDialogActivity {
         addFullscreenFlagIfNeeded(activity, intent);
         activity.startActivityForResult(intent, K_ON_RECORD_RESULT);
         activity.overridePendingTransition(android.R.anim.fade_in, 0);
+    }
+
+    /**
+     * Method which provide the checking of the event equaling
+     *
+     * @param requestCode {@link Integer} value of the request code
+     * @return instance of the {@link Boolean}
+     */
+    public static boolean checkEvent(int requestCode) {
+        return K_ON_RECORD_RESULT == requestCode;
     }
 
     /**
