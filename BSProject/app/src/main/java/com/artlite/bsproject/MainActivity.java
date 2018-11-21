@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
@@ -26,6 +27,7 @@ import com.artlite.bslibrary.ui.fonted.BSCurrencyEditText;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
 import com.artlite.bslibrary.ui.view.BSImageView;
+import com.artlite.bslibrary.ui.view.BSThumbTextView;
 import com.artlite.bslibrary.ui.view.BSView;
 
 import java.util.Locale;
@@ -44,6 +46,12 @@ public class MainActivity extends BSLockableActivity
 
     @FindViewBy(id = R.id.edit_currency)
     private BSCurrencyEditText currencyEditText;
+
+    @FindViewBy(id = R.id.view_seek_label)
+    private BSThumbTextView labelSeek;
+
+    @FindViewBy(id = R.id.view_seek_bar)
+    private SeekBar seekBar;
 
     private Rect rect;
 
@@ -78,6 +86,22 @@ public class MainActivity extends BSLockableActivity
         this.lockActivity();
         this.currencyEditText.configure(Locale.GERMANY, this);
         this.unlockActivity();
+        this.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                labelSeek.attach(seekBar);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     /**
