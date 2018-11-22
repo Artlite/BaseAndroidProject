@@ -21,19 +21,22 @@ import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.managers.BSLocationManager;
+import com.artlite.bslibrary.tasks.BSRepetitiveTask;
 import com.artlite.bslibrary.ui.activity.BSAudioRecordActivity;
 import com.artlite.bslibrary.ui.activity.BSLockableActivity;
 import com.artlite.bslibrary.ui.fonted.BSCurrencyEditText;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
 import com.artlite.bslibrary.ui.view.BSImageView;
+import com.artlite.bslibrary.ui.view.BSThumbProgressBar;
 import com.artlite.bslibrary.ui.view.BSThumbTextView;
 import com.artlite.bslibrary.ui.view.BSView;
 
 import java.util.Locale;
 
 public class MainActivity extends BSLockableActivity
-        implements BSCurrencyEditText.OnCurrencyEditCallback {
+        implements BSCurrencyEditText.OnCurrencyEditCallback,
+        BSRepetitiveTask.OnActionCallback {
 
     @FindViewBy(id = R.id.activity_main)
     private BSDraggableLinearLayout linearItemLayout;
@@ -47,11 +50,10 @@ public class MainActivity extends BSLockableActivity
     @FindViewBy(id = R.id.edit_currency)
     private BSCurrencyEditText currencyEditText;
 
-    @FindViewBy(id = R.id.view_seek_label)
-    private BSThumbTextView labelSeek;
+    @FindViewBy(id = R.id.view_progress_bar)
+    private BSThumbProgressBar progressBar;
 
-    @FindViewBy(id = R.id.view_seek_bar)
-    private SeekBar seekBar;
+    private BSRepetitiveTask repetitiveTask;
 
     private Rect rect;
 
@@ -72,6 +74,8 @@ public class MainActivity extends BSLockableActivity
     protected void onCreateActivity(Bundle bundle) {
         setOnClickListeners(R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5);
         BSLocationManager.startLocationMonitoring(this);
+        this.repetitiveTask = new BSRepetitiveTask(100, this,
+                BSRepetitiveTask.TimeMeasure.MILLISECONDS);
     }
 
     /**
@@ -86,22 +90,14 @@ public class MainActivity extends BSLockableActivity
         this.lockActivity();
         this.currencyEditText.configure(Locale.GERMANY, this);
         this.unlockActivity();
-        this.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                labelSeek.attach(seekBar);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
+        this.progressBar.configure(100);
+        this.progressBar
+                .addColorSection(10, "#8BC34A")
+                .addColorSection(20, "#FF5722")
+                .addColorSection(30, "#039BE5")
+                .addColorSection(40, "#00695C")
+                .addColorSection(90, "#b71c1c");
+        this.repetitiveTask.start();
     }
 
     /**
@@ -227,5 +223,20 @@ public class MainActivity extends BSLockableActivity
                                           int editID,
                                           double value) {
 
+    }
+
+    /**
+     * Method which provide the action performing
+     */
+    @Override
+    public void onActionPerformed() {
+        int progress = this.progressBar.getProgress();
+        int max = this.progressBar.getMax();
+        if (progress >= max) {
+            this.repetitiveTask.stop();
+            this.progressBar.setProgress(0);
+        } else {
+            this.progressBar.setProgress(progress + 1);
+        }
     }
 }

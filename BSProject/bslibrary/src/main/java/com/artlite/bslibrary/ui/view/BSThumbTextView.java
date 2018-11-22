@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 
 import com.artlite.bslibrary.ui.fonted.BSButton;
@@ -82,6 +83,26 @@ public class BSThumbTextView extends BSTextView {
         int maxLimit = (int) (width - contentWidth - seekBar.getPaddingRight());
         int minLimit = seekBar.getPaddingLeft();
         float percent = (float) (1.0 * seekBar.getProgress() / seekBar.getMax());
+        int left = minLimit + (int) (realWidth * percent - contentWidth / 2.0);
+        left = left <= minLimit ? minLimit : left >= maxLimit ? maxLimit : left;
+        lp.setMargins(left, 0, 0, 0);
+        setLayoutParams(lp);
+    }
+
+    /**
+     * Method which provide to attach the {@link android.widget.TextView} to the {@link SeekBar}
+     *
+     * @param progressBar instance of the {@link SeekBar}
+     */
+    public void attach(@Nullable ProgressBar progressBar) {
+        String content = getText().toString();
+        if (progressBar == null) return;
+        if (TextUtils.isEmpty(content)) return;
+        float contentWidth = this.getPaint().measureText(content);
+        int realWidth = width - progressBar.getPaddingLeft() - progressBar.getPaddingRight();
+        int maxLimit = (int) (width - contentWidth - progressBar.getPaddingRight());
+        int minLimit = progressBar.getPaddingLeft();
+        float percent = (float) (1.0 * progressBar.getProgress() / progressBar.getMax());
         int left = minLimit + (int) (realWidth * percent - contentWidth / 2.0);
         left = left <= minLimit ? minLimit : left >= maxLimit ? maxLimit : left;
         lp.setMargins(left, 0, 0, 0);
