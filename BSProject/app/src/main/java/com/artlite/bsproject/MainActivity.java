@@ -90,7 +90,7 @@ public class MainActivity extends BSLockableActivity
         this.lockActivity();
         this.currencyEditText.configure(Locale.GERMANY, this);
         this.unlockActivity();
-        this.progressBar.configure(100);
+        this.progressBar.configure(100, true);
         this.progressBar
                 .addColorSection(10, "#8BC34A")
                 .addColorSection(20, "#FF5722")

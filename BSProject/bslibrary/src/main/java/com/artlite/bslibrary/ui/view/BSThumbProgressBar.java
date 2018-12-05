@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -126,7 +127,7 @@ public class BSThumbProgressBar extends BSView {
      *
      * @param maxValue {@link Integer} value of the max
      */
-    public void configure(int maxValue) {
+    public void configure(@IntRange(from = 1, to = Integer.MAX_VALUE) int maxValue) {
         this.configure(maxValue, K_DEFAULT_COLOR);
     }
 
@@ -136,9 +137,32 @@ public class BSThumbProgressBar extends BSView {
      * @param maxValue        {@link Integer} value of the max
      * @param defaultColorHex {@link String} value of the default hex color
      */
-    public void configure(int maxValue,
+    public void configure(@IntRange(from = 1, to = Integer.MAX_VALUE) int maxValue,
                           @Nullable String defaultColorHex) {
+        this.configure(maxValue, defaultColorHex, true);
+    }
+
+    /**
+     * Method which provide the setting min value and max value to progress view
+     *
+     * @param maxValue {@link Integer} value of the max
+     */
+    public void configure(@IntRange(from = 1, to = Integer.MAX_VALUE) int maxValue,
+                          boolean isNeedProgressLabel) {
+        this.configure(maxValue, K_DEFAULT_COLOR, isNeedProgressLabel);
+    }
+
+    /**
+     * Method which provide the setting min value and max value to progress view
+     *
+     * @param maxValue        {@link Integer} value of the max
+     * @param defaultColorHex {@link String} value of the default hex color
+     */
+    public void configure(@IntRange(from = 1, to = Integer.MAX_VALUE) int maxValue,
+                          @Nullable String defaultColorHex,
+                          boolean isNeedProgressLabel) {
         this.progressBar.setMax(maxValue);
+        this.textView.setVisibility(isNeedProgressLabel ? VISIBLE : GONE);
         if (defaultColorHex != null) {
             try {
                 this.defaultColor = ColorStateList.valueOf(Color.parseColor(defaultColorHex));
