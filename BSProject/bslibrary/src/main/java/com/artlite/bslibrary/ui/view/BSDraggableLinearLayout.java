@@ -130,6 +130,66 @@ public final class BSDraggableLinearLayout extends BaseDraggableLinearLayout {
     /**
      * Method which provide the add of the view
      *
+     * @param views instance of the {@link BSItemView} of array
+     * @param <T>   type of the {@link BSItemView}
+     */
+    @MainThread
+    public final <T extends BSItemView> void add(@Nullable final T... views) {
+        int orientation = getOrientation();
+        if (views != null) {
+            for (T view : views) {
+                if (orientation == LinearLayout.HORIZONTAL) {
+                    view.setLayoutParams(new LinearLayout.LayoutParams(
+                            LayoutParams.WRAP_CONTENT,
+                            LayoutParams.MATCH_PARENT));
+                } else {
+                    view.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT));
+                }
+                if ((draggable) && (view.draggable(getChildCount() - 1))) {
+                    this.addDragView(view, (view.getHandleView() == null)
+                            ? view : view.getHandleView());
+                } else {
+                    this.addView(view);
+                }
+            }
+        }
+    }
+
+    /**
+     * Method which provide the add of the view
+     *
+     * @param views instance of the {@link BSItemView} of {@link List}
+     * @param <T>   type of the {@link BSItemView}
+     */
+    @MainThread
+    public final <T extends BSItemView> void add(@Nullable final List<T> views) {
+        int orientation = getOrientation();
+        if (views != null) {
+            for (T view : views) {
+                if (orientation == LinearLayout.HORIZONTAL) {
+                    view.setLayoutParams(new LinearLayout.LayoutParams(
+                            LayoutParams.WRAP_CONTENT,
+                            LayoutParams.MATCH_PARENT));
+                } else {
+                    view.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT));
+                }
+                if ((draggable) && (view.draggable(getChildCount() - 1))) {
+                    this.addDragView(view, (view.getHandleView() == null)
+                            ? view : view.getHandleView());
+                } else {
+                    this.addView(view);
+                }
+            }
+        }
+    }
+
+    /**
+     * Method which provide the add of the view
+     *
      * @param view  instance of the {@link BSItemView}
      * @param index {@link Integer} value of the index
      * @param <T>   type of the {@link BSItemView}
