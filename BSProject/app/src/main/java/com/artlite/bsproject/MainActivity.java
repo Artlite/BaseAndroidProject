@@ -120,7 +120,7 @@ public class MainActivity extends BSLockableActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button1: {
-                startActivity(RectangleImageActivity.class);
+                startActivity(DetailsActivity.class);
                 break;
             }
             case R.id.button2: {

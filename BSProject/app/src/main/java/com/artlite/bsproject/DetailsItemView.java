@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
+import com.artlite.bslibrary.ui.fonted.BSTextView;
 import com.artlite.bslibrary.ui.view.BSItemView;
 import com.artlite.bslibrary.ui.view.BSView;
 
@@ -17,6 +18,17 @@ public class DetailsItemView extends BSItemView {
      */
     @FindViewBy(id = R.id.drag_menu)
     private ImageView dragImage;
+
+    /**
+     * Instance of the {@link BSTextView}
+     */
+    @FindViewBy(id = R.id.label_text)
+    private BSTextView labelText;
+
+    /**
+     * {@link String} value of the text
+     */
+    private String text;
 
     /**
      * Constructor which provide the create {@link BSView} from
@@ -105,6 +117,19 @@ public class DetailsItemView extends BSItemView {
      */
     @Override
     protected void onCreateView() {
+        this.setText(this.text);
+    }
 
+
+    /**
+     * Method which provide the text setting
+     *
+     * @param text {@link String} value of the text
+     * @return instance of the {@link DetailsItemView}
+     */
+    public DetailsItemView setText(@Nullable String text) {
+        this.text = text;
+        this.labelText.setText(text);
+        return this;
     }
 }

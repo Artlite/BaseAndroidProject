@@ -24,14 +24,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.artlite.bslibrary.ui.view.BSDraggableLinearLayout
+        <com.artlite.bslibrary.ui.view.BSGridLayout
             android:id="@+id/linear_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bs_material2_line_bottom_right_left"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:background="#546E7A"
+            android:columnCount="3" />
 
-        </com.artlite.bslibrary.ui.view.BSDraggableLinearLayout>
     </ScrollView>
 
 </LinearLayout>

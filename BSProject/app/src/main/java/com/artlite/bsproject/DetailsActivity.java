@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.ui.activity.BSActivity;
-import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
+import com.artlite.bslibrary.ui.view.BSGridLayout;
 import com.artlite.bslibrary.ui.view.BSSearchView;
 
 public class DetailsActivity extends BSActivity {
@@ -20,7 +19,7 @@ public class DetailsActivity extends BSActivity {
     private BSSearchView searchView;
 
     @FindViewBy(id = R.id.linear_layout)
-    private BSDraggableLinearLayout bsLinearItemLayout;
+    private BSGridLayout bsLinearItemLayout;
 
     @FindViewBy(id = R.id.scroll_view)
     private ScrollView scrollView;
@@ -52,20 +51,9 @@ public class DetailsActivity extends BSActivity {
      */
     @Override
     protected void onActivityPostCreation(@Nullable Bundle bundle) {
-        this.bsLinearItemLayout.configure(true, this.scrollView, null);
-        searchView.setSearchCallback(new BSSearchView.OnSearchCallback() {
-            @Override
-            public void onSearch(String text) {
-                Toast.makeText(getBaseContext(), "On search" + text, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancel() {
-                Toast.makeText(getBaseContext(), "On cancel", Toast.LENGTH_LONG).show();
-            }
-        });
         for (int i = 0; i < 100; i++) {
-            this.bsLinearItemLayout.add(new DetailsItemView(this));
+            this.bsLinearItemLayout.add(new DetailsItemView(this)
+                    .setText("Text " + i));
         }
     }
 
