@@ -10,4 +10,5 @@
     <string name="bs_text_second">second</string>
     <string name="bs_text_seconds">seconds</string>
     <string name="bs_text_sec">sec</string>
+    <string name="bs_text_please_wait">Please wait</string>
 </resources>

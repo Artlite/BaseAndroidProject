@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
+import com.artlite.bslibrary.managers.BSProgressDialogManager;
+import com.artlite.bslibrary.managers.BSThreadManager;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.view.BSTagsView;
 
@@ -32,7 +34,6 @@ public class TagsActivity extends BSActivity implements BSTagsView.OnTagsViewCal
      */
     @Override
     protected void onCreateActivity(@Nullable Bundle bundle) {
-
     }
 
     /**

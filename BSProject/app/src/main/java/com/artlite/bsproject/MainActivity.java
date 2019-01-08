@@ -21,6 +21,8 @@ import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.managers.BSLocationManager;
+import com.artlite.bslibrary.managers.BSProgressDialogManager;
+import com.artlite.bslibrary.managers.BSThreadManager;
 import com.artlite.bslibrary.tasks.BSRepetitiveTask;
 import com.artlite.bslibrary.ui.activity.BSAudioRecordActivity;
 import com.artlite.bslibrary.ui.activity.BSLockableActivity;
@@ -120,7 +122,13 @@ public class MainActivity extends BSLockableActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button1: {
-                startActivity(DetailsActivity.class);
+                BSProgressDialogManager.show(R.string.bs_text_please_wait, true);
+                BSThreadManager.main(4, new BSThreadManager.OnThreadCallback() {
+                    @Override
+                    public void onExecute() {
+                        startActivity(PDFActivity.class);
+                    }
+                });
                 break;
             }
             case R.id.button2: {

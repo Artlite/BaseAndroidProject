@@ -34,7 +34,9 @@ import com.artlite.bslibrary.helpers.log.BSLogHelper;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.listeners.BSSwipeListener;
+import com.artlite.bslibrary.managers.BSActivityManager;
 import com.artlite.bslibrary.managers.BSLocalNotificationManager;
+import com.artlite.bslibrary.managers.BSProgressDialogManager;
 import com.artlite.bslibrary.managers.BSThreadManager;
 
 import java.io.InputStream;
@@ -132,6 +134,7 @@ public abstract class BSActivity
         onInitBackButton();
         onInitgestures();
         BSInjector.inject(this);
+        BSActivityManager.registerActivity(this);
         onCreateActivity((bundle == null) ? getIntent().getExtras() : bundle);
         BSThreadManager.main(new BSThreadManager.OnThreadCallback() {
             @Override
@@ -139,6 +142,24 @@ public abstract class BSActivity
                 onActivityPostCreation((bundle == null) ? getIntent().getExtras() : bundle);
             }
         });
+    }
+
+    /**
+     * Method which provide the onResume functionality
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BSActivityManager.registerActivity(this);
+    }
+
+    /**
+     * Method which provide the on pause functionality
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BSProgressDialogManager.hide();
     }
 
     /**
