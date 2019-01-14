@@ -40,6 +40,11 @@ public class BSThumbProgressBar extends BSView {
     private static final String K_DEFAULT_COLOR = "#2196F3";
 
     /**
+     * {@link String} constants of the default format
+     */
+    private static final String K_DEFAULT_FORMAT = "%d%%";
+
+    /**
      * Instance of the {@link BSThumbTextView}
      */
     protected BSThumbTextView textView;
@@ -64,6 +69,16 @@ public class BSThumbProgressBar extends BSView {
      * Instance of the {@link ColorStateList}
      */
     protected ColorStateList defaultColor;
+
+    /**
+     * Instance of the {@link ColorStateList}
+     */
+    protected ColorStateList labelColor;
+
+    /**
+     * {@link String} value of the default format
+     */
+    protected String defaultFormat = K_DEFAULT_FORMAT;
 
     /**
      * Constructor which provide the create {@link BSView} from
@@ -174,6 +189,29 @@ public class BSThumbProgressBar extends BSView {
     }
 
     /**
+     * Method which provide the setting of the default format
+     *
+     * @param format {@link String} value of the default format
+     */
+    public void setDefaultFormat(String format) {
+        this.defaultFormat = format;
+    }
+
+    /**
+     * Method which provide the setting of the label color as HEX
+     *
+     * @param color {@link String} value of the HEX color
+     */
+    public void setLabelColor(String color) {
+        try {
+            this.labelColor = ColorStateList.valueOf(Color.parseColor(color));
+        } catch (Exception ex) {
+            this.labelColor = null;
+            Log.e(TAG, "setLabelColor: ", ex);
+        }
+    }
+
+    /**
      * Method which provide the setting of the progress
      *
      * @param progress {@link Integer} value of the progress
@@ -193,7 +231,12 @@ public class BSThumbProgressBar extends BSView {
     @Warning(massage = "Could be overriding")
     @SuppressLint("DefaultLocale")
     protected void setLabelValue(int progress) {
-        this.textView.setText(String.format("%d%%", progress));
+        try {
+            this.textView.setText(String.format(this.defaultFormat, progress));
+        } catch (Exception ex) {
+            this.textView.setText(String.format(K_DEFAULT_FORMAT, progress));
+            Log.e(TAG, "setLabelValue: ", ex);
+        }
     }
 
     /**
@@ -241,8 +284,8 @@ public class BSThumbProgressBar extends BSView {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 this.progressBar.setProgressTintList(color);
                 this.progressBar.setIndeterminateTintList(color);
-                this.textView.setTextColor(color);
             }
+            this.textView.setTextColor((this.labelColor == null) ? color : this.labelColor);
         } catch (Exception ex) {
             Log.e(TAG, "setColor: ", ex);
         }

@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'com.artlite'
     PUBLISH_ARTIFACT_ID = 'baseproject'
-    PUBLISH_VERSION = '4.3.3'
+    PUBLISH_VERSION = '4.3.5'
 }
 
 android {
@@ -27,6 +27,13 @@ android {
     }
     lintOptions {
         abortOnError false
+    }
+}
+
+// Artlite libraries
+repositories {
+    maven {
+        url "https://jitpack.io"
     }
 }
 
@@ -56,6 +63,19 @@ dependencies {
     api 'com.github.barteksc:android-pdf-viewer:2.8.2'
     // Gif drawable
     api 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
+    // For Markdown
+    // Flexmark
+    api 'com.vladsch.flexmark:flexmark:0.28.32'
+    api 'com.vladsch.flexmark:flexmark-ext-tables:0.28.32'
+    api 'com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:0.28.32'
+    api 'com.vladsch.flexmark:flexmark-ext-gfm-tasklist:0.28.32'
+    api 'com.vladsch.flexmark:flexmark-ext-autolink:0.28.32'
+    api 'com.vladsch.flexmark:flexmark-ext-abbreviation:0.28.32'
+    api 'com.vladsch.flexmark:flexmark-ext-superscript:0.28.32'
+    api 'com.vladsch.flexmark:flexmark-ext-footnotes:0.28.32'
+    api 'com.vladsch.flexmark:flexmark-ext-attributes:0.28.32'
+    // Logger
+    api 'com.orhanobut:logger:1.15'
     testImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

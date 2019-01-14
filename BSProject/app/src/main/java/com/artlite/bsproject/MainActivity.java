@@ -122,13 +122,7 @@ public class MainActivity extends BSLockableActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button1: {
-                BSProgressDialogManager.show(R.string.bs_text_please_wait, true);
-                BSThreadManager.main(4, new BSThreadManager.OnThreadCallback() {
-                    @Override
-                    public void onExecute() {
-                        startActivity(PDFActivity.class);
-                    }
-                });
+                startActivity(MarkdownActivity.class);
                 break;
             }
             case R.id.button2: {
