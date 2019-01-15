@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
+import com.artlite.bslibrary.managers.BSProgressDialogManager;
+import com.artlite.bslibrary.managers.BSThreadManager;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.view.BSMarkdownView;
 import com.artlite.bslibrary.ui.view.BSPDFView;
@@ -44,7 +46,14 @@ public class MarkdownActivity extends BSActivity {
      */
     @Override
     protected void onActivityPostCreation(@Nullable Bundle bundle) {
-        this.view.loadMarkdownFromAsset("README.md");
+        BSProgressDialogManager.show(false);
+        BSThreadManager.main(1, new BSThreadManager.OnThreadCallback() {
+            @Override
+            public void onExecute() {
+                view.loadMarkdownFromAsset("Goaline project.md");
+                BSProgressDialogManager.hide();
+            }
+        });
     }
 
 }
