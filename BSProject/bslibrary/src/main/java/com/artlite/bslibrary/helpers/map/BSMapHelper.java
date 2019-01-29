@@ -1,5 +1,6 @@
 package com.artlite.bslibrary.helpers.map;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
 
@@ -11,12 +12,20 @@ import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 
 public final class BSMapHelper extends BSBaseHelper {
 
+    /**
+     * {@link String} value of the link format
+     */
     private static final String K_PREVIEW_LINK_FORMAT =
             "https://maps.googleapis.com/maps/api/staticmap" +
                     "?center=%s,%s" +
                     "&markers=color:red%%7Clabel:C%%7C%s,%s" +
                     "&size=%dx%d" +
                     "&zoom=%d";
+
+    /**
+     * {@link Double} value of the average of the earth radius
+     */
+    private final static double K_AVERAGE_RADIUS_OF_EARTH = 6371;
 
 
     /**
@@ -56,6 +65,7 @@ public final class BSMapHelper extends BSBaseHelper {
      * @return {@link String} url value for the preview
      */
     @Nullable
+    @SuppressLint("DefaultLocale")
     public static String getPreviewMap(@Nullable final String latitude,
                                        @Nullable final String longitude,
                                        @IntRange(from = 200, to = 600) int width,
@@ -72,6 +82,30 @@ public final class BSMapHelper extends BSBaseHelper {
                     zoom);
         }
         return null;
+    }
+
+    /**
+     * Method which provide the getting {@link Double} value of the distance between coordinates
+     *
+     * @param startLatitude  {@link Double} value of the start latitude
+     * @param startLongitude {@link Double} value of the start longitude
+     * @param endLatitude    {@link Double} value of the end latitude
+     * @param endLongitude   {@link Double} value of the end longitude
+     * @return
+     */
+    public static double getDistance(double startLatitude,
+                                     double startLongitude,
+                                     double endLatitude,
+                                     double endLongitude) {
+        double latDistance = Math.toRadians(startLatitude - endLatitude);
+        double lngDistance = Math.toRadians(startLongitude - endLongitude);
+        double a = (Math.sin(latDistance / 2) * Math.sin(latDistance / 2)) +
+                (Math.cos(Math.toRadians(startLatitude))) *
+                        (Math.cos(Math.toRadians(endLatitude))) *
+                        (Math.sin(lngDistance / 2)) *
+                        (Math.sin(lngDistance / 2));
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return (int) (Math.round(K_AVERAGE_RADIUS_OF_EARTH * c));
     }
 
 }
