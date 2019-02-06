@@ -10,7 +10,9 @@ import android.support.v4.app.ActivityCompat;
 import com.artlite.bslibrary.annotations.FindViewBy;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import com.artlite.bslibrary.managers.BSActivityManager;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.view.BSPDFView;
 import com.github.barteksc.pdfviewer.PDFView;

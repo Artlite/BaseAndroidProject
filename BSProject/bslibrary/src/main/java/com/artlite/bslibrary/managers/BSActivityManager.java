@@ -86,9 +86,9 @@ public final class BSActivityManager extends BSBaseManager {
      * @return instance of the foreground {@link Activity}
      */
     @Nullable
-    public static Activity getForegroundActivity() {
+    public static <T extends Activity> T getForegroundActivity() {
         try {
-            return getInstance().activityReference.get();
+            return (T) getInstance().activityReference.get();
         } catch (Exception ex) {
             Log.e(TAG, "getForegroundActivity: ", ex);
             return null;
