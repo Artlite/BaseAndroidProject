@@ -96,8 +96,6 @@ public class PDFActivity extends BSActivity implements BSPDFView.OnConfiguration
      */
     @Override
     public void pdfViewConfigure(@NonNull PDFView.Configurator configurator) {
-        configurator.enableAntialiasing(true);
-        configurator.password("Art2378181");
     }
 
     /**
