@@ -3,18 +3,14 @@ package com.artlite.bsproject;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
 
 import android.os.Bundle;
 
-import com.artlite.bslibrary.managers.BSProgressDialogManager;
-import com.artlite.bslibrary.managers.BSThreadManager;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.view.BSPDFView;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -88,8 +84,7 @@ public class PDFActivity extends BSActivity implements BSPDFView.OnConfiguration
      */
     @SuppressLint("MissingPermission")
     protected void download() {
-        view.download("https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf",
-                null, true);
+        view.download("pdf/Untitled.pdf");
     }
 
     /**
@@ -100,6 +95,7 @@ public class PDFActivity extends BSActivity implements BSPDFView.OnConfiguration
     @Override
     public void pdfViewConfigure(@NonNull PDFView.Configurator configurator) {
         configurator.enableAntialiasing(true);
+        configurator.password("Art2378181");
     }
 
     /**
@@ -109,6 +105,5 @@ public class PDFActivity extends BSActivity implements BSPDFView.OnConfiguration
      */
     @Override
     public void pdfViewLoadComplete(@NonNull BSPDFView view) {
-
     }
 }

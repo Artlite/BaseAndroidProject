@@ -11,6 +11,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.artlite.bslibrary.R;
+import com.artlite.bslibrary.annotations.Info;
+import com.artlite.bslibrary.annotations.Warning;
 import com.artlite.bslibrary.tasks.BSDownloadTask;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.source.DocumentSource;
@@ -52,22 +54,37 @@ public class BSPDFView extends BSView {
     /**
      * Instance of the {@link PDFView}
      */
-    private PDFView viewPDF;
+    protected PDFView viewPDF;
 
     /**
      * Instance of the {@link Uri}
      */
-    private Uri uri;
+    protected Uri uri;
 
     /**
      * Instance of the file
      */
-    private File file;
+    protected File file;
 
     /**
      * Instance of the {@link OnConfigurationCallback}
      */
-    private OnConfigurationCallback callback;
+    protected OnConfigurationCallback callback;
+
+    /**
+     * {@link Float} value of the min zoom
+     */
+    protected float minZoom = 0f;
+
+    /**
+     * {@link Float} value of the mid zoom
+     */
+    protected float midZoom = 0f;
+
+    /**
+     * {@link Float} value of the max zoom
+     */
+    protected float maxZoom = 0f;
 
     /**
      * Constructor which provide the create {@link BSView} from
@@ -208,13 +225,8 @@ public class BSPDFView extends BSView {
     public void download(@Nullable final Uri uri) {
         this.uri = uri;
         final PDFView.Configurator configurator = this.viewPDF.fromUri(uri);
-        if (this.callback != null) {
-            this.callback.pdfViewConfigure(configurator);
-        }
-        configurator.load();
-        if (this.callback != null) {
-            this.callback.pdfViewLoadComplete(this);
-        }
+        this.preconfigure(configurator);
+        this.onLoadCompleted();
     }
 
     /**
@@ -224,13 +236,8 @@ public class BSPDFView extends BSView {
      */
     public void download(@Nullable final String asset) {
         final PDFView.Configurator configurator = this.viewPDF.fromAsset(asset);
-        if (this.callback != null) {
-            this.callback.pdfViewConfigure(configurator);
-        }
-        configurator.load();
-        if (this.callback != null) {
-            this.callback.pdfViewLoadComplete(this);
-        }
+        this.preconfigure(configurator);
+        this.onLoadCompleted();
     }
 
     /**
@@ -240,13 +247,8 @@ public class BSPDFView extends BSView {
      */
     public void download(@Nullable final byte[] bytes) {
         final PDFView.Configurator configurator = this.viewPDF.fromBytes(bytes);
-        if (this.callback != null) {
-            this.callback.pdfViewConfigure(configurator);
-        }
-        configurator.load();
-        if (this.callback != null) {
-            this.callback.pdfViewLoadComplete(this);
-        }
+        this.preconfigure(configurator);
+        this.onLoadCompleted();
     }
 
     /**
@@ -256,13 +258,8 @@ public class BSPDFView extends BSView {
      */
     public void download(@Nullable final File file) {
         final PDFView.Configurator configurator = this.viewPDF.fromFile(file);
-        if (this.callback != null) {
-            this.callback.pdfViewConfigure(configurator);
-        }
-        configurator.load();
-        if (this.callback != null) {
-            this.callback.pdfViewLoadComplete(this);
-        }
+        this.preconfigure(configurator);
+        this.onLoadCompleted();
     }
 
     /**
@@ -272,13 +269,8 @@ public class BSPDFView extends BSView {
      */
     public void download(@Nullable final InputStream stream) {
         final PDFView.Configurator configurator = this.viewPDF.fromStream(stream);
-        if (this.callback != null) {
-            this.callback.pdfViewConfigure(configurator);
-        }
-        configurator.load();
-        if (this.callback != null) {
-            this.callback.pdfViewLoadComplete(this);
-        }
+        this.preconfigure(configurator);
+        this.onLoadCompleted();
     }
 
     /**
@@ -288,10 +280,58 @@ public class BSPDFView extends BSView {
      */
     public void download(@Nullable final DocumentSource source) {
         final PDFView.Configurator configurator = this.viewPDF.fromSource(source);
+        this.preconfigure(configurator);
+        this.onLoadCompleted();
+    }
+
+    /**
+     * Method which provide the disable zoom
+     */
+    @Info(massage = "Could be better to use in the OnConfigurationCallback -> pdfViewLoadComplete")
+    public final void disableZoom() {
+        if (this.viewPDF != null) {
+            this.minZoom = this.viewPDF.getMinZoom();
+            this.midZoom = this.viewPDF.getMidZoom();
+            this.maxZoom = this.viewPDF.getMaxZoom();
+            this.viewPDF.setMinZoom(1f);
+            this.viewPDF.setMidZoom(1f);
+            this.viewPDF.setMaxZoom(1f);
+        }
+    }
+
+    /**
+     * Method which provide the recover zoom
+     */
+    @Info(massage = "Could be better to use in the OnConfigurationCallback -> pdfViewLoadComplete")
+    public final void recoverZoom() {
+        if (this.viewPDF != null) {
+            if ((this.minZoom == 0f)
+                    || (this.midZoom == 0f)
+                    || (this.maxZoom == 0f)) {
+                this.disableZoom();
+            }
+            this.viewPDF.setMinZoom(this.minZoom);
+            this.viewPDF.setMidZoom(this.midZoom);
+            this.viewPDF.setMaxZoom(this.maxZoom);
+        }
+    }
+
+    /**
+     * Method which provide the preconfigure of the {@link BSPDFView}
+     *
+     * @param configurator instance of the {@link PDFView.Configurator}
+     */
+    protected void preconfigure(@NonNull PDFView.Configurator configurator) {
         if (this.callback != null) {
             this.callback.pdfViewConfigure(configurator);
         }
         configurator.load();
+    }
+
+    /**
+     * Method which provide the load completed
+     */
+    protected void onLoadCompleted() {
         if (this.callback != null) {
             this.callback.pdfViewLoadComplete(this);
         }
