@@ -1,6 +1,7 @@
 package com.artlite.bslibrary.managers;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -16,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
+import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 
 import java.util.List;
 import java.util.Locale;
@@ -128,6 +130,10 @@ public final class BSLocationManager extends BSBaseManager implements LocationLi
         final String methodName = "Location getLocation()";
         if (getInstance() != null) {
             final BSLocationManager manager = getInstance();
+            if ((manager.locationName == null)
+                    && (manager.location != null)) {
+                manager.obtainName(manager.location);
+            }
             return manager.locationName;
         }
         return null;
@@ -138,24 +144,24 @@ public final class BSLocationManager extends BSBaseManager implements LocationLi
      *
      * @param activity instance of the {@link Activity}
      */
+    @SuppressLint("MissingPermission")
     public static void startLocationMonitoring(@Nullable final Activity activity) {
         if (getInstance() != null) {
             final BSLocationManager manager = getInstance();
             if (manager.locationManager != null) {
-                if (ActivityCompat.checkSelfPermission(manager.getContext(),
-                        Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED
-                        && ActivityCompat.checkSelfPermission(manager.getContext(),
-                        Manifest.permission.ACCESS_COARSE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
+                final Context context = manager.getContext();
+                if (!BSPermissionHelper.isGranted(context,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION)) {
                     ActivityCompat.requestPermissions(activity,
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
                                     Manifest.permission.ACCESS_COARSE_LOCATION},
                             0b1010);
                     return;
+                } else {
+                    manager.locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                            0, 0, manager);
                 }
-                manager.locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                        0, 0, manager);
             }
         }
     }

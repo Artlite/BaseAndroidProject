@@ -2,10 +2,12 @@ package com.artlite.bslibrary.helpers.permission;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.artlite.bslibrary.callbacks.BSPermissionCallback;
@@ -19,6 +21,11 @@ import java.util.List;
  */
 
 public class BSPermissionHelper {
+
+    /**
+     * {@link String} constants of the tag
+     */
+    private static final String TAG = BSPermissionHelper.class.getSimpleName();
 
     /**
      * Method which provide the request permissions
@@ -70,6 +77,46 @@ public class BSPermissionHelper {
                 callback.onPermissionGranted();
             }
         }
+    }
+
+    /**
+     * Method which provide the checking if the permission is granted
+     *
+     * @param context    instance of the {@link Context}
+     * @param permission {@link String} value of the permission
+     * @return {@link Boolean} value if it granted
+     */
+    public static boolean isGranted(@Nullable Context context,
+                                    @Nullable String permission) {
+        try {
+            return ActivityCompat.checkSelfPermission(context, permission)
+                    == PackageManager.PERMISSION_GRANTED;
+        } catch (Exception ex) {
+            Log.e(TAG, "isGranted: ", ex);
+        }
+        return false;
+    }
+
+    /**
+     * Method which provide the checking if the permission is granted
+     *
+     * @param context     instance of the {@link Context}
+     * @param permissions {@link String} array of the permissions
+     * @return {@link Boolean} value if it granted
+     */
+    public static boolean isGranted(@Nullable Context context,
+                                    @Nullable String... permissions) {
+        try {
+            for (String permission : permissions) {
+                if (!isGranted(context, permission)) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (Exception ex) {
+            Log.e(TAG, "isGranted: ", ex);
+        }
+        return false;
     }
 
 }

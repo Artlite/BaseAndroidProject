@@ -1,10 +1,18 @@
 package com.artlite.bslibrary.helpers.map;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
+
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Class which provide the helper for the Google Map
@@ -25,8 +33,12 @@ public final class BSMapHelper extends BSBaseHelper {
     /**
      * {@link Double} value of the average of the earth radius
      */
-    private final static double K_AVERAGE_RADIUS_OF_EARTH = 6371;
+    private static final double K_AVERAGE_RADIUS_OF_EARTH = 6371;
 
+    /**
+     * {@link String} constants of the TAG
+     */
+    private static final String TAG = BSMapHelper.class.getSimpleName();
 
     /**
      * Method which provide the of the preview image for the Google Map
@@ -106,6 +118,52 @@ public final class BSMapHelper extends BSBaseHelper {
                         (Math.sin(lngDistance / 2));
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return (int) (Math.round(K_AVERAGE_RADIUS_OF_EARTH * c));
+    }
+
+    /**
+     * Method which provide the getting of the address from the latitude and longitude
+     *
+     * @param context   instance of the {@link Context}
+     * @param latitude  {@link Double} value of the latitude
+     * @param longitude {@link Double} value of the longitude
+     * @return instance of the {@link Address}
+     */
+    @Nullable
+    public static Address getAddress(@Nullable Context context,
+                                     double latitude,
+                                     double longitude) {
+        if (context == null) return null;
+        try {
+            final Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+            List<Address> addresses = geocoder
+                    .getFromLocation(latitude, longitude, 1);
+            return addresses.get(0);
+        } catch (Exception ex) {
+            Log.e(TAG, "getAddress: ", ex);
+        }
+        return null;
+    }
+
+    /**
+     * Method which provide the getting of the address from the latitude and longitude
+     *
+     * @param context   instance of the {@link Context}
+     * @param latitude  {@link Double} value of the latitude
+     * @param longitude {@link Double} value of the longitude
+     * @return instance of the {@link Address}
+     */
+    @SuppressLint("DefaultLocale")
+    @Nullable
+    public static String getAddressName(@Nullable Context context,
+                                        double latitude,
+                                        double longitude) {
+        if (context == null) return null;
+        try {
+            return getAddress(context, latitude, longitude).getAddressLine(0);
+        } catch (Exception ex) {
+            Log.e(TAG, "getAddressName: ", ex);
+        }
+        return String.format("%.2f, %.2f", latitude, longitude);
     }
 
 }
