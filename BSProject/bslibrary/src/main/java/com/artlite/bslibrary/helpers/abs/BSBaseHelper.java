@@ -10,6 +10,12 @@ import com.artlite.bslibrary.models.BSLoggableObject;
  */
 
 public abstract class BSBaseHelper extends BSLoggableObject {
+
+    /**
+     * {@link String} constants of the TAG
+     */
+    protected static final String TAG = BSBaseHelper.class.getSimpleName();
+
     /**
      * Method which provide the empty validations
      *

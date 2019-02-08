@@ -8,11 +8,16 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 
+import java.io.BufferedReader;
 import java.io.FileDescriptor;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * CLass which provide the functional for {@link Uri}
@@ -48,5 +53,40 @@ public final class BSUriHelper extends BSBaseHelper {
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
+    }
+
+    /**
+     * Method which provide the reading of the text file (json file) from instance of the {@link Uri}
+     *
+     * @param activity instance of the {@link Activity}
+     * @param uri      instance of the {@link Uri}
+     * @return {@link String} content of the file
+     */
+    @NonNull
+    public static String readTextFile(@Nullable Activity activity,
+                                      @Nullable Uri uri) {
+        BufferedReader reader = null;
+        StringBuilder builder = new StringBuilder();
+        try {
+            assert activity != null;
+            assert uri != null;
+            reader = new BufferedReader(new InputStreamReader(activity
+                    .getContentResolver().openInputStream(uri)));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                builder.append(line);
+            }
+        } catch (Exception ex) {
+            Log.e(TAG, "readTextFile: ", ex);
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException ex) {
+                    Log.e(TAG, "readTextFile: ", ex);
+                }
+            }
+        }
+        return builder.toString();
     }
 }
