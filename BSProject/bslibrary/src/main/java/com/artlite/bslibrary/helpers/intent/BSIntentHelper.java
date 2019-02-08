@@ -538,7 +538,10 @@ public final class BSIntentHelper extends BSBaseHelper {
      *         Uri file = data.getData();
      *     }
      * </code></pre>
+     *
+     * @deprecated Use the Intent pickFile(@NonNull String title) method
      */
+    @Deprecated
     @NonNull
     public static Intent pickFile() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -546,12 +549,58 @@ public final class BSIntentHelper extends BSBaseHelper {
         return intent;
     }
 
+    /**
+     * Pick file from sdcard with file manager. Chosen file can be obtained from
+     * Intent in onActivityResult.
+     * See code below for example:
+     * <p/>
+     * <pre><code>
+     *     @Override
+     *     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+     *         Uri file = data.getData();
+     *     }
+     * </code></pre>
+     *
+     * @param title {@link String} value of the title
+     * @return instance of the {@link Intent}
+     */
+    @NonNull
+    public static Intent pickFile(@NonNull String title) {
+        return pickFile(title, null);
+    }
+
+    /**
+     * Pick file from sdcard with file manager. Chosen file can be obtained from
+     * Intent in onActivityResult.
+     * See code below for example:
+     * <p/>
+     * <pre><code>
+     *     @Override
+     *     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+     *         Uri file = data.getData();
+     *     }
+     * </code></pre>
+     *
+     * @param title {@link String} value of the title
+     * @param type  {@link String} value of the type
+     * @return instance of the {@link Intent}
+     */
+    @NonNull
+    public static Intent pickFile(@NonNull String title,
+                                  @Nullable String type) {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType((type == null) ? "*/*" : type);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        return Intent.createChooser(intent, title);
+    }
+
     //==============================================================================================
     //                                      CALL PHONE
     //==============================================================================================
 
     /**
-     * Calls the entered phone number. Valid telephone numbers as defined in the IETF RFC 3966 are accepted.
+     * Calls the entered phone number. Valid telephone numbers as defined in the
+     * IETF RFC 3966 are accepted.
      * Valid examples include the following:
      * tel:2125551212
      * tel: (212) 555 1212

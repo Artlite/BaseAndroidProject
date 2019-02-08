@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'com.artlite'
     PUBLISH_ARTIFACT_ID = 'baseproject'
-    PUBLISH_VERSION = '4.3.7'
+    PUBLISH_VERSION = '4.3.8'
 }
 
 android {
