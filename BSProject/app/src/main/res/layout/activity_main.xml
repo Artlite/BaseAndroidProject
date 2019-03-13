@@ -87,6 +87,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.artlite.bslibrary.ui.fonted.BSTextView
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Bold"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_18"
+            android:textStyle="bold" />
+
+        <com.artlite.bslibrary.ui.fonted.BSTextView
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Italic"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_18"
+            android:textStyle="italic" />
+
+        <com.artlite.bslibrary.ui.fonted.BSTextView
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Italic/Bold"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_18"
+            android:textStyle="italic|bold" />
+
+        <com.artlite.bslibrary.ui.fonted.BSTextView
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Normal"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_18" />
+
+    </LinearLayout>
+
     <com.artlite.bslibrary.ui.view.BSThumbProgressBar
         android:id="@+id/view_progress_bar"
         android:layout_width="match_parent"
