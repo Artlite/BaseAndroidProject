@@ -22,6 +22,7 @@ import com.artlite.bslibrary.managers.BSThreadManager;
 import com.artlite.bslibrary.managers.BSTransferManager;
 import com.artlite.bslibrary.managers.BSTypefaceManager;
 import com.artlite.bslibrary.managers.BSViewManager;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
 /**
  * Class which provide the BSLibrary application
@@ -64,6 +65,7 @@ public final class BSInstance {
             BSViewManager.init(context);
             BSProgressDialogManager.init(context);
             BSActivityManager.init(context);
+            AndroidThreeTen.init(context);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }

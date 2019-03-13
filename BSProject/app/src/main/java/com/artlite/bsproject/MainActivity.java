@@ -12,17 +12,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.callbacks.BSPermissionCallback;
 import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
 import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
+import com.artlite.bslibrary.helpers.period.BSPeriodHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.managers.BSLocationManager;
-import com.artlite.bslibrary.managers.BSProgressDialogManager;
-import com.artlite.bslibrary.managers.BSThreadManager;
 import com.artlite.bslibrary.tasks.BSRepetitiveTask;
 import com.artlite.bslibrary.ui.activity.BSAudioRecordActivity;
 import com.artlite.bslibrary.ui.activity.BSLockableActivity;
@@ -31,14 +29,21 @@ import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.bslibrary.ui.view.BSDraggableLinearLayout;
 import com.artlite.bslibrary.ui.view.BSImageView;
 import com.artlite.bslibrary.ui.view.BSThumbProgressBar;
-import com.artlite.bslibrary.ui.view.BSThumbTextView;
 import com.artlite.bslibrary.ui.view.BSView;
 
+import org.threeten.bp.Period;
+
+import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends BSLockableActivity
         implements BSCurrencyEditText.OnCurrencyEditCallback,
         BSRepetitiveTask.OnActionCallback {
+
+    /**
+     * {@link String} constants of the TAG
+     */
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @FindViewBy(id = R.id.activity_main)
     private BSDraggableLinearLayout linearItemLayout;
@@ -89,6 +94,10 @@ public class MainActivity extends BSLockableActivity
      */
     @Override
     protected void onActivityPostCreation(@Nullable Bundle bundle) {
+        Period period = BSPeriodHelper.getDifference(new Date(0));
+        Log.d(TAG, "onActivityPostCreation: " + period.getDays()
+                + ":" + period.getMonths()
+                + ":" + period.getYears());
         this.lockActivity();
         this.currencyEditText.configure(Locale.GERMANY, this);
         this.unlockActivity();
