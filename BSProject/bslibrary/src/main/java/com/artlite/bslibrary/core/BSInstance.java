@@ -8,6 +8,8 @@ import com.artlite.bslibrary.constants.BSTypeface;
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
 import com.artlite.bslibrary.managers.BSActivityManager;
 import com.artlite.bslibrary.managers.BSContextManager;
+import com.artlite.bslibrary.managers.BSCryptManager;
+import com.artlite.bslibrary.managers.BSCryptSharedPreferenceManager;
 import com.artlite.bslibrary.managers.BSEventManager;
 import com.artlite.bslibrary.managers.BSImageManager;
 import com.artlite.bslibrary.managers.BSLocalNotificationManager;
@@ -17,6 +19,7 @@ import com.artlite.bslibrary.managers.BSRandomManager;
 import com.artlite.bslibrary.managers.BSScreenManager;
 import com.artlite.bslibrary.managers.BSServiceManager;
 import com.artlite.bslibrary.managers.BSSharedPreferenceManager;
+import com.artlite.bslibrary.managers.BSSignManager;
 import com.artlite.bslibrary.managers.BSStatusBarManager;
 import com.artlite.bslibrary.managers.BSThreadManager;
 import com.artlite.bslibrary.managers.BSTransferManager;
@@ -62,10 +65,13 @@ public final class BSInstance {
             BSTypefaceManager.init(context, typeface);
             BSStatusBarManager.init(context);
             BSSharedPreferenceManager.init(context);
+            BSCryptSharedPreferenceManager.init(context);
             BSViewManager.init(context);
             BSProgressDialogManager.init(context);
             BSActivityManager.init(context);
             AndroidThreeTen.init(context);
+            BSSignManager.init(context);
+            BSCryptManager.init(context);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }
