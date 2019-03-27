@@ -113,6 +113,34 @@ public final class BSBitmapHelper extends BSBaseHelper {
     }
 
     /**
+     * Method which provide the convert the {@link View} to the {@link Bitmap}
+     *
+     * @param view instance of {@link View}
+     * @return instance of the {@link Bitmap}
+     */
+    @NonNull
+    public static Bitmap convert(@Nullable final View view,
+                                 @IntRange(from = 0, to = Integer.MAX_VALUE) int width,
+                                 @IntRange(from = 0, to = Integer.MAX_VALUE) int height) {
+        final String methodName = "Bitmap convert(view)";
+        try {
+            int newWidth = (width >= 0) ? width : 0;
+            int newHeight = (height >= 0) ? height : 0;
+            view.measure(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            final Bitmap bitmap = Bitmap.createBitmap(newWidth, newHeight,
+                    Bitmap.Config.ARGB_8888);
+            final Canvas canvas = new Canvas(bitmap);
+            view.layout(0, 0, newWidth, newHeight);
+            view.draw(canvas);
+            return bitmap;
+        } catch (Exception ex) {
+            log(null, methodName, ex, null);
+            return null;
+        }
+    }
+
+    /**
      * Method which provide the converting of the {@link Byte} array to {@link Bitmap}
      *
      * @param bytes instance of {@link Byte}
