@@ -3,9 +3,12 @@ package com.artlite.bslibrary.helpers.bitmap;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 
@@ -80,6 +83,32 @@ public final class BSBitmapHelper extends BSBaseHelper {
         } catch (Exception ex) {
             log(null, methodName, ex, bitmap);
             return new byte[0];
+        }
+    }
+
+    /**
+     * Method which provide the convert the {@link View} to the {@link Bitmap}
+     *
+     * @param view instance of {@link View}
+     * @return instance of the {@link Bitmap}
+     */
+    @NonNull
+    public static Bitmap convert(@Nullable final View view) {
+        final String methodName = "Bitmap convert(view)";
+        try {
+            view.measure(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            final Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(),
+                    view.getMeasuredHeight(),
+                    Bitmap.Config.ARGB_8888);
+            final Canvas canvas = new Canvas(bitmap);
+            view.layout(0, 0, view.getMeasuredWidth(),
+                    view.getMeasuredHeight());
+            view.draw(canvas);
+            return bitmap;
+        } catch (Exception ex) {
+            log(null, methodName, ex, null);
+            return null;
         }
     }
 
