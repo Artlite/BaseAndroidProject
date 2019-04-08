@@ -1,8 +1,11 @@
 package com.artlite.bslibrary.helpers.random;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.artlite.bslibrary.R;
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
@@ -122,6 +125,24 @@ public class BSRandomHelper extends BSBaseHelper {
             log(null, methodName, ex, context);
         }
         return new String[]{};
+    }
+
+    /**
+     * Method which provide the getting of the random color
+     *
+     * @param context instance of {@link Context}
+     * @return {@link Integer} value of the color
+     */
+    @ColorInt
+    public static int randomColor(@Nullable Context context) {
+        try {
+            String[] colors = context.getResources().getStringArray(R.array.bs_random_colors);
+            int colorIndex = generateInt(0, colors.length - 1);
+            return Color.parseColor(colors[colorIndex]);
+        } catch (Exception ex) {
+            Log.e(TAG, "randomColor: ", ex);
+            return Color.parseColor("#607D8B");
+        }
     }
 
 }

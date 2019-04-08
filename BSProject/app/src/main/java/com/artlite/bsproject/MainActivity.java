@@ -21,6 +21,7 @@ import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.helpers.period.BSPeriodHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.managers.BSLocationManager;
+import com.artlite.bslibrary.managers.BSRandomManager;
 import com.artlite.bslibrary.tasks.BSRepetitiveTask;
 import com.artlite.bslibrary.ui.activity.BSAudioRecordActivity;
 import com.artlite.bslibrary.ui.activity.BSLockableActivity;
@@ -83,6 +84,7 @@ public class MainActivity extends BSLockableActivity
         BSLocationManager.startLocationMonitoring(this);
         this.repetitiveTask = new BSRepetitiveTask(100, this,
                 BSRepetitiveTask.TimeMeasure.MILLISECONDS);
+        this.editText.setTextColor(BSRandomManager.randomColor());
     }
 
     /**

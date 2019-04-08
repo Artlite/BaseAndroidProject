@@ -22,7 +22,7 @@ public class CurrentApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        BSInstance.init(this, BSTypeface.UBUNTU_MONO);
+        BSInstance.init(this);
 
         final String text = "Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit Sed Do Eiusmod Tempor Inc";
         final Date date = new Date();

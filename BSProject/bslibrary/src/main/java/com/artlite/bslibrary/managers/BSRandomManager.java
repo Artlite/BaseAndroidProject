@@ -1,6 +1,7 @@
 package com.artlite.bslibrary.managers;
 
 import android.content.Context;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -113,5 +114,15 @@ public final class BSRandomManager extends BSBaseManager {
      */
     public static String generateSentence(int count) {
         return BSRandomHelper.generateSentence(getInstance().getContext(), count);
+    }
+
+    /**
+     * Method which provide the getting of the random color
+     *
+     * @return {@link Integer} value of the color
+     */
+    @ColorInt
+    public static int randomColor() {
+        return BSRandomHelper.randomColor(getInstance().getContext());
     }
 }
