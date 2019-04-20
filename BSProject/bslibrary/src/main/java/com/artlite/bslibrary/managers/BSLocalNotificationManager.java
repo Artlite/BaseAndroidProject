@@ -25,7 +25,7 @@ public final class BSLocalNotificationManager extends BSBaseManager {
      *
      * @param context
      */
-    public BSLocalNotificationManager(@NonNull Context context) {
+    private BSLocalNotificationManager(@NonNull Context context) {
         super(context);
     }
 

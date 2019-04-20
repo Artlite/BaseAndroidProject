@@ -47,7 +47,7 @@ public final class BSSharedPreferenceManager extends BSBaseManager {
      *
      * @param context
      */
-    public BSSharedPreferenceManager(@NonNull Context context) {
+    private BSSharedPreferenceManager(@NonNull Context context) {
         super(context);
     }
 

@@ -50,7 +50,7 @@ public final class BSViewManager extends BSBaseManager {
      *
      * @param context
      */
-    public BSViewManager(@NonNull Context context) {
+    private BSViewManager(@NonNull Context context) {
         super(context);
     }
 

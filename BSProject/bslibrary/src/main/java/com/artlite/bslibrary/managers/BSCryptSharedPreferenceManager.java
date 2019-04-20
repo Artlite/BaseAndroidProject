@@ -48,7 +48,7 @@ public final class BSCryptSharedPreferenceManager extends BSBaseManager {
      *
      * @param context
      */
-    public BSCryptSharedPreferenceManager(@NonNull Context context) {
+    private BSCryptSharedPreferenceManager(@NonNull Context context) {
         super(context);
     }
 

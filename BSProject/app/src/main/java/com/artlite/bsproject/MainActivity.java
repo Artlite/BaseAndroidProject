@@ -17,11 +17,13 @@ import android.widget.Toast;
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.callbacks.BSPermissionCallback;
 import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
-import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.helpers.period.BSPeriodHelper;
+import com.artlite.bslibrary.helpers.permission.BSPermissionHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
+import com.artlite.bslibrary.managers.BSApplicationManager;
 import com.artlite.bslibrary.managers.BSLocationManager;
 import com.artlite.bslibrary.managers.BSRandomManager;
+import com.artlite.bslibrary.models.BSPackageModel;
 import com.artlite.bslibrary.tasks.BSRepetitiveTask;
 import com.artlite.bslibrary.ui.activity.BSAudioRecordActivity;
 import com.artlite.bslibrary.ui.activity.BSLockableActivity;
@@ -35,6 +37,7 @@ import com.artlite.bslibrary.ui.view.BSView;
 import org.threeten.bp.Period;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends BSLockableActivity

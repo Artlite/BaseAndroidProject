@@ -46,7 +46,7 @@ public final class BSScreenManager extends BSBaseManager {
      *
      * @param context
      */
-    public BSScreenManager(@NonNull Context context) {
+    private BSScreenManager(@NonNull Context context) {
         super(context);
     }
 

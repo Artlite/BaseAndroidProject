@@ -59,7 +59,7 @@ public final class BSProgressDialogManager extends BSBaseManager implements BSVi
      *
      * @param context
      */
-    public BSProgressDialogManager(@NonNull Context context) {
+    private BSProgressDialogManager(@NonNull Context context) {
         super(context);
     }
 

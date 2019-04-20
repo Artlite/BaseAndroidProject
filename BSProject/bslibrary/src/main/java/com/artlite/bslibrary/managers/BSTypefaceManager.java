@@ -739,8 +739,8 @@ public final class BSTypefaceManager extends BSBaseManager {
      * @param context  instance of {@link Context}
      * @param typeface instance of the {@link BSTypeface}
      */
-    public BSTypefaceManager(@NonNull Context context,
-                             @NonNull BSTypeface typeface) {
+    private BSTypefaceManager(@NonNull Context context,
+                              @NonNull BSTypeface typeface) {
         super(context);
         this.typeface = typeface;
     }

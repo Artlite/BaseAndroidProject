@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import com.artlite.bslibrary.constants.BSTypeface;
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
 import com.artlite.bslibrary.managers.BSActivityManager;
+import com.artlite.bslibrary.managers.BSApplicationManager;
 import com.artlite.bslibrary.managers.BSContextManager;
 import com.artlite.bslibrary.managers.BSCryptManager;
 import com.artlite.bslibrary.managers.BSCryptSharedPreferenceManager;
@@ -72,6 +73,7 @@ public final class BSInstance {
             AndroidThreeTen.init(context);
             BSSignManager.init(context);
             BSCryptManager.init(context);
+            BSApplicationManager.init(context);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }

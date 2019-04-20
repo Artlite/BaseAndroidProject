@@ -55,7 +55,7 @@ public final class BSLocationManager extends BSBaseManager implements LocationLi
      *
      * @param context
      */
-    public BSLocationManager(@NonNull Context context) {
+    private BSLocationManager(@NonNull Context context) {
         super(context);
         this.locationManager = (LocationManager) BSContextManager.getApplicationContext()
                 .getSystemService(Context.LOCATION_SERVICE);

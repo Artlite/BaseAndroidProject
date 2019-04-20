@@ -53,7 +53,7 @@ public final class BSActivityManager extends BSBaseManager {
      *
      * @param context
      */
-    public BSActivityManager(@NonNull Context context) {
+    private BSActivityManager(@NonNull Context context) {
         super(context);
     }
 

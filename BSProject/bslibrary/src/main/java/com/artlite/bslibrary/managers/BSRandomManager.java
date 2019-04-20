@@ -53,7 +53,7 @@ public final class BSRandomManager extends BSBaseManager {
      *
      * @param context instance of {@link Context}
      */
-    public BSRandomManager(@NonNull Context context) {
+    private BSRandomManager(@NonNull Context context) {
         super(context);
     }
 
