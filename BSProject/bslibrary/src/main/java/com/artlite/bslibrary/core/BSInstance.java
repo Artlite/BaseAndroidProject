@@ -1,8 +1,9 @@
 package com.artlite.bslibrary.core;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.constants.BSTypeface;
 import com.artlite.bslibrary.helpers.log.BSLogHelper;

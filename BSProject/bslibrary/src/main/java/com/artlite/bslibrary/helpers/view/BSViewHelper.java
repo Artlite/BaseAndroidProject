@@ -2,12 +2,12 @@ package com.artlite.bslibrary.helpers.view;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
-import com.artlite.bslibrary.managers.BSScreenManager;
 
 /**
  * Class which provide the view helping functionality

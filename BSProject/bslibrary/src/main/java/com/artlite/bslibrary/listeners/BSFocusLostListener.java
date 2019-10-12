@@ -1,8 +1,9 @@
 package com.artlite.bslibrary.listeners;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 /**
  * Class which provide the action when user press enter button on keyboard

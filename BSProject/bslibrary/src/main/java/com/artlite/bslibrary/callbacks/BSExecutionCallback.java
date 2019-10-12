@@ -1,6 +1,7 @@
 package com.artlite.bslibrary.callbacks;
 
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 /**
  * Library execution callback

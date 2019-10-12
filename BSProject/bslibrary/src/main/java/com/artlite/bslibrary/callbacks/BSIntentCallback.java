@@ -1,7 +1,8 @@
 package com.artlite.bslibrary.callbacks;
 
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.artlite.bslibrary.helpers.intent.BSIntentHelper;
 

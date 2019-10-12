@@ -1,8 +1,9 @@
 package com.artlite.bslibrary.managers;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 /**
  * Class which provide the executing action in background and main threads

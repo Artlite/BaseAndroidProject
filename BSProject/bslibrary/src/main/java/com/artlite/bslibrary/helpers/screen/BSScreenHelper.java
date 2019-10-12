@@ -1,8 +1,9 @@
 package com.artlite.bslibrary.helpers.screen;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
+
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 

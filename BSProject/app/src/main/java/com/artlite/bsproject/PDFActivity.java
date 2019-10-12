@@ -3,16 +3,16 @@ package com.artlite.bsproject;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.core.app.ActivityCompat;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
 
 import android.os.Bundle;
-import android.util.Log;
 
-import com.artlite.bslibrary.managers.BSActivityManager;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.view.BSPDFView;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -64,6 +64,16 @@ public class PDFActivity extends BSActivity implements BSPDFView.OnConfiguration
             return;
         }
         this.download();
+    }
+
+    /**
+     * Method which provide the checking if need back button into {@link ActionBar}
+     *
+     * @return checking if need back button into {@link ActionBar}
+     */
+    @Override
+    protected boolean isNeedBackButton() {
+        return true;
     }
 
     /**

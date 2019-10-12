@@ -1,12 +1,12 @@
 package com.artlite.bslibrary.managers;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.artlite.bslibrary.helpers.preference.BSCryptSharedPreferenceHelper;
-import com.artlite.bslibrary.helpers.preference.BSSharedPreferenceHelper;
 
 import java.util.Date;
 import java.util.List;

@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'com.artlite'
     PUBLISH_ARTIFACT_ID = 'baseproject'
-    PUBLISH_VERSION = '5.0.0'
+    PUBLISH_VERSION = '0.9.0x'
 }
 
 android {
@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -40,16 +40,16 @@ repositories {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
-    api 'com.android.support:appcompat-v7:27.1.0'
+    api 'androidx.appcompat:appcompat:1.0.0'
     //noinspection GradleCompatible
-    api 'com.android.support:design:27.1.0'
+    api 'com.google.android.material:material:1.0.0'
     api("com.github.bumptech.glide:glide:4.7.1") {
         exclude group: "com.android.support"
     }
     //noinspection GradleCompatible
-    api "com.android.support:support-fragment:27.1.0"
+    api 'androidx.fragment:fragment:1.0.0'
     //noinspection GradleDependency
-    api 'com.android.support:support-annotations:27.1.0'
+    api 'androidx.annotation:annotation:1.0.0'
     // FlexBox library for the tag view
     api 'com.google.android:flexbox:1.0.0'
     // Transformations
@@ -78,7 +78,7 @@ dependencies {
     api 'com.orhanobut:logger:1.15'
     // https://github.com/JakeWharton/ThreeTenABP
     api 'com.jakewharton.threetenabp:threetenabp:1.2.0'
-    testImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    testImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.12'

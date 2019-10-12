@@ -3,11 +3,12 @@ package com.artlite.bslibrary.helpers.image;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.ImageView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 import com.bumptech.glide.Glide;

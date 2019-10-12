@@ -3,7 +3,8 @@ package com.artlite.bslibrary.helpers.statusbar;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 

@@ -1,6 +1,7 @@
 package com.artlite.bslibrary.models;
 
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.artlite.bslibrary.helpers.broadcast.BSLocalBroadcastHelper;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;

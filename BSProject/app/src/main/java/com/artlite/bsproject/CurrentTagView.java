@@ -1,11 +1,12 @@
 package com.artlite.bsproject;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.ui.fonted.BSTextView;

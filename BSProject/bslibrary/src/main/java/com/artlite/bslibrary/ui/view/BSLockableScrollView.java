@@ -2,11 +2,12 @@ package com.artlite.bslibrary.ui.view;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.ScrollView;
+
+import androidx.annotation.RequiresApi;
 
 /**
  * View which provide the Scroll view which could be lockable (enable/disable scroll)

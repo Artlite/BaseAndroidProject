@@ -1,6 +1,7 @@
 package com.artlite.bslibrary.callbacks;
 
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

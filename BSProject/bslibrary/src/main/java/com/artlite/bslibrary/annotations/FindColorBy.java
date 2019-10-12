@@ -1,6 +1,7 @@
 package com.artlite.bslibrary.annotations;
 
-import android.support.annotation.ColorRes;
+
+import androidx.annotation.ColorRes;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

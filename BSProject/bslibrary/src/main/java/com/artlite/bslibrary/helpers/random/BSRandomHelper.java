@@ -2,10 +2,11 @@ package com.artlite.bslibrary.helpers.random;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.R;
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;

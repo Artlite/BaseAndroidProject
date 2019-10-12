@@ -1,7 +1,8 @@
 package com.artlite.bslibrary.helpers.popup;
 
-import android.support.annotation.Nullable;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 import com.artlite.bslibrary.ui.popup.BSPopupWindow;

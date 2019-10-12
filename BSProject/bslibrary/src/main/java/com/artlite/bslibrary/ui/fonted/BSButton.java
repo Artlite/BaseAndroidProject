@@ -2,10 +2,11 @@ package com.artlite.bslibrary.ui.fonted;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v7.widget.AppCompatButton;
 import android.text.Html;
 import android.util.AttributeSet;
 import android.widget.Button;
+
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.artlite.bslibrary.annotations.Warning;
 import com.artlite.bslibrary.managers.BSTypefaceManager;

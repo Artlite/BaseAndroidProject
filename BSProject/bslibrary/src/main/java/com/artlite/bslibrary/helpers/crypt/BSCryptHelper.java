@@ -1,8 +1,9 @@
 package com.artlite.bslibrary.helpers.crypt;
 
-import android.support.annotation.Nullable;
 import android.util.Base64;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 
