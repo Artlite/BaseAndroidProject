@@ -43,6 +43,7 @@ public class BSFieldsValidator {
                 object.add(model);
             }
         }
+        this.objects.add(object);
     }
 
     /**
