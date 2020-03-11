@@ -55,7 +55,7 @@ public abstract class BSValidationRuleModel {
      * @param text instance of the {@link String} value
      * @return validation result
      */
-    abstract boolean validateValue(@Nullable String text);
+    public abstract boolean validateValue(@Nullable String text);
 
     /**
      * Method which provide the get message
@@ -63,6 +63,6 @@ public abstract class BSValidationRuleModel {
      * @return {@link Integer} value of the message
      */
     @StringRes
-    abstract int getMessage();
+    public abstract int getMessage();
 
 }
