@@ -51,9 +51,15 @@ public class BSFieldObject {
      * @param items array of the {@link BSValidationRuleModel}
      */
     public synchronized void add(@Nullable BSValidationRuleModel... items) {
-        if ((items == null) || (items.length <= 0)) return;
+        final TextView textView = this.textReference.get();
+        if (items == null) return;
+        if (items.length <= 0) return;
+        if (textView == null) return;
         for (BSValidationRuleModel validator : items) {
-            if (validator != null) this.validators.add(validator);
+            if (validator != null) {
+                validator.set(textView);
+                this.validators.add(validator);
+            }
         }
     }
 
@@ -71,9 +77,7 @@ public class BSFieldObject {
         while (iterator.hasNext()) {
             final BSValidationRuleModel ruleModel = iterator.next();
             if (!ruleModel.validate()) {
-                if (context != null) {
-                    textView.setError(context.getString(ruleModel.getMessage()));
-                }
+                if (context != null) textView.setError(context.getString(ruleModel.getMessage()));
                 return false;
             }
         }

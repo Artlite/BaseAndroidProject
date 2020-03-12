@@ -5,7 +5,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -27,21 +26,12 @@ public class BSFieldsValidator {
      */
     public synchronized void add(@Nullable final TextView textView,
                                  @Nullable BSValidationRuleModel... models) {
-        if (textView == null) {
-            return;
-        }
-        if (models == null) {
-            return;
-        }
-        if (models.length <= 0) {
-            return;
-        }
+        if (textView == null) return;
+        if (models == null) return;
+        if (models.length <= 0) return;
         final BSFieldObject object = new BSFieldObject(textView);
         for (BSValidationRuleModel model : models) {
-            if (model != null) {
-                model.set(textView);
-                object.add(model);
-            }
+            if (model != null) object.add(model);
         }
         this.objects.add(object);
     }
@@ -53,9 +43,7 @@ public class BSFieldsValidator {
      */
     public boolean validateAll() {
         boolean result = true;
-        if (this.objects.size() <= 0) {
-            return false;
-        }
+        if (this.objects.size() <= 0) return false;
         final ListIterator<BSFieldObject> iterator = this.objects.listIterator();
         while (iterator.hasNext()) {
             final BSFieldObject object = iterator.next();
