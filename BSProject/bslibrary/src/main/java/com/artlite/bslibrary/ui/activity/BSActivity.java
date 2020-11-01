@@ -109,12 +109,12 @@ public abstract class BSActivity
     /**
      * Instance of the {@link BroadcastReceiver}
      */
-    private BroadcastReceiver closeReciever;
+    private BroadcastReceiver closeReceiver;
 
     /**
      * {@link Boolean} value if the Activity is full screen
      */
-    private boolean fulscreened;
+    private boolean fullScreened;
 
     //==============================================================================================
     //                                      CREATE
@@ -130,10 +130,10 @@ public abstract class BSActivity
         super.onCreate(bundle);
         setContentView(getLayoutId());
         // Registering of the close receiver
-        BSLocalNotificationManager.register(this.getCloseReciever(),
+        BSLocalNotificationManager.register(this.getCloseReceiver(),
                 this.getCloseKey());
         onInitBackButton();
-        onInitgestures();
+        onInitGestures();
         BSInjector.inject(this);
         BSActivityManager.registerActivity(this);
         onCreateActivity((bundle == null) ? getIntent().getExtras() : bundle);
@@ -170,7 +170,7 @@ public abstract class BSActivity
     protected void onDestroy() {
         super.onDestroy();
         // Unregistering of the close receiver
-        BSLocalNotificationManager.unregister(this.getCloseReciever());
+        BSLocalNotificationManager.unregister(this.getCloseReceiver());
     }
 
     /**
@@ -181,7 +181,7 @@ public abstract class BSActivity
     @Override
     protected void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
-        bundle.putBoolean(K_FULLSCREEN_KEY, this.fulscreened);
+        bundle.putBoolean(K_FULLSCREEN_KEY, this.fullScreened);
     }
 
     //==============================================================================================
@@ -237,7 +237,7 @@ public abstract class BSActivity
     /**
      * Method which provide the init gestures detector
      */
-    protected void onInitgestures() {
+    protected void onInitGestures() {
         this.gestureDetector = new GestureDetector(this, this.swipeListener);
     }
 
@@ -721,16 +721,16 @@ public abstract class BSActivity
      * @return instance of the {@link BroadcastReceiver}
      */
     @NonNull
-    protected BroadcastReceiver getCloseReciever() {
-        if (this.closeReciever == null) {
-            this.closeReciever = new BroadcastReceiver() {
+    protected BroadcastReceiver getCloseReceiver() {
+        if (this.closeReceiver == null) {
+            this.closeReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     finish();
                 }
             };
         }
-        return this.closeReciever;
+        return this.closeReceiver;
     }
 
     /**
@@ -755,8 +755,8 @@ public abstract class BSActivity
      */
     protected void applyFullscreenIfNeeded(@Nullable Bundle bundle) {
         if (bundle == null) return;
-        this.fulscreened = bundle.getBoolean(K_FULLSCREEN_KEY);
-        if (this.fulscreened) {
+        this.fullScreened = bundle.getBoolean(K_FULLSCREEN_KEY);
+        if (this.fullScreened) {
             this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }

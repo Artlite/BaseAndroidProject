@@ -826,7 +826,7 @@ public class BSAudioRecordActivity
         intent.putExtra(K_LIMIT_KEY, limitSeconds);
         addFullscreenFlagIfNeeded(activity, intent);
         activity.startActivityForResult(intent, K_ON_RECORD_RESULT);
-        activity.overridePendingTransition(android.R.anim.fade_in, 0);
+        activity.overridePendingTransition(R.anim.bs_anim_enter, 0);
     }
 
     /**

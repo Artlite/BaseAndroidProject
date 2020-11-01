@@ -72,8 +72,7 @@ public abstract class BSView extends LinearLayout
      * @param context instance of {@link Context}
      */
     public BSView(Context context) {
-        super(context);
-        onInitializeView(context, null);
+        this(context, null, 0);
     }
 
     /**
@@ -83,8 +82,7 @@ public abstract class BSView extends LinearLayout
      * @param attrs   instance of {@link AttributeSet}
      */
     public BSView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        onInitializeView(context, attrs);
+        this(context, attrs, 0);
     }
 
     /**
