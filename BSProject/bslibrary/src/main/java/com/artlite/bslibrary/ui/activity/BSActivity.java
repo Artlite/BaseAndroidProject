@@ -1,6 +1,7 @@
 package com.artlite.bslibrary.ui.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -473,6 +474,7 @@ public abstract class BSActivity
      * @param resultCode  result code
      * @param data        intent
      */
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to

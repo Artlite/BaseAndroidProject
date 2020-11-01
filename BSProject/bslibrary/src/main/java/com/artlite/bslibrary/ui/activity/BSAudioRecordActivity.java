@@ -217,7 +217,7 @@ public class BSAudioRecordActivity
      * Instance of the {@link Runnable}
      */
     private final Runnable updateTimeRunnable = new Runnable() {
-        @SuppressLint("SetTextI18n")
+        @SuppressLint({"SetTextI18n", "NewApi"})
         @Override
         public void run() {
             second += 1;

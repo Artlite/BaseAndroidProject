@@ -1,5 +1,6 @@
 package com.artlite.bslibrary.ui.fonted;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.Editable;
@@ -313,6 +314,7 @@ public class BSCurrencyEditText extends BSEditText implements TextView.OnEditorA
      * @param selStart {@link Integer} value of the start
      * @param selEnd   {@link Integer} value of the end
      */
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onSelectionChanged(int selStart, int selEnd) {
         setSelection(this.length());
