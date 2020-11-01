@@ -1,9 +1,10 @@
 package com.artlite.bslibrary.ui.view;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 /**
  * Class which provide the item view

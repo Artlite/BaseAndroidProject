@@ -1,6 +1,7 @@
 package com.artlite.bslibrary.annotations;
 
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

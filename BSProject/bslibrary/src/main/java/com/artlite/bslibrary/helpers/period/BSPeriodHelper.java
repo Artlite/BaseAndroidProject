@@ -1,8 +1,9 @@
 package com.artlite.bslibrary.helpers.period;
 
 
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDate;

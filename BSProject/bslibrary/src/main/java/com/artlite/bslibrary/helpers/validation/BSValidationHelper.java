@@ -1,8 +1,9 @@
 package com.artlite.bslibrary.helpers.validation;
 
-import android.support.annotation.Nullable;
 import android.util.Patterns;
 import android.widget.EditText;
+
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 

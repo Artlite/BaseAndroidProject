@@ -1,12 +1,13 @@
 package com.artlite.bslibrary.ui.view;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
+
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.ui.fonted.BSButton;
 import com.artlite.bslibrary.ui.fonted.BSTextView;

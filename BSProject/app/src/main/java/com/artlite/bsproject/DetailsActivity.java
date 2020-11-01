@@ -1,9 +1,10 @@
 package com.artlite.bsproject;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.widget.ScrollView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.ui.activity.BSActivity;

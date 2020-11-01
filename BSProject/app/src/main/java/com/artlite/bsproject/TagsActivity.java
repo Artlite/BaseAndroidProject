@@ -2,13 +2,12 @@ package com.artlite.bsproject;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
-import com.artlite.bslibrary.managers.BSProgressDialogManager;
-import com.artlite.bslibrary.managers.BSThreadManager;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.view.BSTagsView;
 

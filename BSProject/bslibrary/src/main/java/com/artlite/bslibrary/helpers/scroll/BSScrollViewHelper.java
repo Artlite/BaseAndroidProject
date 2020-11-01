@@ -1,9 +1,10 @@
 package com.artlite.bslibrary.helpers.scroll;
 
 import android.graphics.Rect;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ScrollView;
+
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 

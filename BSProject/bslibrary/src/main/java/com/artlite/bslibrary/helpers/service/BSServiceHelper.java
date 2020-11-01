@@ -3,7 +3,8 @@ package com.artlite.bslibrary.helpers.service;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 /**
  * Class which provide the start/stop {@link android.app.Service}

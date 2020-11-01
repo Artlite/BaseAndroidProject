@@ -1,7 +1,8 @@
 package com.artlite.bslibrary.helpers.log;
 
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 

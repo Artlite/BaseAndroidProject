@@ -2,9 +2,10 @@ package com.artlite.bslibrary.helpers.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 import com.artlite.bslibrary.helpers.convert.BSConvertHelper;

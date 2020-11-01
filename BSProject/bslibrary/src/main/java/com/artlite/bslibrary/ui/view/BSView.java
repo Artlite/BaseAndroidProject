@@ -4,15 +4,16 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.annotations.Info;
 import com.artlite.bslibrary.helpers.dialog.BSDialogHelper;
@@ -71,8 +72,7 @@ public abstract class BSView extends LinearLayout
      * @param context instance of {@link Context}
      */
     public BSView(Context context) {
-        super(context);
-        onInitializeView(context, null);
+        this(context, null, 0);
     }
 
     /**
@@ -82,8 +82,7 @@ public abstract class BSView extends LinearLayout
      * @param attrs   instance of {@link AttributeSet}
      */
     public BSView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        onInitializeView(context, attrs);
+        this(context, attrs, 0);
     }
 
     /**

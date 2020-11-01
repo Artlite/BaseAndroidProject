@@ -2,19 +2,29 @@ package com.artlite.bslibrary.ui.fonted;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.Html;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
+
 import com.artlite.bslibrary.annotations.Warning;
 import com.artlite.bslibrary.managers.BSTypefaceManager;
+import com.artlite.bslibrary.validator.BSFieldObject;
+import com.artlite.bslibrary.validator.BSValidationRuleModel;
 
 /**
  * Class which provide the customize font for {@link EditText}
  */
 
 public class BSEditText extends AppCompatEditText {
+
+    /**
+     * Instance of the {@link BSFieldObject}
+     */
+    private BSFieldObject fieldObject;
+
     /**
      * Constructor which provide the creating of the {@link BSButton} from
      *
@@ -55,6 +65,7 @@ public class BSEditText extends AppCompatEditText {
         if (this.isInEditMode()) {
             return;
         }
+        this.fieldObject = new BSFieldObject(this);
         Typeface typeface = this.getTypeface();
         Typeface font = getFont();
         if (typeface != null) {
@@ -137,5 +148,25 @@ public class BSEditText extends AppCompatEditText {
     @Warning(massage = "This method should be overriden if you want to change typeface")
     protected Typeface getFontBoldItalic() {
         return BSTypefaceManager.getDefaultBoldItalic();
+    }
+
+    /**
+     * Method which provide the adding of the validator rule models
+     *
+     * @param models array of the {@link BSValidationRuleModel}
+     */
+    public synchronized void addValidators(@Nullable BSValidationRuleModel... models) {
+        if (this.fieldObject == null) return;
+        this.fieldObject.add(models);
+    }
+
+    /**
+     * Method which provide the validate field
+     *
+     * @return validation result
+     */
+    public boolean validate() {
+        if (this.fieldObject == null) return false;
+        return this.fieldObject.validate();
     }
 }

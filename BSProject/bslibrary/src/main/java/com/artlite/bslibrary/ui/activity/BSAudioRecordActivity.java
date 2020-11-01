@@ -7,16 +7,19 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Parcelable;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.artlite.bslibrary.R;
 import com.artlite.bslibrary.annotations.Warning;
@@ -214,7 +217,7 @@ public class BSAudioRecordActivity
      * Instance of the {@link Runnable}
      */
     private final Runnable updateTimeRunnable = new Runnable() {
-        @SuppressLint("SetTextI18n")
+        @SuppressLint({"SetTextI18n", "NewApi"})
         @Override
         public void run() {
             second += 1;
@@ -373,6 +376,7 @@ public class BSAudioRecordActivity
      *
      * @param v current view
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -401,6 +405,7 @@ public class BSAudioRecordActivity
     /**
      * Method which provide the on record pressed
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     protected void onRecordPressed() {
         if (this.state == ActivityState.PLAYING) return;
         if (this.state == ActivityState.NONE) {
@@ -419,6 +424,7 @@ public class BSAudioRecordActivity
     /**
      * Method which provide the start recording
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     protected void startRecording() {
         this.stopRecording();
         this.onDeletePressed(false);
@@ -687,6 +693,7 @@ public class BSAudioRecordActivity
     /**
      * Method which provide the generating of the file name
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     protected void generateFileName() {
         String root = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOCUMENTS).toString();
@@ -819,7 +826,7 @@ public class BSAudioRecordActivity
         intent.putExtra(K_LIMIT_KEY, limitSeconds);
         addFullscreenFlagIfNeeded(activity, intent);
         activity.startActivityForResult(intent, K_ON_RECORD_RESULT);
-        activity.overridePendingTransition(android.R.anim.fade_in, 0);
+        activity.overridePendingTransition(R.anim.bs_anim_enter, 0);
     }
 
     /**

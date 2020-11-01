@@ -1,16 +1,11 @@
 package com.artlite.bslibrary.managers;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.util.Base64;
 import android.util.Log;
 
-import com.artlite.bslibrary.helpers.crypt.BSCryptHelper;
-import com.artlite.bslibrary.helpers.sign.BSSignHelper;
+import androidx.annotation.Nullable;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
+import com.artlite.bslibrary.helpers.crypt.BSCryptHelper;
 
 /**
  * Method which provide the getting of the {@link Context} independently

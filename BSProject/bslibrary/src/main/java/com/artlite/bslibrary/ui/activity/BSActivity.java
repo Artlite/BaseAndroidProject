@@ -1,6 +1,7 @@
 package com.artlite.bslibrary.ui.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,13 +11,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
@@ -24,6 +18,14 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.artlite.bslibrary.R;
 import com.artlite.bslibrary.annotations.Warning;
@@ -108,12 +110,12 @@ public abstract class BSActivity
     /**
      * Instance of the {@link BroadcastReceiver}
      */
-    private BroadcastReceiver closeReciever;
+    private BroadcastReceiver closeReceiver;
 
     /**
      * {@link Boolean} value if the Activity is full screen
      */
-    private boolean fulscreened;
+    private boolean fullScreened;
 
     //==============================================================================================
     //                                      CREATE
@@ -129,10 +131,10 @@ public abstract class BSActivity
         super.onCreate(bundle);
         setContentView(getLayoutId());
         // Registering of the close receiver
-        BSLocalNotificationManager.register(this.getCloseReciever(),
+        BSLocalNotificationManager.register(this.getCloseReceiver(),
                 this.getCloseKey());
         onInitBackButton();
-        onInitgestures();
+        onInitGestures();
         BSInjector.inject(this);
         BSActivityManager.registerActivity(this);
         onCreateActivity((bundle == null) ? getIntent().getExtras() : bundle);
@@ -169,7 +171,7 @@ public abstract class BSActivity
     protected void onDestroy() {
         super.onDestroy();
         // Unregistering of the close receiver
-        BSLocalNotificationManager.unregister(this.getCloseReciever());
+        BSLocalNotificationManager.unregister(this.getCloseReceiver());
     }
 
     /**
@@ -180,7 +182,7 @@ public abstract class BSActivity
     @Override
     protected void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
-        bundle.putBoolean(K_FULLSCREEN_KEY, this.fulscreened);
+        bundle.putBoolean(K_FULLSCREEN_KEY, this.fullScreened);
     }
 
     //==============================================================================================
@@ -236,7 +238,7 @@ public abstract class BSActivity
     /**
      * Method which provide the init gestures detector
      */
-    protected void onInitgestures() {
+    protected void onInitGestures() {
         this.gestureDetector = new GestureDetector(this, this.swipeListener);
     }
 
@@ -472,6 +474,7 @@ public abstract class BSActivity
      * @param resultCode  result code
      * @param data        intent
      */
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
@@ -720,16 +723,16 @@ public abstract class BSActivity
      * @return instance of the {@link BroadcastReceiver}
      */
     @NonNull
-    protected BroadcastReceiver getCloseReciever() {
-        if (this.closeReciever == null) {
-            this.closeReciever = new BroadcastReceiver() {
+    protected BroadcastReceiver getCloseReceiver() {
+        if (this.closeReceiver == null) {
+            this.closeReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     finish();
                 }
             };
         }
-        return this.closeReciever;
+        return this.closeReceiver;
     }
 
     /**
@@ -754,8 +757,8 @@ public abstract class BSActivity
      */
     protected void applyFullscreenIfNeeded(@Nullable Bundle bundle) {
         if (bundle == null) return;
-        this.fulscreened = bundle.getBoolean(K_FULLSCREEN_KEY);
-        if (this.fulscreened) {
+        this.fullScreened = bundle.getBoolean(K_FULLSCREEN_KEY);
+        if (this.fullScreened) {
             this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }

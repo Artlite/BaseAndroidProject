@@ -1,7 +1,8 @@
 package com.artlite.bsproject;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.managers.BSProgressDialogManager;
