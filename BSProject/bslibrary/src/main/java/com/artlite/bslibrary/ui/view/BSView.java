@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.artlite.bslibrary.R;
 import com.artlite.bslibrary.annotations.Info;
 import com.artlite.bslibrary.helpers.dialog.BSDialogHelper;
 import com.artlite.bslibrary.helpers.injector.BSInjector;
@@ -604,7 +607,7 @@ public abstract class BSView extends LinearLayout
      */
     public void showAsBottomSheet(boolean isCancelable, @Nullable final OnDialogCallback callback) {
         setDialogCallback(callback);
-        final BottomSheetDialog dialog = new BottomSheetDialog(getContext());
+        final BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BSSheetDialog);
         this.setDialogBottomSheet(dialog);
         dialog.setCancelable(isCancelable);
         dialog.setContentView(this);
