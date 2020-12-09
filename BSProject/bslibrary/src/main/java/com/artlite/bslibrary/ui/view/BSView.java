@@ -24,6 +24,7 @@ import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.listeners.BSSwipeListener;
 import com.artlite.bslibrary.managers.BSThreadManager;
 import com.artlite.bslibrary.ui.activity.BSActivity;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.lang.ref.WeakReference;
 
@@ -50,6 +51,11 @@ public abstract class BSView extends LinearLayout
      * Instance of the {@link WeakReference}
      */
     protected WeakReference<Dialog> dialogReference;
+
+    /**
+     * Instance of the {@link BottomSheetDialog}
+     */
+    protected WeakReference<BottomSheetDialog> bottomSheetDialog;
 
     /**
      * Instance of the {@link OnDialogCallback}
@@ -426,6 +432,51 @@ public abstract class BSView extends LinearLayout
     }
 
     /**
+     * Method which provide the setting of the {@link Dialog} inside the {@link BSView}
+     *
+     * @param dialog instance of the {@link Dialog}
+     */
+    public void setDialogBottomSheet(@Nullable final BottomSheetDialog dialog) {
+        if (!BSValidationHelper.isNull(dialog)) {
+            dialog.setOnDismissListener(this);
+            dialog.setOnCancelListener(this);
+            dialog.setOnShowListener(this);
+            this.bottomSheetDialog = new WeakReference<>(dialog);
+        }
+    }
+
+    /**
+     * Method which provide the {@link Dialog} getting
+     *
+     * @return instance of the {@link Dialog}
+     */
+    @Nullable
+    protected BottomSheetDialog getDialogBottomSheet() {
+        return (bottomSheetDialog == null)
+                ? null : bottomSheetDialog.get();
+    }
+
+    /**
+     * Method which provide the dismiss {@link Dialog} from the {@link BSView}
+     */
+    protected void dismissDialogBottomSheet() {
+        final BottomSheetDialog dialog = getDialogBottomSheet();
+        if (!BSValidationHelper.isNull(dialog)) {
+            dialog.dismiss();
+        }
+    }
+
+    /**
+     * Method which provide the dismiss {@link Dialog} from the {@link BSView}
+     */
+    protected void cancelDialogBottomSheet() {
+        final BottomSheetDialog dialog = getDialogBottomSheet();
+        if (!BSValidationHelper.isNull(dialog)) {
+            dialog.cancel();
+        }
+    }
+
+    /**
      * Method which provide the getting of the instance of the {@link OnDialogCallback}
      *
      * @return instance of the {@link OnDialogCallback}
@@ -523,6 +574,43 @@ public abstract class BSView extends LinearLayout
         dialog.show();
     }
 
+    /**
+     * Method which provide the show of the {@link BSView} as {@link Dialog}
+     */
+    public void showAsBottomSheet() {
+        showAsBottomSheet(true, null);
+    }
+
+    /**
+     * Method which provide the show of the {@link BSView} as {@link Dialog}
+     */
+    public void showAsBottomSheet(boolean isCancelable) {
+        showAsBottomSheet(isCancelable, null);
+    }
+
+    /**
+     * Method which provide the show of the {@link BSView} as {@link Dialog}
+     *
+     * @param callback instance of the {@link OnDialogCallback}
+     */
+    public void showAsBottomSheet(@Nullable final OnDialogCallback callback) {
+        showAsBottomSheet(true, callback);
+    }
+
+    /**
+     * Method which provide the show of the {@link BSView} as {@link Dialog}
+     *
+     * @param callback instance of the {@link OnDialogCallback}
+     */
+    public void showAsBottomSheet(boolean isCancelable, @Nullable final OnDialogCallback callback) {
+        setDialogCallback(callback);
+        final BottomSheetDialog dialog = new BottomSheetDialog(getContext());
+        this.setDialogBottomSheet(dialog);
+        dialog.setCancelable(isCancelable);
+        dialog.setContentView(this);
+        dialog.show();
+    }
+
     //==============================================================================================
     //                                          EVENT
     //==============================================================================================
@@ -533,6 +621,7 @@ public abstract class BSView extends LinearLayout
     public void dismiss() {
         dismissPopup();
         dismissDialog();
+        dismissDialogBottomSheet();
     }
 
     //==============================================================================================

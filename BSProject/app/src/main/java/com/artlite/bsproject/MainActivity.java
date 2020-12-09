@@ -143,7 +143,7 @@ public class MainActivity extends BSLockableActivity
                 break;
             }
             case R.id.button2: {
-                new UserView(this).showAsDialog(false, new BSView.OnDialogCallback() {
+                new UserView(this).showAsBottomSheet(false, new BSView.OnDialogCallback() {
                     @Override
                     public void onShow(@NonNull Context context, @NonNull BSView view) {
                         Toast.makeText(context, "onShow", Toast.LENGTH_SHORT).show();

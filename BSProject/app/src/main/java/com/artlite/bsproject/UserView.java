@@ -85,14 +85,9 @@ public final class UserView extends BSLockableView {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.button_close: {
-                dismissPopup();
-                dismissDialog();
-                break;
-            }
+            case R.id.button_close:
             case R.id.button_cancel: {
-                dismissPopup();
-                cancelDialog();
+                dismiss();
                 break;
             }
             case R.id.button_event: {
