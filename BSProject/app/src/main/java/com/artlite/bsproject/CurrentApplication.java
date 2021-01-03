@@ -7,6 +7,7 @@ import com.artlite.bslibrary.core.BSInstance;
 import com.artlite.bslibrary.helpers.log.BSLogHelper;
 import com.artlite.bslibrary.managers.BSCryptManager;
 import com.artlite.bslibrary.managers.BSCryptSharedPreferenceManager;
+import com.artlite.bslibrary.managers.BSEncryptPreferenceManager;
 import com.artlite.bslibrary.managers.BSSignManager;
 
 import java.util.ArrayList;
@@ -33,13 +34,13 @@ public class CurrentApplication extends Application {
 
         }));
 
-        BSCryptSharedPreferenceManager.save(date, "K_DATE");
-        BSCryptSharedPreferenceManager.save(text, "K_TEXT");
-        BSCryptSharedPreferenceManager.save(strings, "K_TEXTS");
+        BSEncryptPreferenceManager.save(date, "K_DATE");
+        BSEncryptPreferenceManager.save(text, "K_TEXT");
+        BSEncryptPreferenceManager.save(strings, "K_TEXTS");
 
-        final String text1 = BSCryptSharedPreferenceManager.getString("K_TEXT");
-        final Date date1 = BSCryptSharedPreferenceManager.getDate("K_DATE");
-        final List<String> strings1 = BSCryptSharedPreferenceManager.getList("K_TEXTS");
+        final String text1 = BSEncryptPreferenceManager.getString("K_TEXT");
+        final Date date1 = BSEncryptPreferenceManager.getDate("K_DATE");
+        final List<String> strings1 = BSEncryptPreferenceManager.getList("K_TEXTS");
 
         BSLogHelper.log(this, "onCreate1", null, text1);
         BSLogHelper.log(this, "onCreate1", null, date1);

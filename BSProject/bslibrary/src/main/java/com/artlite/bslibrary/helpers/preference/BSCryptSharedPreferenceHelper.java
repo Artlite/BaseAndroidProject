@@ -11,6 +11,7 @@ import com.artlite.bslibrary.helpers.abs.BSBaseHelper;
 import com.artlite.bslibrary.helpers.convert.BSConvertHelper;
 import com.artlite.bslibrary.helpers.crypt.BSCryptHelper;
 import com.artlite.bslibrary.helpers.sign.BSSignHelper;
+import com.artlite.bslibrary.managers.BSEncryptPreferenceManager;
 import com.artlite.bslibrary.managers.BSSignManager;
 
 import java.util.ArrayList;
@@ -23,8 +24,10 @@ import java.util.Set;
 
 /**
  * Class which provide the actions with {@link SharedPreferences}
+ *
+ * @deprecated Use {@link BSEncryptPreferenceManager} instead.
  */
-
+@Deprecated
 public final class BSCryptSharedPreferenceHelper extends BSBaseHelper {
     /**
      * Constants
@@ -37,7 +40,9 @@ public final class BSCryptSharedPreferenceHelper extends BSBaseHelper {
      * @param context current context
      * @param object  current String value
      * @param key     SharedPreferences key
+     * @deprecated Use {@link BSEncryptPreferenceManager#save(String, String)} instead.
      */
+    @Deprecated
     public static boolean save(@Nullable final Context context,
                                @Nullable final String object,
                                @Nullable final String key) {
@@ -61,7 +66,9 @@ public final class BSCryptSharedPreferenceHelper extends BSBaseHelper {
      * @param context current context
      * @param object  current {@link Boolean} value
      * @param key     SharedPreferences key
+     * @deprecated Use {@link BSEncryptPreferenceManager#save(boolean, String)} instead.
      */
+    @Deprecated
     public static boolean save(@Nullable final Context context,
                                @Nullable final boolean object,
                                @Nullable final String key) {
@@ -85,7 +92,9 @@ public final class BSCryptSharedPreferenceHelper extends BSBaseHelper {
      * @param context current context
      * @param objects current list of {@link List} values
      * @param key     SharedPreferences key
+     * @deprecated Use {@link BSEncryptPreferenceManager#save(List, String)} instead.
      */
+    @Deprecated
     public static boolean save(@Nullable final Context context,
                                @Nullable final List<String> objects,
                                @Nullable final String key) {
@@ -118,7 +127,9 @@ public final class BSCryptSharedPreferenceHelper extends BSBaseHelper {
      * @param context current context
      * @param date    current list of {@link Date} values
      * @param key     SharedPreferences key
+     * @deprecated Use {@link BSEncryptPreferenceManager#save(Date, String)} instead.
      */
+    @Deprecated
     public static boolean save(@Nullable final Context context,
                                @Nullable final Date date,
                                @Nullable final String key) {
@@ -143,7 +154,9 @@ public final class BSCryptSharedPreferenceHelper extends BSBaseHelper {
      * @param context current context
      * @param key     key ID
      * @return current String
+     * @deprecated Use {@link BSEncryptPreferenceManager#getString(String)} instead.
      */
+    @Deprecated
     @NonNull
     public static String getString(@Nullable final Context context,
                                    @Nullable final String key) {
@@ -165,7 +178,9 @@ public final class BSCryptSharedPreferenceHelper extends BSBaseHelper {
      * @param context current context
      * @param key     key ID
      * @return current {@link Boolean}
+     * @deprecated Use {@link BSEncryptPreferenceManager#getBoolean(String)} instead.
      */
+    @Deprecated
     public static boolean getBoolean(@Nullable final Context context,
                                      @Nullable final String key) {
         final String methodName = "String get(context, id)";
@@ -184,7 +199,9 @@ public final class BSCryptSharedPreferenceHelper extends BSBaseHelper {
      * @param context current context
      * @param key     key ID
      * @return current {@link Date}
+     * @deprecated Use {@link BSEncryptPreferenceManager#getDate(String)} instead.
      */
+    @Deprecated
     @NonNull
     public static Date getDate(@Nullable final Context context,
                                @Nullable final String key) {
@@ -205,7 +222,9 @@ public final class BSCryptSharedPreferenceHelper extends BSBaseHelper {
      * @param context current context
      * @param key     key ID
      * @return current {@link List}
+     * @deprecated Use {@link BSEncryptPreferenceManager#getList(String)} instead.
      */
+    @Deprecated
     @NonNull
     public static List<String> getList(@Nullable final Context context,
                                        @Nullable final String key) {
@@ -292,7 +311,9 @@ public final class BSCryptSharedPreferenceHelper extends BSBaseHelper {
      * @param context instance of {@link Context}
      * @param key     {@link String} value of the key
      * @return {@link Boolean} valie if it delete
+     * @deprecated Use {@link BSEncryptPreferenceManager#delete(String)} instead.
      */
+    @Deprecated
     public static boolean delete(@Nullable final Context context,
                                  @Nullable String key) {
         final String methodName = "boolean delete(context, key)";
@@ -313,7 +334,9 @@ public final class BSCryptSharedPreferenceHelper extends BSBaseHelper {
      *
      * @param context instance of {@link Context}
      * @return {@link Boolean} valie if it delete
+     * @deprecated Use {@link BSEncryptPreferenceManager#clear()} instead.
      */
+    @Deprecated
     public static boolean clear(@Nullable final Context context) {
         final String methodName = "boolean clear(context)";
         if (validate(context)) {

@@ -12,6 +12,7 @@ import com.artlite.bslibrary.managers.BSApplicationManager;
 import com.artlite.bslibrary.managers.BSContextManager;
 import com.artlite.bslibrary.managers.BSCryptManager;
 import com.artlite.bslibrary.managers.BSCryptSharedPreferenceManager;
+import com.artlite.bslibrary.managers.BSEncryptPreferenceManager;
 import com.artlite.bslibrary.managers.BSEventManager;
 import com.artlite.bslibrary.managers.BSImageManager;
 import com.artlite.bslibrary.managers.BSLocalNotificationManager;
@@ -75,6 +76,7 @@ public final class BSInstance {
             BSSignManager.init(context);
             BSCryptManager.init(context);
             BSApplicationManager.init(context);
+            BSEncryptPreferenceManager.init(context);
         } catch (Exception ex) {
             BSLogHelper.log(null, methodName, ex, null);
         }
